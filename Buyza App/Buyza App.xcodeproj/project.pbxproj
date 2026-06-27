@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6AB2FEFD85400C42BC9 /* SplashView.swift */; };
+		097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */; };
+		097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B32FEFE4C200C42BC9 /* ContentView.swift */; };
+		097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */; };
+		097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */; };
+		097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */; };
 		09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */; };
-		09F9B4452FEFCCA10017509E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4442FEFCCA10017509E /* ContentView.swift */; };
 		09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4462FEFCCA40017509E /* Assets.xcassets */; };
 		09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4492FEFCCA40017509E /* Preview Assets.xcassets */; };
 		09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B44B2FEFCCA40017509E /* Persistence.swift */; };
@@ -36,9 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		097FE6AB2FEFD85400C42BC9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		097FE6B32FEFE4C200C42BC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
+		097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		09F9B43F2FEFCCA10017509E /* Buyza App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buyza App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyza_AppApp.swift; sourceTree = "<group>"; };
-		09F9B4442FEFCCA10017509E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		09F9B4462FEFCCA40017509E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09F9B4492FEFCCA40017509E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09F9B44B2FEFCCA40017509E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -75,6 +85,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		097FE6A82FEFD80100C42BC9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6B52FEFF23C00C42BC9 /* Onboarding */,
+				097FE6AD2FEFDFEB00C42BC9 /* Splash */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		097FE6A92FEFD81200C42BC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6AB2FEFD85400C42BC9 /* SplashView.swift */,
+				097FE6B32FEFE4C200C42BC9 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		097FE6AD2FEFDFEB00C42BC9 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6AF2FEFE03300C42BC9 /* ViewModel */,
+				097FE6A92FEFD81200C42BC9 /* View */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		097FE6AF2FEFE03300C42BC9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		097FE6B52FEFF23C00C42BC9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6B62FEFF24500C42BC9 /* View */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		097FE6B62FEFF24500C42BC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */,
+				097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
@@ -98,12 +160,13 @@
 		09F9B4412FEFCCA10017509E /* Buyza App */ = {
 			isa = PBXGroup;
 			children = (
+				097FE6A82FEFD80100C42BC9 /* Presentation */,
 				09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */,
-				09F9B4442FEFCCA10017509E /* ContentView.swift */,
 				09F9B4462FEFCCA40017509E /* Assets.xcassets */,
 				09F9B44B2FEFCCA40017509E /* Persistence.swift */,
 				09F9B44D2FEFCCA40017509E /* Buyza_App.xcdatamodeld */,
 				09F9B4482FEFCCA40017509E /* Preview Content */,
+				097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */,
 			);
 			path = "Buyza App";
 			sourceTree = "<group>";
@@ -265,8 +328,13 @@
 			files = (
 				09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
-				09F9B4452FEFCCA10017509E /* ContentView.swift in Sources */,
+				097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */,
+				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
+				097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */,
+				097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */,
+				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
+				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
