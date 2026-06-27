@@ -23,8 +23,12 @@ struct Buyza_AppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            ContentView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView{
+                LoginView(loginUseCase: LoginUseCase(authRepository: AuthRepoImp(authService: FirebaseServices())))
+            }
+            
         }
     }
 }
