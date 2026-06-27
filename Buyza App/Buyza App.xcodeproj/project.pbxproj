@@ -13,6 +13,10 @@
 		097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */; };
 		097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */; };
 		097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */; };
+		097FE6C02FF01FDD00C42BC9 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6BF2FF01FDD00C42BC9 /* CategoryCell.swift */; };
+		097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C32FF025AE00C42BC9 /* HomeView.swift */; };
+		097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C72FF026BD00C42BC9 /* MainView.swift */; };
+		097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C92FF027E400C42BC9 /* HomeHeader.swift */; };
 		09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */; };
 		09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4462FEFCCA40017509E /* Assets.xcassets */; };
 		09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4492FEFCCA40017509E /* Preview Assets.xcassets */; };
@@ -47,6 +51,10 @@
 		097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		097FE6BF2FF01FDD00C42BC9 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		097FE6C32FF025AE00C42BC9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		097FE6C72FF026BD00C42BC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		097FE6C92FF027E400C42BC9 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
 		09F9B43F2FEFCCA10017509E /* Buyza App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buyza App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyza_AppApp.swift; sourceTree = "<group>"; };
 		09F9B4462FEFCCA40017509E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +96,8 @@
 		097FE6A82FEFD80100C42BC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				097FE6C52FF0269100C42BC9 /* MainView */,
+				097FE6BD2FF01D9E00C42BC9 /* Home */,
 				097FE6B52FEFF23C00C42BC9 /* Onboarding */,
 				097FE6AD2FEFDFEB00C42BC9 /* Splash */,
 			);
@@ -133,6 +143,40 @@
 			children = (
 				097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */,
 				097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		097FE6BD2FF01D9E00C42BC9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6BE2FF01DA600C42BC9 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		097FE6BE2FF01DA600C42BC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6BF2FF01FDD00C42BC9 /* CategoryCell.swift */,
+				097FE6C32FF025AE00C42BC9 /* HomeView.swift */,
+				097FE6C92FF027E400C42BC9 /* HomeHeader.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		097FE6C52FF0269100C42BC9 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6C62FF026A600C42BC9 /* View */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		097FE6C62FF026A600C42BC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				097FE6C72FF026BD00C42BC9 /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,14 +371,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */,
+				097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
 				097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */,
 				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
 				097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */,
+				097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */,
+				097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */,
 				097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */,
 				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
 				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
+				097FE6C02FF01FDD00C42BC9 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
