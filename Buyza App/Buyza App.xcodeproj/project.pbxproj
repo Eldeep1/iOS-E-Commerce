@@ -21,6 +21,13 @@
 		09F9B4592FEFCCA40017509E /* Buyza_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4582FEFCCA40017509E /* Buyza_AppTests.swift */; };
 		09F9B4632FEFCCA50017509E /* Buyza_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4622FEFCCA50017509E /* Buyza_AppUITests.swift */; };
 		09F9B4652FEFCCA50017509E /* Buyza_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4642FEFCCA50017509E /* Buyza_AppUITestsLaunchTests.swift */; };
+		769DB52A2FEFD7B600F532C7 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB5292FEFD7B600F532C7 /* ApiEndpoint.swift */; };
+		769DB52C2FEFD96A00F532C7 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB52B2FEFD96A00F532C7 /* ApiError.swift */; };
+		769DB52E2FEFDA3400F532C7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB52D2FEFDA3400F532C7 /* ApiManager.swift */; };
+		769DB5322FEFE3F300F532C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB5312FEFE3F200F532C7 /* Product.swift */; };
+		769DB5342FEFE50000F532C7 /* GraphQLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB5332FEFE50000F532C7 /* GraphQLRequest.swift */; };
+		769DB5362FEFE51000F532C7 /* GraphQLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB5352FEFE51000F532C7 /* GraphQLResponse.swift */; };
+		769DB5382FEFE60000F532C7 /* ProductsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DB5372FEFE60000F532C7 /* ProductsEndpoints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +65,13 @@
 		09F9B45E2FEFCCA50017509E /* Buyza AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Buyza AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F9B4622FEFCCA50017509E /* Buyza_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyza_AppUITests.swift; sourceTree = "<group>"; };
 		09F9B4642FEFCCA50017509E /* Buyza_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyza_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		769DB5292FEFD7B600F532C7 /* ApiEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
+		769DB52B2FEFD96A00F532C7 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		769DB52D2FEFDA3400F532C7 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		769DB5312FEFE3F200F532C7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		769DB5332FEFE50000F532C7 /* GraphQLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLRequest.swift; sourceTree = "<group>"; };
+		769DB5352FEFE51000F532C7 /* GraphQLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResponse.swift; sourceTree = "<group>"; };
+		769DB5372FEFE60000F532C7 /* ProductsEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsEndpoints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +174,8 @@
 		09F9B4412FEFCCA10017509E /* Buyza App */ = {
 			isa = PBXGroup;
 			children = (
+				769DB52F2FEFE3DC00F532C7 /* Domain */,
+				769DB5262FEFD1E600F532C7 /* Data */,
 				097FE6A82FEFD80100C42BC9 /* Presentation */,
 				09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */,
 				09F9B4462FEFCCA40017509E /* Assets.xcassets */,
@@ -194,6 +210,43 @@
 				09F9B4642FEFCCA50017509E /* Buyza_AppUITestsLaunchTests.swift */,
 			);
 			path = "Buyza AppUITests";
+			sourceTree = "<group>";
+		};
+		769DB5262FEFD1E600F532C7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				769DB5272FEFD22300F532C7 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		769DB5272FEFD22300F532C7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				769DB5292FEFD7B600F532C7 /* ApiEndpoint.swift */,
+				769DB52B2FEFD96A00F532C7 /* ApiError.swift */,
+				769DB52D2FEFDA3400F532C7 /* ApiManager.swift */,
+				769DB5332FEFE50000F532C7 /* GraphQLRequest.swift */,
+				769DB5352FEFE51000F532C7 /* GraphQLResponse.swift */,
+				769DB5372FEFE60000F532C7 /* ProductsEndpoints.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		769DB52F2FEFE3DC00F532C7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				769DB5302FEFE3E400F532C7 /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		769DB5302FEFE3E400F532C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				769DB5312FEFE3F200F532C7 /* Product.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,13 +380,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */,
+				769DB5322FEFE3F300F532C7 /* Product.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
+				09F9B4452FEFCCA10017509E /* ContentView.swift in Sources */,
+				769DB52E2FEFDA3400F532C7 /* ApiManager.swift in Sources */,
 				097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */,
 				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
 				097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */,
 				097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */,
 				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
+				769DB52A2FEFD7B600F532C7 /* ApiEndpoint.swift in Sources */,
+				769DB52C2FEFD96A00F532C7 /* ApiError.swift in Sources */,
+				769DB5342FEFE50000F532C7 /* GraphQLRequest.swift in Sources */,
+				769DB5362FEFE51000F532C7 /* GraphQLResponse.swift in Sources */,
+				769DB5382FEFE60000F532C7 /* ProductsEndpoints.swift in Sources */,
 				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
