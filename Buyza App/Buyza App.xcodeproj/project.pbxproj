@@ -96,6 +96,7 @@
 		B8BA56052FEFFEB1004CA9FF /* RegisterForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm.swift; sourceTree = "<group>"; };
 		B8BA56082FEFFF04004CA9FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		B8BA560A2FEFFF5B004CA9FF /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		B8BA56102FF019E1004CA9FF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +129,7 @@
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
+				B8BA56102FF019E1004CA9FF /* .gitignore */,
 				B8BA55A22FEFE251004CA9FF /* Authentication */,
 				09F9B4412FEFCCA10017509E /* Buyza App */,
 				09F9B4572FEFCCA40017509E /* Buyza AppTests */,
