@@ -31,8 +31,9 @@
 		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
 		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
 		B81D84D22FF30604000DFBE1 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */; };
+		B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */; };
 		B8BA2EAC2FF294C60038CA63 /* LocalAuthDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */; };
-		B8BA2EAF2FF295370038CA63 /* ShopifyCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAE2FF295350038CA63 /* ShopifyCustomerModels.swift */; };
+		B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */; };
 		B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */; };
 		B8BA55902FEFD45B004CA9FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8BA558F2FEFD45B004CA9FF /* GoogleService-Info.plist */; };
 		B8BA55932FEFD837004CA9FF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B8BA55922FEFD837004CA9FF /* FirebaseAuth */; };
@@ -107,8 +108,9 @@
 		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
 		B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Buyza-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyLoginModels.swift; sourceTree = "<group>"; };
 		B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthDataSource.swift; sourceTree = "<group>"; };
-		B8BA2EAE2FF295350038CA63 /* ShopifyCustomerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCustomerModels.swift; sourceTree = "<group>"; };
+		B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyRegisterModels.swift; sourceTree = "<group>"; };
 		B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthService.swift; sourceTree = "<group>"; };
 		B8BA558F2FEFD45B004CA9FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8BA55A12FEFE251004CA9FF /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
@@ -372,7 +374,8 @@
 		B8BA55AA2FEFE2C5004CA9FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B8BA2EAE2FF295350038CA63 /* ShopifyCustomerModels.swift */,
+				B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */,
+				B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */,
 				B8BA55B12FEFE4B3004CA9FF /* AuthDataResultModel.swift */,
 			);
 			path = Model;
@@ -637,6 +640,7 @@
 				B8BA55BE2FEFF22C004CA9FF /* AuthRepoImp.swift in Sources */,
 				B8BA55B22FEFE4B3004CA9FF /* AuthDataResultModel.swift in Sources */,
 				B81D84C92FF2D3F4000DFBE1 /* tmpHome.swift in Sources */,
+				B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */,
 				B81D84CC2FF2D845000DFBE1 /* AppRoute.swift in Sources */,
 				09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */,
 				B8BA55C02FEFF792004CA9FF /* LoginViewModel.swift in Sources */,
@@ -645,7 +649,7 @@
 				B8BA55F82FEFFDF6004CA9FF /* LoginButton.swift in Sources */,
 				B8BA55F92FEFFDF6004CA9FF /* LoginFooter.swift in Sources */,
 				B8BA55FA2FEFFDF6004CA9FF /* LoginForm.swift in Sources */,
-				B8BA2EAF2FF295370038CA63 /* ShopifyCustomerModels.swift in Sources */,
+				B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */,
 				B8BA56092FEFFF04004CA9FF /* RegisterView.swift in Sources */,
 				B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */,
 				B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */,

@@ -9,6 +9,8 @@ import Foundation
 
 protocol ShopifyAuthServiceProtocol {
     func createCustomer(email: String, password: String) async throws -> String
+    func getCustomerID(email: String, password: String) async throws -> String
+    
 }
 
 final class ShopifyAuthService: ShopifyAuthServiceProtocol {
@@ -73,5 +75,76 @@ final class ShopifyAuthService: ShopifyAuthServiceProtocol {
             print(" Catch block error: \(error)")
             throw error
         }
+    }
+    
+    
+    func getCustomerID(email: String, password: String) async throws -> String {
+        let accessToken = try await getAccessToken(email: email, password: password)
+        
+        return try await fetchCustomerID(accessToken: accessToken)
+    }
+    
+    private func getAccessToken(email: String, password: String) async throws -> String {
+        let mutation = """
+        mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+          customerAccessTokenCreate(input: $input) {
+            customerAccessToken {
+              accessToken
+            }
+            customerUserErrors {
+              message
+            }
+          }
+        }
+        """
+        
+        let variables = CustomerAccessTokenVariables(
+            input: CustomerAccessTokenInput(email: email, password: password)
+        )
+        
+        let requestBody = GraphQLRequest(query: mutation, variables: variables)
+        let endpoint = ApiEndpoint(path: "/api/2024-04/graphql.json", method: .POST)
+        
+        let response: GraphQLResponse<CustomerAccessTokenResponse> = try await ApiManager.shared.sendRequest(
+            from: endpoint,
+            with: requestBody
+        )
+        
+        if let error = response.data?.customerAccessTokenCreate.customerUserErrors.first {
+            throw NSError(domain: "ShopifyError", code: 401, userInfo: [NSLocalizedDescriptionKey: error.message])
+        }
+        
+        guard let token = response.data?.customerAccessTokenCreate.customerAccessToken?.accessToken else {
+            throw NSError(domain: "ShopifyError", code: 401, userInfo: [NSLocalizedDescriptionKey: "Invalid credentials"])
+        }
+        
+        return token
+    }
+    
+    private func fetchCustomerID(accessToken: String) async throws -> String {
+        let query = """
+        query getCustomer($customerAccessToken: String!) {
+          customer(customerAccessToken: $customerAccessToken) {
+            id
+          }
+        }
+        """
+        
+        
+        struct TokenVariables: Encodable { let customerAccessToken: String }
+        
+        let requestBody = GraphQLRequest(query: query, variables: TokenVariables(customerAccessToken: accessToken))
+        let endpoint = ApiEndpoint(path: "/api/2024-04/graphql.json", method: .POST)
+        
+        let response: GraphQLResponse<CustomerByTokenResponse> = try await ApiManager.shared.sendRequest(
+            from: endpoint,
+            with: requestBody
+        )
+        
+        guard let customerID = response.data?.customer?.id else {
+            throw NSError(domain: "ShopifyError", code: 404, userInfo: [NSLocalizedDescriptionKey: "Customer not found"])
+        }
+        
+        return customerID
     }
 }

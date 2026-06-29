@@ -27,6 +27,12 @@ struct AuthRepoImp : AuthRepoProtocol {
         do {
             let firebaseModel = try await firebaseService.signIn(email: email, password: password)
             
+            let shopifyID = try await shopifyService.getCustomerID(email: email, password: password)
+            
+            
+            try localDataSource.saveShopifyID(shopifyID)
+            
+            print("Login complete! Shopify ID saved: \(shopifyID)")
             return UserModel(
                 uid: firebaseModel.uid,
                 email: firebaseModel.email ?? email,
@@ -60,15 +66,15 @@ struct AuthRepoImp : AuthRepoProtocol {
     }
     
     func isUserLoggedIn() -> Bool {
-            // 1. Check if Firebase remembers the user
-            let hasFirebaseUser = Auth.auth().currentUser != nil
-            
-            // 2. Check if the Keychain has the Shopify ID
-            let shopifyID = try? localDataSource.getShopifyID()
-            let hasShopifyID = shopifyID != nil
-            
-            // Return true only if both exist!
-            return hasFirebaseUser && hasShopifyID
-        }
-
+        // 1. Check if Firebase remembers the user
+        let hasFirebaseUser = Auth.auth().currentUser != nil
+        
+        // 2. Check if the Keychain has the Shopify ID
+        let shopifyID = try? localDataSource.getShopifyID()
+        let hasShopifyID = shopifyID != nil
+        
+        // Return true only if both exist!
+        return hasFirebaseUser && hasShopifyID
+    }
+    
 }
