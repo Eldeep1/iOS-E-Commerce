@@ -17,6 +17,9 @@
 		097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C32FF025AE00C42BC9 /* HomeView.swift */; };
 		097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C72FF026BD00C42BC9 /* MainView.swift */; };
 		097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C92FF027E400C42BC9 /* HomeHeader.swift */; };
+		09BBE4DE2FF2C76E003A54DF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BBE4DD2FF2C76E003A54DF /* HomeViewModel.swift */; };
+		09BBE4E12FF2CC07003A54DF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BBE4E02FF2CC07003A54DF /* Category.swift */; };
+		09BBE4E32FF2CFC8003A54DF /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BBE4E22FF2CFC8003A54DF /* Brand.swift */; };
 		09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */; };
 		09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4462FEFCCA40017509E /* Assets.xcassets */; };
 		09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4492FEFCCA40017509E /* Preview Assets.xcassets */; };
@@ -55,6 +58,9 @@
 		097FE6C32FF025AE00C42BC9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		097FE6C72FF026BD00C42BC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		097FE6C92FF027E400C42BC9 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
+		09BBE4DD2FF2C76E003A54DF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		09BBE4E02FF2CC07003A54DF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		09BBE4E22FF2CFC8003A54DF /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		09F9B43F2FEFCCA10017509E /* Buyza App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buyza App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyza_AppApp.swift; sourceTree = "<group>"; };
 		09F9B4462FEFCCA40017509E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 		097FE6BD2FF01D9E00C42BC9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				09BBE4DF2FF2C774003A54DF /* ViewModel */,
 				097FE6BE2FF01DA600C42BC9 /* View */,
 			);
 			path = Home;
@@ -179,6 +186,14 @@
 				097FE6C72FF026BD00C42BC9 /* MainView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		09BBE4DF2FF2C774003A54DF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				09BBE4DD2FF2C76E003A54DF /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		09F9B4362FEFCCA10017509E = {
@@ -211,6 +226,8 @@
 				09F9B44D2FEFCCA40017509E /* Buyza_App.xcdatamodeld */,
 				09F9B4482FEFCCA40017509E /* Preview Content */,
 				097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */,
+				09BBE4E02FF2CC07003A54DF /* Category.swift */,
+				09BBE4E22FF2CFC8003A54DF /* Brand.swift */,
 			);
 			path = "Buyza App";
 			sourceTree = "<group>";
@@ -379,8 +396,11 @@
 				097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */,
 				097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */,
 				097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */,
+				09BBE4DE2FF2C76E003A54DF /* HomeViewModel.swift in Sources */,
 				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
+				09BBE4E12FF2CC07003A54DF /* Category.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
+				09BBE4E32FF2CFC8003A54DF /* Brand.swift in Sources */,
 				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
 				097FE6C02FF01FDD00C42BC9 /* CategoryCell.swift in Sources */,
 			);
