@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import FirebaseAuth
 struct AuthRepoImp : AuthRepoProtocol {
     private let firebaseService : AuthServiceProtocol
     private let shopifyService: ShopifyAuthServiceProtocol
@@ -59,5 +59,16 @@ struct AuthRepoImp : AuthRepoProtocol {
         }
     }
     
-    
+    func isUserLoggedIn() -> Bool {
+            // 1. Check if Firebase remembers the user
+            let hasFirebaseUser = Auth.auth().currentUser != nil
+            
+            // 2. Check if the Keychain has the Shopify ID
+            let shopifyID = try? localDataSource.getShopifyID()
+            let hasShopifyID = shopifyID != nil
+            
+            // Return true only if both exist!
+            return hasFirebaseUser && hasShopifyID
+        }
+
 }
