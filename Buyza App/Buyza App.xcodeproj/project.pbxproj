@@ -24,6 +24,7 @@
 		769DC0122FF0010000F532C7 /* ProductColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0112FF0010000F532C7 /* ProductColorSelector.swift */; };
 		769DC0142FF0010000F532C7 /* ProductAccordionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0132FF0010000F532C7 /* ProductAccordionSection.swift */; };
 		769DC0162FF0010000F532C7 /* ProductActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0152FF0010000F532C7 /* ProductActionBar.swift */; };
+		769DC0382FF0030000F532C7 /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0372FF0030000F532C7 /* String+HTML.swift */; };
 		09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */; };
 		09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4462FEFCCA40017509E /* Assets.xcassets */; };
 		09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F9B4492FEFCCA40017509E /* Preview Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		769DC0112FF0010000F532C7 /* ProductColorSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductColorSelector.swift; sourceTree = "<group>"; };
 		769DC0132FF0010000F532C7 /* ProductAccordionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAccordionSection.swift; sourceTree = "<group>"; };
 		769DC0152FF0010000F532C7 /* ProductActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductActionBar.swift; sourceTree = "<group>"; };
+		769DC0372FF0030000F532C7 /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		09F9B43F2FEFCCA10017509E /* Buyza App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buyza App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyza_AppApp.swift; sourceTree = "<group>"; };
 		09F9B4462FEFCCA40017509E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,6 +184,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		769DC0392FF0030000F532C7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				769DC0372FF0030000F532C7 /* String+HTML.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		097FE6A92FEFD81200C42BC9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +258,7 @@
 		09F9B4412FEFCCA10017509E /* Buyza App */ = {
 			isa = PBXGroup;
 			children = (
+				769DC0392FF0030000F532C7 /* Extensions */,
 				769DC0202FF0010000F532C7 /* Domain */,
 				097FE6A82FEFD80100C42BC9 /* Presentation */,
 				09F9B4422FEFCCA10017509E /* Buyza_AppApp.swift */,
@@ -435,6 +446,7 @@
 				769DC0122FF0010000F532C7 /* ProductColorSelector.swift in Sources */,
 				769DC0142FF0010000F532C7 /* ProductAccordionSection.swift in Sources */,
 				769DC0162FF0010000F532C7 /* ProductActionBar.swift in Sources */,
+				769DC0382FF0030000F532C7 /* String+HTML.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

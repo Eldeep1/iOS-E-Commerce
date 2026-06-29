@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct ProductResponse: Decodable {
     let product: Product
@@ -124,22 +123,4 @@ extension ProductResponse {
         let data = Data(json.utf8)
         return try! JSONDecoder().decode(ProductResponse.self, from: data)
     }()
-}
-
-private extension String {
-    var htmlStripped: String {
-        guard let data = data(using: .utf8) else { return self }
-
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-
-        if let attributed = try? NSAttributedString(data: data, options: options, documentAttributes: nil) {
-            return attributed.string.trimmingCharacters(in: .whitespacesAndNewlines)
-        }
-
-        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-    }
 }
