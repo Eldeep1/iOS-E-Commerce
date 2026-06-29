@@ -30,6 +30,7 @@
 		B81D84CC2FF2D845000DFBE1 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */; };
 		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
 		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
+		B81D84D22FF30604000DFBE1 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */; };
 		B8BA2EAC2FF294C60038CA63 /* LocalAuthDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */; };
 		B8BA2EAF2FF295370038CA63 /* ShopifyCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAE2FF295350038CA63 /* ShopifyCustomerModels.swift */; };
 		B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */; };
@@ -104,6 +105,8 @@
 		B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
 		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
+		B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Buyza-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthDataSource.swift; sourceTree = "<group>"; };
 		B8BA2EAE2FF295350038CA63 /* ShopifyCustomerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCustomerModels.swift; sourceTree = "<group>"; };
 		B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthService.swift; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
+				B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */,
 				B8BA56102FF019E1004CA9FF /* .gitignore */,
 				09F9B4412FEFCCA10017509E /* Buyza App */,
 				09F9B4572FEFCCA40017509E /* Buyza AppTests */,
@@ -237,6 +241,7 @@
 		09F9B4412FEFCCA10017509E /* Buyza App */ = {
 			isa = PBXGroup;
 			children = (
+				B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */,
 				B81D84CA2FF2D838000DFBE1 /* Router */,
 				E9DA300E2FF026BC00FBC99A /* Services */,
 				769DB52F2FEFE3DC00F532C7 /* Domain */,
@@ -598,6 +603,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81D84D22FF30604000DFBE1 /* Secrets.xcconfig in Resources */,
 				09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */,
 				09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */,
 				B8BA55902FEFD45B004CA9FF /* GoogleService-Info.plist in Resources */,
@@ -825,6 +831,7 @@
 		};
 		09F9B4692FEFCCA50017509E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -833,6 +840,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Buyza App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Buyza-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -854,6 +862,7 @@
 		};
 		09F9B46A2FEFCCA50017509E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -862,6 +871,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Buyza App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Buyza-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
