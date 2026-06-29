@@ -20,15 +20,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Buyza_AppApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject private var appState = AppStateManager()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            NavigationView{
-                LoginView(loginUseCase: LoginUseCase(authRepository: AuthRepoImp(authService: FirebaseServices())))
+            RootContainerView().environmentObject(appState)
+
             }
             
         }
     }
-}
+
