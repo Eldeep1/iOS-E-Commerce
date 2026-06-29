@@ -18,6 +18,7 @@ import SwiftUI
 struct RegisterView: View {
     @StateObject private var viewModel: RegisterViewModel
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var appState: AppStateManager
     
     init(registerUseCase: RegisterUseCaseProtocol) {
         _viewModel = StateObject(wrappedValue: RegisterViewModel(registerUseCase: registerUseCase))
@@ -98,7 +99,7 @@ struct RegisterView: View {
             }
         }.onChange(of: viewModel.registrationSuccess) { newValue in
             if newValue {
-                dismiss()
+                appState.currentRoute = .home
             }
         }
         .alert("Registration Issue", isPresented: $viewModel.showErrorAlert, actions: {

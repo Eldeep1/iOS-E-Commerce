@@ -12,7 +12,13 @@ struct LoginFooter: View {
         HStack(spacing: 4) {
             Text("New to Buyza?")
                 .foregroundColor(.gray)
-            NavigationLink(destination: RegisterView(registerUseCase: RegisterUseCase(authRepository: AuthRepoImp(authService: FirebaseServices())))) {
+            NavigationLink(destination: RegisterView( registerUseCase: RegisterUseCase(
+                authRepository: AuthRepoImp(
+                    firebaseService: FirebaseServices(),
+                    shopifyService: ShopifyAuthService(),
+                    localDataSource: KeychainService.shared,
+                )
+            ))) {
                 Text("Create Account")
                     .foregroundColor(.black)
             }
