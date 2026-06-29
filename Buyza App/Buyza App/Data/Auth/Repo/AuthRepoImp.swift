@@ -8,15 +8,24 @@
 import Foundation
 
 struct AuthRepoImp : AuthRepoProtocol {
-    let authService : AuthServiceProtocol
+    private let firebaseService : AuthServiceProtocol
+    private let shopifyService: ShopifyAuthServiceProtocol
+    private let localDataSource: LocalAuthDataSourceProtocol
     
-    init(authService: AuthServiceProtocol) {
-        self.authService = authService
+    init(
+        firebaseService: AuthServiceProtocol,
+        shopifyService: ShopifyAuthServiceProtocol,
+        localDataSource: LocalAuthDataSourceProtocol
+    ) {
+        self.firebaseService = firebaseService
+        self.shopifyService = shopifyService
+        self.localDataSource = localDataSource
     }
+    
     
     func loginUser(email: String, password: String) async throws -> UserModel {
         do {
-            let firebaseModel = try await authService.signIn(email: email, password: password)
+            let firebaseModel = try await firebaseService.signIn(email: email, password: password)
             
             return UserModel(
                 uid: firebaseModel.uid,
@@ -31,7 +40,14 @@ struct AuthRepoImp : AuthRepoProtocol {
     
     func createUser(email: String, password: String, name: String) async throws -> UserModel {
         do {
-            let firebaseModel = try await authService.createAccount(email: email, password: password, name: name)
+            print("we are here")
+            let firebaseModel = try await firebaseService.createAccount(email: email, password: password, name: name)
+            print(firebaseModel.uid)
+            print("aaaaaa")
+            print(firebaseModel.name)
+            let shopifyID = try await shopifyService.createCustomer(email: email, password: password)
+            print("that was saved successfully")
+            try localDataSource.saveShopifyID(shopifyID)
             
             return UserModel(
                 uid: firebaseModel.uid,
