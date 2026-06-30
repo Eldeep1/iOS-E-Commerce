@@ -64,7 +64,6 @@
 		B8165E192FF426D4009DC909 /* CartRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8165E182FF426AB009DC909 /* CartRemoteDataSource.swift */; };
 		B8165E1D2FF42775009DC909 /* CartRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8165E1C2FF42774009DC909 /* CartRepositoryImp.swift */; };
 		B8165E1F2FF42BB5009DC909 /* CartSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8165E1E2FF42BB5009DC909 /* CartSummary.swift */; };
-		B81D84C92FF2D3F4000DFBE1 /* tmpHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84C82FF2D3F4000DFBE1 /* tmpHome.swift */; };
 		B81D84CC2FF2D845000DFBE1 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */; };
 		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
 		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
@@ -177,7 +176,6 @@
 		B8165E182FF426AB009DC909 /* CartRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRemoteDataSource.swift; sourceTree = "<group>"; };
 		B8165E1C2FF42774009DC909 /* CartRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRepositoryImp.swift; sourceTree = "<group>"; };
 		B8165E1E2FF42BB5009DC909 /* CartSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartSummary.swift; sourceTree = "<group>"; };
-		B81D84C82FF2D3F4000DFBE1 /* tmpHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tmpHome.swift; sourceTree = "<group>"; };
 		B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
 		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 				09F9B44D2FEFCCA40017509E /* Buyza_App.xcdatamodeld */,
 				09F9B4482FEFCCA40017509E /* Preview Content */,
 				097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */,
-				B81D84C82FF2D3F4000DFBE1 /* tmpHome.swift */,
 				09BBE4E02FF2CC07003A54DF /* Category.swift */,
 				09BBE4E22FF2CFC8003A54DF /* Brand.swift */,
 			);
@@ -919,7 +916,6 @@
 				B8BA55BE2FEFF22C004CA9FF /* AuthRepoImp.swift in Sources */,
 				B8165E122FF41BE2009DC909 /* FetchCartUseCase.swift in Sources */,
 				B8BA55B22FEFE4B3004CA9FF /* AuthDataResultModel.swift in Sources */,
-				B81D84C92FF2D3F4000DFBE1 /* tmpHome.swift in Sources */,
 				B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */,
 				B81D84CC2FF2D845000DFBE1 /* AppRoute.swift in Sources */,
 				09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */,
@@ -957,7 +953,6 @@
 				769DB52E2FEFDA3400F532C7 /* ApiManager.swift in Sources */,
 				097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
-				097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */,
 				09767E762FF30461004D37E8 /* BrandsListView.swift in Sources */,
 				09767E732FF2F7D6004D37E8 /* CategoriesListView.swift in Sources */,
 				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
