@@ -20,7 +20,9 @@ struct ContentView: View {
             } else if !hasSeenOnboarding {
                 OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
             } else {
-
+                NavigationStack {
+                    ProductDetailView(product: .adidasClassicBackpack)
+                }
             }
         }
     }
