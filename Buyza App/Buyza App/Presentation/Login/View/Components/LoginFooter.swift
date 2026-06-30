@@ -16,7 +16,7 @@ struct LoginFooter: View {
                 authRepository: AuthRepoImp(
                     firebaseService: FirebaseServices(),
                     shopifyService: ShopifyAuthService(),
-                    localDataSource: KeychainService.shared,
+                    localDataSource: KeychainService.shared
                 )
             ))) {
                 Text("Create Account")

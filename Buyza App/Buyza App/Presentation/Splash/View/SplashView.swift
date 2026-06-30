@@ -23,7 +23,7 @@ struct SplashView: View {
                 .scaleEffect(isAnimating ? 1.0 : 0.8)
                 .opacity(isAnimating ? 1.0 : 0.0)
                 .onAppear {
-                    withAnimation(.easeInOut(duration: 2.0)) {
+                    withAnimation(.easeInOut(duration: 2)) {
                         isAnimating = true
                     }
           }
