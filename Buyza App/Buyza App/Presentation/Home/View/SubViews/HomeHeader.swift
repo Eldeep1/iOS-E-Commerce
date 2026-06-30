@@ -30,6 +30,7 @@ struct HomeHeader: View {
                 }
             }
             .padding(.horizontal)
+            .padding(.bottom, 4)
             
             HStack {
                 Image(systemName: "magnifyingglass")
@@ -50,9 +51,12 @@ struct HomeHeader: View {
             .padding(.horizontal)
             
             Divider()
-                .padding(.top, 8)
+                .padding(.top, 6)
         }
-        .padding(.top)
+        .padding(.top, 4)
+        .background(Color.white.ignoresSafeArea(edges: .top)
+            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
+        
     }
 }
 

@@ -30,7 +30,7 @@ struct CollectionCell: View {
             )
             
             Text(collectionItem?.title ?? "Unknown")
-                .font(.title2)
+                .font(.title3)
                 .foregroundColor(.black)
         }
     }

@@ -14,7 +14,41 @@ struct HomeView: View {
         VStack{
             HomeHeader()
             
-            Spacer()
+            ScrollView {
+                VStack(alignment: .leading, spacing: 26) {
+                    
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Categories")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 20)
+                        
+                        CategoriesListView(viewModel: viewModel)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Brands")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 20)
+                        
+                        BrandsListView(viewModel: viewModel)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Recommendations")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 20)
+                        
+                        ProductsGrid(viewModel: viewModel)
+                    }
+                }
+                .padding(.top, 8)
+            }
         }
     }
 }
