@@ -1,0 +1,27 @@
+//
+//  .gitignore
+//  Buyza App
+//
+//  Created by depo on 27/06/2026.
+//
+
+.DS_Store
+**/.DS_Store
+
+# Xcode User Data / Personal Workspaces
+xcuserdata/
+*.xcuserdatad
+*.xcworkspace/xcuserdata/
+project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+**/*.swiftpm/
+project.xcworkspace/xcshareddata/swiftpm/
+
+# Crashlytics / Firebase temporary build artifacts
+*.dSYM.zip
+*.dSYM
+Secrets.xcconfig
+EOF

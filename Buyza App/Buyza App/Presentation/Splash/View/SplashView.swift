@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SplashView: View {
     @State private var isAnimating = false
-    
+    @EnvironmentObject var appState: AppStateManager
+    @StateObject var viewModel: SplashViewModel
+
     var body: some View {
         ZStack {
             Color(.systemBackground)
@@ -25,10 +27,12 @@ struct SplashView: View {
                         isAnimating = true
                     }
           }
+        }.onAppear{
+            viewModel.checkUserStatus { nextRoute in
+                withAnimation {
+                    appState.currentRoute = nextRoute
+                }
+            }
         }
     }
-}
-
-#Preview {
-    SplashView()
 }

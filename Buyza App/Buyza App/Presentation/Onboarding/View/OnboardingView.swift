@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Binding var hasSeenOnboarding: Bool
+    @EnvironmentObject var appState: AppStateManager
     
     @State private var currentStep = 0
     
@@ -26,7 +27,7 @@ struct OnboardingView: View {
                         .tag(index)
                 }
             }
-
+            
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             
@@ -37,6 +38,9 @@ struct OnboardingView: View {
                     }
                 } else {
                     hasSeenOnboarding = true
+                    withAnimation {
+                        appState.currentRoute = .auth
+                    }
                 }
             }) {
                 Text(currentStep < steps.count - 1 ? "Next" : "Get Started")
