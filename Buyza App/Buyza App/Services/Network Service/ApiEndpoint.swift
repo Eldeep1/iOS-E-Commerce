@@ -7,28 +7,33 @@
 import Foundation
 
 struct ApiEndpoint {
-
+    
     enum Method: String {
         case GET
         case POST
         case PUT
         case DELETE
     }
-
-    static let shopifyAccessToken = ""
-
+    
+    static var shopifyAccessToken: String {
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "ShopifyStorefrontToken") as? String else {
+            return ""
+        }
+        return token
+    }
+    
     static var defaultHeaders: [String: String] {
         [
-            "X-Shopify-Access-Token": shopifyAccessToken,
+            "X-Shopify-Storefront-Access-Token": shopifyAccessToken,
             "Content-Type": "application/json"
         ]
     }
-
+    
     let path: String
     let method: Method
     let parameters: [URLQueryItem]?
     let headers: [String: String]?
-
+    
     init(
         path: String,
         method: Method,
@@ -40,7 +45,7 @@ struct ApiEndpoint {
         self.parameters = parameters
         self.headers = headers
     }
-
+    
     var allHeaders: [String: String] {
         var merged = Self.defaultHeaders
         headers?.forEach { merged[$0.key] = $0.value }

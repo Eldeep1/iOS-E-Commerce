@@ -8,11 +8,10 @@
 
 import SwiftUI
 
-import SwiftUI
 
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
-    
+    @EnvironmentObject var appState: AppStateManager
     init(loginUseCase: LoginUseCaseProtocol) {
         _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase))
     }
@@ -54,13 +53,19 @@ struct LoginView: View {
                 Spacer()
                 
                 LoginFooter()
-                .padding(.bottom, 16)
+                    .padding(.bottom, 16)
             }
         }
         .alert("Authentication Issue", isPresented: $viewModel.showErrorAlert, actions: {
             Button("OK", role: .cancel) { }
         }, message: {
             Text(viewModel.errorMessage ?? "An unexpected error occurred.")
-        })
+        }).onChange(of: viewModel.loginSuccess) { success in
+            if success {
+                withAnimation {
+                    appState.currentRoute = .home
+                }
+            }
+        }
     }
 }

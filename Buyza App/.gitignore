@@ -23,4 +23,5 @@ project.xcworkspace/xcshareddata/swiftpm/
 # Crashlytics / Firebase temporary build artifacts
 *.dSYM.zip
 *.dSYM
+Secrets.xcconfig
 EOF

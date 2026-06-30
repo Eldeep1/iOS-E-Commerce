@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6AB2FEFD85400C42BC9 /* SplashView.swift */; };
 		097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */; };
-		097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B32FEFE4C200C42BC9 /* ContentView.swift */; };
 		097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */; };
 		097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */; };
 		097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */; };
@@ -39,6 +38,15 @@
 		769DC0142FF0010000F532C7 /* ProductAccordionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0132FF0010000F532C7 /* ProductAccordionSection.swift */; };
 		769DC0162FF0010000F532C7 /* ProductActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0152FF0010000F532C7 /* ProductActionBar.swift */; };
 		769DC0382FF0030000F532C7 /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DC0372FF0030000F532C7 /* String+HTML.swift */; };
+		B81D84C92FF2D3F4000DFBE1 /* tmpHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84C82FF2D3F4000DFBE1 /* tmpHome.swift */; };
+		B81D84CC2FF2D845000DFBE1 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */; };
+		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
+		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
+		B81D84D22FF30604000DFBE1 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */; };
+		B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */; };
+		B8BA2EAC2FF294C60038CA63 /* LocalAuthDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */; };
+		B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */; };
+		B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */; };
 		B8BA55902FEFD45B004CA9FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8BA558F2FEFD45B004CA9FF /* GoogleService-Info.plist */; };
 		B8BA55932FEFD837004CA9FF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B8BA55922FEFD837004CA9FF /* FirebaseAuth */; };
 		B8BA55952FEFD837004CA9FF /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = B8BA55942FEFD837004CA9FF /* FirebaseAuthCombine-Community */; };
@@ -86,7 +94,6 @@
 /* Begin PBXFileReference section */
 		097FE6AB2FEFD85400C42BC9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
-		097FE6B32FEFE4C200C42BC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		097FE6BB2FEFF8DD00C42BC9 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
@@ -119,6 +126,16 @@
 		769DC0132FF0010000F532C7 /* ProductAccordionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAccordionSection.swift; sourceTree = "<group>"; };
 		769DC0152FF0010000F532C7 /* ProductActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductActionBar.swift; sourceTree = "<group>"; };
 		769DC0372FF0030000F532C7 /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
+		B81D84C82FF2D3F4000DFBE1 /* tmpHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tmpHome.swift; sourceTree = "<group>"; };
+		B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
+		B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
+		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
+		B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Buyza-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyLoginModels.swift; sourceTree = "<group>"; };
+		B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthDataSource.swift; sourceTree = "<group>"; };
+		B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyRegisterModels.swift; sourceTree = "<group>"; };
+		B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthService.swift; sourceTree = "<group>"; };
 		B8BA558F2FEFD45B004CA9FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8BA55A12FEFE251004CA9FF /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
 		B8BA55B12FEFE4B3004CA9FF /* AuthDataResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModel.swift; sourceTree = "<group>"; };
@@ -188,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				097FE6AB2FEFD85400C42BC9 /* SplashView.swift */,
-				097FE6B32FEFE4C200C42BC9 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +246,7 @@
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
+				B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */,
 				B8BA56102FF019E1004CA9FF /* .gitignore */,
 				09F9B4412FEFCCA10017509E /* Buyza App */,
 				09F9B4572FEFCCA40017509E /* Buyza AppTests */,
@@ -251,6 +268,8 @@
 		09F9B4412FEFCCA10017509E /* Buyza App */ = {
 			isa = PBXGroup;
 			children = (
+				B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */,
+				B81D84CA2FF2D838000DFBE1 /* Router */,
 				E9DA300E2FF026BC00FBC99A /* Services */,
 				769DB52F2FEFE3DC00F532C7 /* Domain */,
 				769DB5262FEFD1E600F532C7 /* Data */,
@@ -263,6 +282,7 @@
 				09F9B44D2FEFCCA40017509E /* Buyza_App.xcdatamodeld */,
 				09F9B4482FEFCCA40017509E /* Preview Content */,
 				097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */,
+				B81D84C82FF2D3F4000DFBE1 /* tmpHome.swift */,
 			);
 			path = "Buyza App";
 			sourceTree = "<group>";
@@ -393,6 +413,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		B81D84CA2FF2D838000DFBE1 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */,
+				B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B8BA2EB22FF297250038CA63 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
 		B8BA55A42FEFE25F004CA9FF /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +474,8 @@
 		B8BA55AA2FEFE2C5004CA9FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */,
+				B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */,
 				B8BA55B12FEFE4B3004CA9FF /* AuthDataResultModel.swift */,
 			);
 			path = Model;
@@ -445,6 +484,7 @@
 		B8BA55AB2FEFE2CD004CA9FF /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				B8BA2EB22FF297250038CA63 /* Local */,
 				B8BA55AE2FEFE47F004CA9FF /* remote */,
 			);
 			path = DataSource;
@@ -453,6 +493,7 @@
 		B8BA55AE2FEFE47F004CA9FF /* remote */ = {
 			isa = PBXGroup;
 			children = (
+				B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */,
 				B8BA55A12FEFE251004CA9FF /* FirebaseServices.swift */,
 			);
 			path = remote;
@@ -530,6 +571,7 @@
 		B8BA560D2FF00572004CA9FF /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */,
 				B8BA55B72FEFE961004CA9FF /* LoginUseCase.swift */,
 				B8BA55B92FEFE976004CA9FF /* RegisterUseCase.swift */,
 			);
@@ -664,6 +706,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81D84D22FF30604000DFBE1 /* Secrets.xcconfig in Resources */,
 				09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */,
 				09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */,
 				B8BA55902FEFD45B004CA9FF /* GoogleService-Info.plist in Resources */,
@@ -693,8 +736,12 @@
 			files = (
 				B8BA55B42FEFE64A004CA9FF /* AuthRepo.swift in Sources */,
 				B8BA55A32FEFE251004CA9FF /* FirebaseServices.swift in Sources */,
+				B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */,
 				B8BA55BE2FEFF22C004CA9FF /* AuthRepoImp.swift in Sources */,
 				B8BA55B22FEFE4B3004CA9FF /* AuthDataResultModel.swift in Sources */,
+				B81D84C92FF2D3F4000DFBE1 /* tmpHome.swift in Sources */,
+				B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */,
+				B81D84CC2FF2D845000DFBE1 /* AppRoute.swift in Sources */,
 				09F9B44C2FEFCCA40017509E /* Persistence.swift in Sources */,
 				B8BA55C02FEFF792004CA9FF /* LoginViewModel.swift in Sources */,
 				B8BA55F62FEFFDF6004CA9FF /* ForgotPasswordButton.swift in Sources */,
@@ -702,6 +749,7 @@
 				B8BA55F82FEFFDF6004CA9FF /* LoginButton.swift in Sources */,
 				B8BA55F92FEFFDF6004CA9FF /* LoginFooter.swift in Sources */,
 				B8BA55FA2FEFFDF6004CA9FF /* LoginForm.swift in Sources */,
+				B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */,
 				B8BA56092FEFFF04004CA9FF /* RegisterView.swift in Sources */,
 				B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */,
 				B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */,
@@ -714,9 +762,10 @@
 				B8BA55BC2FEFF188004CA9FF /* AuthError.swift in Sources */,
 				B8BA560B2FEFFF5B004CA9FF /* RegisterViewModel.swift in Sources */,
 				B8BA55B62FEFE663004CA9FF /* UserModel.swift in Sources */,
+				B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */,
+				B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */,
 				B8BA55BA2FEFE976004CA9FF /* RegisterUseCase.swift in Sources */,
 				769DB52E2FEFDA3400F532C7 /* ApiManager.swift in Sources */,
-				097FE6B42FEFE4C200C42BC9 /* ContentView.swift in Sources */,
 				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
 				097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */,
 				097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */,
@@ -724,6 +773,7 @@
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
 				B8BA55B82FEFE961004CA9FF /* LoginUseCase.swift in Sources */,
 				769DB52A2FEFD7B600F532C7 /* ApiEndpoint.swift in Sources */,
+				B8BA2EAC2FF294C60038CA63 /* LocalAuthDataSource.swift in Sources */,
 				769DB52C2FEFD96A00F532C7 /* ApiError.swift in Sources */,
 				769DB5342FEFE50000F532C7 /* GraphQLRequest.swift in Sources */,
 				769DB5362FEFE51000F532C7 /* GraphQLResponse.swift in Sources */,
@@ -897,6 +947,7 @@
 		};
 		09F9B4692FEFCCA50017509E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -905,6 +956,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Buyza App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Buyza-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -926,6 +978,7 @@
 		};
 		09F9B46A2FEFCCA50017509E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B81D84D12FF30604000DFBE1 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -934,6 +987,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Buyza App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Buyza-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

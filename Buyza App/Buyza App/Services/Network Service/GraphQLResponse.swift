@@ -8,7 +8,7 @@
 import Foundation
 
 struct GraphQLResponse<D: Decodable>: Decodable {
-    let data: D
+    let data: D?
     let errors: [GraphQLErrorResponse]?
 }
 
