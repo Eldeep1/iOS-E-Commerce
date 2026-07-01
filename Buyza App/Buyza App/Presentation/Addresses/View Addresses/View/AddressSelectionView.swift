@@ -7,7 +7,11 @@ import SwiftUI
 
 struct AddressSelectionView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = AddressSelectionViewModel()
+    @StateObject private var viewModel: AddressSelectionViewModel
+    
+    init(viewModel:AddressSelectionViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -26,6 +30,8 @@ struct AddressSelectionView: View {
         }
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarHidden(true)
-        .task { await viewModel.loadAddresses() }
+        .onAppear {
+            Task { await viewModel.loadAddresses() }
+        }
     }
 }

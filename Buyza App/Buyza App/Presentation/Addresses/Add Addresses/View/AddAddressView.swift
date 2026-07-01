@@ -7,7 +7,11 @@ import SwiftUI
 
 struct AddAddressView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = AddAddressViewModel()
+    @StateObject private var viewModel: AddAddressViewModel
+    
+    init(viewModel: AddAddressViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         VStack(spacing: 0) {

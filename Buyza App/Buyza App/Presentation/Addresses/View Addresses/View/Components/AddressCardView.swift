@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct AddressCardView: View {
-    let address: AddressUIModel
+    let address: Address
     let isSelected: Bool
     let onSelect: () -> Void
     var onEdit: (() -> Void)? = nil
@@ -73,13 +73,4 @@ struct AddressCardView: View {
         }
         .buttonStyle(.plain)
     }
-}
-
-#Preview {
-    VStack(spacing: 16) {
-        AddressCardView(address: AddressUIModel.mocks[0], isSelected: true, onSelect: {}, onEdit: {})
-        AddressCardView(address: AddressUIModel.mocks[1], isSelected: false, onSelect: {}, onEdit: {})
-    }
-    .padding()
-    .background(Color(.systemGroupedBackground))
 }

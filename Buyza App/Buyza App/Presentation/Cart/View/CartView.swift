@@ -13,9 +13,18 @@ struct CartView: View {
     @State private var itemToDelete: CartItem? = nil
     @State private var showDeleteAlert = false
     @State private var showClearAlert = false
+    @State private var navigateToAddresses = false
 
+    let addressSelectionViewModel :AddressSelectionViewModel
+    
     init(viewModel: CartViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        let addressDataSource = ShopifyAddressDataSource()
+        let repo = AddressRepositoryImp(remoteDataSource: addressDataSource)
+        let getAddressUseCase = GetAddressesUseCase(repository: repo)
+        let deleteAdressUseCase = DeleteAddressUseCase(repository: repo)
+        addressSelectionViewModel = AddressSelectionViewModel(getAddressesUseCase: getAddressUseCase, deleteAddressUseCase: deleteAdressUseCase)
+        
     }
 
     var body: some View {
@@ -78,8 +87,12 @@ struct CartView: View {
                     shipping: viewModel.formattedShipping,
                     total: viewModel.formattedTotal,
                     onCheckoutTap: {
-                        // will navigate to payment page
-                        print("Proceeding to payment...")
+                        navigateToAddresses = true
+                    }
+                )
+                .background(
+                    NavigationLink(destination: AddressSelectionView(viewModel: addressSelectionViewModel), isActive: $navigateToAddresses) {
+                        EmptyView()
                     }
                 )
             }

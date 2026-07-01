@@ -10,10 +10,15 @@ struct AddressListContent: View {
     // Navigation handled directly by NavigationLink
     
     var body: some View {
+        let addressDataSource = ShopifyAddressDataSource()
+        let repo = AddressRepositoryImp(remoteDataSource: addressDataSource)
+        let addAddressUseCase = AddAddressUseCase(repository: repo)
+        let addAddressViewModel = AddAddressViewModel(addAddressUseCase: addAddressUseCase)
+        
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: 16) {
-                    NavigationLink(destination: AddAddressView()) {
+                    NavigationLink(destination: AddAddressView(viewModel: addAddressViewModel)) {
                         HStack {
                             Image(systemName: "plus")
                                 .font(.system(size: 16, weight: .bold))

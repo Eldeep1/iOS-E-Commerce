@@ -9,6 +9,11 @@ struct EmptyAddressView: View {
     // Navigation handled directly by NavigationLink
     
     var body: some View {
+        let addressDataSource = ShopifyAddressDataSource()
+        let repo = AddressRepositoryImp(remoteDataSource: addressDataSource)
+        let addAddressUseCase = AddAddressUseCase(repository: repo)
+        let viewModel = AddAddressViewModel(addAddressUseCase:addAddressUseCase)
+        
         VStack(spacing: 24) {
             Spacer()
             
@@ -29,7 +34,7 @@ struct EmptyAddressView: View {
                     .lineSpacing(4)
             }
             
-            NavigationLink(destination: AddAddressView()) {
+            NavigationLink(destination: AddAddressView(viewModel: viewModel)) {
                 HStack(spacing: 8) {
                     Image(systemName: "plus")
                         .font(.system(size: 14, weight: .bold))
