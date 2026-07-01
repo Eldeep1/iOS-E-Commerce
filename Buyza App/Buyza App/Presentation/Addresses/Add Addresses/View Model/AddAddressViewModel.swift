@@ -8,7 +8,8 @@ import Foundation
 @MainActor
 final class AddAddressViewModel: ObservableObject {
 
-    // MARK: - Form Fields
+    private let addAddressUseCase: AddAddressUseCaseProtocol
+
     @Published var fullName: String = ""
     @Published var phoneNumber: String = ""
     @Published var streetAddress: String = ""
@@ -16,12 +17,15 @@ final class AddAddressViewModel: ObservableObject {
     @Published var country: String = ""
     @Published var isDefault: Bool = false
 
-    // MARK: - State
     @Published var isSaving: Bool = false
     @Published var showSuccessAlert: Bool = false
     @Published var errorMessage: String? = nil
 
-    // MARK: - Validation
+    
+    init(addAddressUseCase: AddAddressUseCaseProtocol) {
+        self.addAddressUseCase = addAddressUseCase
+    }
+
 
     var isFormValid: Bool {
         !fullName.trimmingCharacters(in: .whitespaces).isEmpty &&
@@ -53,11 +57,23 @@ final class AddAddressViewModel: ObservableObject {
         isSaving = true
         errorMessage = nil
 
-        // Simulated save delay — replace with real use case call later
-        try? await Task.sleep(nanoseconds: 800_000_000)
+        let newAddress = Address(
+            id: UUID().uuidString, // Shopify assigns ID upon creation, but domain model requires non-optional id
+            fullName: fullName.trimmingCharacters(in: .whitespaces),
+            phoneNumber: phoneNumber.trimmingCharacters(in: .whitespaces),
+            streetAddress: streetAddress.trimmingCharacters(in: .whitespaces),
+            city: city.trimmingCharacters(in: .whitespaces),
+            country: country.trimmingCharacters(in: .whitespaces),
+            isDefault: isDefault
+        )
 
-        // TODO: Call AddAddressUseCase here
-        isSaving = false
-        showSuccessAlert = true
+        do {
+            _ = try await addAddressUseCase.execute(address: newAddress)
+            isSaving = false
+            showSuccessAlert = true
+        } catch {
+            isSaving = false
+            errorMessage = error.localizedDescription
+        }
     }
 }
