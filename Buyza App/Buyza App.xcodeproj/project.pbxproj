@@ -114,6 +114,10 @@
 		B8EAE9BA2FF510B400129771 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9AF2FF510B400129771 /* AddressRepository.swift */; };
 		B8EAE9BB2FF510B400129771 /* AddAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9B12FF510B400129771 /* AddAddressUseCase.swift */; };
 		B8EAE9BC2FF510B400129771 /* GetAddressesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9B32FF510B400129771 /* GetAddressesUseCase.swift */; };
+		B8EAE9C72FF5172C00129771 /* AddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9C22FF5172C00129771 /* AddressResponse.swift */; };
+		B8EAE9C82FF5172C00129771 /* AddressDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9C02FF5172C00129771 /* AddressDataSourceProtocol.swift */; };
+		B8EAE9C92FF5172C00129771 /* AddressRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9C42FF5172C00129771 /* AddressRepositoryImp.swift */; };
+		B8EAE9CA2FF5172C00129771 /* ShopifyAddressDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9BE2FF5172C00129771 /* ShopifyAddressDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +248,10 @@
 		B8EAE9B22FF510B400129771 /* DeleteAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAddressUseCase.swift; sourceTree = "<group>"; };
 		B8EAE9B32FF510B400129771 /* GetAddressesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressesUseCase.swift; sourceTree = "<group>"; };
 		B8EAE9B42FF510B400129771 /* UpdateAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressUseCase.swift; sourceTree = "<group>"; };
+		B8EAE9BE2FF5172C00129771 /* ShopifyAddressDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAddressDataSource.swift; sourceTree = "<group>"; };
+		B8EAE9C02FF5172C00129771 /* AddressDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataSourceProtocol.swift; sourceTree = "<group>"; };
+		B8EAE9C22FF5172C00129771 /* AddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressResponse.swift; sourceTree = "<group>"; };
+		B8EAE9C42FF5172C00129771 /* AddressRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepositoryImp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +466,7 @@
 		769DB5262FEFD1E600F532C7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				B8EAE9C62FF5172C00129771 /* Addresses */,
 				B8165E042FF41A52009DC909 /* Cart */,
 				B8BA560C2FF00557004CA9FF /* Auth */,
 			);
@@ -896,6 +905,49 @@
 			path = Address;
 			sourceTree = "<group>";
 		};
+		B8EAE9BF2FF5172C00129771 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9BE2FF5172C00129771 /* ShopifyAddressDataSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		B8EAE9C12FF5172C00129771 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9BF2FF5172C00129771 /* Remote */,
+				B8EAE9C02FF5172C00129771 /* AddressDataSourceProtocol.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		B8EAE9C32FF5172C00129771 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9C22FF5172C00129771 /* AddressResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B8EAE9C52FF5172C00129771 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9C42FF5172C00129771 /* AddressRepositoryImp.swift */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		B8EAE9C62FF5172C00129771 /* Addresses */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9C12FF5172C00129771 /* DataSource */,
+				B8EAE9C32FF5172C00129771 /* Model */,
+				B8EAE9C52FF5172C00129771 /* Repo */,
+			);
+			path = Addresses;
+			sourceTree = "<group>";
+		};
 		E9DA300E2FF026BC00FBC99A /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1111,6 +1163,10 @@
 				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
 				B8EAE9A52FF5001C00129771 /* AddAddressView.swift in Sources */,
 				09BBE4E12FF2CC07003A54DF /* Category.swift in Sources */,
+				B8EAE9C72FF5172C00129771 /* AddressResponse.swift in Sources */,
+				B8EAE9C82FF5172C00129771 /* AddressDataSourceProtocol.swift in Sources */,
+				B8EAE9C92FF5172C00129771 /* AddressRepositoryImp.swift in Sources */,
+				B8EAE9CA2FF5172C00129771 /* ShopifyAddressDataSource.swift in Sources */,
 				B8EAE99F2FF4FFD000129771 /* AddAddressForm.swift in Sources */,
 				B8EAE9A02FF4FFD000129771 /* AddressInputField.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
