@@ -111,7 +111,7 @@
 		B8EAE9B72FF510B400129771 /* DeleteAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9B22FF510B400129771 /* DeleteAddressUseCase.swift */; };
 		B8EAE9B82FF510B400129771 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9AD2FF510B400129771 /* Address.swift */; };
 		B8EAE9B92FF510B400129771 /* UpdateAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9B42FF510B400129771 /* UpdateAddressUseCase.swift */; };
-		B8EAE9BA2FF510B400129771 /* AddressRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9AF2FF510B400129771 /* AddressRepositoryProtocol.swift */; };
+		B8EAE9BA2FF510B400129771 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9AF2FF510B400129771 /* AddressRepository.swift */; };
 		B8EAE9BB2FF510B400129771 /* AddAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9B12FF510B400129771 /* AddAddressUseCase.swift */; };
 		B8EAE9BC2FF510B400129771 /* GetAddressesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9B32FF510B400129771 /* GetAddressesUseCase.swift */; };
 /* End PBXBuildFile section */
@@ -239,7 +239,7 @@
 		B8EAE9A42FF5001C00129771 /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
 		B8EAE9A62FF5005500129771 /* AddAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModel.swift; sourceTree = "<group>"; };
 		B8EAE9AD2FF510B400129771 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
-		B8EAE9AF2FF510B400129771 /* AddressRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B8EAE9AF2FF510B400129771 /* AddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepository.swift; sourceTree = "<group>"; };
 		B8EAE9B12FF510B400129771 /* AddAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressUseCase.swift; sourceTree = "<group>"; };
 		B8EAE9B22FF510B400129771 /* DeleteAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAddressUseCase.swift; sourceTree = "<group>"; };
 		B8EAE9B32FF510B400129771 /* GetAddressesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressesUseCase.swift; sourceTree = "<group>"; };
@@ -674,7 +674,7 @@
 			children = (
 				B8165E082FF41AC0009DC909 /* CartRepo.swift */,
 				B8BA55B32FEFE64A004CA9FF /* AuthRepo.swift */,
-				B8EAE9AF2FF510B400129771 /* AddressRepositoryProtocol.swift */,
+				B8EAE9AF2FF510B400129771 /* AddressRepository.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -1142,7 +1142,7 @@
 				B8EAE9B72FF510B400129771 /* DeleteAddressUseCase.swift in Sources */,
 				B8EAE9B82FF510B400129771 /* Address.swift in Sources */,
 				B8EAE9B92FF510B400129771 /* UpdateAddressUseCase.swift in Sources */,
-				B8EAE9BA2FF510B400129771 /* AddressRepositoryProtocol.swift in Sources */,
+				B8EAE9BA2FF510B400129771 /* AddressRepository.swift in Sources */,
 				B8EAE9BB2FF510B400129771 /* AddAddressUseCase.swift in Sources */,
 				B8EAE9BC2FF510B400129771 /* GetAddressesUseCase.swift in Sources */,
 				769DC0162FF0010000F532C7 /* ProductActionBar.swift in Sources */,
