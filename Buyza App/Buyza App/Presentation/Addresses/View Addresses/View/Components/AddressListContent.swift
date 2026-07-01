@@ -7,15 +7,13 @@ import SwiftUI
 
 struct AddressListContent: View {
     @ObservedObject var viewModel: AddressSelectionViewModel
-    @State private var navigateToAddAddress = false
+    // Navigation handled directly by NavigationLink
     
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: 16) {
-                    // Add New Address Button
-                    NavigationLink(destination: AddAddressView(), isActive: $navigateToAddAddress) { EmptyView() }
-                    Button(action: { navigateToAddAddress = true }) {
+                    NavigationLink(destination: AddAddressView()) {
                         HStack {
                             Image(systemName: "plus")
                                 .font(.system(size: 16, weight: .bold))

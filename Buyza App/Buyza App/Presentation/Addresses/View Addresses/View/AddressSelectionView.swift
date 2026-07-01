@@ -13,22 +13,16 @@ struct AddressSelectionView: View {
         VStack(spacing: 0) {
             AddressNavigationBar(onDismiss: { dismiss() })
 
-            NavigationView {
-                Group {
-                    if viewModel.isLoading {
-                        Spacer()
-                        ProgressView()
-                            .scaleEffect(1.3)
-                        Spacer()
-                    } else if !viewModel.hasAddresses {
-                        EmptyAddressView(onAddTap: {})
-                    } else {
-                        AddressListContent(viewModel: viewModel)
-                    }
-                }
-                .navigationBarHidden(true)
+            if viewModel.isLoading {
+                Spacer()
+                ProgressView()
+                    .scaleEffect(1.3)
+                Spacer()
+            } else if !viewModel.hasAddresses {
+                EmptyAddressView()
+            } else {
+                AddressListContent(viewModel: viewModel)
             }
-            .navigationViewStyle(.stack)
         }
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarHidden(true)

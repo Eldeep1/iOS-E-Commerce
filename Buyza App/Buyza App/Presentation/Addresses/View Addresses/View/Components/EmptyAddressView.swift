@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct EmptyAddressView: View {
-    var onAddTap: () -> Void
+    // Navigation handled directly by NavigationLink
     
     var body: some View {
         VStack(spacing: 24) {
@@ -29,7 +29,7 @@ struct EmptyAddressView: View {
                     .lineSpacing(4)
             }
             
-            Button(action: onAddTap) {
+            NavigationLink(destination: AddAddressView()) {
                 HStack(spacing: 8) {
                     Image(systemName: "plus")
                         .font(.system(size: 14, weight: .bold))
