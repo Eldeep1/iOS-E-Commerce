@@ -9,8 +9,7 @@ import Foundation
 
 protocol ShopifyAuthServiceProtocol {
     func createCustomer(email: String, password: String) async throws -> String
-    func getCustomerID(email: String, password: String) async throws -> String
-    
+    func getCustomerToken(email: String, password: String) async throws -> String
 }
 
 final class ShopifyAuthService: ShopifyAuthServiceProtocol {
@@ -64,12 +63,13 @@ final class ShopifyAuthService: ShopifyAuthServiceProtocol {
                 throw NSError(domain: "ShopifyError", code: 400, userInfo: [NSLocalizedDescriptionKey: userError.message])
             }
             
-            guard let customerId = responseData.customerCreate.customer?.id else {
+            guard responseData.customerCreate.customer?.id != nil else {
                 print("Customer ID was missing in the success response.")
                 throw NSError(domain: "ShopifyError", code: 500, userInfo: [NSLocalizedDescriptionKey: "Failed to get Customer ID"])
             }
             
-            return customerId
+            // Generate and return access token
+            return try await getAccessToken(email: email, password: password)
             
         } catch {
             print(" Catch block error: \(error)")
@@ -78,10 +78,8 @@ final class ShopifyAuthService: ShopifyAuthServiceProtocol {
     }
     
     
-    func getCustomerID(email: String, password: String) async throws -> String {
-        let accessToken = try await getAccessToken(email: email, password: password)
-        
-        return try await fetchCustomerID(accessToken: accessToken)
+    func getCustomerToken(email: String, password: String) async throws -> String {
+        return try await getAccessToken(email: email, password: password)
     }
     
     private func getAccessToken(email: String, password: String) async throws -> String {
@@ -119,32 +117,5 @@ final class ShopifyAuthService: ShopifyAuthServiceProtocol {
         }
         
         return token
-    }
-    
-    private func fetchCustomerID(accessToken: String) async throws -> String {
-        let query = """
-        query getCustomer($customerAccessToken: String!) {
-          customer(customerAccessToken: $customerAccessToken) {
-            id
-          }
-        }
-        """
-        
-        
-        struct TokenVariables: Encodable { let customerAccessToken: String }
-        
-        let requestBody = GraphQLRequest(query: query, variables: TokenVariables(customerAccessToken: accessToken))
-        let endpoint = ApiEndpoint(path: "/api/2024-04/graphql.json", method: .POST)
-        
-        let response: GraphQLResponse<CustomerByTokenResponse> = try await ApiManager.shared.sendRequest(
-            from: endpoint,
-            with: requestBody
-        )
-        
-        guard let customerID = response.data?.customer?.id else {
-            throw NSError(domain: "ShopifyError", code: 404, userInfo: [NSLocalizedDescriptionKey: "Customer not found"])
-        }
-        
-        return customerID
     }
 }

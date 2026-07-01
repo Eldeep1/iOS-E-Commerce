@@ -27,12 +27,11 @@ struct AuthRepoImp : AuthRepoProtocol {
         do {
             let firebaseModel = try await firebaseService.signIn(email: email, password: password)
             
-            let shopifyID = try await shopifyService.getCustomerID(email: email, password: password)
+            let shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
             
+            try localDataSource.saveShopifyToken(shopifyToken)
             
-            try localDataSource.saveShopifyID(shopifyID)
-            
-            print("Login complete! Shopify ID saved: \(shopifyID)")
+            print("Login complete! Shopify Token saved.")
             return UserModel(
                 uid: firebaseModel.uid,
                 email: firebaseModel.email ?? email,
@@ -51,9 +50,9 @@ struct AuthRepoImp : AuthRepoProtocol {
             print(firebaseModel.uid)
             print("aaaaaa")
             print(firebaseModel.name)
-            let shopifyID = try await shopifyService.createCustomer(email: email, password: password)
+            let shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
             print("that was saved successfully")
-            try localDataSource.saveShopifyID(shopifyID)
+            try localDataSource.saveShopifyToken(shopifyToken)
             
             return UserModel(
                 uid: firebaseModel.uid,
@@ -69,12 +68,12 @@ struct AuthRepoImp : AuthRepoProtocol {
         // 1. Check if Firebase remembers the user
         let hasFirebaseUser = Auth.auth().currentUser != nil
         
-        // 2. Check if the Keychain has the Shopify ID
-        let shopifyID = try? localDataSource.getShopifyID()
-        let hasShopifyID = shopifyID != nil
+        // 2. Check if the Keychain has the Shopify Token
+        let shopifyToken = try? localDataSource.getShopifyToken()
+        let hasShopifyToken = shopifyToken != nil
         
         // Return true only if both exist!
-        return hasFirebaseUser && hasShopifyID
+        return hasFirebaseUser && hasShopifyToken
     }
     
 }

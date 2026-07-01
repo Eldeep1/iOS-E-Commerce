@@ -125,7 +125,7 @@ struct ProductDetailView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         ProductDetailView(product: .adidasClassicBackpack)
     }
 }

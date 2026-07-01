@@ -9,20 +9,20 @@ import Foundation
 import Security
 
 protocol LocalAuthDataSourceProtocol {
-    func saveShopifyID(_ id: String) throws
-    func getShopifyID() throws -> String
+    func saveShopifyToken(_ token: String) throws
+    func getShopifyToken() throws -> String
 }
 
 final class KeychainService : LocalAuthDataSourceProtocol{
     
-    func saveShopifyID(_ id: String) throws {
+    func saveShopifyToken(_ token: String) throws {
         print("from the save in the keychain")
-        print(id)
-        try save(key: "ShopifyCustomerID", value: id)
+        print(token)
+        try save(key: "ShopifyCustomerToken", value: token)
     }
     
-    func getShopifyID() throws -> String {
-        return try read(key: "ShopifyCustomerID")
+    func getShopifyToken() throws -> String {
+        return try read(key: "ShopifyCustomerToken")
     }
     
     enum KeychainError: Error {
