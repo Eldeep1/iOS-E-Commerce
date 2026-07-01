@@ -52,3 +52,54 @@ struct ApiEndpoint {
         return merged
     }
 }
+
+// MARK: - Admin API Support
+
+extension ApiEndpoint {
+    
+    static var shopifyAdminAccessToken: String {
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "ShopifyAdminAccessToken") as? String else {
+            return ""
+        }
+        return token
+    }
+    
+    static var adminHeaders: [String: String] {
+        [
+            "X-Shopify-Access-Token": shopifyAdminAccessToken,
+            "Content-Type": "application/json"
+        ]
+    }
+}
+
+// MARK: - Home Endpoints
+
+extension ApiEndpoint {
+    
+    private static let adminApiVersion = "2026-01"
+    
+    static func products(limit: Int = 8) -> ApiEndpoint {
+        ApiEndpoint(
+            path: "/admin/api/\(adminApiVersion)/products.json",
+            method: .GET,
+            parameters: [URLQueryItem(name: "limit", value: "\(limit)")],
+            headers: adminHeaders
+        )
+    }
+    
+    static func categories() -> ApiEndpoint {
+        ApiEndpoint(
+            path: "/admin/api/\(adminApiVersion)/custom_collections.json",
+            method: .GET,
+            headers: adminHeaders
+        )
+    }
+    
+    static func brands() -> ApiEndpoint {
+        ApiEndpoint(
+            path: "/admin/api/\(adminApiVersion)/smart_collections.json",
+            method: .GET,
+            headers: adminHeaders
+        )
+    }
+}

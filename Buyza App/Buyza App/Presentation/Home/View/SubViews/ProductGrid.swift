@@ -18,7 +18,7 @@ struct ProductsGrid: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(viewModel.fakeProducts?.products ?? [], id: \.id) { product in
+                ForEach(viewModel.products, id: \.id) { product in
                     ProductCard(viewModel: viewModel, product: product)
                 }
             }
