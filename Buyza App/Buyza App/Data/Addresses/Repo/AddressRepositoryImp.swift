@@ -63,8 +63,10 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
             country: address.country
         )
         
-        // Note: Shopify has a separate mutation `customerDefaultAddressUpdate`
-        // if we want to set it as default. For now we just return the mapped object.
+        if address.isDefault {
+            try await remoteDataSource.updateDefaultAddress(addressId: dto.id)
+        }
+        
         return map(dto: dto, isDefault: address.isDefault)
     }
     
@@ -80,6 +82,10 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
             city: address.city,
             country: address.country
         )
+        
+        if address.isDefault {
+            try await remoteDataSource.updateDefaultAddress(addressId: dto.id)
+        }
         
         return map(dto: dto, isDefault: address.isDefault)
     }

@@ -36,6 +36,11 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
         let id: String
     }
     
+    private struct UpdateDefaultAddressVariables: Encodable {
+        let customerAccessToken: String
+        let addressId: String
+    }
+    
     // MARK: - Lifecycle
     
     init(apiManager: ApiManager = .shared, localAuth: LocalAuthDataSourceProtocol = KeychainService.shared) {
@@ -209,6 +214,34 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
         
         if let errors = response.data?.customerAddressDelete?.customerUserErrors, !errors.isEmpty {
             throw NSError(domain: "ShopifyAddressError", code: 400, userInfo: [NSLocalizedDescriptionKey: errors.first?.message ?? "Failed to delete address"])
+        }
+    }
+    
+    func updateDefaultAddress(addressId: String) async throws {
+        let token = try getAccessToken()
+        
+        let mutation = """
+        mutation customerDefaultAddressUpdate($customerAccessToken: String!, $addressId: ID!) {
+          customerDefaultAddressUpdate(customerAccessToken: $customerAccessToken, addressId: $addressId) {
+            customer {
+              id
+            }
+            customerUserErrors {
+              field
+              message
+            }
+          }
+        }
+        """
+        
+        let variables = UpdateDefaultAddressVariables(customerAccessToken: token, addressId: addressId)
+        let body = GraphQLRequest(query: mutation, variables: variables)
+        let endpoint = ApiEndpoint(path: "/api/2024-04/graphql.json", method: .POST)
+        
+        let response: UpdateDefaultAddressResponse = try await apiManager.sendRequest(from: endpoint, with: body)
+        
+        if let errors = response.data?.customerDefaultAddressUpdate?.customerUserErrors, !errors.isEmpty {
+            throw NSError(domain: "ShopifyAddressError", code: 400, userInfo: [NSLocalizedDescriptionKey: errors.first?.message ?? "Failed to update default address"])
         }
     }
 }

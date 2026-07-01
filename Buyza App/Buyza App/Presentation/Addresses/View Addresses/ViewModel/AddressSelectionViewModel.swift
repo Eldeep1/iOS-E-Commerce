@@ -38,11 +38,14 @@ final class AddressSelectionViewModel: ObservableObject {
         do {
             self.addresses = try await getAddressesUseCase.execute()
             
-            // Auto-select the default address, otherwise the first one
-            if let defaultAddress = addresses.first(where: { $0.isDefault }) {
-                selectedAddressId = defaultAddress.id
-            } else if selectedAddressId == nil {
-                selectedAddressId = addresses.first?.id
+            // Only auto-select default if nothing is selected, or if the selected address was deleted
+            let selectedStillExists = addresses.contains { $0.id == selectedAddressId }
+            if selectedAddressId == nil || !selectedStillExists {
+                if let defaultAddress = addresses.first(where: { $0.isDefault }) {
+                    selectedAddressId = defaultAddress.id
+                } else {
+                    selectedAddressId = addresses.first?.id
+                }
             }
         } catch {
             self.errorMessage = error.localizedDescription

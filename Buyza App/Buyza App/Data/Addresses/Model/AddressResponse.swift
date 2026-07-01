@@ -81,3 +81,17 @@ struct CustomerAddressDeletePayload: Decodable {
     let deletedCustomerAddressId: String?
     let customerUserErrors: [AddressUserError]?
 }
+
+// MARK: - Update Default Address
+struct UpdateDefaultAddressResponse: Decodable {
+    let data: UpdateDefaultAddressData?
+}
+
+struct UpdateDefaultAddressData: Decodable {
+    let customerDefaultAddressUpdate: CustomerDefaultAddressUpdatePayload?
+}
+
+struct CustomerDefaultAddressUpdatePayload: Decodable {
+    let customer: CustomerData?
+    let customerUserErrors: [AddressUserError]?
+}
