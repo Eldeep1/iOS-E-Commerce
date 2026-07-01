@@ -117,6 +117,9 @@
 		B8EAE9C82FF5172C00129771 /* AddressDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9C02FF5172C00129771 /* AddressDataSourceProtocol.swift */; };
 		B8EAE9C92FF5172C00129771 /* AddressRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9C42FF5172C00129771 /* AddressRepositoryImp.swift */; };
 		B8EAE9CA2FF5172C00129771 /* ShopifyAddressDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9BE2FF5172C00129771 /* ShopifyAddressDataSource.swift */; };
+		B8EAE9CF2FF5311D00129771 /* EditAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */; };
+		B8EAE9D12FF5314900129771 /* EditAddressForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9D02FF5314900129771 /* EditAddressForm.swift */; };
+		B8EAE9D42FF5316500129771 /* EditAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9D32FF5316500129771 /* EditAddressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,6 +253,9 @@
 		B8EAE9C02FF5172C00129771 /* AddressDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataSourceProtocol.swift; sourceTree = "<group>"; };
 		B8EAE9C22FF5172C00129771 /* AddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressResponse.swift; sourceTree = "<group>"; };
 		B8EAE9C42FF5172C00129771 /* AddressRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepositoryImp.swift; sourceTree = "<group>"; };
+		B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressViewModel.swift; sourceTree = "<group>"; };
+		B8EAE9D02FF5314900129771 /* EditAddressForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressForm.swift; sourceTree = "<group>"; };
+		B8EAE9D32FF5316500129771 /* EditAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -825,6 +831,7 @@
 		B8EAE98C2FF4F94B00129771 /* Addresses */ = {
 			isa = PBXGroup;
 			children = (
+				B8EAE9CB2FF530CB00129771 /* Edit Address */,
 				B8EAE9AA2FF5007900129771 /* View Addresses */,
 				B8EAE9A12FF4FFDD00129771 /* Add Addresses */,
 			);
@@ -935,6 +942,40 @@
 				B8EAE9C52FF5172C00129771 /* Repo */,
 			);
 			path = Addresses;
+			sourceTree = "<group>";
+		};
+		B8EAE9CB2FF530CB00129771 /* Edit Address */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9CD2FF530DB00129771 /* View Model */,
+				B8EAE9CC2FF530D700129771 /* View */,
+			);
+			path = "Edit Address";
+			sourceTree = "<group>";
+		};
+		B8EAE9CC2FF530D700129771 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9D22FF5315400129771 /* Components */,
+				B8EAE9D32FF5316500129771 /* EditAddressView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B8EAE9CD2FF530DB00129771 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		B8EAE9D22FF5315400129771 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B8EAE9D02FF5314900129771 /* EditAddressForm.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		E9DA300E2FF026BC00FBC99A /* Services */ = {
@@ -1120,6 +1161,7 @@
 				B8BA55FA2FEFFDF6004CA9FF /* LoginForm.swift in Sources */,
 				B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */,
 				B8BA56092FEFFF04004CA9FF /* RegisterView.swift in Sources */,
+				B8EAE9D42FF5316500129771 /* EditAddressView.swift in Sources */,
 				B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */,
 				B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */,
 				B8BA55FD2FEFFDF6004CA9FF /* SocialButton.swift in Sources */,
@@ -1175,9 +1217,11 @@
 				769DC00A2FF0010000F532C7 /* ProductDetailView.swift in Sources */,
 				769DC00C2FF0010000F532C7 /* Color+Hex.swift in Sources */,
 				769DC00E2FF0010000F532C7 /* ProductImageCarousel.swift in Sources */,
+				B8EAE9D12FF5314900129771 /* EditAddressForm.swift in Sources */,
 				769DC0102FF0010000F532C7 /* ProductSizeSelector.swift in Sources */,
 				B8165E102FF41BD0009DC909 /* UpdateQuantityUseCase.swift in Sources */,
 				B8EAE9992FF4FCC100129771 /* AddressContinueButton.swift in Sources */,
+				B8EAE9CF2FF5311D00129771 /* EditAddressViewModel.swift in Sources */,
 				B8EAE99A2FF4FCC100129771 /* AddressListContent.swift in Sources */,
 				B8EAE99B2FF4FCC100129771 /* AddressNavigationBar.swift in Sources */,
 				B8EAE99C2FF4FCC100129771 /* EmptyAddressView.swift in Sources */,
