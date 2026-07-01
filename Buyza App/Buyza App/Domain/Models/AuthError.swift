@@ -23,7 +23,7 @@ enum AuthError: LocalizedError {
     static func map(_ error: Error) -> AuthError {
         let nsError = error as NSError
         
-        if nsError.domain == AuthErrorDomain, let errorCode = AuthErrorCode(rawValue: nsError.code) {
+        if nsError.domain == AuthErrorDomain, let errorCode = AuthErrorCode.Code(rawValue: nsError.code) {
             switch errorCode {
             case .wrongPassword:
                 return .firebaseError("Incorrect password. Please try again.")

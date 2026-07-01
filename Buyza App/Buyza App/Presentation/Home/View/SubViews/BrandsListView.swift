@@ -14,9 +14,7 @@ struct BrandsListView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             
             LazyHStack(spacing: 16) {
-                let collection = viewModel.brands?.smart_collections ?? []
-                
-                ForEach(collection, id: \.id) { index in
+                ForEach(viewModel.brands, id: \.id) { index in
                     CollectionCell(collectionItem: index)
                 }
             }

@@ -30,8 +30,11 @@ struct CollectionCell: View {
             )
             
             Text(collectionItem?.title ?? "Unknown")
-                .font(.title3)
+                .font(.subheadline)
                 .foregroundColor(.black)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .frame(width: 80, height: 30)
         }
     }
 }

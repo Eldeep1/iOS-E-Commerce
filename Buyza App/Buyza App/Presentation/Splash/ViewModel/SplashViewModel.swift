@@ -23,7 +23,7 @@ class SplashViewModel: ObservableObject {
     
     func checkUserStatus(completion: @escaping (AppRoute) -> Void) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
             
             let isLoggedIn = self.checkLoginUseCase.execute()
@@ -36,7 +36,6 @@ class SplashViewModel: ObservableObject {
                 completion(.auth)
             }
             
-            // 4. Turn off splash state
             self.isSplashActive = false
         }
     }

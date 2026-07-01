@@ -4,5 +4,7 @@
 <dict>
 	<key>ShopifyStorefrontToken</key>
 	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
+	<key>ShopifyAdminAccessToken</key>
+	<string>$(SHOPIFY_ADMIN_ACCESS_TOKEN)</string>
 </dict>
 </plist>

@@ -10,6 +10,10 @@
 		09767E732FF2F7D6004D37E8 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09767E722FF2F7D5004D37E8 /* CategoriesListView.swift */; };
 		09767E762FF30461004D37E8 /* BrandsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09767E752FF30461004D37E8 /* BrandsListView.swift */; };
 		09767E782FF3118A004D37E8 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09767E772FF3118A004D37E8 /* ProductCard.swift */; };
+		0977367E2FF564A800EA8530 /* HomeRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0977367D2FF564A800EA8530 /* HomeRemoteDataSource.swift */; };
+		097736802FF564AA00EA8530 /* HomeRepoImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0977367F2FF564AA00EA8530 /* HomeRepoImp.swift */; };
+		097736852FF5652D00EA8530 /* HomeRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097736842FF5652D00EA8530 /* HomeRepo.swift */; };
+		097736892FF565CC00EA8530 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097736882FF565CC00EA8530 /* HomeUseCase.swift */; };
 		0978086B2FF40B5A00ECF823 /* ProductGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978086A2FF40B5A00ECF823 /* ProductGrid.swift */; };
 		097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6AB2FEFD85400C42BC9 /* SplashView.swift */; };
 		097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */; };
@@ -143,7 +147,12 @@
 		09767E722FF2F7D5004D37E8 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		09767E752FF30461004D37E8 /* BrandsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsListView.swift; sourceTree = "<group>"; };
 		09767E772FF3118A004D37E8 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
+		0977367D2FF564A800EA8530 /* HomeRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRemoteDataSource.swift; sourceTree = "<group>"; };
+		0977367F2FF564AA00EA8530 /* HomeRepoImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepoImp.swift; sourceTree = "<group>"; };
+		097736842FF5652D00EA8530 /* HomeRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRepo.swift; sourceTree = "<group>"; };
+		097736882FF565CC00EA8530 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		0978086A2FF40B5A00ECF823 /* ProductGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductGrid.swift; sourceTree = "<group>"; };
+		0978086C2FF4341800ECF823 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		097FE6AB2FEFD85400C42BC9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -296,6 +305,39 @@
 				0978086A2FF40B5A00ECF823 /* ProductGrid.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		097736812FF564BC00EA8530 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				097736822FF564C400EA8530 /* DataSource */,
+				097736832FF564E300EA8530 /* Repo */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		097736822FF564C400EA8530 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				0977367D2FF564A800EA8530 /* HomeRemoteDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		097736832FF564E300EA8530 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				0977367F2FF564AA00EA8530 /* HomeRepoImp.swift */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		0977368A2FF565D300EA8530 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				097736882FF565CC00EA8530 /* HomeUseCase.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		097FE6A82FEFD80100C42BC9 /* Presentation */ = {
@@ -472,6 +514,7 @@
 			children = (
 				B8EAE9C62FF5172C00129771 /* Addresses */,
 				B8165E042FF41A52009DC909 /* Cart */,
+				097736812FF564BC00EA8530 /* Home */,
 				B8BA560C2FF00557004CA9FF /* Auth */,
 			);
 			path = Data;
@@ -492,8 +535,11 @@
 			children = (
 				B8165E1E2FF42BB5009DC909 /* CartSummary.swift */,
 				B8165E132FF42627009DC909 /* CartError.swift */,
+				097FE6B92FEFF58400C42BC9 /* OnboardingStep.swift */,
 				B8BA55BB2FEFF188004CA9FF /* AuthError.swift */,
 				B8BA55B52FEFE663004CA9FF /* UserModel.swift */,
+				09BBE4E22FF2CFC8003A54DF /* Brand.swift */,
+				09BBE4E02FF2CC07003A54DF /* Category.swift */,
 				769DB5312FEFE3F200F532C7 /* Product.swift */,
 				B8EAE9AD2FF510B400129771 /* Address.swift */,
 			);
@@ -675,6 +721,7 @@
 			children = (
 				B8EAE9BD2FF510D500129771 /* Address */,
 				B8165E0A2FF41AF0009DC909 /* Cart */,
+				0977368A2FF565D300EA8530 /* Home */,
 				B8BA560D2FF00572004CA9FF /* Auth */,
 				769DC0032FF0010000F532C7 /* ProductDetailUseCaseProtocol.swift */,
 				769DC0052FF0010000F532C7 /* ProductDetailUseCase.swift */,
@@ -688,6 +735,7 @@
 				B8165E082FF41AC0009DC909 /* CartRepo.swift */,
 				B8BA55B32FEFE64A004CA9FF /* AuthRepo.swift */,
 				B8EAE9AF2FF510B400129771 /* AddressRepository.swift */,
+				097736842FF5652D00EA8530 /* HomeRepo.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -1137,6 +1185,7 @@
 				B8BA55B42FEFE64A004CA9FF /* AuthRepo.swift in Sources */,
 				B8BA55A32FEFE251004CA9FF /* FirebaseServices.swift in Sources */,
 				B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */,
+				0977367E2FF564A800EA8530 /* HomeRemoteDataSource.swift in Sources */,
 				B8BA55BE2FEFF22C004CA9FF /* AuthRepoImp.swift in Sources */,
 				B8165E122FF41BE2009DC909 /* FetchCartUseCase.swift in Sources */,
 				B8BA55B22FEFE4B3004CA9FF /* AuthDataResultModel.swift in Sources */,
@@ -1171,6 +1220,7 @@
 				B8BA55FF2FEFFDF6004CA9FF /* LoginView.swift in Sources */,
 				769DB5322FEFE3F300F532C7 /* Product.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
+				097736802FF564AA00EA8530 /* HomeRepoImp.swift in Sources */,
 				B8BA55BC2FEFF188004CA9FF /* AuthError.swift in Sources */,
 				B8BA560B2FEFFF5B004CA9FF /* RegisterViewModel.swift in Sources */,
 				B8165E192FF426D4009DC909 /* CartRemoteDataSource.swift in Sources */,
@@ -1185,6 +1235,7 @@
 				09767E732FF2F7D6004D37E8 /* CategoriesListView.swift in Sources */,
 				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
 				097FE6BA2FEFF58400C42BC9 /* OnboardingStep.swift in Sources */,
+				097736852FF5652D00EA8530 /* HomeRepo.swift in Sources */,
 				097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */,
 				097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */,
 				097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */,
@@ -1235,6 +1286,7 @@
 				B8EAE9BC2FF510B400129771 /* GetAddressesUseCase.swift in Sources */,
 				769DC0162FF0010000F532C7 /* ProductActionBar.swift in Sources */,
 				B8EAE9922FF4FB5900129771 /* AddressSelectionViewModel.swift in Sources */,
+				097736892FF565CC00EA8530 /* HomeUseCase.swift in Sources */,
 				769DC0382FF0030000F532C7 /* String+HTML.swift in Sources */,
 				09BBE4E32FF2CFC8003A54DF /* Brand.swift in Sources */,
 				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
@@ -1575,8 +1627,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 12.15.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 10.25.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

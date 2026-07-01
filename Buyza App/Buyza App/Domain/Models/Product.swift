@@ -11,6 +11,10 @@ struct ProductResponse: Decodable {
     let product: Product
 }
 
+struct ProductsResponse: Decodable {
+    let products: [Product]
+}
+
 struct Product: Identifiable, Decodable, Hashable {
     let id: Int64
     let title: String

@@ -27,7 +27,7 @@ struct RootContainerView: View {
                 NavigationView {
                     LoginView(
                         loginUseCase: LoginUseCase(authRepository: AuthRepoImp(
-                            firebaseService: FirebaseServices(), shopifyService: ShopifyAuthService(), localDataSource: KeychainService.shared)),
+                            firebaseService: FirebaseServices(), shopifyService: ShopifyAuthService(), localDataSource: KeychainService.shared))
                     )
                 }
                 .environmentObject(appState)
