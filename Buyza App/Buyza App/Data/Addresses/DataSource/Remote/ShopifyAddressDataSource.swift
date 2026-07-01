@@ -49,7 +49,7 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
     }
     
     private func getAccessToken() throws -> String {
-        return try localAuth.getShopifyID()
+        return try localAuth.getShopifyToken()
     }
     
     func fetchAddresses() async throws -> (addresses: [AddressDTO], defaultAddressId: String?) {
