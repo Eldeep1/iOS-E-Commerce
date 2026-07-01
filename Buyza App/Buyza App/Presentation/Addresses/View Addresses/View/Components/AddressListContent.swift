@@ -7,17 +7,26 @@ import SwiftUI
 
 struct AddressListContent: View {
     @ObservedObject var viewModel: AddressSelectionViewModel
-    // Navigation handled directly by NavigationLink
-    
+    @State private var addressToEdit: Address? = nil
+    @State private var navigateToEdit: Bool = false
+
     var body: some View {
         let addressDataSource = ShopifyAddressDataSource()
         let repo = AddressRepositoryImp(remoteDataSource: addressDataSource)
         let addAddressUseCase = AddAddressUseCase(repository: repo)
         let addAddressViewModel = AddAddressViewModel(addAddressUseCase: addAddressUseCase)
-        
+
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: 16) {
+                    // Hidden NavigationLink for editing — triggered by pencil button
+                    NavigationLink(
+                        destination: addressToEdit.map { EditAddressView(address: $0) },
+                        isActive: $navigateToEdit
+                    ) {
+                        EmptyView()
+                    }
+
                     NavigationLink(destination: AddAddressView(viewModel: addAddressViewModel)) {
                         HStack {
                             Image(systemName: "plus")
@@ -34,7 +43,7 @@ struct AddressListContent: View {
                         )
                     }
                     .padding(.top, 16)
-                    
+
                     // Address Cards
                     ForEach(viewModel.addresses) { address in
                         AddressCardView(
@@ -46,7 +55,8 @@ struct AddressListContent: View {
                                 }
                             },
                             onEdit: {
-                                print("Edit address \(address.id)")
+                                addressToEdit = address
+                                navigateToEdit = true
                             }
                         )
                     }
@@ -54,7 +64,7 @@ struct AddressListContent: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 30)
             }
-            
+
             // Continue Footer
             AddressContinueButton(
                 selectedAddressId: viewModel.selectedAddressId,
