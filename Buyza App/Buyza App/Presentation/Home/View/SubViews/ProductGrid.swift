@@ -18,15 +18,16 @@ struct ProductsGrid: View {
     ]
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(viewModel.products, id: \.id) { product in
-                    NavigationLink(destination: ProductDetailView(product: product)) {
-                        
-                        ProductCard(viewModel: viewModel, product: product)
-                        
-                    }
+        LazyVGrid(columns: columns, spacing: 20) {
+            ForEach(products) { product in
+                NavigationLink(destination: ProductDetailView(product: product)) {
+                    ProductCard(
+                        product: product,
+                        isFavorite: isFavorite(product.id),
+                        onFavoriteTap: { onFavoriteTap(product) }
+                    )
                 }
+                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal, 16)

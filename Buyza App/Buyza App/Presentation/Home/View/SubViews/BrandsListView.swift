@@ -16,7 +16,10 @@ struct BrandsListView: View {
                 ForEach(viewModel.brands, id: \.id) { brand in
                     if let _ = brand.id {
                         NavigationLink {
-                            CollectionProductsView(collection: brand)
+                            CollectionProductsView(
+                                collection: brand,
+                                source: .brand(vendor: brand.title ?? "")
+                            )
                         } label: {
                             CollectionCell(collectionItem: brand)
                         }

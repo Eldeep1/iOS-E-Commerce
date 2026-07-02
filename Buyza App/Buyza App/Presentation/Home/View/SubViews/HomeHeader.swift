@@ -22,7 +22,7 @@ struct HomeHeader: View {
                 Spacer()
                 
                 Button(action: {
-                    print("Cart tapped")
+                    //NavigationLink(destination: CartView, label: "Cart")
                 }) {
                     Image(systemName: "cart")
                         .font(.title2)

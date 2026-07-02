@@ -2,7 +2,7 @@
 //  CollectionProductsViewModel.swift
 //  Buyza App
 //
-//  Created by Ahmad Fathy on 27/06/2026.
+//  Created by Ahmad Fathy on 02/07/2026.
 //
 
 import Foundation
@@ -15,20 +15,20 @@ final class CollectionProductsViewModel: ObservableObject {
 
     let collectionTitle: String
 
-    private let collectionId: Int
+    private let source: CollectionProductsSource
     private let homeUseCase: HomeUseCaseProtocol
 
     init(
-        collectionId: Int,
         collectionTitle: String,
+        source: CollectionProductsSource,
         homeUseCase: HomeUseCaseProtocol = HomeUseCase(
             homeRepo: HomeRepoImp(
                 remoteDataSource: HomeRemoteDataSource()
             )
         )
     ) {
-        self.collectionId = collectionId
         self.collectionTitle = collectionTitle
+        self.source = source
         self.homeUseCase = homeUseCase
         fetchProducts()
     }
@@ -37,7 +37,12 @@ final class CollectionProductsViewModel: ObservableObject {
         Task {
             isLoading = true
             do {
-                products = try await homeUseCase.getProducts(collectionId: collectionId)
+                switch source {
+                case .category(let collectionId):
+                    products = try await homeUseCase.getProducts(collectionId: collectionId)
+                case .brand(let vendor):
+                    products = try await homeUseCase.getProductsByVendor(vendor: vendor)
+                }
             } catch {
                 errorMessage = error.localizedDescription
             }

@@ -26,6 +26,23 @@ struct Product: Identifiable, Decodable, Hashable {
     let images: [ProductImage]
     let variants: [ProductVariant]
 
+    private enum CodingKeys: String, CodingKey {
+        case id, title, body_html, vendor, product_type, status, options, images, variants
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int64.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        body_html = try container.decodeIfPresent(String.self, forKey: .body_html)
+        vendor = try container.decode(String.self, forKey: .vendor)
+        product_type = try container.decode(String.self, forKey: .product_type)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        options = try container.decodeIfPresent([ProductOption].self, forKey: .options) ?? []
+        images = try container.decodeIfPresent([ProductImage].self, forKey: .images) ?? []
+        variants = try container.decodeIfPresent([ProductVariant].self, forKey: .variants) ?? []
+    }
+
     var brandName: String {
         vendor.uppercased()
     }

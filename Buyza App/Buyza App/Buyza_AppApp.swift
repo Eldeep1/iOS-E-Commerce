@@ -28,8 +28,8 @@ struct Buyza_AppApp: App {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            //RootContainerView().environmentObject(appState)
-            HomeView()
+            RootContainerView().environmentObject(appState)
+            //HomeView()
             }
             
         }

@@ -47,8 +47,12 @@ struct ApiEndpoint {
     }
     
     var allHeaders: [String: String] {
+        guard let headers else { return Self.defaultHeaders }
+        if headers.keys.contains("X-Shopify-Access-Token") {
+            return headers
+        }
         var merged = Self.defaultHeaders
-        headers?.forEach { merged[$0.key] = $0.value }
+        headers.forEach { merged[$0.key] = $0.value }
         return merged
     }
 }
@@ -103,10 +107,26 @@ extension ApiEndpoint {
         )
     }
 
-    static func collectionProducts(collectionId: Int) -> ApiEndpoint {
+    static func collectionProducts(collectionId: Int, limit: Int = 50) -> ApiEndpoint {
         ApiEndpoint(
-            path: "/admin/api/\(adminApiVersion)/collections/\(collectionId)/products.json",
+            path: "/admin/api/\(adminApiVersion)/products.json",
             method: .GET,
+            parameters: [
+                URLQueryItem(name: "collection_id", value: "\(collectionId)"),
+                URLQueryItem(name: "limit", value: "\(limit)")
+            ],
+            headers: adminHeaders
+        )
+    }
+
+    static func productsByVendor(vendor: String, limit: Int = 50) -> ApiEndpoint {
+        ApiEndpoint(
+            path: "/admin/api/\(adminApiVersion)/products.json",
+            method: .GET,
+            parameters: [
+                URLQueryItem(name: "vendor", value: vendor),
+                URLQueryItem(name: "limit", value: "\(limit)")
+            ],
             headers: adminHeaders
         )
     }

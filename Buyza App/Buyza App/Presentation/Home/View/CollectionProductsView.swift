@@ -2,7 +2,7 @@
 //  CollectionProductsView.swift
 //  Buyza App
 //
-//  Created by Ahmad Fathy on 27/06/2026.
+//  Created by Ahmad Fathy on 02/07/2026.
 //
 
 import SwiftUI
@@ -10,11 +10,11 @@ import SwiftUI
 struct CollectionProductsView: View {
     @StateObject private var viewModel: CollectionProductsViewModel
 
-    init(collection: Collection) {
+    init(collection: Collection, source: CollectionProductsSource) {
         _viewModel = StateObject(
             wrappedValue: CollectionProductsViewModel(
-                collectionId: collection.id ?? 0,
-                collectionTitle: collection.title ?? ""
+                collectionTitle: collection.title ?? "",
+                source: source
             )
         )
     }
@@ -55,7 +55,8 @@ struct CollectionProductsView: View {
                 id: 1,
                 title: "ADIDAS",
                 image: NetworkImage(src: "")
-            )
+            ),
+            source: .brand(vendor: "ADIDAS")
         )
     }
 }

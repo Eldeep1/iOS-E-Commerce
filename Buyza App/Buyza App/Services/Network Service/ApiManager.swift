@@ -43,6 +43,13 @@ final class ApiManager{
             throw ApiError.decoding
         }
 
+        guard (200...299).contains(httpResponse.statusCode) else {
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Request failed for \(endpoint.path). HTTP Status: \(httpResponse.statusCode). Raw response: \(jsonString)")
+            }
+            throw ApiError.httpStatus(httpResponse.statusCode)
+        }
+
         do {
             return try decoder.decode(Response.self, from: data)
         } catch {

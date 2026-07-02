@@ -10,6 +10,7 @@ import Foundation
 enum ApiError:Error{
     case invalidPath
     case decoding
+    case httpStatus(Int)
 }
 
 
@@ -20,6 +21,8 @@ extension ApiError{
             return "Invalid Path"
         case .decoding:
             return "Error in decoding"
+        case .httpStatus(let code):
+            return "Request failed with status code \(code)"
         }
     }
 }

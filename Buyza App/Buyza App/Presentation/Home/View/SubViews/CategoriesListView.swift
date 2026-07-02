@@ -16,7 +16,10 @@ struct CategoriesListView: View {
                 ForEach(viewModel.categories, id: \.id) { category in
                     if let _ = category.id {
                         NavigationLink {
-                            CollectionProductsView(collection: category)
+                            CollectionProductsView(
+                                collection: category,
+                                source: .category(collectionId: category.id ?? 0)
+                            )
                         } label: {
                             CollectionCell(collectionItem: category)
                         }
