@@ -10,6 +10,7 @@ struct AddressCardView: View {
     let isSelected: Bool
     let onSelect: () -> Void
     let onEdit: () -> Void
+    let onDelete: () -> Void
     
     var body: some View {
         Button(action: onSelect) {
@@ -41,10 +42,19 @@ struct AddressCardView: View {
                         Spacer()
                         
                         // Pencil button is a separate tap target — does NOT conflict with the card's onSelect button
-                        Button(action: onEdit) {
+                            Button(action: onEdit) {
                             Image(systemName: "pencil")
                                 .font(.system(size: 15, weight: .semibold))
                                 .foregroundColor(.secondary)
+                                .padding(8)
+                                .background(Color(.systemGray6))
+                                .clipShape(Circle())
+                        }
+                        
+                        Button(action: onDelete) {
+                            Image(systemName: "trash")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.red)
                                 .padding(8)
                                 .background(Color(.systemGray6))
                                 .clipShape(Circle())

@@ -34,7 +34,7 @@ struct CategoriesListView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         CategoriesListView(viewModel: HomeViewModel())
     }
 }

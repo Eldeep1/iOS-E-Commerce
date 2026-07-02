@@ -21,9 +21,7 @@ struct HomeHeader: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    //NavigationLink(destination: CartView, label: "Cart")
-                }) {
+                NavigationLink(destination: makeCartView()) {
                     Image(systemName: "cart")
                         .font(.title2)
                         .foregroundColor(.black)
@@ -57,6 +55,21 @@ struct HomeHeader: View {
         .background(Color.white.ignoresSafeArea(edges: .top)
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
         
+    }
+    
+    private func makeCartView() -> some View {
+        let repo = CartRepositoryImp()
+        let fetchCartUseCase = FetchCartUseCase(repository: repo)
+        let addToCartUseCase = AddToCartUseCase(repository: repo)
+        let removeFromCartUseCase = RemoveFromCartUseCase(repository: repo)
+        let updateQuantityUseCase = UpdateQuantityUseCase(repository: repo)
+        let viewModel = CartViewModel(
+            fetchCartUseCase: fetchCartUseCase,
+            addToCartUseCase: addToCartUseCase,
+            removeFromCartUseCase: removeFromCartUseCase,
+            updateQuantityUseCase: updateQuantityUseCase
+        )
+        return CartView(viewModel: viewModel)
     }
 }
 

@@ -49,7 +49,7 @@ struct CollectionProductsView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         CollectionProductsView(
             collection: Collection(
                 id: 1,
