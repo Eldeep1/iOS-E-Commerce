@@ -57,7 +57,7 @@ struct HomeHeader: View {
         
     }
     
-    private func makeCartView() -> some View {
+    @MainActor private func makeCartView() -> some View {
         let repo = CartRepositoryImp()
         let fetchCartUseCase = FetchCartUseCase(repository: repo)
         let addToCartUseCase = AddToCartUseCase(repository: repo)

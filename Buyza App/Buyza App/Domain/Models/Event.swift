@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event {
+struct Event : Hashable {
     var title : String
     var subtitle : String
     var img : String

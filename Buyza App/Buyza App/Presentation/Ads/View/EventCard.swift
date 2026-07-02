@@ -15,20 +15,21 @@ struct EventCard: View {
             Image(event.img)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 380, height: 210)
-                .overlay(Color.black.opacity(0.4))
+                .frame(height: 210)
+                .overlay(Color.black.opacity(0.3))
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 40) {
+                
+            VStack(alignment: .leading, spacing: 10) {
                 Text(event.title)
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.system(size: 32, weight: .semibold))
                     .foregroundColor(.white)
                     .minimumScaleFactor(0.8)
                 
                 Text(event.subtitle)
-                    .font(.system(size: 16, weight: .regular))
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
-                
-                Spacer()
+            }
                 
                 Button(action: {
 
@@ -42,16 +43,21 @@ struct EventCard: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 40)
-            .padding(.bottom, 24)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 16)
         }
-        .frame(width: 380, height: 210)
+        .frame(height: 210)
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 6)
     }
 }
 
-//#Preview {
-//    EventCard()
-//}
+#Preview {
+    EventCard(event: Event(
+title: "Unleash Next-Gen",
+subtitle: "High-energy commercial photography highlighting futuristic mobile innovation.",
+img: "neon_smartphone",
+btnText: "Pre-Order"
+))
+}
