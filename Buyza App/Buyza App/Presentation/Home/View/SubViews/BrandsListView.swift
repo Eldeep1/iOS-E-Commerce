@@ -34,7 +34,7 @@ struct BrandsListView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         BrandsListView(viewModel: HomeViewModel())
     }
 }
