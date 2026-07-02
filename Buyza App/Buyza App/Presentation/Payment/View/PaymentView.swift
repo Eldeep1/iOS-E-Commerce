@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
-    @StateObject private var viewModel = PaymentViewModel()
+    @StateObject var viewModel: PaymentViewModel
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -34,6 +34,9 @@ struct PaymentView: View {
         }
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarHidden(true)
+        .task {
+            await viewModel.loadCheckout()
+        }
     }
     
     // MARK: - Navigation Bar
@@ -100,8 +103,4 @@ struct PaymentView: View {
                 .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: -5)
         )
     }
-}
-
-#Preview {
-    PaymentView()
 }

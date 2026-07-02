@@ -18,44 +18,77 @@ class PaymentViewModel: ObservableObject {
     @Published var isApplyingCoupon: Bool = false
     @Published var isPlacingOrder: Bool = false
     @Published var couponError: String? = nil
+    @Published var isLoading: Bool = false
     
-    // Mock Data for now
-    @Published var subtotal: Double = 120.50
-    @Published var shippingCost: Double = 15.00
-    @Published var discountAmount: Double = 0.00
+    // Domain Data
+    @Published var subtotal: Double = 0.0
+    @Published var shippingCost: Double = 0.0
+    @Published var discountAmount: Double = 0.0
+    @Published var total: Double = 0.0
     
     @Published var deliveryAddressString: String = "123 Apple Park Way, Cupertino, CA 95014"
+    @Published var webUrl: URL? = nil
     
-    var total: Double {
-        return max(0, (subtotal + shippingCost) - discountAmount)
+    private let cartID: String
+    private let addressID: String?
+    private let createCheckoutUseCase: CreateCheckoutUseCase
+    private let applyDiscountUseCase: ApplyDiscountUseCase
+    
+    init(
+        cartID: String,
+        addressID: String? = nil,
+        createCheckoutUseCase: CreateCheckoutUseCase,
+        applyDiscountUseCase: ApplyDiscountUseCase
+    ) {
+        self.cartID = cartID
+        self.addressID = addressID
+        self.createCheckoutUseCase = createCheckoutUseCase
+        self.applyDiscountUseCase = applyDiscountUseCase
     }
     
-    func applyCoupon() {
+    @MainActor
+    func loadCheckout() async {
+        isLoading = true
+        do {
+            let summary = try await createCheckoutUseCase.execute(cartID: cartID, addressID: addressID)
+            updateSummary(summary)
+        } catch {
+            print("Error loading checkout: \(error)")
+        }
+        isLoading = false
+    }
+    
+    @MainActor
+    func applyCoupon() async {
         guard !couponCode.isEmpty else { return }
         
         isApplyingCoupon = true
         couponError = nil
         
-        // Simulate network delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.isApplyingCoupon = false
-            
-            if self?.couponCode.lowercased() == "buyza10" {
-                self?.discountAmount = 10.0
-                self?.couponError = nil
-            } else {
-                self?.discountAmount = 0.0
-                self?.couponError = "Invalid coupon code"
-            }
+        do {
+            let summary = try await applyDiscountUseCase.execute(checkoutID: cartID, discountCode: couponCode)
+            updateSummary(summary)
+            couponError = nil
+        } catch {
+            couponError = "Invalid coupon code"
+            print("Error applying coupon: \(error)")
         }
+        
+        isApplyingCoupon = false
+    }
+    
+    private func updateSummary(_ summary: CheckoutSummary) {
+        self.subtotal = summary.subtotal
+        self.shippingCost = summary.shipping
+        self.discountAmount = summary.discount
+        self.total = summary.total
+        self.webUrl = summary.webUrl
     }
     
     func placeOrder() {
-        isPlacingOrder = true
-        // Simulate network delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.isPlacingOrder = false
-            print("Order Placed via \(self?.selectedPaymentMethod.rawValue ?? "")")
-        }
+        // Since we are using the webUrl for both Credit Card and COD:
+        guard let url = webUrl else { return }
+        print("Opening Web Checkout: \(url.absoluteString)")
+        // In a real app, you would use a coordinator or navigation state to open SFSafariViewController with this URL
     }
 }

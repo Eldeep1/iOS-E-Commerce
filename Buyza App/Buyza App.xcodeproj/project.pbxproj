@@ -81,6 +81,10 @@
 		B8AF236E2FF6A326003A7B2E /* CouponSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23692FF6A326003A7B2E /* CouponSection.swift */; };
 		B8AF236F2FF6A326003A7B2E /* PaymentMethodSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF236C2FF6A326003A7B2E /* PaymentMethodSection.swift */; };
 		B8AF23702FF6A326003A7B2E /* PaymentAddressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF236B2FF6A326003A7B2E /* PaymentAddressSection.swift */; };
+		B8AF23792FF6AFFB003A7B2E /* CreateCheckoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23772FF6AFFB003A7B2E /* CreateCheckoutUseCase.swift */; };
+		B8AF237A2FF6AFFB003A7B2E /* ApplyDiscountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23762FF6AFFB003A7B2E /* ApplyDiscountUseCase.swift */; };
+		B8AF237C2FF6B035003A7B2E /* CheckoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF237B2FF6B035003A7B2E /* CheckoutRepository.swift */; };
+		B8AF237E2FF6B043003A7B2E /* CheckoutSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF237D2FF6B043003A7B2E /* CheckoutSummary.swift */; };
 		B8BA2EAC2FF294C60038CA63 /* LocalAuthDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */; };
 		B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */; };
 		B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */; };
@@ -231,6 +235,10 @@
 		B8AF236A2FF6A326003A7B2E /* OrderSummarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummarySection.swift; sourceTree = "<group>"; };
 		B8AF236B2FF6A326003A7B2E /* PaymentAddressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressSection.swift; sourceTree = "<group>"; };
 		B8AF236C2FF6A326003A7B2E /* PaymentMethodSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodSection.swift; sourceTree = "<group>"; };
+		B8AF23762FF6AFFB003A7B2E /* ApplyDiscountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDiscountUseCase.swift; sourceTree = "<group>"; };
+		B8AF23772FF6AFFB003A7B2E /* CreateCheckoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCheckoutUseCase.swift; sourceTree = "<group>"; };
+		B8AF237B2FF6B035003A7B2E /* CheckoutRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutRepository.swift; sourceTree = "<group>"; };
+		B8AF237D2FF6B043003A7B2E /* CheckoutSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutSummary.swift; sourceTree = "<group>"; };
 		B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthDataSource.swift; sourceTree = "<group>"; };
 		B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyRegisterModels.swift; sourceTree = "<group>"; };
 		B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthService.swift; sourceTree = "<group>"; };
@@ -550,6 +558,7 @@
 		769DB5302FEFE3E400F532C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B8AF237D2FF6B043003A7B2E /* CheckoutSummary.swift */,
 				09B9BFDB2FF67831004D2A3A /* CollectionProductsSource.swift */,
 				09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */,
 				09B9BFD12FF64FC3004D2A3A /* Brand.swift */,
@@ -746,6 +755,15 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		B8AF23782FF6AFFB003A7B2E /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF23762FF6AFFB003A7B2E /* ApplyDiscountUseCase.swift */,
+				B8AF23772FF6AFFB003A7B2E /* CreateCheckoutUseCase.swift */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
 		B8BA2EB22FF297250038CA63 /* Local */ = {
 			isa = PBXGroup;
 			children = (
@@ -774,6 +792,7 @@
 		B8BA55A62FEFE288004CA9FF /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				B8AF23782FF6AFFB003A7B2E /* Checkout */,
 				B8EAE9BD2FF510D500129771 /* Address */,
 				B8165E0A2FF41AF0009DC909 /* Cart */,
 				0977368A2FF565D300EA8530 /* Home */,
@@ -787,6 +806,7 @@
 		B8BA55A82FEFE29A004CA9FF /* Repo */ = {
 			isa = PBXGroup;
 			children = (
+				B8AF237B2FF6B035003A7B2E /* CheckoutRepository.swift */,
 				B8165E082FF41AC0009DC909 /* CartRepo.swift */,
 				B8BA55B32FEFE64A004CA9FF /* AuthRepo.swift */,
 				B8EAE9AF2FF510B400129771 /* AddressRepository.swift */,
@@ -1259,6 +1279,8 @@
 				09B9BFD42FF64FCA004D2A3A /* OnboardingStep.swift in Sources */,
 				B8165E1D2FF42775009DC909 /* CartRepositoryImp.swift in Sources */,
 				B8165DFE2FF418D0009DC909 /* CartView.swift in Sources */,
+				B8AF23792FF6AFFB003A7B2E /* CreateCheckoutUseCase.swift in Sources */,
+				B8AF237A2FF6AFFB003A7B2E /* ApplyDiscountUseCase.swift in Sources */,
 				B8165DFF2FF418D0009DC909 /* CartSummarySection.swift in Sources */,
 				B8165E012FF418D0009DC909 /* CartViewModel.swift in Sources */,
 				B8BA55F72FEFFDF6004CA9FF /* InputFieldModifier.swift in Sources */,
@@ -1334,6 +1356,8 @@
 				769DC00C2FF0010000F532C7 /* Color+Hex.swift in Sources */,
 				769DC00E2FF0010000F532C7 /* ProductImageCarousel.swift in Sources */,
 				B8EAE9D12FF5314900129771 /* EditAddressForm.swift in Sources */,
+				B8AF237E2FF6B043003A7B2E /* CheckoutSummary.swift in Sources */,
+				B8AF237C2FF6B035003A7B2E /* CheckoutRepository.swift in Sources */,
 				769DC0102FF0010000F532C7 /* ProductSizeSelector.swift in Sources */,
 				B8165E102FF41BD0009DC909 /* UpdateQuantityUseCase.swift in Sources */,
 				B8EAE9992FF4FCC100129771 /* AddressContinueButton.swift in Sources */,
