@@ -45,6 +45,11 @@ struct ProductDetailView: View {
         }
         .background(Color(.systemBackground))
         .navigationBarHidden(true)
+        .background(
+            NavigationLink(destination: makeCartView(), isActive: $viewModel.navigateToCart) {
+                EmptyView()
+            }
+        )
         .overlay {
             if viewModel.isAddToCartLoading {
                 ZStack {
@@ -88,7 +93,7 @@ struct ProductDetailView: View {
 
             Spacer()
 
-            Button(action: {}) {
+            Button(action: { viewModel.navigateToCart = true }) {
                 Image(systemName: "bag")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.primary)
@@ -144,6 +149,21 @@ struct ProductDetailView: View {
                 }
             }
         }
+    }
+    
+    private func makeCartView() -> some View {
+        let repo = CartRepositoryImp()
+        let fetchCartUseCase = FetchCartUseCase(repository: repo)
+        let addToCartUseCase = AddToCartUseCase(repository: repo)
+        let removeFromCartUseCase = RemoveFromCartUseCase(repository: repo)
+        let updateQuantityUseCase = UpdateQuantityUseCase(repository: repo)
+        let cartViewModel = CartViewModel(
+            fetchCartUseCase: fetchCartUseCase,
+            addToCartUseCase: addToCartUseCase,
+            removeFromCartUseCase: removeFromCartUseCase,
+            updateQuantityUseCase: updateQuantityUseCase
+        )
+        return CartView(viewModel: cartViewModel)
     }
 }
 

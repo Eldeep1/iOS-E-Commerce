@@ -21,6 +21,7 @@ final class ProductDetailViewModel: ObservableObject {
     @AppStorage("shopify_cart_id") private var storedCartID: String = ""
     @Published var isAddToCartLoading = false
     @Published var addToCartSuccess = false
+    @Published var navigateToCart = false
     @Published var addToCartError: String? = nil
 
     let formattedPrice: String
@@ -100,5 +101,23 @@ final class ProductDetailViewModel: ObservableObject {
     }
 
     func buyNow() {
+        guard let variant = product.variants.first else { return }
+        let variantID = "gid://shopify/ProductVariant/\(variant.id)"
+        
+        isAddToCartLoading = true
+        Task {
+            do {
+                let result = try await addToCartUseCase.execute(
+                    cartID: storedCartID.isEmpty ? nil : storedCartID,
+                    variantID: variantID,
+                    quantity: 1
+                )
+                storedCartID = result.cartID
+                navigateToCart = true
+            } catch {
+                addToCartError = error.localizedDescription
+            }
+            isAddToCartLoading = false
+        }
     }
 }
