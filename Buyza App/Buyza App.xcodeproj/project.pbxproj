@@ -75,6 +75,12 @@
 		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
 		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
 		B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */; };
+		B8AF23662FF6A0B5003A7B2E /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23652FF6A0B5003A7B2E /* PaymentView.swift */; };
+		B8AF23682FF6A0C2003A7B2E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23672FF6A0BD003A7B2E /* PaymentViewModel.swift */; };
+		B8AF236D2FF6A326003A7B2E /* OrderSummarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF236A2FF6A326003A7B2E /* OrderSummarySection.swift */; };
+		B8AF236E2FF6A326003A7B2E /* CouponSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23692FF6A326003A7B2E /* CouponSection.swift */; };
+		B8AF236F2FF6A326003A7B2E /* PaymentMethodSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF236C2FF6A326003A7B2E /* PaymentMethodSection.swift */; };
+		B8AF23702FF6A326003A7B2E /* PaymentAddressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF236B2FF6A326003A7B2E /* PaymentAddressSection.swift */; };
 		B8BA2EAC2FF294C60038CA63 /* LocalAuthDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */; };
 		B8BA2EAF2FF295370038CA63 /* ShopifyRegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */; };
 		B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */; };
@@ -219,6 +225,12 @@
 		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
 		B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Buyza-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyLoginModels.swift; sourceTree = "<group>"; };
+		B8AF23652FF6A0B5003A7B2E /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		B8AF23672FF6A0BD003A7B2E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		B8AF23692FF6A326003A7B2E /* CouponSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponSection.swift; sourceTree = "<group>"; };
+		B8AF236A2FF6A326003A7B2E /* OrderSummarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummarySection.swift; sourceTree = "<group>"; };
+		B8AF236B2FF6A326003A7B2E /* PaymentAddressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressSection.swift; sourceTree = "<group>"; };
+		B8AF236C2FF6A326003A7B2E /* PaymentMethodSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodSection.swift; sourceTree = "<group>"; };
 		B8BA2EAB2FF294C60038CA63 /* LocalAuthDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthDataSource.swift; sourceTree = "<group>"; };
 		B8BA2EAE2FF295350038CA63 /* ShopifyRegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyRegisterModels.swift; sourceTree = "<group>"; };
 		B8BA2EB02FF2959C0038CA63 /* ShopifyAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthService.swift; sourceTree = "<group>"; };
@@ -348,6 +360,7 @@
 		097FE6A82FEFD80100C42BC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B8AF23612FF6A055003A7B2E /* Payment */,
 				B8EAE98C2FF4F94B00129771 /* Addresses */,
 				B8165DFB2FF418D0009DC909 /* Cart */,
 				B8BA56022FEFFE1E004CA9FF /* Register */,
@@ -694,6 +707,43 @@
 				B81D84CB2FF2D845000DFBE1 /* AppRoute.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		B8AF23612FF6A055003A7B2E /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF23642FF6A073003A7B2E /* View Model */,
+				B8AF23622FF6A061003A7B2E /* View */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		B8AF23622FF6A061003A7B2E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF23632FF6A06B003A7B2E /* Components */,
+				B8AF23652FF6A0B5003A7B2E /* PaymentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B8AF23632FF6A06B003A7B2E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF23692FF6A326003A7B2E /* CouponSection.swift */,
+				B8AF236A2FF6A326003A7B2E /* OrderSummarySection.swift */,
+				B8AF236B2FF6A326003A7B2E /* PaymentAddressSection.swift */,
+				B8AF236C2FF6A326003A7B2E /* PaymentMethodSection.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B8AF23642FF6A073003A7B2E /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF23672FF6A0BD003A7B2E /* PaymentViewModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 		B8BA2EB22FF297250038CA63 /* Local */ = {
@@ -1236,6 +1286,7 @@
 				B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */,
 				B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */,
 				B8BA55BA2FEFE976004CA9FF /* RegisterUseCase.swift in Sources */,
+				B8AF23662FF6A0B5003A7B2E /* PaymentView.swift in Sources */,
 				769DB52E2FEFDA3400F532C7 /* ApiManager.swift in Sources */,
 				097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
@@ -1252,6 +1303,10 @@
 				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
 				B8EAE9A52FF5001C00129771 /* AddAddressView.swift in Sources */,
 				B8EAE9C72FF5172C00129771 /* AddressResponse.swift in Sources */,
+				B8AF236D2FF6A326003A7B2E /* OrderSummarySection.swift in Sources */,
+				B8AF236E2FF6A326003A7B2E /* CouponSection.swift in Sources */,
+				B8AF236F2FF6A326003A7B2E /* PaymentMethodSection.swift in Sources */,
+				B8AF23702FF6A326003A7B2E /* PaymentAddressSection.swift in Sources */,
 				B8EAE9C82FF5172C00129771 /* AddressDataSourceProtocol.swift in Sources */,
 				B8EAE9C92FF5172C00129771 /* AddressRepositoryImp.swift in Sources */,
 				B8EAE9CA2FF5172C00129771 /* ShopifyAddressDataSource.swift in Sources */,
@@ -1272,6 +1327,7 @@
 				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
 				769DC0042FF0010000F532C7 /* ProductDetailUseCaseProtocol.swift in Sources */,
 				769DC0062FF0010000F532C7 /* ProductDetailUseCase.swift in Sources */,
+				B8AF23682FF6A0C2003A7B2E /* PaymentViewModel.swift in Sources */,
 				769DC0082FF0010000F532C7 /* ProductDetailViewModel.swift in Sources */,
 				B8165E1F2FF42BB5009DC909 /* CartSummary.swift in Sources */,
 				769DC00A2FF0010000F532C7 /* ProductDetailView.swift in Sources */,
