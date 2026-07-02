@@ -24,32 +24,46 @@ struct HomeView: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 20)
-
-                            CategoriesListView(viewModel: viewModel)
+                            
+                            if viewModel.isCategoriesLoading {
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding()
+                            } else {
+                                CategoriesListView(viewModel: viewModel)
+                            }
                         }
-
+                        
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Brands")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 20)
-
-                            BrandsListView(viewModel: viewModel)
+                            
+                            if viewModel.isBrandsLoading {
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding()
+                            } else {
+                                BrandsListView(viewModel: viewModel)
+                            }
                         }
-
+                        
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Recommendations")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 20)
-
-                            ProductsGrid(
-                                products: viewModel.products,
-                                isFavorite: viewModel.isFavorite(productID:),
-                                onFavoriteTap: { _ in }
-                            )
+                            
+                            if viewModel.isProductsLoading {
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding()
+                            } else {
+                                ProductsGrid(viewModel: viewModel)
+                            }
                         }
                     }
                     .padding(.top, 8)
