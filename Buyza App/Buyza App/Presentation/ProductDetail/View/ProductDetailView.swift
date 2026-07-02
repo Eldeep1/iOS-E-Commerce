@@ -45,6 +45,34 @@ struct ProductDetailView: View {
         }
         .background(Color(.systemBackground))
         .navigationBarHidden(true)
+        .background(
+            NavigationLink(destination: makeCartView(), isActive: $viewModel.navigateToCart) {
+                EmptyView()
+            }
+        )
+        .overlay {
+            if viewModel.isAddToCartLoading {
+                ZStack {
+                    Color.black.opacity(0.3).ignoresSafeArea()
+                    ProgressView()
+                        .scaleEffect(1.5)
+                        .tint(.white)
+                }
+            }
+        }
+        .alert("Added to Cart", isPresented: $viewModel.addToCartSuccess) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("\(viewModel.product.title) was added to your cart.")
+        }
+        .alert("Error", isPresented: Binding(
+            get: { viewModel.addToCartError != nil },
+            set: { if !$0 { viewModel.addToCartError = nil } }
+        )) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(viewModel.addToCartError ?? "")
+        }
     }
 
     private var navigationBar: some View {
@@ -65,7 +93,7 @@ struct ProductDetailView: View {
 
             Spacer()
 
-            Button(action: {}) {
+            Button(action: { viewModel.navigateToCart = true }) {
                 Image(systemName: "bag")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.primary)
@@ -121,6 +149,21 @@ struct ProductDetailView: View {
                 }
             }
         }
+    }
+    
+    private func makeCartView() -> some View {
+        let repo = CartRepositoryImp()
+        let fetchCartUseCase = FetchCartUseCase(repository: repo)
+        let addToCartUseCase = AddToCartUseCase(repository: repo)
+        let removeFromCartUseCase = RemoveFromCartUseCase(repository: repo)
+        let updateQuantityUseCase = UpdateQuantityUseCase(repository: repo)
+        let cartViewModel = CartViewModel(
+            fetchCartUseCase: fetchCartUseCase,
+            addToCartUseCase: addToCartUseCase,
+            removeFromCartUseCase: removeFromCartUseCase,
+            updateQuantityUseCase: updateQuantityUseCase
+        )
+        return CartView(viewModel: cartViewModel)
     }
 }
 

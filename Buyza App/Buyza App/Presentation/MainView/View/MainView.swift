@@ -19,7 +19,6 @@ struct MainTabView: View {
             UITabBar.appearance().standardAppearance = appearance
             UITabBar.appearance().scrollEdgeAppearance = appearance
             
-            UITabBarItem.appearance().imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
         }
     }
     

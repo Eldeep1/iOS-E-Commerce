@@ -11,13 +11,12 @@ struct HomeView: View {
     @StateObject private var viewModel : HomeViewModel = HomeViewModel()
     
     var body: some View {
-        NavigationStack {
-            VStack{
+            VStack {
                 HomeHeader()
-                
+
                 ScrollView {
                     VStack(alignment: .leading, spacing: 26) {
-                        
+
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Categories")
                                 .font(.title2)
@@ -62,14 +61,17 @@ struct HomeView: View {
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .padding()
                             } else {
-                                ProductsGrid(viewModel: viewModel)
+                                ProductsGrid(
+                                    products: viewModel.products,
+                                    isFavorite: viewModel.isFavorite(productID:),
+                                    onFavoriteTap: { _ in }
+                                )
                             }
                         }
                     }
                     .padding(.top, 8)
                 }
             }
-        }
     }
 }
 

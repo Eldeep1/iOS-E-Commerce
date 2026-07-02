@@ -9,6 +9,8 @@ struct AddressListContent: View {
     @ObservedObject var viewModel: AddressSelectionViewModel
     @State private var addressToEdit: Address? = nil
     @State private var navigateToEdit: Bool = false
+    @State private var addressToDelete: Address? = nil
+    @State private var showDeleteAlert: Bool = false
 
     var body: some View {
         let addressDataSource = ShopifyAddressDataSource()
@@ -57,6 +59,10 @@ struct AddressListContent: View {
                             onEdit: {
                                 addressToEdit = address
                                 navigateToEdit = true
+                            },
+                            onDelete: {
+                                addressToDelete = address
+                                showDeleteAlert = true
                             }
                         )
                     }
@@ -73,6 +79,14 @@ struct AddressListContent: View {
                     print("Proceeding to Payment with address: \(address.fullAddressString)")
                 }
             )
+        }
+        .alert("Delete Address?", isPresented: $showDeleteAlert, presenting: addressToDelete) { address in
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                Task { await viewModel.deleteAddress(id: address.id) }
+            }
+        } message: { address in
+            Text("Are you sure you want to delete \(address.fullName)'s address?")
         }
     }
 }

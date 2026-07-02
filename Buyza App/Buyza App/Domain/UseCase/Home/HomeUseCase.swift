@@ -9,6 +9,8 @@ import Foundation
 
 protocol HomeUseCaseProtocol {
     func getRecommendedProducts() async throws -> [Product]
+    func getProducts(collectionId: Int) async throws -> [Product]
+    func getProductsByVendor(vendor: String) async throws -> [Product]
     func getCategories() async throws -> [Collection]
     func getBrands() async throws -> [Collection]
 }
@@ -23,6 +25,16 @@ struct HomeUseCase: HomeUseCaseProtocol {
     
     func getRecommendedProducts() async throws -> [Product] {
         let response = try await homeRepo.fetchProducts(limit: 8)
+        return response.products
+    }
+
+    func getProducts(collectionId: Int) async throws -> [Product] {
+        let response = try await homeRepo.fetchCollectionProducts(collectionId: collectionId)
+        return response.products
+    }
+
+    func getProductsByVendor(vendor: String) async throws -> [Product] {
+        let response = try await homeRepo.fetchProductsByVendor(vendor: vendor)
         return response.products
     }
     
