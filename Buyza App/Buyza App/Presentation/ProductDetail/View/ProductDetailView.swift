@@ -45,6 +45,29 @@ struct ProductDetailView: View {
         }
         .background(Color(.systemBackground))
         .navigationBarHidden(true)
+        .overlay {
+            if viewModel.isAddToCartLoading {
+                ZStack {
+                    Color.black.opacity(0.3).ignoresSafeArea()
+                    ProgressView()
+                        .scaleEffect(1.5)
+                        .tint(.white)
+                }
+            }
+        }
+        .alert("Added to Cart", isPresented: $viewModel.addToCartSuccess) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("\(viewModel.product.title) was added to your cart.")
+        }
+        .alert("Error", isPresented: Binding(
+            get: { viewModel.addToCartError != nil },
+            set: { if !$0 { viewModel.addToCartError = nil } }
+        )) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(viewModel.addToCartError ?? "")
+        }
     }
 
     private var navigationBar: some View {

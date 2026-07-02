@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 final class ProductDetailViewModel: ObservableObject {
@@ -16,11 +17,21 @@ final class ProductDetailViewModel: ObservableObject {
     @Published var currentImageIndex: Int = 0
     @Published var expandedSectionIDs: Set<String>
     @Published var isFavorite: Bool = false
+    
+    @AppStorage("shopify_cart_id") private var storedCartID: String = ""
+    @Published var isAddToCartLoading = false
+    @Published var addToCartSuccess = false
+    @Published var addToCartError: String? = nil
 
     let formattedPrice: String
     let informationSections: [ProductInformationSection]
+    private let addToCartUseCase: AddToCartUseCaseProtocol
 
-    init(product: Product, useCase: ProductDetailUseCaseProtocol = ProductDetailUseCase()) {
+    init(
+        product: Product, 
+        useCase: ProductDetailUseCaseProtocol = ProductDetailUseCase(),
+        addToCartUseCase: AddToCartUseCaseProtocol = AddToCartUseCase(repository: CartRepositoryImp())
+    ) {
         let state = useCase.execute(product: product)
         self.product = state.product
         self.formattedPrice = state.formattedPrice
@@ -28,6 +39,7 @@ final class ProductDetailViewModel: ObservableObject {
         self.selectedColorIndex = state.selectedColorIndex
         self.informationSections = state.informationSections
         self.expandedSectionIDs = Set(state.informationSections.prefix(1).map(\.id))
+        self.addToCartUseCase = addToCartUseCase
     }
 
     var selectedColorLabel: String? {
@@ -66,6 +78,25 @@ final class ProductDetailViewModel: ObservableObject {
     }
 
     func addToCart() {
+        guard let variant = product.variants.first else { return }
+        // Storefront API uses gid://shopify/ProductVariant/...
+        let variantID = "gid://shopify/ProductVariant/\(variant.id)"
+        
+        isAddToCartLoading = true
+        Task {
+            do {
+                let result = try await addToCartUseCase.execute(
+                    cartID: storedCartID.isEmpty ? nil : storedCartID,
+                    variantID: variantID,
+                    quantity: 1
+                )
+                storedCartID = result.cartID
+                addToCartSuccess = true
+            } catch {
+                addToCartError = error.localizedDescription
+            }
+            isAddToCartLoading = false
+        }
     }
 
     func buyNow() {
