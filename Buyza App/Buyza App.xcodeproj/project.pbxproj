@@ -15,6 +15,8 @@
 		097736852FF5652D00EA8530 /* HomeRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097736842FF5652D00EA8530 /* HomeRepo.swift */; };
 		097736892FF565CC00EA8530 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097736882FF565CC00EA8530 /* HomeUseCase.swift */; };
 		0978086B2FF40B5A00ECF823 /* ProductGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978086A2FF40B5A00ECF823 /* ProductGrid.swift */; };
+		097C91F32FF6E06E00AEB7D3 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C91F22FF6E06E00AEB7D3 /* Event.swift */; };
+		097C91F72FF6E23400AEB7D3 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C91F62FF6E23400AEB7D3 /* EventCard.swift */; };
 		097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6AB2FEFD85400C42BC9 /* SplashView.swift */; };
 		097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */; };
 		097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */; };
@@ -155,6 +157,8 @@
 		097736842FF5652D00EA8530 /* HomeRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRepo.swift; sourceTree = "<group>"; };
 		097736882FF565CC00EA8530 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		0978086A2FF40B5A00ECF823 /* ProductGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductGrid.swift; sourceTree = "<group>"; };
+		097C91F22FF6E06E00AEB7D3 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		097C91F62FF6E23400AEB7D3 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		097FE6AB2FEFD85400C42BC9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -345,9 +349,26 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		097C91F42FF6E13000AEB7D3 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				097C91F52FF6E13800AEB7D3 /* View */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
+		097C91F52FF6E13800AEB7D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				097C91F62FF6E23400AEB7D3 /* EventCard.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		097FE6A82FEFD80100C42BC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				097C91F42FF6E13000AEB7D3 /* Ads */,
 				B8EAE98C2FF4F94B00129771 /* Addresses */,
 				B8165DFB2FF418D0009DC909 /* Cart */,
 				B8BA56022FEFFE1E004CA9FF /* Register */,
@@ -547,6 +568,7 @@
 				B8BA55B52FEFE663004CA9FF /* UserModel.swift */,
 				769DB5312FEFE3F200F532C7 /* Product.swift */,
 				B8EAE9AD2FF510B400129771 /* Address.swift */,
+				097C91F22FF6E06E00AEB7D3 /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1241,6 +1263,7 @@
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
 				09767E762FF30461004D37E8 /* BrandsListView.swift in Sources */,
 				09767E732FF2F7D6004D37E8 /* CategoriesListView.swift in Sources */,
+				097C91F72FF6E23400AEB7D3 /* EventCard.swift in Sources */,
 				097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */,
 				097736852FF5652D00EA8530 /* HomeRepo.swift in Sources */,
 				097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */,
@@ -1269,6 +1292,7 @@
 				769DB52C2FEFD96A00F532C7 /* ApiError.swift in Sources */,
 				769DB5342FEFE50000F532C7 /* GraphQLRequest.swift in Sources */,
 				769DB5362FEFE51000F532C7 /* GraphQLResponse.swift in Sources */,
+				097C91F32FF6E06E00AEB7D3 /* Event.swift in Sources */,
 				097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */,
 				769DC0042FF0010000F532C7 /* ProductDetailUseCaseProtocol.swift in Sources */,
 				769DC0062FF0010000F532C7 /* ProductDetailUseCase.swift in Sources */,
