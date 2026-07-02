@@ -43,8 +43,14 @@ final class ApiManager{
             throw ApiError.decoding
         }
 
-        
-        return try decoder.decode(Response.self, from: data)
+        do {
+            return try decoder.decode(Response.self, from: data)
+        } catch {
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Decoding failed for \(endpoint.path). HTTP Status: \(httpResponse.statusCode). Raw response: \(jsonString)")
+            }
+            throw error
+        }
     }
 
        

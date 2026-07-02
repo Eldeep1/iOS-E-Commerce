@@ -19,7 +19,11 @@ struct ProductsGrid: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(viewModel.products, id: \.id) { product in
-                    ProductCard(viewModel: viewModel, product: product)
+                    NavigationLink(destination: ProductDetailView(product: product)) {
+                        
+                        ProductCard(viewModel: viewModel, product: product)
+                        
+                    }
                 }
             }
             .padding(.horizontal, 16)
