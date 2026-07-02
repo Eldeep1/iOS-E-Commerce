@@ -12,12 +12,12 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack{
+            VStack {
                 HomeHeader()
-                
+
                 ScrollView {
                     VStack(alignment: .leading, spacing: 26) {
-                        
+
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Categories")
                                 .font(.title2)
