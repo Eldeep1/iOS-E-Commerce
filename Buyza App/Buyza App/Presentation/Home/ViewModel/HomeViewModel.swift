@@ -61,9 +61,9 @@ class HomeViewModel : ObservableObject {
         }
     }
     
-    func isFavorite(productID: Int) -> Bool {
+    func isFavorite(productID: Int64) -> Bool {
         // will call here the function from the usecase
-        
+
         return true
     }
 }

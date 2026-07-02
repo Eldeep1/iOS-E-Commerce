@@ -8,21 +8,30 @@
 import SwiftUI
 
 struct BrandsListView: View {
-    @ObservedObject var viewModel : HomeViewModel
-    
+    @ObservedObject var viewModel: HomeViewModel
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            
             LazyHStack(spacing: 16) {
-                ForEach(viewModel.brands, id: \.id) { index in
-                    CollectionCell(collectionItem: index)
+                ForEach(viewModel.brands, id: \.id) { brand in
+                    if let _ = brand.id {
+                        NavigationLink {
+                            CollectionProductsView(collection: brand)
+                        } label: {
+                            CollectionCell(collectionItem: brand)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
             }
             .padding(.leading, 24)
             .padding(.trailing, 8)
         }
-    }}
+    }
+}
 
 #Preview {
-    BrandsListView(viewModel: HomeViewModel())
+    NavigationStack {
+        BrandsListView(viewModel: HomeViewModel())
+    }
 }

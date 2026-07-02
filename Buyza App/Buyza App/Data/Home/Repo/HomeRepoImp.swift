@@ -18,6 +18,10 @@ struct HomeRepoImp: HomeRepoProtocol {
     func fetchProducts(limit: Int) async throws -> ProductsResponse {
         try await remoteDataSource.fetchProducts(limit: limit)
     }
+
+    func fetchCollectionProducts(collectionId: Int) async throws -> ProductsResponse {
+        try await remoteDataSource.fetchCollectionProducts(collectionId: collectionId)
+    }
     
     func fetchCategories() async throws -> CategoryResponse {
         try await remoteDataSource.fetchCategories()

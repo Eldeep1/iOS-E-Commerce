@@ -102,4 +102,12 @@ extension ApiEndpoint {
             headers: adminHeaders
         )
     }
+
+    static func collectionProducts(collectionId: Int) -> ApiEndpoint {
+        ApiEndpoint(
+            path: "/admin/api/\(adminApiVersion)/collections/\(collectionId)/products.json",
+            method: .GET,
+            headers: adminHeaders
+        )
+    }
 }

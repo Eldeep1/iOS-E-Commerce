@@ -9,6 +9,7 @@ import Foundation
 
 protocol HomeRemoteDataSourceProtocol {
     func fetchProducts(limit: Int) async throws -> ProductsResponse
+    func fetchCollectionProducts(collectionId: Int) async throws -> ProductsResponse
     func fetchCategories() async throws -> CategoryResponse
     func fetchBrands() async throws -> BrandResponse
 }
@@ -23,6 +24,11 @@ final class HomeRemoteDataSource: HomeRemoteDataSourceProtocol {
     
     func fetchProducts(limit: Int) async throws -> ProductsResponse {
         let endpoint = ApiEndpoint.products(limit: limit)
+        return try await apiManager.sendRequest(from: endpoint)
+    }
+
+    func fetchCollectionProducts(collectionId: Int) async throws -> ProductsResponse {
+        let endpoint = ApiEndpoint.collectionProducts(collectionId: collectionId)
         return try await apiManager.sendRequest(from: endpoint)
     }
     
