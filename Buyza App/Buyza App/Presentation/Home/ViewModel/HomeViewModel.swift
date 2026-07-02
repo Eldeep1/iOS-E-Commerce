@@ -12,7 +12,9 @@ class HomeViewModel : ObservableObject {
     @Published var categories : [Collection] = []
     @Published var brands : [Collection] = []
     @Published var products : [Product] = []
-    @Published var isLoading : Bool = false
+    @Published var isCategoriesLoading : Bool = false
+    @Published var isBrandsLoading : Bool = false
+    @Published var isProductsLoading : Bool = false
     @Published var errorMessage : String?
     
     private let homeUseCase : HomeUseCaseProtocol
@@ -31,36 +33,40 @@ class HomeViewModel : ObservableObject {
     
     func fetchCategories() {
         Task { @MainActor in
+            self.isCategoriesLoading = true
             do {
                 self.categories = try await homeUseCase.getCategories()
             } catch {
                 self.errorMessage = error.localizedDescription
                 print("Error fetching categories: \(error)")
             }
+            self.isCategoriesLoading = false
         }
     }
     
     func fetchBrands() {
         Task { @MainActor in
+            self.isBrandsLoading = true
             do {
                 self.brands = try await homeUseCase.getBrands()
             } catch {
                 self.errorMessage = error.localizedDescription
                 print("Error fetching brands: \(error)")
             }
+            self.isBrandsLoading = false
         }
     }
     
     func fetchRecommendedProducts() {
         Task { @MainActor in
-            self.isLoading = true
+            self.isProductsLoading = true
             do {
                 self.products = try await homeUseCase.getRecommendedProducts()
             } catch {
                 self.errorMessage = error.localizedDescription
                 print("Error fetching products: \(error)")
             }
-            self.isLoading = false
+            self.isProductsLoading = false
         }
     }
     
