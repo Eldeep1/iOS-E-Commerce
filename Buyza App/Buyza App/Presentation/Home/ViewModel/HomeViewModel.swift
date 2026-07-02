@@ -35,6 +35,7 @@ class HomeViewModel : ObservableObject {
                 self.categories = try await homeUseCase.getCategories()
             } catch {
                 self.errorMessage = error.localizedDescription
+                print("Error fetching categories: \(error)")
             }
         }
     }
@@ -45,6 +46,7 @@ class HomeViewModel : ObservableObject {
                 self.brands = try await homeUseCase.getBrands()
             } catch {
                 self.errorMessage = error.localizedDescription
+                print("Error fetching brands: \(error)")
             }
         }
     }
@@ -56,6 +58,7 @@ class HomeViewModel : ObservableObject {
                 self.products = try await homeUseCase.getRecommendedProducts()
             } catch {
                 self.errorMessage = error.localizedDescription
+                print("Error fetching products: \(error)")
             }
             self.isLoading = false
         }
