@@ -11,7 +11,7 @@ struct HomeView: View {
     @StateObject private var viewModel : HomeViewModel = HomeViewModel()
     
     var body: some View {
-            VStack {
+            VStack(spacing: 20) {
                 HomeHeader()
 
                 ScrollView {

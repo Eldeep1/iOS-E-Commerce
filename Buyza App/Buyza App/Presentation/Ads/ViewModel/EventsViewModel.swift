@@ -18,7 +18,7 @@ class EventsViewModel {
         Event(
             title: "Unleash Next-Gen",
             subtitle: "Experience the incredible power and speed of futuristic 5G innovation.",
-            img: "neon_smartphone",
+            img: "mobile",
             btnText: "Pre-Order"
         ),
         Event(

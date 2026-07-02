@@ -20,7 +20,9 @@ struct CollectionCell: View {
                     .resizable()
                     .scaledToFill()
             } placeholder: {
-                Color(.systemGray4)
+                Image("empty-img")
+                    .resizable()
+                    .scaledToFill()
             }
             .frame(width: 100, height: 100)
             .clipShape(RoundedRectangle(cornerRadius: 16))

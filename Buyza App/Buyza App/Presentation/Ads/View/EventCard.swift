@@ -43,7 +43,7 @@ struct EventCard: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 16)
             .padding(.top, 20)
             .padding(.bottom, 16)
         }
@@ -57,7 +57,7 @@ struct EventCard: View {
     EventCard(event: Event(
 title: "Unleash Next-Gen",
 subtitle: "High-energy commercial photography highlighting futuristic mobile innovation.",
-img: "neon_smartphone",
+img: "mobile",
 btnText: "Pre-Order"
 ))
 }
