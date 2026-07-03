@@ -7,22 +7,22 @@ import SwiftUI
 
 struct AddressSelectionView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel: AddressSelectionViewModel
+    @ObservedObject var viewModel: AddressSelectionViewModel
     
-    init(viewModel:AddressSelectionViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: AddressSelectionViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
         VStack(spacing: 0) {
             AddressNavigationBar(onDismiss: { dismiss() })
 
-            if viewModel.isLoading {
+            if viewModel.isLoading && viewModel.addresses.isEmpty {
                 Spacer()
                 ProgressView()
                     .scaleEffect(1.3)
                 Spacer()
-            } else if !viewModel.hasAddresses {
+            } else if !viewModel.hasAddresses && !viewModel.isLoading {
                 EmptyAddressView()
             } else {
                 AddressListContent(viewModel: viewModel)
