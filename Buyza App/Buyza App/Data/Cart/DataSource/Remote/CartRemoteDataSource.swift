@@ -76,7 +76,7 @@ final class ShopifyCartDataSource: CartDataSourceProtocol {
         }
         let response: GraphQLResponse<CartLinesAddData> = try await ApiManager.shared.sendRequest(from: endpoint, with: GraphQLRequest(query: mutation, variables: Vars(cartId: cartID, lines: [.init(merchandiseId: variantID, quantity: quantity)])))
         if let errors = response.data?.cartLinesAdd.userErrors, let firstError = errors.first {
-            throw CartError.networkError("Shopify Error: \\(firstError.message)")
+            throw CartError.networkError("Shopify Error: \(firstError.message)")
         }
         guard let cart = response.data?.cartLinesAdd.cart else { throw CartError.networkError("cartLinesAdd failed") }
         return cart
@@ -97,7 +97,7 @@ final class ShopifyCartDataSource: CartDataSourceProtocol {
         }
         let response: GraphQLResponse<CartLinesUpdateData> = try await ApiManager.shared.sendRequest(from: endpoint, with: GraphQLRequest(query: mutation, variables: Vars(cartId: cartID, lines: [.init(id: lineID, quantity: quantity)])))
         if let errors = response.data?.cartLinesUpdate.userErrors, let firstError = errors.first {
-            throw CartError.networkError("Shopify Error: \\(firstError.message)")
+            throw CartError.networkError("Shopify Error: \(firstError.message)")
         }
         guard let cart = response.data?.cartLinesUpdate.cart else { throw CartError.networkError("cartLinesUpdate failed") }
         return cart
@@ -115,7 +115,7 @@ final class ShopifyCartDataSource: CartDataSourceProtocol {
         struct Vars: Encodable { let cartId: String; let lineIds: [String] }
         let response: GraphQLResponse<CartLinesRemoveData> = try await ApiManager.shared.sendRequest(from: endpoint, with: GraphQLRequest(query: mutation, variables: Vars(cartId: cartID, lineIds: [lineID])))
         if let errors = response.data?.cartLinesRemove.userErrors, let firstError = errors.first {
-            throw CartError.networkError("Shopify Error: \\(firstError.message)")
+            throw CartError.networkError("Shopify Error: \(firstError.message)")
         }
         guard let cart = response.data?.cartLinesRemove.cart else { throw CartError.networkError("cartLinesRemove failed") }
         return cart
