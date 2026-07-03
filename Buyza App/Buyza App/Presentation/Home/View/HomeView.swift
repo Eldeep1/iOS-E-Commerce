@@ -11,11 +11,13 @@ struct HomeView: View {
     @StateObject private var viewModel : HomeViewModel = HomeViewModel()
     
     var body: some View {
-            VStack {
+            VStack(spacing: 20) {
                 HomeHeader()
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 26) {
+                    VStack(alignment: .leading, spacing: 24) {
+                        
+                        EventsList()
 
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Categories")
@@ -50,7 +52,7 @@ struct HomeView: View {
                         }
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Recommendations")
+                            Text("Featured Products")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
