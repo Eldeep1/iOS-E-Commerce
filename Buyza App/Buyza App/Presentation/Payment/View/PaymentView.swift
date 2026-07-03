@@ -10,26 +10,44 @@ import SwiftUI
 struct PaymentView: View {
     @StateObject var viewModel: PaymentViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
             
+            // making error message always visible
+            if let error = viewModel.orderError {
+                HStack(spacing: 8) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.red)
+                    Text(error)
+                        .font(.subheadline)
+                        .foregroundColor(.red)
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.red.opacity(0.08))
+                )
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
+            }
+
             ScrollView {
                 VStack(spacing: 24) {
-                    PaymentAddressSection(viewModel: viewModel)
-                    
+                    PaymentAddressSection(viewModel: viewModel, onChangeTap: {
+                        dismiss()
+                    })
                     CouponSection(viewModel: viewModel)
-                    
                     OrderSummarySection(viewModel: viewModel)
-                    
                     PaymentMethodSection(viewModel: viewModel)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 .padding(.bottom, 30)
             }
-            
+
             placeOrderFooter
         }
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
@@ -37,28 +55,61 @@ struct PaymentView: View {
         .task {
             await viewModel.loadCheckout()
         }
+        // Hidden NavigationLinks
+        .background(
+            Group {
+                NavigationLink(
+                    destination: OrderSuccessView(order: viewModel.placedOrder),
+                    isActive: $viewModel.navigateToSuccess
+                ) { EmptyView() }
+
+                NavigationLink(
+                    destination: OrderPendingView(order: viewModel.placedOrder),
+                    isActive: $viewModel.navigateToPending
+                ) { EmptyView() }
+            }
+        )
+        // Safari sheet for Credit Card
+        .fullScreenCover(isPresented: $viewModel.showWebView, onDismiss: {
+            Task { await viewModel.checkOrderAfterWebReturn() }
+        }) {
+            if let url = viewModel.webUrl {
+                SafariView(url: url)
+                    .ignoresSafeArea()
+            }
+        }
+        .onDisappear {
+            let vm = viewModel
+            if !vm.navigateToSuccess && !vm.navigateToPending && !vm.showWebView && !vm.isPlacingOrder {
+                Task {
+                    await vm.clearDiscount()
+                }
+            }
+        }
     }
-    
+
     // MARK: - Navigation Bar
-    
+
     private var navigationBar: some View {
         HStack {
-            Button(action: { dismiss() }) {
+            Button(action: {
+                dismiss()
+            }) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.primary)
                     .frame(width: 44, height: 44)
             }
-            
+
             Spacer()
-            
+
             Text("Checkout")
                 .font(.headline)
                 .fontWeight(.bold)
                 .tracking(1)
-            
+
             Spacer()
-            
+
             Color.clear
                 .frame(width: 44, height: 44)
         }
@@ -66,9 +117,9 @@ struct PaymentView: View {
         .padding(.top, 4)
         .background(Color(.systemBackground))
     }
-    
+
     // MARK: - Footer
-    
+
     private var placeOrderFooter: some View {
         VStack {
             Button(action: {
@@ -94,7 +145,7 @@ struct PaymentView: View {
                 .cornerRadius(12)
                 .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
             }
-            .disabled(viewModel.isPlacingOrder)
+            .disabled(viewModel.isPlacingOrder || viewModel.isLoading)
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
         }

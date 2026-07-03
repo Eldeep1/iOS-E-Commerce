@@ -8,6 +8,7 @@ import SwiftUI
 
 struct PaymentAddressSection: View {
     @ObservedObject var viewModel: PaymentViewModel
+    var onChangeTap: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -19,7 +20,7 @@ struct PaymentAddressSection: View {
                 Spacer()
                 
                 Button(action: {
-                    // This will navigate back or push an address selection view later
+                    onChangeTap()
                 }) {
                     Text("Change")
                         .font(.subheadline)
