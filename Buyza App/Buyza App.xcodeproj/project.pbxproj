@@ -28,6 +28,8 @@
 		097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C72FF026BD00C42BC9 /* MainView.swift */; };
 		097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C92FF027E400C42BC9 /* HomeHeader.swift */; };
 		0997ED1E2FF7E3BC00C7B976 /* Database Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED1D2FF7E3BC00C7B976 /* Database Manager.swift */; };
+		0997ED322FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED302FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift */; };
+		0997ED332FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED312FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift */; };
 		09B9BFD02FF64FB9004D2A3A /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9BFCF2FF64FB9004D2A3A /* Category.swift */; };
 		09B9BFD22FF64FC3004D2A3A /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9BFD12FF64FC3004D2A3A /* Brand.swift */; };
 		09B9BFD42FF64FCA004D2A3A /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */; };
@@ -173,6 +175,8 @@
 		097FE6C72FF026BD00C42BC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		097FE6C92FF027E400C42BC9 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
 		0997ED1D2FF7E3BC00C7B976 /* Database Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database Manager.swift"; sourceTree = "<group>"; };
+		0997ED302FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0997ED312FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		09B9BFCF2FF64FB9004D2A3A /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		09B9BFD12FF64FC3004D2A3A /* Brand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
@@ -582,6 +586,8 @@
 		769DB5302FEFE3E400F532C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0997ED302FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift */,
+				0997ED312FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift */,
 				09B9BFDB2FF67831004D2A3A /* CollectionProductsSource.swift */,
 				09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */,
 				09B9BFD12FF64FC3004D2A3A /* Brand.swift */,
@@ -1236,6 +1242,7 @@
 			files = (
 				B8BA55B42FEFE64A004CA9FF /* AuthRepo.swift in Sources */,
 				B8BA55A32FEFE251004CA9FF /* FirebaseServices.swift in Sources */,
+				0997ED332FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift in Sources */,
 				B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */,
 				0977367E2FF564A800EA8530 /* HomeRemoteDataSource.swift in Sources */,
 				B8BA55BE2FEFF22C004CA9FF /* AuthRepoImp.swift in Sources */,
@@ -1275,6 +1282,7 @@
 				B8BA55FF2FEFFDF6004CA9FF /* LoginView.swift in Sources */,
 				769DB5322FEFE3F300F532C7 /* Product.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,
+				0997ED322FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift in Sources */,
 				097736802FF564AA00EA8530 /* HomeRepoImp.swift in Sources */,
 				B8BA55BC2FEFF188004CA9FF /* AuthError.swift in Sources */,
 				B8BA560B2FEFFF5B004CA9FF /* RegisterViewModel.swift in Sources */,
