@@ -26,6 +26,8 @@
 		097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C32FF025AE00C42BC9 /* HomeView.swift */; };
 		097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C72FF026BD00C42BC9 /* MainView.swift */; };
 		097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C92FF027E400C42BC9 /* HomeHeader.swift */; };
+		0996349F2FF85A36007CCE33 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996349E2FF85A36007CCE33 /* FavoritesViewModel.swift */; };
+		099634A12FF85A4F007CCE33 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099634A02FF85A4F007CCE33 /* FavoritesView.swift */; };
 		0997ED1E2FF7E3BC00C7B976 /* Database Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED1D2FF7E3BC00C7B976 /* Database Manager.swift */; };
 		0997ED322FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED302FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift */; };
 		0997ED332FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED312FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift */; };
@@ -187,6 +189,8 @@
 		097FE6C32FF025AE00C42BC9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		097FE6C72FF026BD00C42BC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		097FE6C92FF027E400C42BC9 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
+		0996349E2FF85A36007CCE33 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		099634A02FF85A4F007CCE33 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		0997ED1D2FF7E3BC00C7B976 /* Database Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database Manager.swift"; sourceTree = "<group>"; };
 		0997ED302FF7F79000C7B976 /* ProductEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0997ED312FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 		097FE6A82FEFD80100C42BC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				0996349A2FF858E5007CCE33 /* Favorites */,
 				0997ED3A2FF811AB00C7B976 /* Collections */,
 				097C91F42FF6E13000AEB7D3 /* Ads */,
 				B8EAE98C2FF4F94B00129771 /* Addresses */,
@@ -510,6 +515,31 @@
 				097FE6C72FF026BD00C42BC9 /* MainView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0996349A2FF858E5007CCE33 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0996349D2FF858FE007CCE33 /* ViewModel */,
+				0996349C2FF858F5007CCE33 /* View */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		0996349C2FF858F5007CCE33 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				099634A02FF85A4F007CCE33 /* FavoritesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0996349D2FF858FE007CCE33 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0996349E2FF85A36007CCE33 /* FavoritesViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		0997ED1C2FF7E2DE00C7B976 /* Database Service */ = {
@@ -1380,6 +1410,7 @@
 			files = (
 				B8BA55B42FEFE64A004CA9FF /* AuthRepo.swift in Sources */,
 				B8BA55A32FEFE251004CA9FF /* FirebaseServices.swift in Sources */,
+				099634A12FF85A4F007CCE33 /* FavoritesView.swift in Sources */,
 				0997ED332FF7F79000C7B976 /* ProductEntity+CoreDataProperties.swift in Sources */,
 				B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */,
 				0977367E2FF564A800EA8530 /* HomeRemoteDataSource.swift in Sources */,
@@ -1453,6 +1484,7 @@
 				09BBE4DE2FF2C76E003A54DF /* HomeViewModel.swift in Sources */,
 				09B9BFD82FF674B2004D2A3A /* CollectionProductsView.swift in Sources */,
 				097FE6BC2FEFF8DD00C42BC9 /* OnboardingPageView.swift in Sources */,
+				0996349F2FF85A36007CCE33 /* FavoritesViewModel.swift in Sources */,
 				B8EAE9A52FF5001C00129771 /* AddAddressView.swift in Sources */,
 				B8EAE9C72FF5172C00129771 /* AddressResponse.swift in Sources */,
 				0997ED462FF8264800C7B976 /* GetProductsByCollectionUseCase.swift in Sources */,

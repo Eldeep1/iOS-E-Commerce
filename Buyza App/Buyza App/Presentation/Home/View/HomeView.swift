@@ -84,6 +84,9 @@ struct HomeView: View {
             } message: { product in
                 Text("Are you sure you want to remove \(product.title) from your favorites?")
             }
+            .onAppear {
+                viewModel.objectWillChange.send()
+            }
     }
 }
 
