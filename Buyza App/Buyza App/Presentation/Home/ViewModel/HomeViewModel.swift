@@ -104,7 +104,7 @@ class HomeViewModel : ObservableObject {
                 self.showRemoveAlert = true
             } else {
                 try saveFavoriteUseCase.execute(product: product)
-                self.objectWillChange.send() // Trigger UI update
+                self.objectWillChange.send()
             }
         } catch {
             print("Error toggling favorite: \(error)")

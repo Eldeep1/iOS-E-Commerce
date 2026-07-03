@@ -41,6 +41,9 @@
 		0997ED522FF827F600C7B976 /* CollectionRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED512FF827F600C7B976 /* CollectionRepo.swift */; };
 		0997ED582FF829AB00C7B976 /* CollectionRepoImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED572FF829AB00C7B976 /* CollectionRepoImp.swift */; };
 		0997ED5A2FF82A4900C7B976 /* CollectionRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED592FF82A4900C7B976 /* CollectionRemoteDataSource.swift */; };
+		0997ED612FF8490C00C7B976 /* FavoritesRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED602FF8490C00C7B976 /* FavoritesRepo.swift */; };
+		0997ED632FF849CC00C7B976 /* FavoritesRepoImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED622FF849CC00C7B976 /* FavoritesRepoImp.swift */; };
+		0997ED652FF84ACD00C7B976 /* GetFavoriteProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED642FF84ACD00C7B976 /* GetFavoriteProductsUseCase.swift */; };
 		09B9BFD02FF64FB9004D2A3A /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9BFCF2FF64FB9004D2A3A /* Category.swift */; };
 		09B9BFD22FF64FC3004D2A3A /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9BFD12FF64FC3004D2A3A /* Brand.swift */; };
 		09B9BFD42FF64FCA004D2A3A /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */; };
@@ -199,6 +202,9 @@
 		0997ED512FF827F600C7B976 /* CollectionRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRepo.swift; sourceTree = "<group>"; };
 		0997ED572FF829AB00C7B976 /* CollectionRepoImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRepoImp.swift; sourceTree = "<group>"; };
 		0997ED592FF82A4900C7B976 /* CollectionRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRemoteDataSource.swift; sourceTree = "<group>"; };
+		0997ED602FF8490C00C7B976 /* FavoritesRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepo.swift; sourceTree = "<group>"; };
+		0997ED622FF849CC00C7B976 /* FavoritesRepoImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepoImp.swift; sourceTree = "<group>"; };
+		0997ED642FF84ACD00C7B976 /* GetFavoriteProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetFavoriteProductsUseCase.swift; path = "Buyza App/Domain/UseCase/Favorites/GetFavoriteProductsUseCase.swift"; sourceTree = SOURCE_ROOT; };
 		09B9BFCF2FF64FB9004D2A3A /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		09B9BFD12FF64FC3004D2A3A /* Brand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
@@ -550,6 +556,7 @@
 		0997ED4F2FF8268400C7B976 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				0997ED642FF84ACD00C7B976 /* GetFavoriteProductsUseCase.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -586,6 +593,31 @@
 				0997ED572FF829AB00C7B976 /* CollectionRepoImp.swift */,
 			);
 			path = Repo;
+			sourceTree = "<group>";
+		};
+		0997ED5D2FF8487600C7B976 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0997ED5F2FF848A200C7B976 /* DataSource */,
+				0997ED5E2FF8488100C7B976 /* Repo */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		0997ED5E2FF8488100C7B976 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				0997ED622FF849CC00C7B976 /* FavoritesRepoImp.swift */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		0997ED5F2FF848A200C7B976 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				0997ED362FF8017500C7B976 /* ProductLocalDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		09BBE4DF2FF2C774003A54DF /* ViewModel */ = {
@@ -665,8 +697,8 @@
 		769DB5262FEFD1E600F532C7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0997ED5D2FF8487600C7B976 /* Favorites */,
 				0997ED532FF8284C00C7B976 /* Collections */,
-				0997ED362FF8017500C7B976 /* ProductLocalDataSource.swift */,
 				B8EAE9C62FF5172C00129771 /* Addresses */,
 				B8165E042FF41A52009DC909 /* Cart */,
 				097736812FF564BC00EA8530 /* Home */,
@@ -898,6 +930,7 @@
 				B8EAE9AF2FF510B400129771 /* AddressRepository.swift */,
 				097736842FF5652D00EA8530 /* HomeRepo.swift */,
 				0997ED512FF827F600C7B976 /* CollectionRepo.swift */,
+				0997ED602FF8490C00C7B976 /* FavoritesRepo.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -1386,6 +1419,7 @@
 				0997ED402FF8260C00C7B976 /* GetBrandsUseCase.swift in Sources */,
 				B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */,
 				B8BA55FD2FEFFDF6004CA9FF /* SocialButton.swift in Sources */,
+				0997ED632FF849CC00C7B976 /* FavoritesRepoImp.swift in Sources */,
 				B8EAE9A72FF5005500129771 /* AddAddressViewModel.swift in Sources */,
 				B8BA56062FEFFEB1004CA9FF /* RegisterForm.swift in Sources */,
 				B8BA55FE2FEFFDF6004CA9FF /* SocialLogin.swift in Sources */,
@@ -1400,6 +1434,7 @@
 				B8165E192FF426D4009DC909 /* CartRemoteDataSource.swift in Sources */,
 				B8BA55B62FEFE663004CA9FF /* UserModel.swift in Sources */,
 				B8BA2EB12FF2959F0038CA63 /* ShopifyAuthService.swift in Sources */,
+				0997ED612FF8490C00C7B976 /* FavoritesRepo.swift in Sources */,
 				B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */,
 				B8BA55BA2FEFE976004CA9FF /* RegisterUseCase.swift in Sources */,
 				0997ED372FF8017500C7B976 /* ProductLocalDataSource.swift in Sources */,
@@ -1441,6 +1476,7 @@
 				09B9BFD22FF64FC3004D2A3A /* Brand.swift in Sources */,
 				B8165E0C2FF41B1A009DC909 /* AddToCartUseCase.swift in Sources */,
 				769DB52C2FEFD96A00F532C7 /* ApiError.swift in Sources */,
+				0997ED652FF84ACD00C7B976 /* GetFavoriteProductsUseCase.swift in Sources */,
 				769DB5342FEFE50000F532C7 /* GraphQLRequest.swift in Sources */,
 				769DB5362FEFE51000F532C7 /* GraphQLResponse.swift in Sources */,
 				097C91F32FF6E06E00AEB7D3 /* Event.swift in Sources */,

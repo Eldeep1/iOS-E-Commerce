@@ -82,7 +82,7 @@ final class CollectionProductsViewModel: ObservableObject {
                 self.showRemoveAlert = true
             } else {
                 try saveFavoriteUseCase.execute(product: product)
-                self.objectWillChange.send() // Trigger UI update
+                self.objectWillChange.send()
             }
         } catch {
             print("Error toggling favorite: \(error)")
@@ -94,7 +94,7 @@ final class CollectionProductsViewModel: ObservableObject {
         guard let product = productToRemove else { return }
         do {
             try removeFavoriteUseCase.execute(productId: product.id)
-            self.objectWillChange.send() // Trigger UI update
+            self.objectWillChange.send()
         } catch {
             print("Error removing favorite: \(error)")
             self.errorMessage = "Failed to remove favorite"
