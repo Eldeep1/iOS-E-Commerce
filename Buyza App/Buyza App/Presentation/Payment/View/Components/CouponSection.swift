@@ -25,11 +25,13 @@ struct CouponSection: View {
                         .disableAutocorrection(true)
                     
                     Button(action: {
-                        viewModel.applyCoupon()
+                        Task {
+                            await viewModel.applyCoupon()
+                        }
                     }) {
                         if viewModel.isApplyingCoupon {
                             ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle())
+                                .progressViewStyle(CircularProgressViewStyle(tint: Color(.systemBackground)))
                         } else {
                             Text("Apply")
                                 .fontWeight(.bold)

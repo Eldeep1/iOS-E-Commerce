@@ -59,24 +59,50 @@ class PaymentViewModel: ObservableObject {
     }
     
     @MainActor
+    func clearDiscount() async {
+        if discountAmount > 0 {
+            if let clearedSummary = try? await applyDiscountUseCase.execute(checkoutID: cartID, discountCode: "") {
+                self.cartID = clearedSummary.id
+                updateSummary(clearedSummary)
+            }
+        }
+    }
+
+    // MARK: - Apply Coupon
+
+    @MainActor
     func applyCoupon() async {
         guard !couponCode.isEmpty else { return }
-        
+
         isApplyingCoupon = true
         couponError = nil
-        
+
         do {
             let summary = try await applyDiscountUseCase.execute(checkoutID: cartID, discountCode: couponCode)
+            if summary.discount <= 0 {
+                // Remove the coupon if it was invalid
+                if let clearedSummary = try? await applyDiscountUseCase.execute(checkoutID: cartID, discountCode: "") {
+                    self.cartID = clearedSummary.id
+                    updateSummary(clearedSummary)
+                }
+                couponError = "Invalid coupon code"
+                isApplyingCoupon = false
+                return
+            }
+            self.cartID = summary.id
             updateSummary(summary)
             couponError = nil
         } catch {
+            // Remove the coupon if it was invalid
+            if let clearedSummary = try? await applyDiscountUseCase.execute(checkoutID: cartID, discountCode: "") {
+                self.cartID = clearedSummary.id
+                updateSummary(clearedSummary)
+            }
             couponError = "Invalid coupon code"
-            print("Error applying coupon: \(error)")
         }
-        
+
         isApplyingCoupon = false
     }
-    
     private func updateSummary(_ summary: CheckoutSummary) {
         self.subtotal = summary.subtotal
         self.shippingCost = summary.shipping
