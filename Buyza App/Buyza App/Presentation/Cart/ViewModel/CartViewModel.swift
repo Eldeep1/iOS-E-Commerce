@@ -15,7 +15,10 @@ class CartViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
 
     // Persisted locally so the cart survives app restarts
-    @AppStorage("shopify_cart_id") private var storedCartID: String = ""
+    private var storedCartID: String {
+        get { UserDefaults.standard.string(forKey: "shopify_cart_id") ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: "shopify_cart_id") }
+    }
 
     private let fetchCartUseCase: FetchCartUseCaseProtocol
     private let addToCartUseCase: AddToCartUseCaseProtocol
@@ -49,7 +52,7 @@ class CartViewModel: ObservableObject {
     }
 
     var formattedTotal: String {
-        return format(cart?.total ?? 0, currency: cart?.currencyCode ?? "USD")
+        return format(cart?.subtotal ?? 0, currency: cart?.currencyCode ?? "USD")
     }
 
     // MARK: - Actions
