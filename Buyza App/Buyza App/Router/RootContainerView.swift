@@ -32,11 +32,22 @@ struct RootContainerView: View {
                 }
                 .environmentObject(appState)
             case .home:
-                NavigationView{
-                    //HomeView()
-                    MainTabView()
-                }
+                HomeNavContainer()
             }
         }.animation(.easeInOut, value: appState.currentRoute)
+    }
+}
+
+struct HomeNavContainer: View {
+    @State private var navID = UUID()
+    
+    var body: some View {
+        NavigationView {
+            MainTabView()
+        }
+        .id(navID)
+        .onReceive(NotificationCenter.default.publisher(for: .popToRoot)) { _ in
+            navID = UUID()
+        }
     }
 }
