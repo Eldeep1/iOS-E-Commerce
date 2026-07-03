@@ -18,7 +18,10 @@ final class ProductDetailViewModel: ObservableObject {
     @Published var expandedSectionIDs: Set<String>
     @Published var isFavorite: Bool = false
     
-    @AppStorage("shopify_cart_id") private var storedCartID: String = ""
+    private var storedCartID: String {
+        get { UserDefaults.standard.string(forKey: "shopify_cart_id") ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: "shopify_cart_id") }
+    }
     @Published var isAddToCartLoading = false
     @Published var addToCartSuccess = false
     @Published var navigateToCart = false
