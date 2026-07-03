@@ -11,6 +11,11 @@ protocol HomeRepoProtocol {
     func fetchProducts(limit: Int) async throws -> ProductsResponse
     func fetchCollectionProducts(collectionId: Int) async throws -> ProductsResponse
     func fetchProductsByVendor(vendor: String) async throws -> ProductsResponse
+    func fetchFilteredProducts(
+        source: CollectionProductsSource,
+        criteria: ProductFilterCriteria,
+        limit: Int
+    ) async throws -> ProductsResponse
     func fetchCategories() async throws -> CategoryResponse
     func fetchBrands() async throws -> BrandResponse
 }

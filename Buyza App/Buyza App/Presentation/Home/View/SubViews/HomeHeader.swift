@@ -8,19 +8,31 @@
 import SwiftUI
 
 struct HomeHeader: View {
-    @State private var searchText: String = ""
-    
+    @Binding var searchText: String
+    var onSearchActivated: () -> Void
+    var onSearch: () -> Void
+
+    init(
+        searchText: Binding<String>,
+        onSearchActivated: @escaping () -> Void,
+        onSearch: @escaping () -> Void
+    ) {
+        _searchText = searchText
+        self.onSearchActivated = onSearchActivated
+        self.onSearch = onSearch
+    }
+
     var body: some View {
         VStack(spacing: 16) {
-            
+
             HStack {
                 Text("BUYZA")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
-                
+
                 Spacer()
-                
+
                 NavigationLink(destination: makeCartView()) {
                     Image(systemName: "cart")
                         .font(.title2)
@@ -29,35 +41,26 @@ struct HomeHeader: View {
             }
             .padding(.horizontal)
             .padding(.bottom, 4)
-            
+
             HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                    .font(.title3)
-                
-                TextField("What are you looking for?", text: $searchText)
-                    .foregroundColor(.primary)
+                SearchBarView(
+                    text: $searchText,
+                    placeholder: "What are you looking for?",
+                    onSubmit: onSearch,
+                    onIconTap: onSearchActivated
+                )
             }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color(.systemGray4), lineWidth: 1)
-            )
             .padding(.horizontal)
-            
+
             Divider()
                 .padding(.top, 6)
         }
         .padding(.top, 4)
         .background(Color.white.ignoresSafeArea(edges: .top)
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
-        
     }
-    
-    private func makeCartView() -> some View {
+
+    @MainActor private func makeCartView() -> some View {
         let repo = CartRepositoryImp()
         let fetchCartUseCase = FetchCartUseCase(repository: repo)
         let addToCartUseCase = AddToCartUseCase(repository: repo)
@@ -74,5 +77,9 @@ struct HomeHeader: View {
 }
 
 #Preview {
-    HomeHeader()
+    HomeHeader(
+        searchText: .constant(""),
+        onSearchActivated: {},
+        onSearch: {}
+    )
 }

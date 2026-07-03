@@ -26,6 +26,18 @@ struct HomeRepoImp: HomeRepoProtocol {
     func fetchProductsByVendor(vendor: String) async throws -> ProductsResponse {
         try await remoteDataSource.fetchProductsByVendor(vendor: vendor)
     }
+
+    func fetchFilteredProducts(
+        source: CollectionProductsSource,
+        criteria: ProductFilterCriteria,
+        limit: Int
+    ) async throws -> ProductsResponse {
+        try await remoteDataSource.fetchFilteredProducts(
+            source: source,
+            criteria: criteria,
+            limit: limit
+        )
+    }
     
     func fetchCategories() async throws -> CategoryResponse {
         try await remoteDataSource.fetchCategories()

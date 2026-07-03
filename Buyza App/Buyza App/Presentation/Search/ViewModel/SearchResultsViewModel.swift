@@ -1,5 +1,5 @@
 //
-//  CollectionProductsViewModel.swift
+//  SearchResultsViewModel.swift
 //  Buyza App
 //
 //  Created by Ahmad Fathy on 02/07/2026.
@@ -8,25 +8,23 @@
 import Foundation
 
 @MainActor
-final class CollectionProductsViewModel: ObservableObject {
+final class SearchResultsViewModel: ObservableObject {
     @Published private(set) var fetchedProducts: [Product] = []
-    @Published var searchText: String = ""
+    @Published var searchText: String
     @Published var filterCriteria = ProductFilterCriteria()
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var isFilterSheetPresented = false
 
-    let collectionTitle: String
-    let filterLabel: String
-    let showsVendorFilter: Bool
+    let showsVendorFilter = true
+    let filterLabel = "All Products"
 
-    private let source: CollectionProductsSource
     private let filterUseCase: FilterProductsUseCaseProtocol
     private var baselineProductTypes: [String] = []
     private var baselineVendors: [String] = []
 
     var searchPlaceholder: String {
-        "Search in \(collectionTitle)"
+        "Search products"
     }
 
     var availableProductTypes: [String] {
@@ -51,22 +49,15 @@ final class CollectionProductsViewModel: ObservableObject {
     }
 
     init(
-        collectionTitle: String,
-        source: CollectionProductsSource,
+        initialSearchText: String = "",
         filterUseCase: FilterProductsUseCaseProtocol = FilterProductsUseCase(
             repository: HomeRepoImp(
                 remoteDataSource: HomeRemoteDataSource()
             )
         )
     ) {
-        self.collectionTitle = collectionTitle
-        self.source = source
+        self.searchText = initialSearchText
         self.filterUseCase = filterUseCase
-        self.filterLabel = Self.makeFilterLabel(title: collectionTitle, source: source)
-        self.showsVendorFilter = {
-            if case .category = source { return true }
-            return false
-        }()
         fetchProducts()
     }
 
@@ -76,7 +67,7 @@ final class CollectionProductsViewModel: ObservableObject {
             errorMessage = nil
             do {
                 fetchedProducts = try await filterUseCase.fetchProducts(
-                    source: source,
+                    source: .all,
                     criteria: apiCriteria
                 )
                 updateBaselineOptionsIfNeeded()
@@ -122,20 +113,6 @@ final class CollectionProductsViewModel: ObservableObject {
         }
         if baselineVendors.isEmpty {
             baselineVendors = Array(Set(fetchedProducts.map(\.vendor))).sorted()
-        }
-    }
-
-    private static func makeFilterLabel(
-        title: String,
-        source: CollectionProductsSource
-    ) -> String {
-        switch source {
-        case .all:
-            return "All Products"
-        case .category:
-            return "Category: \(title)"
-        case .brand(let vendor):
-            return "Brand: \(vendor)"
         }
     }
 }
