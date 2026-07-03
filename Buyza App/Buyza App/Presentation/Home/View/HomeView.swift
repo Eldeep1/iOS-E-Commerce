@@ -65,7 +65,7 @@ struct HomeView: View {
                             } else {
                                 ProductsGrid(
                                     products: viewModel.products,
-                                    isFavorite: { viewModel.favoriteIDs.contains($0) },
+                                    isFavorite: viewModel.isFavorite(productID:),
                                     onFavoriteTap: { product in
                                         viewModel.toggleFavorite(product: product)
                                     }
@@ -75,6 +75,14 @@ struct HomeView: View {
                     }
                     .padding(.top, 8)
                 }
+            }
+            .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+                Button("Cancel", role: .cancel) { }
+                Button("Remove", role: .destructive) {
+                    viewModel.confirmRemoveFavorite()
+                }
+            } message: { product in
+                Text("Are you sure you want to remove \(product.title) from your favorites?")
             }
     }
 }

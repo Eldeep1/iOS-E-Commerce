@@ -12,7 +12,9 @@ class HomeViewModel : ObservableObject {
     @Published var categories : [Collection] = []
     @Published var brands : [Collection] = []
     @Published var products : [Product] = []
-    @Published var favoriteIDs: Set<Int64> = []
+    
+    @Published var showRemoveAlert: Bool = false
+    @Published var productToRemove: Product?
     
     @Published var isCategoriesLoading : Bool = false
     @Published var isBrandsLoading : Bool = false
@@ -24,13 +26,15 @@ class HomeViewModel : ObservableObject {
     private let getFeaturedProductsUseCase: GetFeaturedProductsUseCaseProtocol
     private let saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
     private let removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol
+    private let checkIsFavoriteUseCase: CheckIsFavoriteUseCaseProtocol
     
     init(
         getCategoriesUseCase: GetCategoriesUseCaseProtocol? = nil,
         getBrandsUseCase: GetBrandsUseCaseProtocol? = nil,
         getFeaturedProductsUseCase: GetFeaturedProductsUseCaseProtocol? = nil,
         saveFavoriteUseCase: SaveFavoriteUseCaseProtocol? = nil,
-        removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol? = nil
+        removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol? = nil,
+        checkIsFavoriteUseCase: CheckIsFavoriteUseCaseProtocol? = nil
     ) {
         let defaultRepo = HomeRepoImp(
             remoteDataSource: HomeRemoteDataSource(),
@@ -42,6 +46,7 @@ class HomeViewModel : ObservableObject {
         self.getFeaturedProductsUseCase = getFeaturedProductsUseCase ?? GetFeaturedProductsUseCase(repository: defaultRepo)
         self.saveFavoriteUseCase = saveFavoriteUseCase ?? SaveFavoriteUseCase(repository: defaultRepo)
         self.removeFavoriteUseCase = removeFavoriteUseCase ?? RemoveFavoriteUseCase(repository: defaultRepo)
+        self.checkIsFavoriteUseCase = checkIsFavoriteUseCase ?? CheckIsFavoriteUseCase(repository: defaultRepo)
         
         fetchCategories()
         fetchBrands()
@@ -87,19 +92,34 @@ class HomeViewModel : ObservableObject {
         }
     }
     
+    func isFavorite(productID: Int64) -> Bool {
+        return (try? checkIsFavoriteUseCase.execute(productId: productID)) ?? false
+    }
+    
     func toggleFavorite(product: Product) {
-        let isFav = favoriteIDs.contains(product.id)
         do {
+            let isFav = try checkIsFavoriteUseCase.execute(productId: product.id)
             if isFav {
-                try removeFavoriteUseCase.execute(productId: product.id)
-                favoriteIDs.remove(product.id)
+                self.productToRemove = product
+                self.showRemoveAlert = true
             } else {
                 try saveFavoriteUseCase.execute(product: product)
-                favoriteIDs.insert(product.id)
+                self.objectWillChange.send() // Trigger UI update
             }
         } catch {
             print("Error toggling favorite: \(error)")
             self.errorMessage = "Failed to update favorites"
+        }
+    }
+    
+    func confirmRemoveFavorite() {
+        guard let product = productToRemove else { return }
+        do {
+            try removeFavoriteUseCase.execute(productId: product.id)
+            self.objectWillChange.send()
+        } catch {
+            print("Error removing favorite: \(error)")
+            self.errorMessage = "Failed to remove favorite"
         }
     }
 }
