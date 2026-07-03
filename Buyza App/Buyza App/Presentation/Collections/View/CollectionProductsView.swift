@@ -37,8 +37,10 @@ struct CollectionProductsView: View {
             } else {
                 ProductsGrid(
                     products: viewModel.products,
-                    isFavorite: viewModel.isFavorite(productID:),
-                    onFavoriteTap: { _ in }
+                    isFavorite: { viewModel.favoriteIDs.contains($0) },
+                    onFavoriteTap: { product in
+                        viewModel.toggleFavorite(product: product)
+                    }
                 )
             }
         }

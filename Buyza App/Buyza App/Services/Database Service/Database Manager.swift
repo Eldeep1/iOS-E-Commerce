@@ -15,7 +15,7 @@ final class CoreDataManager {
     let persistentContainer: NSPersistentContainer
     
     private init() {
-        persistentContainer = NSPersistentContainer(name: "Buyza")
+        persistentContainer = NSPersistentContainer(name: "Buyza_App")
         
         persistentContainer.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
