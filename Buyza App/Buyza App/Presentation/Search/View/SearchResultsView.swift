@@ -1,5 +1,5 @@
 //
-//  CollectionProductsView.swift
+//  SearchResultsView.swift
 //  Buyza App
 //
 //  Created by Ahmad Fathy on 02/07/2026.
@@ -7,15 +7,12 @@
 
 import SwiftUI
 
-struct CollectionProductsView: View {
-    @StateObject private var viewModel: CollectionProductsViewModel
+struct SearchResultsView: View {
+    @StateObject private var viewModel: SearchResultsViewModel
 
-    init(collection: Collection, source: CollectionProductsSource) {
+    init(initialSearchText: String = "") {
         _viewModel = StateObject(
-            wrappedValue: CollectionProductsViewModel(
-                collectionTitle: collection.title ?? "",
-                source: source
-            )
+            wrappedValue: SearchResultsViewModel(initialSearchText: initialSearchText)
         )
     }
 
@@ -64,8 +61,8 @@ struct CollectionProductsView: View {
                 content
             }
         }
-        .navigationTitle(viewModel.collectionTitle)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle("Search")
+        .navigationBarTitleDisplayMode(.inline)
         .background(Color(.systemBackground))
         .sheet(isPresented: $viewModel.isFilterSheetPresented) {
             ProductFilterSheet(
@@ -133,13 +130,6 @@ struct CollectionProductsView: View {
 
 #Preview {
     NavigationView {
-        CollectionProductsView(
-            collection: Collection(
-                id: 1,
-                title: "ADIDAS",
-                image: NetworkImage(src: "")
-            ),
-            source: .brand(vendor: "ADIDAS")
-        )
+        SearchResultsView(initialSearchText: "adidas")
     }
 }

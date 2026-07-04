@@ -1,5 +1,5 @@
 //
-//  CollectionProductsViewModel.swift
+//  SearchResultsViewModel.swift
 //  Buyza App
 //
 //  Created by Ahmad Fathy on 02/07/2026.
@@ -8,9 +8,9 @@
 import Foundation
 
 @MainActor
-final class CollectionProductsViewModel: ObservableObject {
+final class SearchResultsViewModel: ObservableObject {
     @Published private(set) var fetchedProducts: [Product] = []
-    @Published var searchText: String = ""
+    @Published var searchText: String
     @Published var filterCriteria = ProductFilterCriteria()
     @Published var isLoading = false
     @Published var errorMessage: String?
@@ -18,11 +18,9 @@ final class CollectionProductsViewModel: ObservableObject {
     @Published var showRemoveAlert = false
     @Published var productToRemove: Product?
 
-    let collectionTitle: String
-    let filterLabel: String
-    let showsVendorFilter: Bool
+    let showsVendorFilter = true
+    let filterLabel = "All Products"
 
-    private let source: CollectionProductsSource
     private let filterUseCase: FilterProductsUseCaseProtocol
     private let saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
     private let removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol
@@ -31,7 +29,7 @@ final class CollectionProductsViewModel: ObservableObject {
     private var baselineVendors: [String] = []
 
     var searchPlaceholder: String {
-        "Search in \(collectionTitle)"
+        "Search products"
     }
 
     var availableProductTypes: [String] {
@@ -56,8 +54,7 @@ final class CollectionProductsViewModel: ObservableObject {
     }
 
     init(
-        collectionTitle: String,
-        source: CollectionProductsSource,
+        initialSearchText: String = "",
         filterUseCase: FilterProductsUseCaseProtocol? = nil,
         saveFavoriteUseCase: SaveFavoriteUseCaseProtocol? = nil,
         removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol? = nil,
@@ -68,18 +65,11 @@ final class CollectionProductsViewModel: ObservableObject {
             localDataSource: ProductLocalDataSource()
         )
 
-        self.collectionTitle = collectionTitle
-        self.source = source
+        self.searchText = initialSearchText
         self.filterUseCase = filterUseCase ?? FilterProductsUseCase(repository: defaultRepo)
         self.saveFavoriteUseCase = saveFavoriteUseCase ?? SaveFavoriteUseCase(repository: defaultRepo)
         self.removeFavoriteUseCase = removeFavoriteUseCase ?? RemoveFavoriteUseCase(repository: defaultRepo)
         self.checkIsFavoriteUseCase = checkIsFavoriteUseCase ?? CheckIsFavoriteUseCase(repository: defaultRepo)
-        self.filterLabel = Self.makeFilterLabel(title: collectionTitle, source: source)
-        self.showsVendorFilter = {
-            if case .category = source { return true }
-            if case .all = source { return true }
-            return false
-        }()
         fetchProducts()
     }
 
@@ -89,7 +79,7 @@ final class CollectionProductsViewModel: ObservableObject {
             errorMessage = nil
             do {
                 fetchedProducts = try await filterUseCase.fetchProducts(
-                    source: source,
+                    source: .all,
                     criteria: apiCriteria
                 )
                 updateBaselineOptionsIfNeeded()
@@ -162,20 +152,6 @@ final class CollectionProductsViewModel: ObservableObject {
         }
         if baselineVendors.isEmpty {
             baselineVendors = Array(Set(fetchedProducts.map(\.vendor))).sorted()
-        }
-    }
-
-    private static func makeFilterLabel(
-        title: String,
-        source: CollectionProductsSource
-    ) -> String {
-        switch source {
-        case .all:
-            return "All Products"
-        case .category:
-            return "Category: \(title)"
-        case .brand(let vendor):
-            return "Brand: \(vendor)"
         }
     }
 }

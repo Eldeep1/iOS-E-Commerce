@@ -9,6 +9,11 @@ import Foundation
 
 protocol HomeRemoteDataSourceProtocol {
     func fetchProducts(limit: Int) async throws -> ProductsResponse
+    func fetchFilteredProducts(
+        source: CollectionProductsSource,
+        criteria: ProductFilterCriteria,
+        limit: Int
+    ) async throws -> ProductsResponse
     func fetchCategories() async throws -> CategoryResponse
     func fetchBrands() async throws -> BrandResponse
 }
@@ -24,6 +29,39 @@ final class HomeRemoteDataSource: HomeRemoteDataSourceProtocol {
     func fetchProducts(limit: Int) async throws -> ProductsResponse {
         let endpoint = ApiEndpoint.products(limit: limit)
         return try await apiManager.sendRequest(from: endpoint)
+    }
+
+    func fetchFilteredProducts(
+        source: CollectionProductsSource,
+        criteria: ProductFilterCriteria,
+        limit: Int
+    ) async throws -> ProductsResponse {
+        var apiCriteria = criteria
+
+        switch source {
+        case .all:
+            let endpoint = ApiEndpoint.filteredProducts(
+                criteria: apiCriteria,
+                limit: limit
+            )
+            return try await apiManager.sendRequest(from: endpoint)
+        case .category(let collectionId):
+            let endpoint = ApiEndpoint.filteredProducts(
+                criteria: apiCriteria,
+                collectionId: collectionId,
+                limit: limit
+            )
+            return try await apiManager.sendRequest(from: endpoint)
+        case .brand(let vendor):
+            if apiCriteria.vendor == nil {
+                apiCriteria.vendor = vendor
+            }
+            let endpoint = ApiEndpoint.filteredProducts(
+                criteria: apiCriteria,
+                limit: limit
+            )
+            return try await apiManager.sendRequest(from: endpoint)
+        }
     }
     
     func fetchCategories() async throws -> CategoryResponse {
