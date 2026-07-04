@@ -16,10 +16,14 @@ class HomeViewModel : ObservableObject {
     @Published var showRemoveAlert: Bool = false
     @Published var productToRemove: Product?
     
+    @Published var showGuestAlert: Bool = false
+    
     @Published var isCategoriesLoading : Bool = false
     @Published var isBrandsLoading : Bool = false
     @Published var isProductsLoading : Bool = false
     @Published var errorMessage : String?
+    
+    var isGuest: Bool = false
     
     private let getCategoriesUseCase: GetCategoriesUseCaseProtocol
     private let getBrandsUseCase: GetBrandsUseCaseProtocol
@@ -29,6 +33,7 @@ class HomeViewModel : ObservableObject {
     private let checkIsFavoriteUseCase: CheckIsFavoriteUseCaseProtocol
     
     init(
+        isGuest: Bool = false,
         getCategoriesUseCase: GetCategoriesUseCaseProtocol? = nil,
         getBrandsUseCase: GetBrandsUseCaseProtocol? = nil,
         getFeaturedProductsUseCase: GetFeaturedProductsUseCaseProtocol? = nil,
@@ -36,6 +41,8 @@ class HomeViewModel : ObservableObject {
         removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol? = nil,
         checkIsFavoriteUseCase: CheckIsFavoriteUseCaseProtocol? = nil
     ) {
+        self.isGuest = isGuest
+        
         let defaultRepo = HomeRepoImp(
             remoteDataSource: HomeRemoteDataSource(),
             localDataSource: ProductLocalDataSource()
@@ -92,11 +99,19 @@ class HomeViewModel : ObservableObject {
         }
     }
     
+    // MARK: - Favorites
+    
     func isFavorite(productID: Int64) -> Bool {
+        if isGuest { return false }
         return (try? checkIsFavoriteUseCase.execute(productId: productID)) ?? false
     }
     
     func toggleFavorite(product: Product) {
+        if isGuest {
+            showGuestAlert = true
+            return
+        }
+        
         do {
             let isFav = try checkIsFavoriteUseCase.execute(productId: product.id)
             if isFav {

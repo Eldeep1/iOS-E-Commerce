@@ -8,7 +8,21 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject var appState: AppStateManager
     @State private var selectedTab = 0
+    @State private var showGuestAlert = false
+    
+    var selectionBinding: Binding<Int> {
+        Binding {
+            selectedTab
+        } set: { newValue in
+            if appState.isGuest && (newValue == 1 || newValue == 2 || newValue == 3) {
+                showGuestAlert = true
+            } else {
+                selectedTab = newValue
+            }
+        }
+    }
     
     init() {
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
@@ -23,7 +37,7 @@ struct MainTabView: View {
     }
     
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: selectionBinding) {
             
             HomeView()
                 .tabItem {
@@ -50,10 +64,20 @@ struct MainTabView: View {
                 .tag(3)
         }
         .tint(.black)
+        .alert("Sign In Required", isPresented: $showGuestAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Sign In") {
+                appState.isGuest = false
+                appState.currentRoute = .auth
+            }
+        } message: {
+            Text("Please sign in to access Favorites, Cart, and Orders. It only takes a moment!")
+        }
         
     }
 }
 
 #Preview {
     MainTabView()
+        .environmentObject(AppStateManager())
 }

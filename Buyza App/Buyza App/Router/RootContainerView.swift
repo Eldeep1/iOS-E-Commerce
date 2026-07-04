@@ -33,6 +33,7 @@ struct RootContainerView: View {
                 .environmentObject(appState)
             case .home:
                 HomeNavContainer()
+                    .environmentObject(appState)
             }
         }.animation(.easeInOut, value: appState.currentRoute)
     }

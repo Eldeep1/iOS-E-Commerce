@@ -48,9 +48,8 @@ struct AnotherLoginOptions: View {
                     
                     Button(action: {
                         withAnimation {
-                            //uncoment it when you are ready to navigate home :)
-    //                        appState.currentRoute = .home
-                            print("guest mode")
+                            appState.isGuest = true
+                            appState.currentRoute = .home
                         }
                     }) {
                         Text("Continue as a Guest")
