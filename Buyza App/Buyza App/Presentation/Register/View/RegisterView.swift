@@ -72,7 +72,7 @@ struct RegisterView: View {
                     .padding(.top, 8)
                     
                 
-                    SocialLogin()
+                    AnotherLoginOptions()
                 }
                 .padding(24)
                 .background(Color.white)

@@ -11,6 +11,7 @@ import Security
 protocol LocalAuthDataSourceProtocol {
     func saveShopifyToken(_ token: String) throws
     func getShopifyToken() throws -> String
+    func clearShopifyToken() throws
 }
 
 final class KeychainService : LocalAuthDataSourceProtocol{
@@ -23,6 +24,10 @@ final class KeychainService : LocalAuthDataSourceProtocol{
     
     func getShopifyToken() throws -> String {
         return try read(key: "ShopifyCustomerToken")
+    }
+    
+    func clearShopifyToken() throws {
+        try delete(key: "ShopifyCustomerToken")
     }
     
     enum KeychainError: Error {
@@ -66,5 +71,17 @@ final class KeychainService : LocalAuthDataSourceProtocol{
         }
         
         return result
+    }
+    
+    func delete(key: String) throws {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            throw KeychainError.unexpectedStatus(status)
+        }
     }
 }

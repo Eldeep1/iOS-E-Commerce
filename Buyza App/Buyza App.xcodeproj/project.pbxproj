@@ -162,7 +162,7 @@
 		B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA55EF2FEFFDF6004CA9FF /* LoginHeader.swift */; };
 		B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA55F02FEFFDF6004CA9FF /* LoginViewHeader.swift */; };
 		B8BA55FD2FEFFDF6004CA9FF /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA55F12FEFFDF6004CA9FF /* SocialButton.swift */; };
-		B8BA55FE2FEFFDF6004CA9FF /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA55F22FEFFDF6004CA9FF /* SocialLogin.swift */; };
+		B8BA55FE2FEFFDF6004CA9FF /* AnotherLoginOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA55F22FEFFDF6004CA9FF /* AnotherLoginOptions.swift */; };
 		B8BA55FF2FEFFDF6004CA9FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA55F42FEFFDF6004CA9FF /* LoginView.swift */; };
 		B8BA56062FEFFEB1004CA9FF /* RegisterForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA56052FEFFEB1004CA9FF /* RegisterForm.swift */; };
 		B8BA56092FEFFF04004CA9FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BA56082FEFFF04004CA9FF /* RegisterView.swift */; };
@@ -192,6 +192,7 @@
 		B8EAE9CF2FF5311D00129771 /* EditAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */; };
 		B8EAE9D12FF5314900129771 /* EditAddressForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9D02FF5314900129771 /* EditAddressForm.swift */; };
 		B8EAE9D42FF5316500129771 /* EditAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9D32FF5316500129771 /* EditAddressView.swift */; };
+		B8FC98732FF93A5D00A0C614 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -369,7 +370,7 @@
 		B8BA55EF2FEFFDF6004CA9FF /* LoginHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeader.swift; sourceTree = "<group>"; };
 		B8BA55F02FEFFDF6004CA9FF /* LoginViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewHeader.swift; sourceTree = "<group>"; };
 		B8BA55F12FEFFDF6004CA9FF /* SocialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
-		B8BA55F22FEFFDF6004CA9FF /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
+		B8BA55F22FEFFDF6004CA9FF /* AnotherLoginOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherLoginOptions.swift; sourceTree = "<group>"; };
 		B8BA55F42FEFFDF6004CA9FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B8BA56052FEFFEB1004CA9FF /* RegisterForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm.swift; sourceTree = "<group>"; };
 		B8BA56082FEFFF04004CA9FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -400,6 +401,7 @@
 		B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressViewModel.swift; sourceTree = "<group>"; };
 		B8EAE9D02FF5314900129771 /* EditAddressForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressForm.swift; sourceTree = "<group>"; };
 		B8EAE9D32FF5316500129771 /* EditAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressView.swift; sourceTree = "<group>"; };
+		B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1329,7 +1331,7 @@
 				B8BA55EF2FEFFDF6004CA9FF /* LoginHeader.swift */,
 				B8BA55F02FEFFDF6004CA9FF /* LoginViewHeader.swift */,
 				B8BA55F12FEFFDF6004CA9FF /* SocialButton.swift */,
-				B8BA55F22FEFFDF6004CA9FF /* SocialLogin.swift */,
+				B8BA55F22FEFFDF6004CA9FF /* AnotherLoginOptions.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1390,6 +1392,7 @@
 		B8BA560D2FF00572004CA9FF /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */,
 				B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */,
 				B8BA55B72FEFE961004CA9FF /* LoginUseCase.swift */,
 				B8BA55B92FEFE976004CA9FF /* RegisterUseCase.swift */,
@@ -1783,13 +1786,14 @@
 				B89BAC342FF921F500DA1703 /* EmptyOrdersView.swift in Sources */,
 				B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */,
 				0997ED402FF8260C00C7B976 /* GetBrandsUseCase.swift in Sources */,
+				B8FC98732FF93A5D00A0C614 /* LogoutUseCase.swift in Sources */,
 				B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */,
 				B8BA55FD2FEFFDF6004CA9FF /* SocialButton.swift in Sources */,
 				0997ED632FF849CC00C7B976 /* FavoritesRepoImp.swift in Sources */,
 				B8EAE9A72FF5005500129771 /* AddAddressViewModel.swift in Sources */,
 				B89BAC3D2FF922D000DA1703 /* OrderRepository.swift in Sources */,
 				B8BA56062FEFFEB1004CA9FF /* RegisterForm.swift in Sources */,
-				B8BA55FE2FEFFDF6004CA9FF /* SocialLogin.swift in Sources */,
+				B8BA55FE2FEFFDF6004CA9FF /* AnotherLoginOptions.swift in Sources */,
 				B8BA55FF2FEFFDF6004CA9FF /* LoginView.swift in Sources */,
 				769DB5322FEFE3F300F532C7 /* Product.swift in Sources */,
 				09F9B44F2FEFCCA40017509E /* Buyza_App.xcdatamodeld in Sources */,

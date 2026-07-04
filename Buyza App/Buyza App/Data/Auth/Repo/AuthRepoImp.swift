@@ -76,4 +76,13 @@ struct AuthRepoImp : AuthRepoProtocol {
         return hasFirebaseUser && hasShopifyToken
     }
     
+    func logout() async throws {
+        do {
+            try firebaseService.signOut()
+            try localDataSource.clearShopifyToken()
+            UserDefaults.standard.removeObject(forKey: "shopify_cart_id")
+        } catch {
+            throw AuthError.firebaseError(error.localizedDescription)
+        }
+    }
 }
