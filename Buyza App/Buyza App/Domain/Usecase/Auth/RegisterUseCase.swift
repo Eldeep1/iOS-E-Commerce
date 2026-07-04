@@ -10,6 +10,7 @@ import Foundation
 
 protocol RegisterUseCaseProtocol {
     func execute(email: String, password: String, name:String) async throws -> UserModel
+    @MainActor func executeGoogleLogin() async throws -> UserModel
 }
 
 struct RegisterUseCase: RegisterUseCaseProtocol {
@@ -27,6 +28,15 @@ struct RegisterUseCase: RegisterUseCaseProtocol {
         
         do {
             return try await authRepository.createUser(email: email, password: password, name: name)
+        } catch {
+            throw AuthError.map(error)
+        }
+    }
+    
+    @MainActor
+    func executeGoogleLogin() async throws -> UserModel {
+        do {
+            return try await authRepository.loginWithGoogle()
         } catch {
             throw AuthError.map(error)
         }

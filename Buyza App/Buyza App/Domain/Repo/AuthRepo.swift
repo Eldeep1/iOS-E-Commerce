@@ -9,6 +9,7 @@ import Foundation
 
 protocol AuthRepoProtocol {
     func loginUser(email:String, password:String) async throws-> UserModel
+    @MainActor func loginWithGoogle() async throws -> UserModel
     func createUser(email:String, password:String, name:String) async throws-> UserModel
     func isUserLoggedIn() -> Bool
     func logout() async throws

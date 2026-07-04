@@ -7,10 +7,13 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseCore
+import GoogleSignIn
 
 protocol AuthServiceProtocol {
     func createAccount(email: String, password: String, name:String) async throws -> AuthDataResultModel
     func signIn(email: String, password: String) async throws -> AuthDataResultModel
+    @MainActor func signInWithGoogle() async throws -> AuthDataResultModel
     func signOut() throws
 }
 
@@ -39,7 +42,28 @@ struct FirebaseServices :AuthServiceProtocol{
         
         print("Yaaaay")
         return AuthDataResultModel(user: authResult.user)
+    }
+    
+    @MainActor
+    func signInWithGoogle() async throws -> AuthDataResultModel {
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            throw AuthError.firebaseError("No client ID found.")
+        }
         
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
         
+        let topVC = UIApplication.shared.getRootViewController()
+        
+        let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: topVC)
+        guard let idToken = result.user.idToken?.tokenString else {
+            throw AuthError.firebaseError("No ID token found.")
+        }
+        let accessToken = result.user.accessToken.tokenString
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                       accessToken: accessToken)
+        let authResult = try await Auth.auth().signIn(with: credential)
+        return AuthDataResultModel(user: authResult.user)
     }
 }

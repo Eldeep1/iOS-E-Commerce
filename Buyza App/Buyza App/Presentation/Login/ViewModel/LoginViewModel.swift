@@ -44,4 +44,23 @@ final class LoginViewModel: ObservableObject {
             }
         }
     }
+    
+    func signInWithGoogle() {
+        guard !isLoading else { return }
+        isLoading = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                let userModel = try await loginUseCase.executeGoogleLogin()
+                print("Successfully logged in with Google: \(userModel.name)")
+                self.loginSuccess = true
+                self.isLoading = false
+            } catch {
+                self.errorMessage = error.localizedDescription
+                self.showErrorAlert = true
+                self.isLoading = false
+            }
+        }
+    }
 }

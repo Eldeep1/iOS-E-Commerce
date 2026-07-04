@@ -24,6 +24,43 @@ struct RegisterView: View {
         _viewModel = StateObject(wrappedValue: RegisterViewModel(registerUseCase: registerUseCase))
     }
     
+    var formSection: some View {
+        VStack(spacing: 20) {
+            RegisterForm(viewModel: viewModel)
+            
+            Button(action: { viewModel.signUp() }) {
+                HStack {
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    } else {
+                        Text("Sign Up")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(Color.black)
+                .clipShape(Capsule())
+            }
+            .disabled(viewModel.isLoading)
+            .padding(.top, 8)
+            
+            AnotherLoginOptions(showGuestOption: false, onGoogleLogin: {
+                viewModel.signInWithGoogle()
+            })
+        }
+        .padding(24)
+        .background(Color.white)
+        .cornerRadius(28)
+        .overlay(
+            RoundedRectangle(cornerRadius: 28)
+                .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+        )
+        .padding(.horizontal, 16)
+    }
+    
     var body: some View {
         ZStack {
             
@@ -49,39 +86,7 @@ struct RegisterView: View {
                             .foregroundColor(.gray)
                     }
                     
-                    
-                    VStack(spacing: 20) {
-                        RegisterForm(viewModel: viewModel)
-                        
-                        Button(action: { viewModel.signUp() }) {
-                            HStack {
-                                if viewModel.isLoading {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                } else {
-                                    Text("Sign Up")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(Color.black)
-                            .clipShape(Capsule())
-                        }
-                        .disabled(viewModel.isLoading)
-                        .padding(.top, 8)
-                        
-                        AnotherLoginOptions(showGuestOption: false)
-                    }
-                    .padding(24)
-                    .background(Color.white)
-                    .cornerRadius(28)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 28)
-                            .stroke(Color.gray.opacity(0.1), lineWidth: 1)
-                    )
-                    .padding(.horizontal, 16)
+                    formSection
                     
                     Spacer().frame(height: 20)
                     

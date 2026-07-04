@@ -69,4 +69,23 @@ final class RegisterViewModel: ObservableObject {
             }
         }
     }
+    
+    func signInWithGoogle() {
+        guard !isLoading else { return }
+        isLoading = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                let userModel = try await registerUseCase.executeGoogleLogin()
+                print("Successfully logged in with Google: \(userModel.name)")
+                self.registrationSuccess = true
+                self.isLoading = false
+            } catch {
+                self.errorMessage = error.localizedDescription
+                self.showErrorAlert = true
+                self.isLoading = false
+            }
+        }
+    }
 }

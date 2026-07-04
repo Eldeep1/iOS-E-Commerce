@@ -16,6 +16,29 @@ struct LoginView: View {
         _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase))
     }
     
+    var formSection: some View {
+        VStack(spacing: 20) {
+            LoginForm(viewModel: viewModel) {
+                print("Forgot password tapped")
+            }
+            
+            LoginButton(viewModel: viewModel)
+                .padding(.top, 8)
+            
+            AnotherLoginOptions(showGuestOption: true, onGoogleLogin: {
+                viewModel.signInWithGoogle()
+            })
+        }
+        .padding(24)
+        .background(Color.white)
+        .cornerRadius(28)
+        .overlay(
+            RoundedRectangle(cornerRadius: 28)
+                .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+        )
+        .padding(.horizontal, 16)
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -31,25 +54,7 @@ struct LoginView: View {
                     
                     LoginHeader()
                     
-                    
-                    VStack(spacing: 20) {
-                        LoginForm(viewModel: viewModel) {
-                            print("Forgot password tapped")
-                        }
-                        
-                        LoginButton(viewModel: viewModel)
-                            .padding(.top, 8)
-                        
-                        AnotherLoginOptions()
-                    }
-                    .padding(24)
-                    .background(Color.white)
-                    .cornerRadius(28)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 28)
-                            .stroke(Color.gray.opacity(0.1), lineWidth: 1)
-                    )
-                    .padding(.horizontal, 16)
+                    formSection
                     
                     Spacer().frame(height: 20)
                     

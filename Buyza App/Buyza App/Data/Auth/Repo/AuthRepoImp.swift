@@ -43,6 +43,36 @@ struct AuthRepoImp : AuthRepoProtocol {
         }
     }
     
+    @MainActor
+    func loginWithGoogle() async throws -> UserModel {
+        do {
+            let firebaseModel = try await firebaseService.signInWithGoogle()
+            
+            // Use a deterministic password for Shopify since Google doesn't provide one
+            let shopifyPassword = "\(firebaseModel.uid)_GoogleAuthSecret123!"
+            
+            var shopifyToken: String
+            
+            do {
+                // Try to log in to Shopify
+                shopifyToken = try await shopifyService.getCustomerToken(email: firebaseModel.email ?? "", password: shopifyPassword)
+            } catch {
+                // If it fails, assume the user doesn't exist in Shopify yet, so create them
+                shopifyToken = try await shopifyService.createCustomer(email: firebaseModel.email ?? "", password: shopifyPassword)
+            }
+            
+            try localDataSource.saveShopifyToken(shopifyToken)
+            
+            return UserModel(
+                uid: firebaseModel.uid,
+                email: firebaseModel.email ?? "",
+                name: firebaseModel.name ?? "User"
+            )
+        } catch {
+            throw AuthError.firebaseError(error.localizedDescription)
+        }
+    }
+    
     func createUser(email: String, password: String, name: String) async throws -> UserModel {
         do {
             print("we are here")
