@@ -7,10 +7,14 @@
 
 import Foundation
 
-protocol HomeRepoProtocol {
+protocol ProductProtocol {
+    func saveProduct(product: Product) throws
+    func removeProduct(productId: Int64) throws
+    func isFavorite(productId: Int64) throws -> Bool
+}
+
+protocol HomeRepoProtocol : ProductProtocol {
     func fetchProducts(limit: Int) async throws -> ProductsResponse
-    func fetchCollectionProducts(collectionId: Int) async throws -> ProductsResponse
-    func fetchProductsByVendor(vendor: String) async throws -> ProductsResponse
     func fetchFilteredProducts(
         source: CollectionProductsSource,
         criteria: ProductFilterCriteria,

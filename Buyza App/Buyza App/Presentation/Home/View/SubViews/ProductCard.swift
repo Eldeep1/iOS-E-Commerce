@@ -22,7 +22,9 @@ struct ProductCard: View {
                         .resizable()
                         .scaledToFill()
                 } placeholder: {
-                    Color(.systemGray4)
+                    Image("empty-img")
+                        .resizable()
+                        .scaledToFill()
                 }
                 .frame(width: 137, height: 145)
                 .clipped()
@@ -51,7 +53,7 @@ struct ProductCard: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 4))
 
-                Text(String(format: "$%.2f", Double(product.variants.first?.price ?? "0") ?? 0.0))
+                Text(String(format: "$ %.2f", Double(product.variants.first?.price ?? "0") ?? 0.0))
                     .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)

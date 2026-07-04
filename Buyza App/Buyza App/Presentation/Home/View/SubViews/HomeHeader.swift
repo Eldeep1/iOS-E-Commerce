@@ -34,6 +34,13 @@ struct HomeHeader: View {
                 Spacer()
 
                 NavigationLink(destination: makeCartView()) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .padding(.trailing, 8)
+                }
+                
+                NavigationLink(destination: makeCartView()) {
                     Image(systemName: "cart")
                         .font(.title2)
                         .foregroundColor(.black)
@@ -41,6 +48,8 @@ struct HomeHeader: View {
             }
             .padding(.horizontal)
             .padding(.bottom, 4)
+            .padding(.top, 4)
+
 
             HStack {
                 SearchBarView(
@@ -55,11 +64,11 @@ struct HomeHeader: View {
             Divider()
                 .padding(.top, 6)
         }
-        .padding(.top, 4)
-        .background(Color.white.ignoresSafeArea(edges: .top)
+        //.padding(.bottom, 80)
+        .background(Color.white.ignoresSafeArea()
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
     }
-
+    
     @MainActor private func makeCartView() -> some View {
         let repo = CartRepositoryImp()
         let fetchCartUseCase = FetchCartUseCase(repository: repo)

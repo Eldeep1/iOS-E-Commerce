@@ -31,7 +31,7 @@ struct MainTabView: View {
                 }
                 .tag(0)
     
-            Text("Favorites View Placeholder")
+            FavoritesView()
                 .tabItem {
                     Image(systemName: selectedTab == 1 ? "heart.fill" : "heart")
                 }

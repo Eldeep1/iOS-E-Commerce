@@ -16,15 +16,16 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 20) {
                 HomeHeader(
                     searchText: $searchText,
                     onSearchActivated: openSearchResults,
                     onSearch: openSearchResults
                 )
-
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 26) {
+                    VStack(alignment: .leading, spacing: 24) {
+                        
+                        EventsList()
 
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Categories")
@@ -59,7 +60,7 @@ struct HomeView: View {
                         }
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Recommendations")
+                            Text("Featured Products")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
@@ -73,13 +74,26 @@ struct HomeView: View {
                                 ProductsGrid(
                                     products: viewModel.products,
                                     isFavorite: viewModel.isFavorite(productID:),
-                                    onFavoriteTap: { _ in }
+                                    onFavoriteTap: { product in
+                                        viewModel.toggleFavorite(product: product)
+                                    }
                                 )
                             }
                         }
                     }
                     .padding(.top, 8)
                 }
+            }
+            .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+                Button("Cancel", role: .cancel) { }
+                Button("Remove", role: .destructive) {
+                    viewModel.confirmRemoveFavorite()
+                }
+            } message: { product in
+                Text("Are you sure you want to remove \(product.title) from your favorites?")
+            }
+            .onAppear {
+                viewModel.objectWillChange.send()
             }
             .background(searchNavigationLink)
             .onChange(of: searchText, perform: handleSearchTextChange)
