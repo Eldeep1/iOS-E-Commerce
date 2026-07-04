@@ -20,9 +20,9 @@ final class RegisterViewModel: ObservableObject {
     @Published var name = ""
     @Published var email = ""
     @Published var password = ""
+    @Published var confirmPassword = ""
     @Published var isPasswordVisible = false
-    
-    
+    @Published var isConfirmPasswordVisible = false
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var showErrorAlert = false
@@ -40,6 +40,12 @@ final class RegisterViewModel: ObservableObject {
         
         let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard password == confirmPassword else {
+            errorMessage = "Passwords do not match."
+            showErrorAlert = true
+            return
+        }
         
         isLoading = true
         errorMessage = nil

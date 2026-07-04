@@ -69,6 +69,27 @@ struct RegisterForm: View {
                 }
                 .modifier(InputFieldModifier())
             }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("CONFIRM PASSWORD")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(.gray)
+                    .tracking(1)
+                
+                HStack {
+                    if viewModel.isConfirmPasswordVisible {
+                        TextField("••••••••", text: $viewModel.confirmPassword)
+                    } else {
+                        SecureField("••••••••", text: $viewModel.confirmPassword)
+                    }
+                    
+                    Button(action: { viewModel.isConfirmPasswordVisible.toggle() }) {
+                        Image(systemName: viewModel.isConfirmPasswordVisible ? "eye.slash" : "eye")
+                            .foregroundColor(.gray)
+                    }
+                }
+                .modifier(InputFieldModifier())
+            }
         }
     }
 }

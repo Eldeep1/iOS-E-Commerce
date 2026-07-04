@@ -25,35 +25,37 @@ struct LoginView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 24) {
-                Spacer().frame(height: 40)
-                
-                LoginHeader()
-                
-                
-                VStack(spacing: 20) {
-                    LoginForm(viewModel: viewModel) {
-                        print("Forgot password tapped")
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 24) {
+                    Spacer().frame(height: 20)
+                    
+                    LoginHeader()
+                    
+                    
+                    VStack(spacing: 20) {
+                        LoginForm(viewModel: viewModel) {
+                            print("Forgot password tapped")
+                        }
+                        
+                        LoginButton(viewModel: viewModel)
+                            .padding(.top, 8)
+                        
+                        AnotherLoginOptions()
                     }
+                    .padding(24)
+                    .background(Color.white)
+                    .cornerRadius(28)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+                    )
+                    .padding(.horizontal, 16)
                     
-                    LoginButton(viewModel: viewModel)
-                        .padding(.top, 8)
+                    Spacer().frame(height: 20)
                     
-                    AnotherLoginOptions()
+                    LoginFooter()
+                        .padding(.bottom, 40)
                 }
-                .padding(24)
-                .background(Color.white)
-                .cornerRadius(28)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color.gray.opacity(0.1), lineWidth: 1)
-                )
-                .padding(.horizontal, 16)
-                
-                Spacer()
-                
-                LoginFooter()
-                    .padding(.bottom, 16)
             }
         }
         .alert("Authentication Issue", isPresented: $viewModel.showErrorAlert, actions: {

@@ -34,68 +34,69 @@ struct RegisterView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 24) {
-                Spacer().frame(height: 30)
-                
-               
-                VStack(spacing: 8) {
-                    Text("Create Account")
-                        .font(.system(size: 34, weight: .bold))
-                        .foregroundColor(.black)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 24) {
+                    Spacer().frame(height: 20)
                     
-                    Text("Join Buyza and start shopping unsecurely")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                
-                
-                VStack(spacing: 20) {
-                    RegisterForm(viewModel: viewModel)
+                   
+                    VStack(spacing: 8) {
+                        Text("Create Account")
+                            .font(.system(size: 34, weight: .bold))
+                            .foregroundColor(.black)
+                        
+                        Text("Join Buyza and start shopping unsecurely")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
                     
-                    Button(action: { viewModel.signUp() }) {
-                        HStack {
-                            if viewModel.isLoading {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            } else {
-                                Text("Sign Up")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
+                    
+                    VStack(spacing: 20) {
+                        RegisterForm(viewModel: viewModel)
+                        
+                        Button(action: { viewModel.signUp() }) {
+                            HStack {
+                                if viewModel.isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                } else {
+                                    Text("Sign Up")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                }
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 16)
+                            .background(Color.black)
+                            .clipShape(Capsule())
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color.black)
-                        .clipShape(Capsule())
+                        .disabled(viewModel.isLoading)
+                        .padding(.top, 8)
+                        
+                        AnotherLoginOptions(showGuestOption: false)
                     }
-                    .disabled(viewModel.isLoading)
-                    .padding(.top, 8)
+                    .padding(24)
+                    .background(Color.white)
+                    .cornerRadius(28)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+                    )
+                    .padding(.horizontal, 16)
                     
-                
-                    AnotherLoginOptions()
-                }
-                .padding(24)
-                .background(Color.white)
-                .cornerRadius(28)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color.gray.opacity(0.1), lineWidth: 1)
-                )
-                .padding(.horizontal, 16)
-                
-                Spacer()
-                
-               
-                HStack(spacing: 4) {
-                    Text("Already have an account?")
-                        .foregroundColor(.gray)
-                    Button("Sign In") {
-                        dismiss()
+                    Spacer().frame(height: 20)
+                    
+                   
+                    HStack(spacing: 4) {
+                        Text("Already have an account?")
+                            .foregroundColor(.gray)
+                        Button("Sign In") {
+                            dismiss()
+                        }
+                        .foregroundColor(.black)
                     }
-                    .foregroundColor(.black)
+                    .font(.system(size: 15))
+                    .padding(.bottom, 40)
                 }
-                .font(.system(size: 15))
-                .padding(.bottom, 40)
             }
         }.onChange(of: viewModel.registrationSuccess) { newValue in
             if newValue {
