@@ -43,9 +43,9 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            Text("Profile View Placeholder")
+            OrdersView()
                 .tabItem {
-                    Image(systemName: selectedTab == 3 ? "person.fill" : "person")
+                    Image(systemName: selectedTab == 3 ? "shippingbox.fill" : "shippingbox")
                 }
                 .tag(3)
         }
