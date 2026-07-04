@@ -25,12 +25,10 @@ final class FilterProductsUseCase: FilterProductsUseCaseProtocol {
 
     init(
         repository: HomeRepoProtocol,
-        searchUseCase: SearchProductsUseCaseProtocol = SearchProductsUseCase(
-            repository: HomeRepoImp(remoteDataSource: HomeRemoteDataSource())
-        )
+        searchUseCase: SearchProductsUseCaseProtocol? = nil
     ) {
         self.repository = repository
-        self.searchUseCase = searchUseCase
+        self.searchUseCase = searchUseCase ?? SearchProductsUseCase(repository: repository)
     }
 
     func fetchProducts(

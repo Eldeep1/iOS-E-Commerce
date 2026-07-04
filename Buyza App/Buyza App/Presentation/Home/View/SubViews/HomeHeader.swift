@@ -8,23 +8,8 @@
 import SwiftUI
 
 struct HomeHeader: View {
-    @Binding var searchText: String
-    var onSearchActivated: () -> Void
-    var onSearch: () -> Void
-
-    init(
-        searchText: Binding<String>,
-        onSearchActivated: @escaping () -> Void,
-        onSearch: @escaping () -> Void
-    ) {
-        _searchText = searchText
-        self.onSearchActivated = onSearchActivated
-        self.onSearch = onSearch
-    }
-
     var body: some View {
         VStack(spacing: 16) {
-
             HStack {
                 Text("BUYZA")
                     .font(.largeTitle)
@@ -33,13 +18,13 @@ struct HomeHeader: View {
 
                 Spacer()
 
-                NavigationLink(destination: makeCartView()) {
+                NavigationLink(destination: SearchResultsView()) {
                     Image(systemName: "magnifyingglass")
                         .font(.title2)
                         .foregroundColor(.black)
                         .padding(.trailing, 8)
                 }
-                
+
                 NavigationLink(destination: makeCartView()) {
                     Image(systemName: "cart")
                         .font(.title2)
@@ -50,25 +35,13 @@ struct HomeHeader: View {
             .padding(.bottom, 4)
             .padding(.top, 4)
 
-
-            HStack {
-                SearchBarView(
-                    text: $searchText,
-                    placeholder: "What are you looking for?",
-                    onSubmit: onSearch,
-                    onIconTap: onSearchActivated
-                )
-            }
-            .padding(.horizontal)
-
             Divider()
                 .padding(.top, 6)
         }
-        //.padding(.bottom, 80)
         .background(Color.white.ignoresSafeArea()
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
     }
-    
+
     @MainActor private func makeCartView() -> some View {
         let repo = CartRepositoryImp()
         let fetchCartUseCase = FetchCartUseCase(repository: repo)
@@ -86,9 +59,7 @@ struct HomeHeader: View {
 }
 
 #Preview {
-    HomeHeader(
-        searchText: .constant(""),
-        onSearchActivated: {},
-        onSearch: {}
-    )
+    NavigationView {
+        HomeHeader()
+    }
 }

@@ -74,6 +74,17 @@ struct SearchResultsView: View {
                 onReset: { viewModel.resetFilters() }
             )
         }
+        .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+            Button("Cancel", role: .cancel) { }
+            Button("Remove", role: .destructive) {
+                viewModel.confirmRemoveFavorite()
+            }
+        } message: { product in
+            Text("Are you sure you want to remove \(product.title) from your favorites?")
+        }
+        .onAppear {
+            viewModel.objectWillChange.send()
+        }
     }
 
     @ViewBuilder
@@ -102,7 +113,9 @@ struct SearchResultsView: View {
             ProductsGrid(
                 products: viewModel.displayedProducts,
                 isFavorite: viewModel.isFavorite(productID:),
-                onFavoriteTap: { _ in }
+                onFavoriteTap: { product in
+                    viewModel.toggleFavorite(product: product)
+                }
             )
         }
     }
