@@ -11,9 +11,13 @@ import FirebaseAuth
 protocol AuthServiceProtocol {
     func createAccount(email: String, password: String, name:String) async throws -> AuthDataResultModel
     func signIn(email: String, password: String) async throws -> AuthDataResultModel
+    func signOut() throws
 }
 
 struct FirebaseServices :AuthServiceProtocol{
+    func signOut() throws {
+        try Auth.auth().signOut()
+    }
     func createAccount(email: String, password: String,name:String) async throws-> AuthDataResultModel {
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         

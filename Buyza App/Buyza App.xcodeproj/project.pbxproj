@@ -192,6 +192,7 @@
 		B8EAE9CF2FF5311D00129771 /* EditAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */; };
 		B8EAE9D12FF5314900129771 /* EditAddressForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9D02FF5314900129771 /* EditAddressForm.swift */; };
 		B8EAE9D42FF5316500129771 /* EditAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAE9D32FF5316500129771 /* EditAddressView.swift */; };
+		B8FC98732FF93A5D00A0C614 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -400,6 +401,7 @@
 		B8EAE9CE2FF5311D00129771 /* EditAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressViewModel.swift; sourceTree = "<group>"; };
 		B8EAE9D02FF5314900129771 /* EditAddressForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressForm.swift; sourceTree = "<group>"; };
 		B8EAE9D32FF5316500129771 /* EditAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressView.swift; sourceTree = "<group>"; };
+		B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1390,6 +1392,7 @@
 		B8BA560D2FF00572004CA9FF /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */,
 				B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */,
 				B8BA55B72FEFE961004CA9FF /* LoginUseCase.swift */,
 				B8BA55B92FEFE976004CA9FF /* RegisterUseCase.swift */,
@@ -1783,6 +1786,7 @@
 				B89BAC342FF921F500DA1703 /* EmptyOrdersView.swift in Sources */,
 				B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */,
 				0997ED402FF8260C00C7B976 /* GetBrandsUseCase.swift in Sources */,
+				B8FC98732FF93A5D00A0C614 /* LogoutUseCase.swift in Sources */,
 				B8BA55FC2FEFFDF6004CA9FF /* LoginViewHeader.swift in Sources */,
 				B8BA55FD2FEFFDF6004CA9FF /* SocialButton.swift in Sources */,
 				0997ED632FF849CC00C7B976 /* FavoritesRepoImp.swift in Sources */,
