@@ -97,6 +97,62 @@ struct GeographicData {
         return citiesByProvince[province] ?? ["Central City", "North City", "South City", "West City", "East City"]
     }
     
+    // MARK: - Validation Resources
+    
+    static let zipRanges: [String: [ClosedRange<Int>]] = [
+        "Alabama": [350...369],
+        "Alaska": [995...999],
+        "Arizona": [850...865],
+        "Arkansas": [716...729],
+        "California": [900...961],
+        "Colorado": [800...816],
+        "Connecticut": [60...69],
+        "Delaware": [197...199],
+        "Florida": [320...349],
+        "Georgia": [300...319, 398...399],
+        "Hawaii": [967...968],
+        "Idaho": [832...839],
+        "Illinois": [600...629],
+        "Indiana": [460...479],
+        "Iowa": [500...528],
+        "Kansas": [660...679],
+        "Kentucky": [400...427],
+        "Louisiana": [700...715],
+        "Maine": [40...49],
+        "Maryland": [206...212, 214...219],
+        "Massachusetts": [10...27],
+        "Michigan": [480...499],
+        "Minnesota": [550...567],
+        "Mississippi": [386...397],
+        "Missouri": [630...658],
+        "Montana": [590...599],
+        "Nebraska": [680...693],
+        "Nevada": [889...898],
+        "New Hampshire": [30...38],
+        "New Jersey": [70...89],
+        "New Mexico": [870...884],
+        "New York": [100...149],
+        "North Carolina": [270...289],
+        "North Dakota": [580...588],
+        "Ohio": [430...458],
+        "Oklahoma": [730...749],
+        "Oregon": [970...979],
+        "Pennsylvania": [150...196],
+        "Rhode Island": [28...29],
+        "South Carolina": [290...299],
+        "South Dakota": [570...577],
+        "Tennessee": [370...385],
+        "Texas": [750...799, 885...885],
+        "Utah": [840...847],
+        "Vermont": [50...59],
+        "Virginia": [201...201, 220...246],
+        "Washington": [980...994],
+        "West Virginia": [247...269],
+        "Wisconsin": [530...549],
+        "Wyoming": [820...831],
+        "District of Columbia": [200...205, 209...209, 569...569]
+    ]
+
     static func isValidZip(_ zip: String, for province: String, in country: String) -> Bool {
         let cleanZip = zip.trimmingCharacters(in: .whitespaces).uppercased()
         
@@ -132,61 +188,7 @@ struct GeographicData {
             
             guard let prefix3 = Int(cleanZip.prefix(3)) else { return false }
             
-            let validRanges: [String: [ClosedRange<Int>]] = [
-                "Alabama": [350...369],
-                "Alaska": [995...999],
-                "Arizona": [850...865],
-                "Arkansas": [716...729],
-                "California": [900...961],
-                "Colorado": [800...816],
-                "Connecticut": [60...69],
-                "Delaware": [197...199],
-                "Florida": [320...349],
-                "Georgia": [300...319, 398...399],
-                "Hawaii": [967...968],
-                "Idaho": [832...839],
-                "Illinois": [600...629],
-                "Indiana": [460...479],
-                "Iowa": [500...528],
-                "Kansas": [660...679],
-                "Kentucky": [400...427],
-                "Louisiana": [700...715],
-                "Maine": [40...49],
-                "Maryland": [206...212, 214...219],
-                "Massachusetts": [10...27],
-                "Michigan": [480...499],
-                "Minnesota": [550...567],
-                "Mississippi": [386...397],
-                "Missouri": [630...658],
-                "Montana": [590...599],
-                "Nebraska": [680...693],
-                "Nevada": [889...898],
-                "New Hampshire": [30...38],
-                "New Jersey": [70...89],
-                "New Mexico": [870...884],
-                "New York": [100...149],
-                "North Carolina": [270...289],
-                "North Dakota": [580...588],
-                "Ohio": [430...458],
-                "Oklahoma": [730...749],
-                "Oregon": [970...979],
-                "Pennsylvania": [150...196],
-                "Rhode Island": [28...29],
-                "South Carolina": [290...299],
-                "South Dakota": [570...577],
-                "Tennessee": [370...385],
-                "Texas": [750...799, 885...885],
-                "Utah": [840...847],
-                "Vermont": [50...59],
-                "Virginia": [201...201, 220...246],
-                "Washington": [980...994],
-                "West Virginia": [247...269],
-                "Wisconsin": [530...549],
-                "Wyoming": [820...831],
-                "District of Columbia": [200...205, 209...209, 569...569]
-            ]
-            
-            if let ranges = validRanges[province] {
+            if let ranges = zipRanges[province] {
                 return ranges.contains { $0.contains(prefix3) }
             }
             return true
@@ -270,5 +272,113 @@ struct GeographicData {
             return false
         }
         return phone.filter { $0.isNumber }.count >= 7
+    }
+    
+    // MARK: - Sample Data Helpers
+    
+    static func samplePostalCode(for province: String, in country: String) -> String {
+        if country == "Canada" {
+            // Return a valid postal code prefix based on the province
+            switch province {
+            case "Alberta": return "T2P 1J9"
+            case "British Columbia": return "V6B 1A1"
+            case "Manitoba": return "R3C 1A5"
+            case "New Brunswick": return "E3B 1A1"
+            case "Newfoundland and Labrador": return "A1C 1A1"
+            case "Nova Scotia": return "B3J 1A1"
+            case "Ontario": return "M5V 2H1"
+            case "Prince Edward Island": return "C1A 1A1"
+            case "Quebec": return "H3B 1A1"
+            case "Saskatchewan": return "S4P 1A1"
+            case "Northwest Territories": return "X1A 2P7"
+            case "Nunavut": return "X0A 0H0"
+            case "Yukon": return "Y1A 2C6"
+            default: return "K1A 0B1"
+            }
+        } else {
+            // US ZIP code sample based on range
+            if let ranges = zipRanges[province], let firstRange = ranges.first {
+                let sampleZip = firstRange.lowerBound
+                return String(format: "%05d", sampleZip * 100 + 1)
+            }
+            return "90210"
+        }
+    }
+    
+    static func samplePhoneNumber(for province: String, in country: String) -> String {
+        if country == "United States" {
+            switch province {
+            case "Alabama": return "205"
+            case "Alaska": return "907"
+            case "Arizona": return "602"
+            case "Arkansas": return "501"
+            case "California": return "213"
+            case "Colorado": return "303"
+            case "Connecticut": return "860"
+            case "Delaware": return "302"
+            case "Florida": return "305"
+            case "Georgia": return "404"
+            case "Hawaii": return "808"
+            case "Idaho": return "208"
+            case "Illinois": return "312"
+            case "Indiana": return "317"
+            case "Iowa": return "515"
+            case "Kansas": return "316"
+            case "Kentucky": return "502"
+            case "Louisiana": return "504"
+            case "Maine": return "207"
+            case "Maryland": return "410"
+            case "Massachusetts": return "617"
+            case "Michigan": return "313"
+            case "Minnesota": return "612"
+            case "Mississippi": return "601"
+            case "Missouri": return "816"
+            case "Montana": return "406"
+            case "Nebraska": return "402"
+            case "Nevada": return "702"
+            case "New Hampshire": return "603"
+            case "New Jersey": return "973"
+            case "New Mexico": return "505"
+            case "New York": return "212"
+            case "North Carolina": return "704"
+            case "North Dakota": return "701"
+            case "Ohio": return "614"
+            case "Oklahoma": return "405"
+            case "Oregon": return "503"
+            case "Pennsylvania": return "215"
+            case "Rhode Island": return "401"
+            case "South Carolina": return "803"
+            case "South Dakota": return "605"
+            case "Tennessee": return "615"
+            case "Texas": return "713"
+            case "Utah": return "801"
+            case "Vermont": return "802"
+            case "Virginia": return "804"
+            case "Washington": return "206"
+            case "West Virginia": return "304"
+            case "Wisconsin": return "414"
+            case "Wyoming": return "307"
+            case "District of Columbia": return "202"
+            default: return "555"
+            }
+        } else if country == "Canada" {
+            switch province {
+            case "Alberta": return "403"
+            case "British Columbia": return "604"
+            case "Manitoba": return "204"
+            case "New Brunswick": return "506"
+            case "Newfoundland and Labrador": return "709"
+            case "Nova Scotia": return "902"
+            case "Ontario": return "416"
+            case "Prince Edward Island": return "902"
+            case "Quebec": return "514"
+            case "Saskatchewan": return "306"
+            case "Northwest Territories": return "867"
+            case "Nunavut": return "867"
+            case "Yukon": return "867"
+            default: return "555"
+            }
+        }
+        return "555"
     }
 }

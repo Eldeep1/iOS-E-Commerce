@@ -49,17 +49,19 @@ final class AddAddressViewModel: ObservableObject {
         if GeographicData.isValidPhoneNumber(phoneNumber, in: country) {
             return nil
         } else {
-            return "Enter a valid phone number with a real Area Code"
+            let sample = GeographicData.samplePhoneNumber(for: province, in: country)
+            return "Enter a valid phone number with a real Area Code (e.g. \(sample)-555-0199)"
         }
     }
 
     var zipError: String? {
         guard !zip.isEmpty else { return nil }
         if !GeographicData.isValidZip(zip, for: province, in: country) {
+            let sample = GeographicData.samplePostalCode(for: province, in: country)
             if country == "Canada" {
-                return "Enter a valid postal code for \(province) (e.g. \(province == "Alberta" ? "T2P 1J9" : "K1A 0B1"))"
+                return "Enter a valid postal code for \(province) (e.g. \(sample))"
             } else {
-                return "Enter a valid ZIP code for \(province)"
+                return "Enter a valid ZIP code for \(province) (e.g. \(sample))"
             }
         }
         return nil
