@@ -11,6 +11,7 @@ struct AddressListContent: View {
     @State private var navigateToEdit: Bool = false
     @State private var addressToDelete: Address? = nil
     @State private var showDeleteAlert: Bool = false
+    @State private var navigateToPayment: Bool = false
 
     var body: some View {
         let addressDataSource = ShopifyAddressDataSource()
@@ -21,14 +22,6 @@ struct AddressListContent: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: 16) {
-                    // Hidden NavigationLink for editing — triggered by pencil button
-                    NavigationLink(
-                        destination: addressToEdit.map { EditAddressView(address: $0) },
-                        isActive: $navigateToEdit
-                    ) {
-                        EmptyView()
-                    }
-
                     NavigationLink(destination: AddAddressView(viewModel: addAddressViewModel)) {
                         HStack {
                             Image(systemName: "plus")
@@ -75,11 +68,24 @@ struct AddressListContent: View {
             AddressContinueButton(
                 selectedAddressId: viewModel.selectedAddressId,
                 onContinue: {
-                    guard let address = viewModel.selectedAddress else { return }
-                    print("Proceeding to Payment with address: \(address.fullAddressString)")
+                    guard viewModel.selectedAddress != nil else { return }
+                    navigateToPayment = true
                 }
             )
         }
+        .background(
+            Group {
+                NavigationLink(
+                    destination: addressToEdit.map { EditAddressView(address: $0) },
+                    isActive: $navigateToEdit
+                ) { EmptyView() }
+                
+                NavigationLink(
+                    destination: paymentDestination(),
+                    isActive: $navigateToPayment
+                ) { EmptyView() }
+            }
+        )
         .alert("Delete Address?", isPresented: $showDeleteAlert, presenting: addressToDelete) { address in
             Button("Cancel", role: .cancel) { }
             Button("Delete", role: .destructive) {
@@ -87,6 +93,25 @@ struct AddressListContent: View {
             }
         } message: { address in
             Text("Are you sure you want to delete \(address.fullName)'s address?")
+        }
+    }
+
+    @ViewBuilder
+    private func paymentDestination() -> some View {
+        if let address = viewModel.selectedAddress {
+            let repo = CheckoutRepositoryImp()
+
+            let paymentVM = PaymentViewModel(
+                address: address,
+                customerID: viewModel.customerGID,
+                createCheckoutUseCase: CreateCheckoutUseCase(repository: repo),
+                applyDiscountUseCase: ApplyDiscountUseCase(repository: repo),
+                placeCODOrderUseCase: PlaceCODOrderUseCase(repository: repo),
+                fetchLatestOrderUseCase: FetchLatestOrderUseCase(repository: repo)
+            )
+            PaymentView(viewModel: paymentVM)
+        } else {
+            EmptyView()
         }
     }
 }

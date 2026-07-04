@@ -13,6 +13,8 @@ struct AddressDTO: Decodable {
     let phone: String?
     let address1: String?
     let city: String?
+    let province: String?
+    let zip: String?
     let country: String?
 }
 

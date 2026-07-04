@@ -13,8 +13,10 @@ final class AddAddressViewModel: ObservableObject {
     @Published var fullName: String = ""
     @Published var phoneNumber: String = ""
     @Published var streetAddress: String = ""
-    @Published var city: String = ""
-    @Published var country: String = ""
+    @Published var city: String = "Birmingham"
+    @Published var province: String = "Alabama"
+    @Published var zip: String = ""
+    @Published var country: String = "United States"
     @Published var isDefault: Bool = false
 
     @Published var isSaving: Bool = false
@@ -28,10 +30,12 @@ final class AddAddressViewModel: ObservableObject {
 
 
     var isFormValid: Bool {
-        !fullName.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !fullName.trimmingCharacters(in: .whitespaces).isEmpty && fullNameError == nil &&
+        !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty && phoneError == nil &&
         !streetAddress.trimmingCharacters(in: .whitespaces).isEmpty &&
         !city.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !province.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !zip.trimmingCharacters(in: .whitespaces).isEmpty && zipError == nil &&
         !country.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
@@ -42,8 +46,25 @@ final class AddAddressViewModel: ObservableObject {
 
     var phoneError: String? {
         guard !phoneNumber.isEmpty else { return nil }
-        let digits = phoneNumber.filter { $0.isNumber }
-        return digits.count < 7 ? "Enter a valid phone number" : nil
+        if GeographicData.isValidPhoneNumber(phoneNumber, in: country) {
+            return nil
+        } else {
+            let sample = GeographicData.samplePhoneNumber(for: province, in: country)
+            return "Enter a valid phone number with a real Area Code (e.g. \(sample)-555-0199)"
+        }
+    }
+
+    var zipError: String? {
+        guard !zip.isEmpty else { return nil }
+        if !GeographicData.isValidZip(zip, for: province, in: country) {
+            let sample = GeographicData.samplePostalCode(for: province, in: country)
+            if country == "Canada" {
+                return "Enter a valid postal code for \(province) (e.g. \(sample))"
+            } else {
+                return "Enter a valid ZIP code for \(province) (e.g. \(sample))"
+            }
+        }
+        return nil
     }
 
     // MARK: - Actions
@@ -63,6 +84,8 @@ final class AddAddressViewModel: ObservableObject {
             phoneNumber: phoneNumber.trimmingCharacters(in: .whitespaces),
             streetAddress: streetAddress.trimmingCharacters(in: .whitespaces),
             city: city.trimmingCharacters(in: .whitespaces),
+            province: province.trimmingCharacters(in: .whitespaces),
+            zip: zip.trimmingCharacters(in: .whitespaces),
             country: country.trimmingCharacters(in: .whitespaces),
             isDefault: isDefault
         )

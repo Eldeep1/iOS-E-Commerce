@@ -15,6 +15,7 @@ final class AddressSelectionViewModel: ObservableObject {
     @Published var selectedAddressId: String? = nil
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var customerGID: String = ""
 
     // MARK: - Computed Properties
     
@@ -52,6 +53,13 @@ final class AddressSelectionViewModel: ObservableObject {
         }
         
         isLoading = false
+        
+        // Fetch customer GID from Shopify token for use in checkout
+        if let token = try? KeychainService.shared.getShopifyToken() {
+            if let gid = try? await ShopifyAdminCheckoutDataSource().fetchCustomerGID(accessToken: token) {
+                customerGID = gid
+            }
+        }
     }
     
     func select(address: Address) {

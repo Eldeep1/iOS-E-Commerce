@@ -31,12 +31,12 @@ struct CartView: View {
         VStack(spacing: 0) {
             navigationBar
 
-            if viewModel.isLoading {
+            if viewModel.isLoading && viewModel.cartItems.isEmpty {
                 Spacer()
                 ProgressView()
                     .scaleEffect(1.3)
                 Spacer()
-            } else if viewModel.cartItems.isEmpty {
+            } else if viewModel.cartItems.isEmpty && !viewModel.isLoading {
                 EmptyCartView(onShopNowTap: { dismiss() })
             } else {
                 ScrollView {
@@ -90,14 +90,15 @@ struct CartView: View {
                         navigateToAddresses = true
                     }
                 )
-                .background(
-                    NavigationLink(destination: AddressSelectionView(viewModel: addressSelectionViewModel), isActive: $navigateToAddresses) {
-                        EmptyView()
-                    }
-                )
             }
         }
         .background(Color(.systemBackground))
+        .background(
+            NavigationLink(
+                destination: AddressSelectionView(viewModel: addressSelectionViewModel),
+                isActive: $navigateToAddresses
+            ) { EmptyView() }
+        )
         .navigationBarHidden(true)
         .task { await viewModel.fetchCurrentCart() }
         .alert("Remove Item?", isPresented: $showDeleteAlert, presenting: itemToDelete) { item in

@@ -26,6 +26,8 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
             phoneNumber: dto.phone ?? "",
             streetAddress: dto.address1 ?? "",
             city: dto.city ?? "",
+            province: dto.province ?? "",
+            zip: dto.zip ?? "",
             country: dto.country ?? "",
             isDefault: isDefault
         )
@@ -60,6 +62,8 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
             phone: address.phoneNumber,
             address1: address.streetAddress,
             city: address.city,
+            province: address.province,
+            zip: address.zip,
             country: address.country
         )
         
@@ -80,6 +84,8 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
             phone: address.phoneNumber,
             address1: address.streetAddress,
             city: address.city,
+            province: address.province,
+            zip: address.zip,
             country: address.country
         )
         
