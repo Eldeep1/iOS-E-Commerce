@@ -79,6 +79,7 @@
 		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
 		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
 		B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */; };
+		B8371B552FF8EF1B00D9ED3B /* GeographicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */; };
 		B8AF23662FF6A0B5003A7B2E /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23652FF6A0B5003A7B2E /* PaymentView.swift */; };
 		B8AF23682FF6A0C2003A7B2E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23672FF6A0BD003A7B2E /* PaymentViewModel.swift */; };
 		B8AF236D2FF6A326003A7B2E /* OrderSummarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF236A2FF6A326003A7B2E /* OrderSummarySection.swift */; };
@@ -248,6 +249,7 @@
 		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
 		B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Buyza-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyLoginModels.swift; sourceTree = "<group>"; };
+		B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicData.swift; sourceTree = "<group>"; };
 		B8AF23652FF6A0B5003A7B2E /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		B8AF23672FF6A0BD003A7B2E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		B8AF23692FF6A326003A7B2E /* CouponSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponSection.swift; sourceTree = "<group>"; };
@@ -1063,6 +1065,7 @@
 		B8EAE98C2FF4F94B00129771 /* Addresses */ = {
 			isa = PBXGroup;
 			children = (
+				B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */,
 				B8EAE9CB2FF530CB00129771 /* Edit Address */,
 				B8EAE9AA2FF5007900129771 /* View Addresses */,
 				B8EAE9A12FF4FFDD00129771 /* Add Addresses */,
@@ -1453,6 +1456,7 @@
 				B8EAE9CA2FF5172C00129771 /* ShopifyAddressDataSource.swift in Sources */,
 				B8EAE99F2FF4FFD000129771 /* AddAddressForm.swift in Sources */,
 				B8EAE9A02FF4FFD000129771 /* AddressInputField.swift in Sources */,
+				B8371B552FF8EF1B00D9ED3B /* GeographicData.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
 				B8AF238B2FF6CBE4003A7B2E /* Order.swift in Sources */,
 				097C91F92FF6E46000AEB7D3 /* EventsList.swift in Sources */,
