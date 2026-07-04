@@ -50,7 +50,7 @@ struct LoginView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
-                    Spacer().frame(height: 20)
+                    Spacer().frame(height: 40)
                     
                     LoginHeader()
                     

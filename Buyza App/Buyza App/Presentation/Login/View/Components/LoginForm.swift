@@ -21,11 +21,19 @@ struct LoginForm: View {
                     .foregroundColor(.gray)
                     .tracking(1)
                 
-                TextField("name@example.com", text: $viewModel.email)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .modifier(InputFieldModifier())
+                ZStack(alignment: .leading) {
+                    if viewModel.email.isEmpty {
+                        Text(verbatim: "depo@example.com")
+                            .foregroundColor(Color.gray.opacity(0.6))
+                    }
+                    TextField("", text: $viewModel.email)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .foregroundColor(.black)
+                        .tint(.black)
+                }
+                .modifier(InputFieldModifier())
             }
             
             VStack(alignment: .leading, spacing: 8) {
