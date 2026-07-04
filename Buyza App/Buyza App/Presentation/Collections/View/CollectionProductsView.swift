@@ -38,13 +38,26 @@ struct CollectionProductsView: View {
                 ProductsGrid(
                     products: viewModel.products,
                     isFavorite: viewModel.isFavorite(productID:),
-                    onFavoriteTap: { _ in }
+                    onFavoriteTap: { product in
+                        viewModel.toggleFavorite(product: product)
+                    }
                 )
             }
         }
         .navigationTitle(viewModel.collectionTitle)
         .navigationBarTitleDisplayMode(.large)
         .background(Color(.systemBackground))
+        .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+            Button("Cancel", role: .cancel) { }
+            Button("Remove", role: .destructive) {
+                viewModel.confirmRemoveFavorite()
+            }
+        } message: { product in
+            Text("Are you sure you want to remove \(product.title) from your favorites?")
+        }
+        .onAppear {
+            viewModel.objectWillChange.send()
+        }
     }
 }
 

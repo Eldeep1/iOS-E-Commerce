@@ -30,19 +30,6 @@ struct Product: Identifiable, Decodable, Hashable {
         case id, title, body_html, vendor, product_type, status, options, images, variants
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int64.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
-        body_html = try container.decodeIfPresent(String.self, forKey: .body_html)
-        vendor = try container.decode(String.self, forKey: .vendor)
-        product_type = try container.decode(String.self, forKey: .product_type)
-        status = try container.decodeIfPresent(String.self, forKey: .status)
-        options = try container.decodeIfPresent([ProductOption].self, forKey: .options) ?? []
-        images = try container.decodeIfPresent([ProductImage].self, forKey: .images) ?? []
-        variants = try container.decodeIfPresent([ProductVariant].self, forKey: .variants) ?? []
-    }
-
     var brandName: String {
         vendor.uppercased()
     }
@@ -70,23 +57,38 @@ struct Product: Identifiable, Decodable, Hashable {
     }
 }
 
-struct ProductOption: Identifiable, Decodable, Hashable {
+struct ProductOption: Identifiable, Codable, Hashable {
     let id: Int64
     let name: String
     let values: [String]
 }
 
-struct ProductImage: Decodable, Hashable {
+struct ProductImage: Codable, Hashable {
     let src: String
     let position: Int?
 }
 
-struct ProductVariant: Decodable, Hashable {
+struct ProductVariant: Codable, Hashable {
     let id: Int64
     let price: String
     let option1: String?
     let option2: String?
     let option3: String?
+}
+
+extension Product {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int64.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        body_html = try container.decodeIfPresent(String.self, forKey: .body_html)
+        vendor = try container.decode(String.self, forKey: .vendor)
+        product_type = try container.decode(String.self, forKey: .product_type)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        options = try container.decodeIfPresent([ProductOption].self, forKey: .options) ?? []
+        images = try container.decodeIfPresent([ProductImage].self, forKey: .images) ?? []
+        variants = try container.decodeIfPresent([ProductVariant].self, forKey: .variants) ?? []
+    }
 }
 
 extension Product {

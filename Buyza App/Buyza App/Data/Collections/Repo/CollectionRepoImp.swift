@@ -1,35 +1,30 @@
 //
-//  HomeRepoImp.swift
+//  CollectionRepoImp.swift
 //  Buyza App
 //
-//  Created by Ahmed Tarek on 01/07/2026.
+//  Created by Ahmed Tarek on 03/07/2026.
 //
 
 import Foundation
 
-struct HomeRepoImp: HomeRepoProtocol {
-    
-    private let remoteDataSource: HomeRemoteDataSourceProtocol
+struct CollectionRepoImp : CollectionRepoProtocol {
+    private let remoteDataSource: CollectionRemoteDataSourceProtocol
     private let localDataSource: ProductLocalDataSourceProtocol
     
     init(
-        remoteDataSource: HomeRemoteDataSourceProtocol,
+        remoteDataSource: CollectionRemoteDataSourceProtocol,
         localDataSource: ProductLocalDataSourceProtocol
     ) {
         self.remoteDataSource = remoteDataSource
         self.localDataSource = localDataSource
     }
     
-    func fetchProducts(limit: Int) async throws -> ProductsResponse {
-        try await remoteDataSource.fetchProducts(limit: limit)
+    func fetchCollectionProducts(collectionId: Int) async throws -> ProductsResponse {
+        try await remoteDataSource.fetchCollectionProducts(collectionId: collectionId)
     }
-    
-    func fetchCategories() async throws -> CategoryResponse {
-        try await remoteDataSource.fetchCategories()
-    }
-    
-    func fetchBrands() async throws -> BrandResponse {
-        try await remoteDataSource.fetchBrands()
+
+    func fetchProductsByVendor(vendor: String) async throws -> ProductsResponse {
+        try await remoteDataSource.fetchProductsByVendor(vendor: vendor)
     }
     
     func saveProduct(product: Product) throws {
