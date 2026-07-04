@@ -28,7 +28,7 @@ final class ShopifyAdminCheckoutDataSource {
 
     // MARK: - Place COD Order (Draft Order)
 
-    func placeCODOrder(cartID: String, address: Address, customerID: String, discountAmount: Double, discountCode: String?) async throws -> Order {
+    func placeCODOrder(cartID: String, address: Address, customerID: String, discountAmount: Double, discountCode: String?) async throws -> CheckoutOrder {
         let lineItems = try await fetchCartLineItems(cartID: cartID)
         
         // 2. Create Draft Order with discount
@@ -165,7 +165,7 @@ final class ShopifyAdminCheckoutDataSource {
         return draftID
     }
 
-    private func completeDraftOrder(draftOrderID: String) async throws -> Order {
+    private func completeDraftOrder(draftOrderID: String) async throws -> CheckoutOrder {
         let mutation = """
         mutation draftOrderComplete($id: ID!, $paymentPending: Boolean) {
           draftOrderComplete(id: $id, paymentPending: $paymentPending) {
@@ -206,7 +206,7 @@ final class ShopifyAdminCheckoutDataSource {
             throw NSError(domain: "CODError", code: 404, userInfo: [NSLocalizedDescriptionKey: "Order was not created"])
         }
 
-        return Order(
+        return CheckoutOrder(
             id: order.id,
             name: order.name,
             totalPrice: Double(order.totalPriceSet.shopMoney.amount) ?? 0.0,
@@ -217,7 +217,7 @@ final class ShopifyAdminCheckoutDataSource {
 
     // MARK: - Fetch Latest Order (for Credit Card verification)
 
-    func fetchLatestOrder(customerID: String) async throws -> Order? {
+    func fetchLatestOrder(customerID: String) async throws -> CheckoutOrder? {
         let query = """
         query getCustomerOrders($id: ID!) {
           customer(id: $id) {
@@ -247,7 +247,7 @@ final class ShopifyAdminCheckoutDataSource {
 
         guard let node = response.data?.customer?.orders.nodes.first else { return nil }
 
-        return Order(
+        return CheckoutOrder(
             id: node.id,
             name: node.name,
             totalPrice: Double(node.totalPriceSet.shopMoney.amount) ?? 0.0,

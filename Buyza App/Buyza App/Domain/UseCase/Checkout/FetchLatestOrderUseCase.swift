@@ -12,7 +12,7 @@ struct FetchLatestOrderUseCase {
         self.repository = repository
     }
 
-    func execute(customerID: String) async throws -> Order? {
+    func execute(customerID: String) async throws -> CheckoutOrder? {
         return try await repository.fetchLatestOrder(customerID: customerID)
     }
 }

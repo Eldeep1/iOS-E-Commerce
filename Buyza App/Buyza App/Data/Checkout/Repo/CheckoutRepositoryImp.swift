@@ -41,11 +41,11 @@ struct CheckoutRepositoryImp: CheckoutRepository {
         return try await remoteDataSource.applyDiscount(cartID: checkoutID, discountCode: discountCode)
     }
     
-    func placeCODOrder(cartID: String, address: Address, customerID: String, discountAmount: Double, discountCode: String?) async throws -> Order {
+    func placeCODOrder(cartID: String, address: Address, customerID: String, discountAmount: Double, discountCode: String?) async throws -> CheckoutOrder {
         return try await adminDataSource.placeCODOrder(cartID: cartID, address: address, customerID: customerID, discountAmount: discountAmount, discountCode: discountCode)
     }
     
-    func fetchLatestOrder(customerID: String) async throws -> Order? {
+    func fetchLatestOrder(customerID: String) async throws -> CheckoutOrder? {
         return try await adminDataSource.fetchLatestOrder(customerID: customerID)
     }
 }

@@ -93,7 +93,7 @@
 		B8AF23852FF6B167003A7B2E /* ShopifyCheckoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF237F2FF6B167003A7B2E /* ShopifyCheckoutDataSource.swift */; };
 		B8AF23862FF6B167003A7B2E /* CheckoutRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23822FF6B167003A7B2E /* CheckoutRepositoryImp.swift */; };
 		B8AF23892FF6B189003A7B2E /* CheckoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23882FF6B184003A7B2E /* CheckoutModels.swift */; };
-		B8AF238B2FF6CBE4003A7B2E /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF238A2FF6CBE4003A7B2E /* Order.swift */; };
+		B8AF238B2FF6CBE4003A7B2E /* CheckoutOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF238A2FF6CBE4003A7B2E /* CheckoutOrder.swift */; };
 		B8AF23902FF6CE00003A7B2E /* FetchLatestOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF238E2FF6CE00003A7B2E /* FetchLatestOrderUseCase.swift */; };
 		B8AF23932FF6CE00003A7B2E /* PlaceCODOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF238F2FF6CE00003A7B2E /* PlaceCODOrderUseCase.swift */; };
 		B8AF23972FF6CE9F003A7B2E /* OrderSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF23952FF6CE9F003A7B2E /* OrderSuccessView.swift */; };
@@ -263,7 +263,7 @@
 		B8AF237F2FF6B167003A7B2E /* ShopifyCheckoutDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCheckoutDataSource.swift; sourceTree = "<group>"; };
 		B8AF23822FF6B167003A7B2E /* CheckoutRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutRepositoryImp.swift; sourceTree = "<group>"; };
 		B8AF23882FF6B184003A7B2E /* CheckoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutModels.swift; sourceTree = "<group>"; };
-		B8AF238A2FF6CBE4003A7B2E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		B8AF238A2FF6CBE4003A7B2E /* CheckoutOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutOrder.swift; sourceTree = "<group>"; };
 		B8AF238E2FF6CE00003A7B2E /* FetchLatestOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLatestOrderUseCase.swift; sourceTree = "<group>"; };
 		B8AF238F2FF6CE00003A7B2E /* PlaceCODOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCODOrderUseCase.swift; sourceTree = "<group>"; };
 		B8AF23942FF6CE9F003A7B2E /* OrderPendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPendingView.swift; sourceTree = "<group>"; };
@@ -618,7 +618,7 @@
 		769DB5302FEFE3E400F532C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B8AF238A2FF6CBE4003A7B2E /* Order.swift */,
+				B8AF238A2FF6CBE4003A7B2E /* CheckoutOrder.swift */,
 				B8AF237D2FF6B043003A7B2E /* CheckoutSummary.swift */,
 				09B9BFDB2FF67831004D2A3A /* CollectionProductsSource.swift */,
 				09B9BFD32FF64FCA004D2A3A /* OnboardingStep.swift */,
@@ -1458,7 +1458,7 @@
 				B8EAE9A02FF4FFD000129771 /* AddressInputField.swift in Sources */,
 				B8371B552FF8EF1B00D9ED3B /* GeographicData.swift in Sources */,
 				09F9B4432FEFCCA10017509E /* Buyza_AppApp.swift in Sources */,
-				B8AF238B2FF6CBE4003A7B2E /* Order.swift in Sources */,
+				B8AF238B2FF6CBE4003A7B2E /* CheckoutOrder.swift in Sources */,
 				097C91F92FF6E46000AEB7D3 /* EventsList.swift in Sources */,
 				B8BA55B82FEFE961004CA9FF /* LoginUseCase.swift in Sources */,
 				B8165E072FF41A8D009DC909 /* CartResponse.swift in Sources */,

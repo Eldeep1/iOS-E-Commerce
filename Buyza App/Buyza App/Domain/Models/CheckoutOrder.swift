@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Order {
+struct CheckoutOrder {
     let id: String
     let name: String
     let totalPrice: Double

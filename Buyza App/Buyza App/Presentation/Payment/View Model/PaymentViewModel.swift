@@ -34,7 +34,7 @@ class PaymentViewModel: ObservableObject {
     @Published var showWebView: Bool = false
     @Published var navigateToSuccess: Bool = false
     @Published var navigateToPending: Bool = false
-    @Published var placedOrder: Order? = nil
+    @Published var placedOrder: CheckoutOrder? = nil
     
     private var checkoutStartedAt: Date? = nil
 

@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct OrderPendingView: View {
-    let order: Order?
+    let order: CheckoutOrder?
 
     var body: some View {
         VStack(spacing: 0) {

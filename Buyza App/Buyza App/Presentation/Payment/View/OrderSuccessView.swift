@@ -10,7 +10,7 @@ extension Notification.Name {
 }
 
 struct OrderSuccessView: View {
-    let order: Order?
+    let order: CheckoutOrder?
 
     var body: some View {
         VStack(spacing: 0) {
