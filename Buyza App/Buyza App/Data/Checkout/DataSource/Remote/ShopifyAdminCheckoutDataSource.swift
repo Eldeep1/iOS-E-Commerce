@@ -243,7 +243,7 @@ final class ShopifyAdminCheckoutDataSource {
             headers: ApiEndpoint.adminHeaders
         )
 
-        let response: GraphQLResponse<CustomerOrdersResponse> = try await ApiManager.shared.sendRequest(from: endpoint, with: request)
+        let response: GraphQLResponse<AdminCustomerOrdersResponse> = try await ApiManager.shared.sendRequest(from: endpoint, with: request)
 
         guard let node = response.data?.customer?.orders.nodes.first else { return nil }
 

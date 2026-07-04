@@ -48,11 +48,11 @@ struct AdminMoney: Decodable {
     let amount: String
 }
 
-struct CustomerOrdersResponse: Decodable {
-    let customer: CustomerOrdersData?
+struct AdminCustomerOrdersResponse: Decodable {
+    let customer: AdminCustomerOrdersData?
 }
 
-struct CustomerOrdersData: Decodable {
+struct AdminCustomerOrdersData: Decodable {
     let orders: CustomerOrdersList
 }
 
