@@ -11,10 +11,20 @@ struct Address: Identifiable, Equatable {
     let phoneNumber: String
     let streetAddress: String
     let city: String
+    let province: String
+    let zip: String
     let country: String
     var isDefault: Bool
     
     var fullAddressString: String {
-        return "\(streetAddress), \(city), \(country)"
+        var parts = [streetAddress, city]
+        let stateZip = [province, zip].filter { !$0.isEmpty }.joined(separator: " ")
+        if !stateZip.isEmpty {
+            parts.append(stateZip)
+        }
+        if !country.isEmpty {
+            parts.append(country)
+        }
+        return parts.filter { !$0.isEmpty }.joined(separator: ", ")
     }
 }

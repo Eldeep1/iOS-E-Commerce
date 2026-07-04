@@ -17,6 +17,8 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
         let phone: String
         let address1: String
         let city: String
+        let province: String
+        let zip: String
         let country: String
     }
     
@@ -70,6 +72,8 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
                   phone
                   address1
                   city
+                  province
+                  zip
                   country
                 }
               }
@@ -88,7 +92,7 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
         return (addresses, defaultId)
     }
     
-    func addAddress(firstName: String, lastName: String, phone: String, address1: String, city: String, country: String) async throws -> AddressDTO {
+    func addAddress(firstName: String, lastName: String, phone: String, address1: String, city: String, province: String, zip: String, country: String) async throws -> AddressDTO {
         let token = try getAccessToken()
         
         let mutation = """
@@ -101,6 +105,8 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
               phone
               address1
               city
+              province
+              zip
               country
             }
             customerUserErrors {
@@ -119,6 +125,8 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
                 phone: phone,
                 address1: address1,
                 city: city,
+                province: province,
+                zip: zip,
                 country: country
             )
         )
@@ -139,7 +147,7 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
         return address
     }
     
-    func updateAddress(id: String, firstName: String, lastName: String, phone: String, address1: String, city: String, country: String) async throws -> AddressDTO {
+    func updateAddress(id: String, firstName: String, lastName: String, phone: String, address1: String, city: String, province: String, zip: String, country: String) async throws -> AddressDTO {
         let token = try getAccessToken()
         
         let mutation = """
@@ -152,6 +160,8 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
               phone
               address1
               city
+              province
+              zip
               country
             }
             customerUserErrors {
@@ -171,6 +181,8 @@ final class ShopifyAddressDataSource: AddressDataSourceProtocol {
                 phone: phone,
                 address1: address1,
                 city: city,
+                province: province,
+                zip: zip,
                 country: country
             )
         )

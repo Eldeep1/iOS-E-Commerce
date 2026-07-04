@@ -90,6 +90,8 @@ final class ShopifyAdminCheckoutDataSource {
             let lastName: String
             let address1: String
             let city: String
+            let province: String
+            let zip: String
             let country: String
             let phone: String
         }
@@ -122,6 +124,8 @@ final class ShopifyAdminCheckoutDataSource {
             lastName: lastName,
             address1: address.streetAddress,
             city: address.city,
+            province: address.province,
+            zip: address.zip,
             country: address.country,
             phone: address.phoneNumber
         )
