@@ -108,25 +108,53 @@ extension ApiEndpoint {
     }
 
     static func collectionProducts(collectionId: Int, limit: Int = 50) -> ApiEndpoint {
-        ApiEndpoint(
-            path: "/admin/api/\(adminApiVersion)/products.json",
-            method: .GET,
-            parameters: [
-                URLQueryItem(name: "collection_id", value: "\(collectionId)"),
-                URLQueryItem(name: "limit", value: "\(limit)")
-            ],
-            headers: adminHeaders
+        filteredProducts(
+            criteria: ProductFilterCriteria(),
+            collectionId: collectionId,
+            limit: limit
         )
     }
 
     static func productsByVendor(vendor: String, limit: Int = 50) -> ApiEndpoint {
-        ApiEndpoint(
+        filteredProducts(
+            criteria: ProductFilterCriteria(vendor: vendor),
+            limit: limit
+        )
+    }
+
+    static func filteredProducts(
+        criteria: ProductFilterCriteria,
+        collectionId: Int? = nil,
+        limit: Int = 50
+    ) -> ApiEndpoint {
+        var parameters: [URLQueryItem] = [
+            URLQueryItem(name: "limit", value: "\(limit)")
+        ]
+
+        if let collectionId {
+            parameters.append(URLQueryItem(name: "collection_id", value: "\(collectionId)"))
+        }
+
+        if let vendor = criteria.vendor, !vendor.isEmpty {
+            parameters.append(URLQueryItem(name: "vendor", value: vendor))
+        }
+
+        if let productType = criteria.productType, !productType.isEmpty {
+            parameters.append(URLQueryItem(name: "product_type", value: productType))
+        }
+
+        if let publishedStatus = criteria.publishedStatus.apiValue {
+            parameters.append(URLQueryItem(name: "published_status", value: publishedStatus))
+        }
+
+        if let status = criteria.status {
+            parameters.append(URLQueryItem(name: "status", value: status.rawValue))
+        }
+
+        return ApiEndpoint(
             path: "/admin/api/\(adminApiVersion)/products.json",
             method: .GET,
-            parameters: [
-                URLQueryItem(name: "vendor", value: vendor),
-                URLQueryItem(name: "limit", value: "\(limit)")
-            ],
+            parameters: parameters,
             headers: adminHeaders
         )
     }

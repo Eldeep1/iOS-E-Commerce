@@ -8,6 +8,7 @@
 import Foundation
 
 enum CollectionProductsSource {
+    case all
     case category(collectionId: Int)
     case brand(vendor: String)
 }
