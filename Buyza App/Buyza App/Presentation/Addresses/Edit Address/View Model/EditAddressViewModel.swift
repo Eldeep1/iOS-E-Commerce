@@ -14,6 +14,8 @@ final class EditAddressViewModel: ObservableObject {
     @Published var phoneNumber: String
     @Published var streetAddress: String
     @Published var city: String
+    @Published var province: String
+    @Published var zip: String
     @Published var country: String
     @Published var isDefault: Bool
 
@@ -31,18 +33,23 @@ final class EditAddressViewModel: ObservableObject {
         self.fullName = address.fullName
         self.phoneNumber = address.phoneNumber
         self.streetAddress = address.streetAddress
-        self.city = address.city
-        self.country = address.country
+        let prov = address.province.isEmpty ? "Alabama" : address.province
+        self.province = prov
+        self.city = address.city.isEmpty ? (GeographicData.cities(for: prov).first ?? "") : address.city
+        self.zip = address.zip
+        self.country = address.country.isEmpty ? "United States" : address.country
         self.isDefault = address.isDefault
         self.updateAddressUseCase = updateAddressUseCase
     }
 
 
     var isFormValid: Bool {
-        !fullName.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !fullName.trimmingCharacters(in: .whitespaces).isEmpty && fullNameError == nil &&
+        !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty && phoneError == nil &&
         !streetAddress.trimmingCharacters(in: .whitespaces).isEmpty &&
         !city.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !province.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !zip.trimmingCharacters(in: .whitespaces).isEmpty && zipError == nil &&
         !country.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
@@ -53,8 +60,23 @@ final class EditAddressViewModel: ObservableObject {
 
     var phoneError: String? {
         guard !phoneNumber.isEmpty else { return nil }
-        let digits = phoneNumber.filter { $0.isNumber }
-        return digits.count < 7 ? "Enter a valid phone number" : nil
+        if GeographicData.isValidPhoneNumber(phoneNumber, in: country) {
+            return nil
+        } else {
+            return "Enter a valid phone number with a real Area Code"
+        }
+    }
+
+    var zipError: String? {
+        guard !zip.isEmpty else { return nil }
+        if !GeographicData.isValidZip(zip, for: province, in: country) {
+            if country == "Canada" {
+                return "Enter a valid postal code for \(province) (e.g. \(province == "Alberta" ? "T2P 1J9" : "K1A 0B1"))"
+            } else {
+                return "Enter a valid ZIP code for \(province)"
+            }
+        }
+        return nil
     }
 
     // MARK: - Actions
@@ -74,6 +96,8 @@ final class EditAddressViewModel: ObservableObject {
             phoneNumber: phoneNumber.trimmingCharacters(in: .whitespaces),
             streetAddress: streetAddress.trimmingCharacters(in: .whitespaces),
             city: city.trimmingCharacters(in: .whitespaces),
+            province: province.trimmingCharacters(in: .whitespaces),
+            zip: zip.trimmingCharacters(in: .whitespaces),
             country: country.trimmingCharacters(in: .whitespaces),
             isDefault: isDefault
         )
