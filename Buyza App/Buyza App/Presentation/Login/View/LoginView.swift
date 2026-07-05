@@ -12,6 +12,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     init(loginUseCase: LoginUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
         _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase, googleLoginUseCase: googleLoginUseCase))
     }
@@ -68,10 +69,10 @@ struct LoginView: View {
                 }
             }
         }
-        .alert("Authentication Issue", isPresented: $viewModel.showErrorAlert, actions: {
-            Button("OK", role: .cancel) { }
+        .alert(localization.text(.authenticationIssue), isPresented: $viewModel.showErrorAlert, actions: {
+            Button(localization.text(.ok), role: .cancel) { }
         }, message: {
-            Text(viewModel.errorMessage ?? "An unexpected error occurred.")
+            Text(viewModel.errorMessage ?? localization.text(.error))
         }).onChange(of: viewModel.loginSuccess) { success in
             if success {
                 withAnimation {

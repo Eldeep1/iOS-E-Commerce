@@ -6,7 +6,8 @@
 import SwiftUI
 
 struct EmptyOrdersView: View {
-    var message: String = "You have no orders yet."
+    @EnvironmentObject private var localization: LocalizationManager
+    var message: String?
 
     var body: some View {
         VStack(spacing: 16) {
@@ -14,11 +15,11 @@ struct EmptyOrdersView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.secondary)
 
-            Text("No Orders")
+            Text(localization.text(.noOrders))
                 .font(.title3)
                 .fontWeight(.semibold)
 
-            Text(message)
+            Text(message ?? localization.text(.noOrdersSubtitle))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -30,4 +31,5 @@ struct EmptyOrdersView: View {
 
 #Preview {
     EmptyOrdersView()
+        .environmentObject(LocalizationManager())
 }

@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct EmptyAddressView: View {
-    // Navigation handled directly by NavigationLink
+    @EnvironmentObject private var localization: LocalizationManager
     
     var body: some View {
         let addressDataSource = ShopifyAddressDataSource()
@@ -22,12 +22,12 @@ struct EmptyAddressView: View {
                 .foregroundColor(.secondary.opacity(0.3))
             
             VStack(spacing: 8) {
-                Text("No Saved Addresses")
+                Text(localization.text(.noSavedAddresses))
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
-                Text("You haven't added any delivery\naddresses yet. Add one to continue.")
+                Text(localization.text(.noSavedAddressesSubtitle))
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -38,7 +38,7 @@ struct EmptyAddressView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "plus")
                         .font(.system(size: 14, weight: .bold))
-                    Text("Add Your First Address")
+                    Text(localization.text(.addFirstAddress))
                         .font(.headline)
                 }
                 .foregroundColor(Color(.systemBackground))
@@ -54,4 +54,3 @@ struct EmptyAddressView: View {
         .padding(.horizontal, 32)
     }
 }
-

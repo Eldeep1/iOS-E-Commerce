@@ -5,25 +5,18 @@
 //  Created by depo on 27/06/2026.
 //
 
-
-//
-//  RegisterForm.swift
-//  Buyza App
-//
-//  Created by depo on 27/06/2026.
-//
-
 import SwiftUI
 
 struct RegisterForm: View {
     @ObservedObject var viewModel: RegisterViewModel
+    @EnvironmentObject private var localization: LocalizationManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("FULL NAME")
+                Text(localization.text(.fullName))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.gray)
                     .tracking(1)
@@ -36,7 +29,7 @@ struct RegisterForm: View {
             
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("EMAIL ADDRESS")
+                Text(localization.text(.emailAddress))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.gray)
                     .tracking(1)
@@ -58,7 +51,7 @@ struct RegisterForm: View {
             
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("PASSWORD")
+                Text(localization.text(.password))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.gray)
                     .tracking(1)
@@ -79,7 +72,7 @@ struct RegisterForm: View {
             }
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("CONFIRM PASSWORD")
+                Text(localization.text(.confirmPassword))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.gray)
                     .tracking(1)

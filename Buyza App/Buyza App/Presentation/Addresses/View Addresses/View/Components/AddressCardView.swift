@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct AddressCardView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let address: Address
     let isSelected: Bool
     let onSelect: () -> Void
@@ -30,7 +31,7 @@ struct AddressCardView: View {
                             .foregroundColor(.primary)
                         
                         if address.isDefault {
-                            Text("Default")
+                            Text(localization.text(.defaultLabel))
                                 .font(.system(size: 10, weight: .bold))
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 2)

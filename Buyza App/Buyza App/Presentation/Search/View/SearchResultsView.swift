@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchResultsView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: SearchResultsViewModel
 
     init(initialSearchText: String = "") {
@@ -28,13 +29,13 @@ struct SearchResultsView: View {
                     Button {
                         viewModel.isFilterSheetPresented = true
                     } label: {
-                        Label("Filters", systemImage: "line.3.horizontal.decrease.circle")
+                        Label(localization.text(.filters), systemImage: "line.3.horizontal.decrease.circle")
                             .font(.subheadline)
                             .foregroundColor(viewModel.hasActiveFilters ? .black : .secondary)
                     }
 
                     if viewModel.hasActiveFilters {
-                        Text("• Active")
+                        Text(localization.text(.active))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -42,7 +43,7 @@ struct SearchResultsView: View {
                     Spacer()
 
                     if !viewModel.isLoading {
-                        Text("\(viewModel.displayedProducts.count) items")
+                        Text(localization.format(.items, viewModel.displayedProducts.count))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -61,7 +62,7 @@ struct SearchResultsView: View {
                 content
             }
         }
-        .navigationTitle("Search")
+        .navigationTitle(localization.text(.search))
         .navigationBarTitleDisplayMode(.inline)
         .background(Color(.systemBackground))
         .sheet(isPresented: $viewModel.isFilterSheetPresented) {
@@ -74,13 +75,13 @@ struct SearchResultsView: View {
                 onReset: { viewModel.resetFilters() }
             )
         }
-        .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
-            Button("Cancel", role: .cancel) { }
-            Button("Remove", role: .destructive) {
+        .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.remove), role: .destructive) {
                 viewModel.confirmRemoveFavorite()
             }
         } message: { product in
-            Text("Are you sure you want to remove \(product.title) from your favorites?")
+            Text(localization.format(.removeFromFavoritesMessage, product.title))
         }
         .onAppear {
             viewModel.objectWillChange.send()
@@ -98,7 +99,7 @@ struct SearchResultsView: View {
                 .foregroundColor(.secondary)
                 .padding()
         } else if viewModel.fetchedProducts.isEmpty {
-            Text("No products found")
+            Text(localization.text(.noProductsFound))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.top, 40)
@@ -122,14 +123,15 @@ struct SearchResultsView: View {
 
     private var emptyResultsMessage: String {
         if !viewModel.searchText.isEmpty {
-            return "No products match \"\(viewModel.searchText)\""
+            return localization.format(.noProductsMatchSearch, viewModel.searchText)
         }
-        return "No products match the selected filters"
+        return localization.text(.noProductsMatchFilters)
     }
 }
 
 #Preview {
     NavigationView {
         SearchResultsView(initialSearchText: "adidas")
+            .environmentObject(LocalizationManager())
     }
 }

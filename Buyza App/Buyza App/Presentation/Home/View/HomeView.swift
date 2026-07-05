@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: HomeViewModel = HomeViewModel()
 
     var body: some View {
@@ -21,7 +22,7 @@ struct HomeView: View {
                         EventsList()
 
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Categories")
+                            Text(localization.text(.categories))
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
@@ -37,7 +38,7 @@ struct HomeView: View {
                         }
 
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Brands")
+                            Text(localization.text(.brands))
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
@@ -53,7 +54,7 @@ struct HomeView: View {
                         }
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Featured Products")
+                            Text(localization.text(.featuredProducts))
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
@@ -77,22 +78,22 @@ struct HomeView: View {
                     .padding(.top, 8)
                 }
             }
-            .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
-                Button("Cancel", role: .cancel) { }
-                Button("Remove", role: .destructive) {
+            .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+                Button(localization.text(.cancel), role: .cancel) { }
+                Button(localization.text(.remove), role: .destructive) {
                     viewModel.confirmRemoveFavorite()
                 }
             } message: { product in
-                Text("Are you sure you want to remove \(product.title) from your favorites?")
+                Text(localization.format(.removeFromFavoritesMessage, product.title))
             }
-            .alert("Sign In Required", isPresented: $viewModel.showGuestAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Sign In") {
+            .alert(localization.text(.signInRequired), isPresented: $viewModel.showGuestAlert) {
+                Button(localization.text(.cancel), role: .cancel) { }
+                Button(localization.text(.signIn)) {
                     appState.isGuest = false
                     appState.currentRoute = .auth
                 }
             } message: {
-                Text("Please sign in to enjoy adding products to your favorites and cart. It only takes a moment!")
+                Text(localization.text(.signInRequiredFavoritesMessage))
             }
             .onAppear {
                 viewModel.isGuest = appState.isGuest
@@ -106,4 +107,5 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environmentObject(AppStateManager())
+        .environmentObject(LocalizationManager())
 }

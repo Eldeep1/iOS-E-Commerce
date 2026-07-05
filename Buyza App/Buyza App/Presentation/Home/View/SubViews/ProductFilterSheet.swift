@@ -16,6 +16,7 @@ struct ProductFilterSheet: View {
     var onReset: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var localization: LocalizationManager
 
     @State private var minPriceText: String = ""
     @State private var maxPriceText: String = ""
@@ -23,9 +24,9 @@ struct ProductFilterSheet: View {
     var body: some View {
         NavigationView {
             Form {
-                Section("Product Type") {
-                    Picker("Type", selection: productTypeBinding) {
-                        Text("All Types").tag("")
+                Section(localization.text(.productType)) {
+                    Picker(localization.text(.productType), selection: productTypeBinding) {
+                        Text(localization.text(.allTypes)).tag("")
                         ForEach(productTypes, id: \.self) { type in
                             Text(type).tag(type)
                         }
@@ -33,9 +34,9 @@ struct ProductFilterSheet: View {
                 }
 
                 if showsVendorFilter {
-                    Section("Brand / Vendor") {
-                        Picker("Vendor", selection: vendorBinding) {
-                            Text("All Brands").tag("")
+                    Section(localization.text(.brandVendor)) {
+                        Picker(localization.text(.brandVendor), selection: vendorBinding) {
+                            Text(localization.text(.allBrands)).tag("")
                             ForEach(vendors, id: \.self) { vendor in
                                 Text(vendor).tag(vendor)
                             }
@@ -43,49 +44,49 @@ struct ProductFilterSheet: View {
                     }
                 }
 
-                Section("Price Range") {
-                    TextField("Min price", text: $minPriceText)
+                Section(localization.text(.priceRange)) {
+                    TextField(localization.text(.minPrice), text: $minPriceText)
                         .keyboardType(.decimalPad)
-                    TextField("Max price", text: $maxPriceText)
+                    TextField(localization.text(.maxPrice), text: $maxPriceText)
                         .keyboardType(.decimalPad)
                 }
 
-                Section("Availability") {
-                    Picker("Published", selection: $criteria.publishedStatus) {
+                Section(localization.text(.availability)) {
+                    Picker(localization.text(.published), selection: $criteria.publishedStatus) {
                         ForEach(ProductPublishedStatus.allCases) { status in
-                            Text(status.displayName).tag(status)
+                            Text(status.localizedName(for: localization.currentLanguage)).tag(status)
                         }
                     }
 
-                    Picker("Status", selection: statusBinding) {
-                        Text("Any").tag("")
+                    Picker(localization.text(.status), selection: statusBinding) {
+                        Text(localization.text(.any)).tag("")
                         ForEach(ProductStatusFilter.allCases) { status in
-                            Text(status.displayName).tag(status.rawValue)
+                            Text(status.localizedName(for: localization.currentLanguage)).tag(status.rawValue)
                         }
                     }
                 }
 
-                Section("Sort By") {
-                    Picker("Sort", selection: $criteria.sort) {
+                Section(localization.text(.sortBy)) {
+                    Picker(localization.text(.sortBy), selection: $criteria.sort) {
                         ForEach(ProductSortOption.allCases) { option in
-                            Text(option.displayName).tag(option)
+                            Text(option.localizedName(for: localization.currentLanguage)).tag(option)
                         }
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
                 }
             }
-            .navigationTitle("Filters")
+            .navigationTitle(localization.text(.filters))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Reset") {
+                    Button(localization.text(.reset)) {
                         onReset()
                         syncPriceFieldsFromCriteria()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Apply") {
+                    Button(localization.text(.apply)) {
                         applyPriceFieldsToCriteria()
                         onApply()
                         dismiss()
@@ -139,4 +140,5 @@ struct ProductFilterSheet: View {
         onApply: {},
         onReset: {}
     )
+    .environmentObject(LocalizationManager())
 }

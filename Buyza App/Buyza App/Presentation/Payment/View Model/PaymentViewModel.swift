@@ -113,7 +113,7 @@ class PaymentViewModel: ObservableObject {
                     self.cartID = clearedSummary.id
                     updateSummary(clearedSummary)
                 }
-                couponError = "Invalid coupon code"
+                couponError = L10n.invalidCouponCode.text(for: AppLanguage.stored)
                 isApplyingCoupon = false
                 return
             }
@@ -126,7 +126,7 @@ class PaymentViewModel: ObservableObject {
                 self.cartID = clearedSummary.id
                 updateSummary(clearedSummary)
             }
-            couponError = "Invalid coupon code"
+            couponError = L10n.invalidCouponCode.text(for: AppLanguage.stored)
         }
 
         isApplyingCoupon = false
@@ -142,7 +142,7 @@ class PaymentViewModel: ObservableObject {
             Task { await placeCOD() }
         case .creditCard:
             guard webUrl != nil else {
-                orderError = "Checkout URL is not ready yet."
+                orderError = L10n.checkoutNotReady.text(for: AppLanguage.stored)
                 return
             }
             checkoutStartedAt = Date()
@@ -164,7 +164,7 @@ class PaymentViewModel: ObservableObject {
             placedOrder = order
             navigateToPending = true
         } catch {
-            orderError = "Failed to place order. Please try again."
+            orderError = L10n.failedPlaceOrder.text(for: AppLanguage.stored)
             print("COD Error: \(error)")
         }
         isPlacingOrder = false
@@ -205,18 +205,18 @@ class PaymentViewModel: ObservableObject {
                         navigateToSuccess = true
                     } else {
                         
-                        orderError = "Payment was not completed. Please try again."
+                        orderError = L10n.paymentNotCompleted.text(for: AppLanguage.stored)
                     }
                 } else {
                     // that's an old order, the user just closed the browser
-                    orderError = "Payment was cancelled."
+                    orderError = L10n.paymentCancelled.text(for: AppLanguage.stored)
                 }
             } else {
                 // No order found — user closed the browser without paying
-                orderError = "Payment was cancelled."
+                orderError = L10n.paymentCancelled.text(for: AppLanguage.stored)
             }
         } catch {
-            orderError = "Could not verify payment. Please contact support."
+            orderError = L10n.couldNotVerifyPayment.text(for: AppLanguage.stored)
             print("Order check error: \(error)")
         }
 

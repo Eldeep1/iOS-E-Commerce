@@ -45,7 +45,7 @@ final class RegisterViewModel: ObservableObject {
         let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard password == confirmPassword else {
-            errorMessage = "Passwords do not match."
+            errorMessage = L10n.passwordsDoNotMatch.text(for: AppLanguage.stored)
             showErrorAlert = true
             return
         }

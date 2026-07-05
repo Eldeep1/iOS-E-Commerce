@@ -9,13 +9,14 @@ import SwiftUI
 
 struct HomeHeader: View {
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     @State private var navigateToCart = false
     @State private var showGuestAlert = false
 
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                Text("BUYZA")
+                Text(localization.text(.buyza))
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -55,14 +56,14 @@ struct HomeHeader: View {
         }
         .background(Color.white.ignoresSafeArea()
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
-        .alert("Sign In Required", isPresented: $showGuestAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Sign In") {
+        .alert(localization.text(.signInRequired), isPresented: $showGuestAlert) {
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.signIn)) {
                 appState.isGuest = false
                 appState.currentRoute = .auth
             }
         } message: {
-            Text("Please sign in to access Favorites, Cart, and Orders. It only takes a moment!")
+            Text(localization.text(.signInRequiredGuestMessage))
         }
     }
 
@@ -86,5 +87,6 @@ struct HomeHeader: View {
     NavigationView {
         HomeHeader()
             .environmentObject(AppStateManager())
+            .environmentObject(LocalizationManager())
     }
 }

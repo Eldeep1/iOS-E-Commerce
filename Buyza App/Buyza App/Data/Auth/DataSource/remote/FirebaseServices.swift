@@ -15,6 +15,7 @@ protocol AuthServiceProtocol {
     func signIn(email: String, password: String) async throws -> AuthDataResultModel
     @MainActor func signInWithGoogle() async throws -> AuthDataResultModel
     func sendPasswordReset(email: String) async throws
+    func updateDisplayName(_ name: String) async throws
     func signOut() throws
 }
 
@@ -25,6 +26,16 @@ struct FirebaseServices :AuthServiceProtocol{
     
     func sendPasswordReset(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+
+    func updateDisplayName(_ name: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw AuthError.firebaseError("No user signed in.")
+        }
+
+        let changeRequest = user.createProfileChangeRequest()
+        changeRequest.displayName = name
+        try await changeRequest.commitChanges()
     }
     
     func createAccount(email: String, password: String,name:String) async throws-> AuthDataResultModel {

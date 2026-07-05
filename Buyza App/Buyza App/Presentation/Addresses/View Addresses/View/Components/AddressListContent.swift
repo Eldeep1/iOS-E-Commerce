@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct AddressListContent: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @ObservedObject var viewModel: AddressSelectionViewModel
     @State private var addressToEdit: Address? = nil
     @State private var navigateToEdit: Bool = false
@@ -26,7 +27,7 @@ struct AddressListContent: View {
                         HStack {
                             Image(systemName: "plus")
                                 .font(.system(size: 16, weight: .bold))
-                            Text("Add New Address")
+                            Text(localization.text(.addNewAddress))
                                 .font(.headline)
                         }
                         .foregroundColor(.primary)
@@ -86,13 +87,13 @@ struct AddressListContent: View {
                 ) { EmptyView() }
             }
         )
-        .alert("Delete Address?", isPresented: $showDeleteAlert, presenting: addressToDelete) { address in
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert(localization.text(.deleteAddress), isPresented: $showDeleteAlert, presenting: addressToDelete) { address in
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.delete), role: .destructive) {
                 Task { await viewModel.deleteAddress(id: address.id) }
             }
         } message: { address in
-            Text("Are you sure you want to delete \(address.fullName)'s address?")
+            Text(localization.format(.deleteAddressMessage, address.fullName))
         }
     }
 

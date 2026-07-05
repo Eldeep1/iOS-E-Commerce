@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct ForgotPasswordButton: View {
+    @EnvironmentObject private var localization: LocalizationManager
     var action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            Text("Forgot password?")
+            Text(localization.text(.forgotPassword))
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(.blue)
         }

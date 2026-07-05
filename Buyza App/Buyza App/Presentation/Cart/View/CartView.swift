@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CartView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: CartViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var itemToDelete: CartItem? = nil
@@ -101,21 +102,21 @@ struct CartView: View {
         )
         .navigationBarHidden(true)
         .task { await viewModel.fetchCurrentCart() }
-        .alert("Remove Item?", isPresented: $showDeleteAlert, presenting: itemToDelete) { item in
-            Button("Cancel", role: .cancel) { }
-            Button("Remove", role: .destructive) {
+        .alert(localization.text(.removeItem), isPresented: $showDeleteAlert, presenting: itemToDelete) { item in
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.remove), role: .destructive) {
                 Task { await viewModel.removeItem(lineID: item.id) }
             }
         } message: { item in
-            Text("Are you sure you want to remove \(item.productTitle) from your cart?")
+            Text(localization.format(.removeItemMessage, item.productTitle))
         }
-        .alert("Clear Cart?", isPresented: $showClearAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Clear All", role: .destructive) {
+        .alert(localization.text(.clearCart), isPresented: $showClearAlert) {
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.clearAll), role: .destructive) {
                 Task { await viewModel.clearCart() }
             }
         } message: {
-            Text("Are you sure you want to remove all items from your cart?")
+            Text(localization.text(.clearCartMessage))
         }
     }
 
@@ -130,7 +131,7 @@ struct CartView: View {
 
             Spacer()
 
-            Text("Shopping Cart")
+            Text(localization.text(.shoppingCart))
                 .font(.headline)
                 .fontWeight(.bold)
                 .tracking(1)
@@ -139,7 +140,7 @@ struct CartView: View {
 
             if !viewModel.cartItems.isEmpty {
                 Button(action: { showClearAlert = true }) {
-                    Text("Clear")
+                    Text(localization.text(.clear))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.red)
                         .frame(height: 44)

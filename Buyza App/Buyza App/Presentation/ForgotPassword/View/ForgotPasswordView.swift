@@ -3,6 +3,7 @@ import SwiftUI
 struct ForgotPasswordView: View {
     @StateObject private var viewModel: ForgotPasswordViewModel
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var localization: LocalizationManager
     
     init(sendPasswordResetUseCase: SendPasswordResetUseCaseProtocol) {
         _viewModel = StateObject(wrappedValue: ForgotPasswordViewModel(sendPasswordResetUseCase: sendPasswordResetUseCase))
@@ -21,11 +22,11 @@ struct ForgotPasswordView: View {
                 Spacer().frame(height: 40)
                 
                 VStack(spacing: 8) {
-                    Text("Reset Password")
+                    Text(localization.text(.resetPassword))
                         .font(.system(size: 32, weight: .bold))
                         .foregroundColor(.black)
                     
-                    Text("Enter your email address to receive a password reset link.")
+                    Text(localization.text(.resetPasswordSubtitle))
                         .font(.system(size: 15))
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
@@ -34,7 +35,7 @@ struct ForgotPasswordView: View {
                 
                 VStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("EMAIL ADDRESS")
+                        Text(localization.text(.emailAddress))
                             .font(.system(size: 11, weight: .semibold))
                             .foregroundColor(.gray)
                             .tracking(1)
@@ -65,7 +66,7 @@ struct ForgotPasswordView: View {
                                 .background(Color.black)
                                 .cornerRadius(28)
                         } else {
-                            Text("Send Reset Link")
+                            Text(localization.text(.sendResetLink))
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
@@ -89,17 +90,17 @@ struct ForgotPasswordView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .alert("Error", isPresented: $viewModel.showErrorAlert, actions: {
-            Button("OK", role: .cancel) { }
+        .alert(localization.text(.error), isPresented: $viewModel.showErrorAlert, actions: {
+            Button(localization.text(.ok), role: .cancel) { }
         }, message: {
-            Text(viewModel.errorMessage ?? "An unexpected error occurred.")
+            Text(viewModel.errorMessage ?? localization.text(.error))
         })
-        .alert("Email Sent", isPresented: $viewModel.showSuccessAlert, actions: {
-            Button("OK", role: .cancel) {
+        .alert(localization.text(.emailSent), isPresented: $viewModel.showSuccessAlert, actions: {
+            Button(localization.text(.ok), role: .cancel) {
                 dismiss()
             }
         }, message: {
-            Text("A password reset link has been sent to your email address.")
+            Text(localization.text(.passwordResetSent))
         })
     }
 }

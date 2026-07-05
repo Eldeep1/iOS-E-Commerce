@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductDetailView: View {
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: ProductDetailViewModel
     @Environment(\.dismiss) private var dismiss
 
@@ -61,27 +62,25 @@ struct ProductDetailView: View {
                 }
             }
         }
-        .alert("Added to Cart", isPresented: $viewModel.addToCartSuccess) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("\(viewModel.product.title) was added to your cart.")
+        .alert(localization.format(.addedToCart, viewModel.product.title), isPresented: $viewModel.addToCartSuccess) {
+            Button(localization.text(.ok), role: .cancel) { }
         }
-        .alert("Error", isPresented: Binding(
+        .alert(localization.text(.error), isPresented: Binding(
             get: { viewModel.addToCartError != nil },
             set: { if !$0 { viewModel.addToCartError = nil } }
         )) {
-            Button("OK", role: .cancel) { }
+            Button(localization.text(.ok), role: .cancel) { }
         } message: {
             Text(viewModel.addToCartError ?? "")
         }
-        .alert("Sign In Required", isPresented: $viewModel.showGuestAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Sign In") {
+        .alert(localization.text(.signInRequired), isPresented: $viewModel.showGuestAlert) {
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.signIn)) {
                 appState.isGuest = false
                 appState.currentRoute = .auth
             }
         } message: {
-            Text("Please sign in to enjoy adding products to your favorites and cart. It only takes a moment!")
+            Text(localization.text(.signInRequiredFavoritesMessage))
         }
         .onAppear {
             viewModel.isGuest = appState.isGuest
@@ -189,5 +188,7 @@ struct ProductDetailView: View {
 #Preview {
     NavigationView {
         ProductDetailView(product: .adidasClassicBackpack)
+            .environmentObject(AppStateManager())
+            .environmentObject(LocalizationManager())
     }
 }

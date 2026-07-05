@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProductActionBar: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let brandName: String
     let onAddToCart: () -> Void
     let onBuyNow: () -> Void
@@ -16,7 +17,7 @@ struct ProductActionBar: View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
                 Button(action: onAddToCart) {
-                    Text("Add to Cart")
+                    Text(localization.text(.addToCart))
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -25,18 +26,18 @@ struct ProductActionBar: View {
                         .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
 
-                Button(action: onBuyNow) {
-                    Text("Buy Now")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color(.systemGray5))
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
-                }
+//                Button(action: onBuyNow) {
+//                    Text(localization.text(.buyNow))
+//                        .font(.headline)
+//                        .foregroundColor(.primary)
+//                        .frame(maxWidth: .infinity)
+//                        .padding(.vertical, 16)
+//                        .background(Color(.systemGray5))
+//                        .clipShape(RoundedRectangle(cornerRadius: 14))
+//                }
             }
 
-            Text("SECURE CHECKOUT BY \(brandName.uppercased())®")
+            Text(localization.format(.secureCheckout, brandName.uppercased()))
                 .font(.caption2)
                 .fontWeight(.semibold)
                 .foregroundColor(.secondary)

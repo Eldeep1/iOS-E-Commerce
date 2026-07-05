@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmptyCartView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     var onShopNowTap: () -> Void = {}
     
     var body: some View {
@@ -26,12 +27,12 @@ struct EmptyCartView: View {
             }
             
             VStack(spacing: 12) {
-                Text("Your Cart is Empty")
+                Text(localization.text(.emptyCart))
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
-                Text("Looks like you haven't added anything to your cart yet. Explore our curated collections to find your style.")
+                Text(localization.text(.emptyCartSubtitle))
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -40,7 +41,7 @@ struct EmptyCartView: View {
             }
             
             Button(action: onShopNowTap) {
-                Text("Start Shopping")
+                Text(localization.text(.startShopping))
                     .font(.headline)
                     .foregroundColor(Color(.systemBackground))
                     .frame(height: 54)
@@ -60,4 +61,5 @@ struct EmptyCartView: View {
 
 #Preview {
     EmptyCartView()
+        .environmentObject(LocalizationManager())
 }

@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct OrdersView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: OrdersViewModel
 
     init(viewModel: OrdersViewModel = OrdersViewModel()) {
@@ -35,7 +36,7 @@ struct OrdersView: View {
                 }
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("My Orders")
+            .navigationTitle(localization.text(.myOrders))
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 if viewModel.orders.isEmpty && viewModel.errorMessage == nil {
@@ -59,4 +60,5 @@ struct OrdersView: View {
 
 #Preview {
     OrdersView()
+        .environmentObject(LocalizationManager())
 }

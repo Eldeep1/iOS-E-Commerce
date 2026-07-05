@@ -6,13 +6,14 @@
 import SwiftUI
 
 struct AddressContinueButton: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let selectedAddressId: String?
     let onContinue: () -> Void
     
     var body: some View {
         VStack {
             Button(action: onContinue) {
-                Text("Continue to Payment")
+                Text(localization.text(.continueToPayment))
                     .font(.headline)
                     .foregroundColor(Color(.systemBackground))
                     .frame(maxWidth: .infinity)

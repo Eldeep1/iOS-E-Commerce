@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct ProductColorSelector: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let colors: [String]
     let selectedIndex: Int
     let selectedColorLabel: String?
     let onSelect: (Int) -> Void
 
+    private var displayColorLabel: String {
+        selectedColorLabel ?? colors[safe: selectedIndex]?.uppercased() ?? ""
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("COLOR: \(selectedColorLabel ?? colors[safe: selectedIndex]?.uppercased() ?? "")")
+            Text(localization.format(.colorLabel, displayColorLabel))
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(.secondary)

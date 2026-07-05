@@ -48,7 +48,7 @@ class CartViewModel: ObservableObject {
     }
 
     var formattedShipping: String {
-        return "Calculated at checkout"
+        L10n.calculatedAtCheckout.text(for: AppLanguage.stored)
     }
 
     var formattedTotal: String {

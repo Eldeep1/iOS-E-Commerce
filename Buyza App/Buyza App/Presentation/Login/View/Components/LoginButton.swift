@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LoginButton: View {
     @ObservedObject var viewModel: LoginViewModel
+    @EnvironmentObject private var localization: LocalizationManager
     
     var body: some View {
         Button(action: { viewModel.signIn() }) {
@@ -18,7 +19,7 @@ struct LoginButton: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 } else {
-                    Text("Sign In")
+                    Text(localization.text(.signIn))
                         .font(.headline)
                         .foregroundColor(.white)
                 }

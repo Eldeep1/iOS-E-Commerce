@@ -5,20 +5,13 @@
 //  Created by depo on 27/06/2026.
 //
 
-
-//
-//  RegisterView.swift
-//  Buyza App
-//
-//  Created by depo on 27/06/2026.
-//
-
 import SwiftUI
 
 struct RegisterView: View {
     @StateObject private var viewModel: RegisterViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     
     init(registerUseCase: RegisterUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
         _viewModel = StateObject(wrappedValue: RegisterViewModel(registerUseCase: registerUseCase, googleLoginUseCase: googleLoginUseCase))
@@ -34,7 +27,7 @@ struct RegisterView: View {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     } else {
-                        Text("Sign Up")
+                        Text(localization.text(.signUp))
                             .font(.headline)
                             .foregroundColor(.white)
                     }
@@ -77,11 +70,11 @@ struct RegisterView: View {
                     
                    
                     VStack(spacing: 8) {
-                        Text("Create Account")
+                        Text(localization.text(.createAccount))
                             .font(.system(size: 34, weight: .bold))
                             .foregroundColor(.black)
                         
-                        Text("Join Buyza and start shopping unsecurely")
+                        Text(localization.text(.joinBuyza))
                             .font(.subheadline)
                             .foregroundColor(.gray)
                     }
@@ -92,9 +85,9 @@ struct RegisterView: View {
                     
                    
                     HStack(spacing: 4) {
-                        Text("Already have an account?")
+                        Text(localization.text(.alreadyHaveAccount))
                             .foregroundColor(.gray)
-                        Button("Sign In") {
+                        Button(localization.text(.signIn)) {
                             dismiss()
                         }
                         .foregroundColor(.black)
@@ -108,17 +101,17 @@ struct RegisterView: View {
                 appState.currentRoute = .home
             }
         }
-        .alert("Registration Issue", isPresented: $viewModel.showErrorAlert, actions: {
-            Button("OK", role: .cancel) { }
+        .alert(localization.text(.registrationIssue), isPresented: $viewModel.showErrorAlert, actions: {
+            Button(localization.text(.ok), role: .cancel) { }
         }, message: {
-            Text(viewModel.errorMessage ?? "An unexpected error occurred.")
+            Text(viewModel.errorMessage ?? localization.text(.error))
         })
-        .alert("Check your email", isPresented: $viewModel.showSuccessAlert, actions: {
-            Button("OK", role: .cancel) {
+        .alert(localization.text(.checkYourEmail), isPresented: $viewModel.showSuccessAlert, actions: {
+            Button(localization.text(.ok), role: .cancel) {
                 dismiss()
             }
         }, message: {
-            Text("We've sent a verification link to your email address. Please verify it before signing in.")
+            Text(localization.text(.verificationEmailSent))
         })
     }
 }

@@ -123,7 +123,7 @@ class HomeViewModel : ObservableObject {
             }
         } catch {
             print("Error toggling favorite: \(error)")
-            self.errorMessage = "Failed to update favorites"
+            self.errorMessage = L10n.failedUpdateFavorites.text(for: AppLanguage.stored)
         }
     }
     
@@ -134,7 +134,7 @@ class HomeViewModel : ObservableObject {
             self.objectWillChange.send()
         } catch {
             print("Error removing favorite: \(error)")
-            self.errorMessage = "Failed to remove favorite"
+            self.errorMessage = L10n.failedRemoveFavorites.text(for: AppLanguage.stored)
         }
     }
 }

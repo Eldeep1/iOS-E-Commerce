@@ -7,13 +7,14 @@
 import SwiftUI
 
 struct PaymentAddressSection: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @ObservedObject var viewModel: PaymentViewModel
     var onChangeTap: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Delivery Address")
+                Text(localization.text(.deliveryAddress))
                     .font(.headline)
                     .fontWeight(.bold)
                 
@@ -22,7 +23,7 @@ struct PaymentAddressSection: View {
                 Button(action: {
                     onChangeTap()
                 }) {
-                    Text("Change")
+                    Text(localization.text(.change))
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)

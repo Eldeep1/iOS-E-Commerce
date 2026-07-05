@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct OrderRowView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let order: Order
 
     var body: some View {
@@ -38,7 +39,7 @@ struct OrderRowView: View {
             Divider()
 
             HStack {
-                Text("\(order.itemCount) item\(order.itemCount == 1 ? "" : "s")")
+                Text(itemCountLabel)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
@@ -56,6 +57,13 @@ struct OrderRowView: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color(.systemGray4), lineWidth: 1)
         )
+    }
+
+    private var itemCountLabel: String {
+        if order.itemCount == 1 {
+            return localization.format(.orderItemsSingular, order.itemCount)
+        }
+        return localization.format(.orderItemsPlural, order.itemCount)
     }
 
     private var orderImage: some View {
@@ -93,10 +101,10 @@ struct OrderRowView: View {
 
     private var itemSummary: String {
         let titles = order.lineItems.prefix(2).map(\.title)
-        guard !titles.isEmpty else { return "No items" }
+        guard !titles.isEmpty else { return localization.text(.noItems) }
         let joined = titles.joined(separator: ", ")
         if order.lineItems.count > 2 {
-            return "\(joined) +\(order.lineItems.count - 2) more"
+            return localization.format(.moreItems, joined, order.lineItems.count - 2)
         }
         return joined
     }
@@ -126,4 +134,5 @@ struct OrderRowView: View {
         )
     )
     .padding()
+    .environmentObject(LocalizationManager())
 }

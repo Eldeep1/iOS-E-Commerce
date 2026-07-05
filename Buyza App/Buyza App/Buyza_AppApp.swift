@@ -23,15 +23,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Buyza_AppApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject private var appState = AppStateManager()
+    @StateObject private var localization = LocalizationManager()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            RootContainerView().environmentObject(appState)
-            //HomeView()
-            }
-            
+            RootContainerView()
+                .environmentObject(appState)
+                .environmentObject(localization)
+                .environment(\.layoutDirection, localization.layoutDirection)
+                .environment(\.locale, Locale(identifier: localization.currentLanguage.localeIdentifier))
         }
     }
-
+}

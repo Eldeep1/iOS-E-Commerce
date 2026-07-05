@@ -7,6 +7,7 @@ import SwiftUI
 
 struct EditAddressView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: EditAddressViewModel
 
     init(address: Address) {
@@ -19,19 +20,17 @@ struct EditAddressView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
-                    // Header
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Edit Address")
+                        Text(localization.text(.editAddress))
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
-                        Text("Update the details of your delivery address below.")
+                        Text(localization.text(.editAddressSubtitle))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .lineSpacing(3)
                     }
 
-                    // Reuse the same form, bridged via EditAddressFormAdapter
                     EditAddressForm(viewModel: viewModel)
                 }
                 .padding(.horizontal, 20)
@@ -44,22 +43,20 @@ struct EditAddressView: View {
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarHidden(true)
         .animation(.easeInOut(duration: 0.2), value: viewModel.isFormValid)
-        .alert("Address Updated", isPresented: $viewModel.showSuccessAlert) {
-            Button("OK") { dismiss() }
+        .alert(localization.text(.addressUpdated), isPresented: $viewModel.showSuccessAlert) {
+            Button(localization.text(.ok)) { dismiss() }
         } message: {
-            Text("Your delivery address has been updated successfully.")
+            Text(localization.text(.addressUpdatedMessage))
         }
-        .alert("Error", isPresented: Binding(
+        .alert(localization.text(.error), isPresented: Binding(
             get: { viewModel.errorMessage != nil },
             set: { if !$0 { viewModel.errorMessage = nil } }
         )) {
-            Button("OK", role: .cancel) { viewModel.errorMessage = nil }
+            Button(localization.text(.ok), role: .cancel) { viewModel.errorMessage = nil }
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
     }
-
-    // MARK: - Navigation Bar
 
     private var navigationBar: some View {
         HStack {
@@ -72,7 +69,7 @@ struct EditAddressView: View {
 
             Spacer()
 
-            Text("Edit Address")
+            Text(localization.text(.editAddress))
                 .font(.headline)
                 .fontWeight(.bold)
                 .tracking(1)
@@ -87,8 +84,6 @@ struct EditAddressView: View {
         .background(Color(.systemBackground))
     }
 
-    // MARK: - Save Button
-
     private var saveButton: some View {
         VStack {
             Button(action: {
@@ -101,7 +96,7 @@ struct EditAddressView: View {
                     } else {
                         Image(systemName: "checkmark")
                             .font(.system(size: 14, weight: .bold))
-                        Text("Save Changes")
+                        Text(localization.text(.saveChanges))
                             .font(.headline)
                     }
                 }

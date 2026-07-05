@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ProductSizeSelector: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let sizes: [String]
     let selectedIndex: Int
     let onSelect: (Int) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("SELECT SIZE")
+            Text(localization.text(.selectSize))
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(.secondary)

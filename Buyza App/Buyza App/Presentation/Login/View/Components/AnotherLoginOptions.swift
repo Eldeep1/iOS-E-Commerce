@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AnotherLoginOptions: View {
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     var showGuestOption: Bool = true
     var onGoogleLogin: () -> Void
         
@@ -18,7 +19,7 @@ struct AnotherLoginOptions: View {
                
                 HStack {
                     VStack { Divider().background(Color.gray.opacity(0.3)) }
-                    Text("OR")
+                    Text(localization.text(.or))
                         .font(.system(size: 11, weight: .semibold))
                         .foregroundColor(.gray.opacity(0.7))
                         .tracking(1)
@@ -34,7 +35,7 @@ struct AnotherLoginOptions: View {
                         HStack {
                             Image(systemName: "globe")
                                 .font(.system(size: 18))
-                            Text("Continue with Google")
+                            Text(localization.text(.continueWithGoogle))
                                 .font(.system(size: 15, weight: .semibold))
                         }
                         .foregroundColor(.black)
@@ -54,7 +55,7 @@ struct AnotherLoginOptions: View {
                             appState.currentRoute = .home
                         }
                     }) {
-                        Text("Continue as a Guest")
+                        Text(localization.text(.continueAsGuest))
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity)
