@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HomeHeader: View {
+    @EnvironmentObject var appState: AppStateManager
+    @State private var navigateToCart = false
+    @State private var showGuestAlert = false
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
@@ -25,11 +29,22 @@ struct HomeHeader: View {
                         .padding(.trailing, 8)
                 }
 
-                NavigationLink(destination: makeCartView()) {
+                Button(action: {
+                    if appState.isGuest {
+                        showGuestAlert = true
+                    } else {
+                        navigateToCart = true
+                    }
+                }) {
                     Image(systemName: "cart")
                         .font(.title2)
                         .foregroundColor(.black)
                 }
+                .background(
+                    NavigationLink(destination: makeCartView(), isActive: $navigateToCart) {
+                        EmptyView()
+                    }
+                )
             }
             .padding(.horizontal)
             .padding(.bottom, 4)
@@ -40,6 +55,15 @@ struct HomeHeader: View {
         }
         .background(Color.white.ignoresSafeArea()
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
+        .alert("Sign In Required", isPresented: $showGuestAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Sign In") {
+                appState.isGuest = false
+                appState.currentRoute = .auth
+            }
+        } message: {
+            Text("Please sign in to access Favorites, Cart, and Orders. It only takes a moment!")
+        }
     }
 
     @MainActor private func makeCartView() -> some View {
@@ -61,5 +85,6 @@ struct HomeHeader: View {
 #Preview {
     NavigationView {
         HomeHeader()
+            .environmentObject(AppStateManager())
     }
 }

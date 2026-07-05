@@ -14,9 +14,21 @@ struct OnboardingView: View {
     @State private var currentStep = 0
     
     private let steps = [
-        OnboardingStep(image: "onboarding1", title: "Discover Products You'll Love", description: "Find everything you need in one place."),
-        OnboardingStep(image: "onboarding2", title: "Build Your Personal Collection", description: "Save your favorites and unlock personalized recommendations based on what you love."),
-        OnboardingStep(image: "onboarding3", title: "Easy Payment", description: "Secure and fast checkout process.")
+        OnboardingStep(
+            image: "onboarding1",
+            title: "Discover Products",
+            description: "Explore a catalog of premium items tailored to your lifestyle. From daily essentials to exclusive finds"
+        ),
+        OnboardingStep(
+            image: "onboarding2",
+            title: "Build Your Collection",
+            description: "Save your favorites and unlock personalized recommendations based on what you love."
+        ),
+        OnboardingStep(
+            image: "onboarding3",
+            title: "Easy Payment",
+            description: "Experience a seamless checkout process designed for your peace of mind. With multiple trusted payment options"
+        )
     ]
     
     var body: some View {
@@ -27,10 +39,14 @@ struct OnboardingView: View {
                         .tag(index)
                 }
             }
-            
             .tabViewStyle(.page(indexDisplayMode: .always))
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-            
+            .indexViewStyle(.page(backgroundDisplayMode: .never))
+            .ignoresSafeArea(edges: .top)
+            .onAppear {
+                UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.black
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.systemGray3
+            }
+
             Button(action: {
                 if currentStep < steps.count - 1 {
                     withAnimation {
@@ -51,8 +67,9 @@ struct OnboardingView: View {
                     .background(Color.black)
                     .cornerRadius(12)
                     .padding(.horizontal, 24)
+                    .padding(.top, 16)
             }
-            .padding(.bottom, 40)
+            .padding(.bottom, 48)
         }
     }
 }

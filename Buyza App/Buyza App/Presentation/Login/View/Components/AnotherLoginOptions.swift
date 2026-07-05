@@ -48,26 +48,23 @@ struct AnotherLoginOptions: View {
                         )
                     }
                     
-                    if showGuestOption {
-                        Button(action: {
-                            withAnimation {
-                                //uncoment it when you are ready to navigate home :)
-        //                        appState.currentRoute = .home
-                                print("guest mode")
-                            }
-                        }) {
-                            Text("Continue as a Guest")
-                                .font(.system(size: 15, weight: .semibold))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(Color.white)
-                                .cornerRadius(16)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                                )
+                    Button(action: {
+                        withAnimation {
+                            appState.isGuest = true
+                            appState.currentRoute = .home
                         }
+                    }) {
+                        Text("Continue as a Guest")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color.white)
+                            .cornerRadius(16)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                            )
                     }
                 }
             }

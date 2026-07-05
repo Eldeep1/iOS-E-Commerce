@@ -9,10 +9,10 @@ import SwiftUI
 
 struct CollectionCell: View {
     var collectionItem : Collection?
+    @State private var isPressed = false
     
     var body: some View {
-        VStack(spacing: 14) {
-            
+        VStack(spacing: 12) {
             let imageUrl = URL(string: collectionItem?.image?.src ?? "")
             
             AsyncImage(url: imageUrl) { image in
@@ -24,19 +24,23 @@ struct CollectionCell: View {
                     .resizable()
                     .scaledToFill()
             }
-            .frame(width: 100, height: 100)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(.systemGray3), lineWidth: 1)
-            )
+            .frame(width: 110, height: 110)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(color: Color.black.opacity(0.12), radius: 8, x: 0, y: 4)
+            .scaleEffect(isPressed ? 0.95 : 1.0)
+            .animation(.easeInOut(duration: 0.2), value: isPressed)
             
             Text(collectionItem?.title ?? "Unknown")
-                .font(.subheadline)
+                .font(.system(size: 16, weight: .semibold, design: .default))
                 .foregroundColor(.black)
                 .lineLimit(1)
                 .truncationMode(.tail)
-                .frame(width: 80, height: 30)
+                .frame(maxWidth: 100, alignment: .center)
+                .opacity(0.9)
+        }
+        .frame(width: 130)
+        .onLongPressGesture(minimumDuration: 0.1, perform: {}) { isPressed in
+            self.isPressed = isPressed
         }
     }
 }
