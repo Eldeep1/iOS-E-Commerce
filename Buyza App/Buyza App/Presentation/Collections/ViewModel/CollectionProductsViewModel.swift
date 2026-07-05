@@ -22,7 +22,6 @@ final class CollectionProductsViewModel: ObservableObject {
     var isGuest: Bool = false
 
     let collectionTitle: String
-    let filterLabel: String
     let showsVendorFilter: Bool
 
     private let source: CollectionProductsSource
@@ -34,7 +33,11 @@ final class CollectionProductsViewModel: ObservableObject {
     private var baselineVendors: [String] = []
 
     var searchPlaceholder: String {
-        "Search in \(collectionTitle)"
+        String(format: L10n.searchIn.text(for: AppLanguage.stored), collectionTitle)
+    }
+
+    var filterLabel: String {
+        Self.makeFilterLabel(title: collectionTitle, source: source)
     }
 
     var availableProductTypes: [String] {
@@ -77,7 +80,6 @@ final class CollectionProductsViewModel: ObservableObject {
         self.saveFavoriteUseCase = saveFavoriteUseCase ?? SaveFavoriteUseCase(repository: defaultRepo)
         self.removeFavoriteUseCase = removeFavoriteUseCase ?? RemoveFavoriteUseCase(repository: defaultRepo)
         self.checkIsFavoriteUseCase = checkIsFavoriteUseCase ?? CheckIsFavoriteUseCase(repository: defaultRepo)
-        self.filterLabel = Self.makeFilterLabel(title: collectionTitle, source: source)
         self.showsVendorFilter = {
             if case .category = source { return true }
             if case .all = source { return true }
@@ -135,7 +137,7 @@ final class CollectionProductsViewModel: ObservableObject {
             }
         } catch {
             print("Error toggling favorite: \(error)")
-            errorMessage = "Failed to update favorites"
+            errorMessage = L10n.failedUpdateFavorites.text(for: AppLanguage.stored)
         }
     }
 
@@ -146,7 +148,7 @@ final class CollectionProductsViewModel: ObservableObject {
             objectWillChange.send()
         } catch {
             print("Error removing favorite: \(error)")
-            errorMessage = "Failed to remove favorite"
+            errorMessage = L10n.failedRemoveFavorites.text(for: AppLanguage.stored)
         }
     }
 
@@ -178,13 +180,14 @@ final class CollectionProductsViewModel: ObservableObject {
         title: String,
         source: CollectionProductsSource
     ) -> String {
+        let language = AppLanguage.stored
         switch source {
         case .all:
-            return "All Products"
+            return L10n.allProducts.text(for: language)
         case .category:
-            return "Category: \(title)"
+            return String(format: L10n.categoryFilter.text(for: language), title)
         case .brand(let vendor):
-            return "Brand: \(vendor)"
+            return String(format: L10n.brandFilter.text(for: language), vendor)
         }
     }
 }

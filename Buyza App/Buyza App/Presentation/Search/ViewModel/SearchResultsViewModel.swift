@@ -19,7 +19,10 @@ final class SearchResultsViewModel: ObservableObject {
     @Published var productToRemove: Product?
 
     let showsVendorFilter = true
-    let filterLabel = "All Products"
+
+    var filterLabel: String {
+        L10n.allProducts.text(for: AppLanguage.stored)
+    }
 
     private let filterUseCase: FilterProductsUseCaseProtocol
     private let saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
@@ -29,7 +32,7 @@ final class SearchResultsViewModel: ObservableObject {
     private var baselineVendors: [String] = []
 
     var searchPlaceholder: String {
-        "Search products"
+        L10n.searchProducts.text(for: AppLanguage.stored)
     }
 
     var availableProductTypes: [String] {
@@ -116,7 +119,7 @@ final class SearchResultsViewModel: ObservableObject {
             }
         } catch {
             print("Error toggling favorite: \(error)")
-            errorMessage = "Failed to update favorites"
+            errorMessage = L10n.failedUpdateFavorites.text(for: AppLanguage.stored)
         }
     }
 
@@ -127,7 +130,7 @@ final class SearchResultsViewModel: ObservableObject {
             objectWillChange.send()
         } catch {
             print("Error removing favorite: \(error)")
-            errorMessage = "Failed to remove favorite"
+            errorMessage = L10n.failedRemoveFavorites.text(for: AppLanguage.stored)
         }
     }
 

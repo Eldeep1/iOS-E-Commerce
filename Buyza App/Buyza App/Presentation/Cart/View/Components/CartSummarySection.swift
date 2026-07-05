@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CartSummarySection: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let subtotal: String
     let shipping: String
     let total: String
@@ -16,9 +17,8 @@ struct CartSummarySection: View {
     var body: some View {
         VStack(spacing: 16) {
             VStack(spacing: 12) {
-                // Subtotal
                 HStack {
-                    Text("Subtotal")
+                    Text(localization.text(.subtotal))
                         .font(.body)
                         .foregroundColor(.secondary)
                     Spacer()
@@ -28,9 +28,8 @@ struct CartSummarySection: View {
                         .foregroundColor(.primary)
                 }
                 
-                // Shipping
                 HStack {
-                    Text("Shipping")
+                    Text(localization.text(.shipping))
                         .font(.body)
                         .foregroundColor(.secondary)
                     Spacer()
@@ -46,9 +45,8 @@ struct CartSummarySection: View {
                 Divider()
                     .padding(.vertical, 4)
                 
-                // Total
                 HStack {
-                    Text("Total")
+                    Text(localization.text(.total))
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -62,10 +60,9 @@ struct CartSummarySection: View {
             .padding(.horizontal, 24)
             .padding(.top, 16)
             
-            // Checkout button
             Button(action: onCheckoutTap) {
                 HStack {
-                    Text("Proceed to Payment")
+                    Text(localization.text(.proceedToPayment))
                         .font(.headline)
                     Image(systemName: "arrow.right")
                         .font(.system(size: 16, weight: .bold))
@@ -93,5 +90,6 @@ struct CartSummarySection: View {
         shipping: "$15.00",
         total: "$85.00"
     )
+    .environmentObject(LocalizationManager())
     .previewLayout(.sizeThatFits)
 }

@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct AddressNavigationBar: View {
+    @EnvironmentObject private var localization: LocalizationManager
     var onDismiss: () -> Void
     
     var body: some View {
@@ -19,7 +20,7 @@ struct AddressNavigationBar: View {
             
             Spacer()
             
-            Text("Select Address")
+            Text(localization.text(.selectAddress))
                 .font(.headline)
                 .fontWeight(.bold)
                 .tracking(1)

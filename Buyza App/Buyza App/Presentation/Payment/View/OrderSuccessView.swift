@@ -10,13 +10,13 @@ extension Notification.Name {
 }
 
 struct OrderSuccessView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let order: CheckoutOrder?
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Icon
             ZStack {
                 Circle()
                     .fill(Color.green.opacity(0.12))
@@ -27,27 +27,25 @@ struct OrderSuccessView: View {
             }
             .padding(.bottom, 32)
 
-            // Title
-            Text("Payment Successful!")
+            Text(localization.text(.paymentSuccessful))
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding(.bottom, 8)
 
-            Text("Your order has been confirmed and is being prepared.")
+            Text(localization.text(.orderConfirmed))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
                 .padding(.bottom, 40)
 
-            // Order Details Card
             if let order {
                 VStack(spacing: 12) {
-                    orderRow(label: "Order Number", value: order.name)
+                    orderRow(label: localization.text(.orderNumber), value: order.name)
                     Divider()
-                    orderRow(label: "Total Paid", value: String(format: "$%.2f", order.totalPrice))
+                    orderRow(label: localization.text(.total), value: String(format: "$%.2f", order.totalPrice))
                     Divider()
-                    orderRow(label: "Payment Status", value: order.paymentStatus.capitalized)
+                    orderRow(label: localization.text(.paymentMethod), value: order.paymentStatus.capitalized)
                 }
                 .padding(20)
                 .background(
@@ -61,11 +59,10 @@ struct OrderSuccessView: View {
 
             Spacer()
 
-            // CTA
             Button(action: {
                 NotificationCenter.default.post(name: .popToRoot, object: nil)
             }) {
-                Text("Continue Shopping")
+                Text(localization.text(.continueShopping))
                     .font(.headline)
                     .foregroundColor(Color(.systemBackground))
                     .frame(maxWidth: .infinity)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootContainerView: View {
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var localization: LocalizationManager
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
     
     var body: some View {
@@ -36,7 +37,9 @@ struct RootContainerView: View {
                 HomeNavContainer()
                     .environmentObject(appState)
             }
-        }.animation(.easeInOut, value: appState.currentRoute)
+        }
+        .id(localization.currentLanguage.rawValue)
+        .animation(.easeInOut, value: appState.currentRoute)
     }
 }
 

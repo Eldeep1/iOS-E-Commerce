@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct LoginViewHeader: View {
+    @EnvironmentObject private var localization: LocalizationManager
+
     var body: some View {
         Spacer().frame(height: 40)
         
         VStack(spacing: 8) {
-            Text("Welcome Back")
+            Text(localization.text(.welcomeBack))
                 .font(.system(size: 34, weight: .bold, design: .default))
                 .foregroundColor(.black)
             
-            Text("Sign in to your secure Buyza account")
+            Text(localization.text(.signInSubtitle))
                 .font(.subheadline)
                 .foregroundColor(.gray)
         }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject var viewModel: PaymentViewModel
     @Environment(\.dismiss) private var dismiss
 
@@ -15,7 +16,6 @@ struct PaymentView: View {
         VStack(spacing: 0) {
             navigationBar
             
-            // making error message always visible
             if let error = viewModel.orderError {
                 HStack(spacing: 8) {
                     Image(systemName: "exclamationmark.triangle.fill")
@@ -55,7 +55,6 @@ struct PaymentView: View {
         .task {
             await viewModel.loadCheckout()
         }
-        // Hidden NavigationLinks
         .background(
             Group {
                 NavigationLink(
@@ -69,7 +68,6 @@ struct PaymentView: View {
                 ) { EmptyView() }
             }
         )
-        // Safari sheet for Credit Card
         .fullScreenCover(isPresented: $viewModel.showWebView, onDismiss: {
             Task { await viewModel.checkOrderAfterWebReturn() }
         }) {
@@ -88,8 +86,6 @@ struct PaymentView: View {
         }
     }
 
-    // MARK: - Navigation Bar
-
     private var navigationBar: some View {
         HStack {
             Button(action: {
@@ -103,7 +99,7 @@ struct PaymentView: View {
 
             Spacer()
 
-            Text("Checkout")
+            Text(localization.text(.checkout))
                 .font(.headline)
                 .fontWeight(.bold)
                 .tracking(1)
@@ -118,8 +114,6 @@ struct PaymentView: View {
         .background(Color(.systemBackground))
     }
 
-    // MARK: - Footer
-
     private var placeOrderFooter: some View {
         VStack {
             Button(action: {
@@ -130,7 +124,7 @@ struct PaymentView: View {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     } else {
-                        Text("Place Order")
+                        Text(localization.text(.placeOrder))
                             .font(.headline)
                         Spacer()
                         Text("$\(String(format: "%.2f", viewModel.total))")

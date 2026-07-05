@@ -8,27 +8,28 @@
 import SwiftUI
 
 struct OrderSummarySection: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @ObservedObject var viewModel: PaymentViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Order Summary")
+            Text(localization.text(.orderSummary))
                 .font(.headline)
                 .fontWeight(.bold)
             
             VStack(spacing: 12) {
-                summaryRow(title: "Subtotal", amount: viewModel.subtotal)
-                summaryRow(title: "Shipping", amount: viewModel.shippingCost)
+                summaryRow(title: localization.text(.subtotal), amount: viewModel.subtotal)
+                summaryRow(title: localization.text(.shipping), amount: viewModel.shippingCost)
                 
                 if viewModel.discountAmount > 0 {
-                    summaryRow(title: "Discount", amount: -viewModel.discountAmount, isDiscount: true)
+                    summaryRow(title: localization.text(.discount), amount: -viewModel.discountAmount, isDiscount: true)
                 }
                 
                 Divider()
                     .padding(.vertical, 4)
                 
                 HStack {
-                    Text("Total")
+                    Text(localization.text(.total))
                         .font(.headline)
                         .fontWeight(.bold)
                     

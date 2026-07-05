@@ -9,13 +9,15 @@ import SwiftUI
 
 struct SearchBarView: View {
     @Binding var text: String
-    var placeholder: String = "What are you looking for?"
+    var placeholder: String?
     var onSubmit: (() -> Void)?
     var onIconTap: (() -> Void)?
 
+    @EnvironmentObject private var localization: LocalizationManager
+
     init(
         text: Binding<String>,
-        placeholder: String = "What are you looking for?",
+        placeholder: String? = nil,
         onSubmit: (() -> Void)? = nil,
         onIconTap: (() -> Void)? = nil
     ) {
@@ -23,6 +25,10 @@ struct SearchBarView: View {
         self.placeholder = placeholder
         self.onSubmit = onSubmit
         self.onIconTap = onIconTap
+    }
+
+    private var resolvedPlaceholder: String {
+        placeholder ?? localization.text(.searchPlaceholder)
     }
 
     var body: some View {
@@ -42,7 +48,7 @@ struct SearchBarView: View {
                 }
             }
 
-            TextField(placeholder, text: $text)
+            TextField(resolvedPlaceholder, text: $text)
                 .foregroundColor(.primary)
                 .submitLabel(onSubmit == nil ? .done : .search)
                 .onSubmit {
@@ -71,4 +77,5 @@ struct SearchBarView: View {
 
 #Preview {
     SearchBarView(text: .constant("adidas"), placeholder: "Search in ADIDAS")
+        .environmentObject(LocalizationManager())
 }

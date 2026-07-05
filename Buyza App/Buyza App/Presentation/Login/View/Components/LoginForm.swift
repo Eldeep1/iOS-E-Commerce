@@ -10,13 +10,13 @@ import SwiftUI
 
 struct LoginForm: View {
     @ObservedObject var viewModel: LoginViewModel
+    @EnvironmentObject private var localization: LocalizationManager
     var onForgotPassword: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            // Email Input
             VStack(alignment: .leading, spacing: 8) {
-                Text("EMAIL ADDRESS")
+                Text(localization.text(.emailAddress))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.gray)
                     .tracking(1)
@@ -37,7 +37,7 @@ struct LoginForm: View {
             }
             
             VStack(alignment: .leading, spacing: 8) {
-                    Text("PASSWORD")
+                    Text(localization.text(.password))
                         .font(.system(size: 11, weight: .semibold))
                         .foregroundColor(.gray)
                         .tracking(1)

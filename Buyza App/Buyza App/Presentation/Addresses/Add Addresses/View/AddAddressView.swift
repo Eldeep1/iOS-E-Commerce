@@ -7,6 +7,7 @@ import SwiftUI
 
 struct AddAddressView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: AddAddressViewModel
     
     init(viewModel: AddAddressViewModel) {
@@ -19,19 +20,17 @@ struct AddAddressView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
-                    // Header
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Delivery Address")
+                        Text(localization.text(.deliveryAddressTitle))
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
-                        Text("Fill in the details below to add a new delivery address.")
+                        Text(localization.text(.deliveryAddressSubtitle))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .lineSpacing(3)
                     }
 
-                    // Form
                     AddAddressForm(viewModel: viewModel)
                 }
                 .padding(.horizontal, 20)
@@ -39,28 +38,25 @@ struct AddAddressView: View {
                 .padding(.bottom, 32)
             }
 
-            // Save Button Footer
             saveButton
         }
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarHidden(true)
         .animation(.easeInOut(duration: 0.2), value: viewModel.isFormValid)
-        .alert("Address Saved", isPresented: $viewModel.showSuccessAlert) {
-            Button("OK") { dismiss() }
+        .alert(localization.text(.addressSaved), isPresented: $viewModel.showSuccessAlert) {
+            Button(localization.text(.ok)) { dismiss() }
         } message: {
-            Text("Your new delivery address has been saved successfully.")
+            Text(localization.text(.addressSavedMessage))
         }
-        .alert("Error", isPresented: Binding(
+        .alert(localization.text(.error), isPresented: Binding(
             get: { viewModel.errorMessage != nil },
             set: { if !$0 { viewModel.errorMessage = nil } }
         )) {
-            Button("OK", role: .cancel) { viewModel.errorMessage = nil }
+            Button(localization.text(.ok), role: .cancel) { viewModel.errorMessage = nil }
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
     }
-
-    // MARK: - Navigation Bar
 
     private var navigationBar: some View {
         HStack {
@@ -73,7 +69,7 @@ struct AddAddressView: View {
 
             Spacer()
 
-            Text("Add Address")
+            Text(localization.text(.addAddress))
                 .font(.headline)
                 .fontWeight(.bold)
                 .tracking(1)
@@ -88,8 +84,6 @@ struct AddAddressView: View {
         .background(Color(.systemBackground))
     }
 
-    // MARK: - Save Button
-
     private var saveButton: some View {
         VStack {
             Button(action: {
@@ -102,7 +96,7 @@ struct AddAddressView: View {
                     } else {
                         Image(systemName: "checkmark")
                             .font(.system(size: 14, weight: .bold))
-                        Text("Save Address")
+                        Text(localization.text(.saveAddress))
                             .font(.headline)
                     }
                 }

@@ -8,9 +8,11 @@
 
 import SwiftUI
 struct LoginFooter: View {
+    @EnvironmentObject private var localization: LocalizationManager
+
     var body: some View {
         HStack(spacing: 4) {
-            Text("New to Buyza?")
+            Text(localization.text(.newToBuyza))
                 .foregroundColor(.gray)
             NavigationLink(destination: RegisterView(
                 registerUseCase: RegisterUseCase(
@@ -28,7 +30,7 @@ struct LoginFooter: View {
                     )
                 )
             )) {
-                Text("Create Account")
+                Text(localization.text(.createAccount))
                     .foregroundColor(.black)
             }
         }

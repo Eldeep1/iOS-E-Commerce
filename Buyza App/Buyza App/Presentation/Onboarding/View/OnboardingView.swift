@@ -10,26 +10,29 @@ import SwiftUI
 struct OnboardingView: View {
     @Binding var hasSeenOnboarding: Bool
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     
     @State private var currentStep = 0
     
-    private let steps = [
-        OnboardingStep(
-            image: "onboarding1",
-            title: "Discover Products",
-            description: "Explore a catalog of premium items tailored to your lifestyle. From daily essentials to exclusive finds"
-        ),
-        OnboardingStep(
-            image: "onboarding2",
-            title: "Build Your Collection",
-            description: "Save your favorites and unlock personalized recommendations based on what you love."
-        ),
-        OnboardingStep(
-            image: "onboarding3",
-            title: "Easy Payment",
-            description: "Experience a seamless checkout process designed for your peace of mind. With multiple trusted payment options"
-        )
-    ]
+    private var steps: [OnboardingStep] {
+        [
+            OnboardingStep(
+                image: "onboarding1",
+                title: localization.text(.onboarding1Title),
+                description: localization.text(.onboarding1Description)
+            ),
+            OnboardingStep(
+                image: "onboarding2",
+                title: localization.text(.onboarding2Title),
+                description: localization.text(.onboarding2Description)
+            ),
+            OnboardingStep(
+                image: "onboarding3",
+                title: localization.text(.onboarding3Title),
+                description: localization.text(.onboarding3Description)
+            )
+        ]
+    }
     
     var body: some View {
         VStack {
@@ -59,7 +62,7 @@ struct OnboardingView: View {
                     }
                 }
             }) {
-                Text(currentStep < steps.count - 1 ? "Next" : "Get Started")
+                Text(currentStep < steps.count - 1 ? localization.text(.next) : localization.text(.getStarted))
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -76,4 +79,6 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView(hasSeenOnboarding: .constant(false))
+        .environmentObject(AppStateManager())
+        .environmentObject(LocalizationManager())
 }

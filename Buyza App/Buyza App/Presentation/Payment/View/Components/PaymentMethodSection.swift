@@ -7,11 +7,12 @@
 import SwiftUI
 
 struct PaymentMethodSection: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @ObservedObject var viewModel: PaymentViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Payment Method")
+            Text(localization.text(.paymentMethod))
                 .font(.headline)
                 .fontWeight(.bold)
             
@@ -28,7 +29,7 @@ struct PaymentMethodSection: View {
                                 .foregroundColor(viewModel.selectedPaymentMethod == method ? .primary : .secondary.opacity(0.5))
                             
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(method.rawValue)
+                                Text(method.localizedName(for: localization.currentLanguage))
                                     .font(.subheadline)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.primary)

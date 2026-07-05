@@ -7,17 +7,17 @@ import SwiftUI
 
 struct EditAddressForm: View {
     @ObservedObject var viewModel: EditAddressViewModel
+    @EnvironmentObject private var localization: LocalizationManager
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            // Country Selection
             VStack(alignment: .leading, spacing: 8) {
-                Text("Country")
+                Text(localization.text(.country))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.primary)
 
                 HStack(spacing: 12) {
-                    countryButton(title: "United States", flag: "🇺🇸", isSelected: viewModel.country == "United States") {
+                    countryButton(title: localization.text(.unitedStates), flag: "🇺🇸", isSelected: viewModel.country == "United States") {
                         viewModel.country = "United States"
                         if !GeographicData.usStates.contains(viewModel.province) {
                             let newProv = GeographicData.usStates.first ?? ""
@@ -28,7 +28,7 @@ struct EditAddressForm: View {
                         }
                     }
 
-                    countryButton(title: "Canada", flag: "🇨🇦", isSelected: viewModel.country == "Canada") {
+                    countryButton(title: localization.text(.canada), flag: "🇨🇦", isSelected: viewModel.country == "Canada") {
                         viewModel.country = "Canada"
                         if !GeographicData.canadianProvinces.contains(viewModel.province) {
                             let newProv = GeographicData.canadianProvinces.first ?? ""
@@ -41,18 +41,16 @@ struct EditAddressForm: View {
                 }
             }
 
-            // Full Name
             AddressInputField(
-                label: "Full Name",
+                label: localization.text(.fullName),
                 placeholder: "e.g. John Doe",
                 icon: "person",
                 text: $viewModel.fullName,
                 errorMessage: viewModel.fullNameError
             )
 
-            // Phone Number
             AddressInputField(
-                label: "Phone Number",
+                label: localization.text(.phone),
                 placeholder: "e.g. +1 234 567 8900",
                 icon: "phone",
                 text: $viewModel.phoneNumber,
@@ -60,17 +58,15 @@ struct EditAddressForm: View {
                 errorMessage: viewModel.phoneError
             )
 
-            // Street Address
             AddressInputField(
-                label: "Street Address",
+                label: localization.text(.streetAddress),
                 placeholder: "e.g. 123 Apple Park Way",
                 icon: "mappin",
                 text: $viewModel.streetAddress
             )
 
-            // State / Province Dropdown
             VStack(alignment: .leading, spacing: 8) {
-                Text(viewModel.country == "Canada" ? "Province" : "State")
+                Text(viewModel.country == "Canada" ? localization.text(.province) : localization.text(.state))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.primary)
 
@@ -91,7 +87,7 @@ struct EditAddressForm: View {
                             .foregroundColor(.gray)
                             .frame(width: 24)
 
-                        Text(viewModel.province.isEmpty ? "Select \(viewModel.country == "Canada" ? "Province" : "State")" : viewModel.province)
+                        Text(viewModel.province.isEmpty ? (viewModel.country == "Canada" ? localization.text(.province) : localization.text(.state)) : viewModel.province)
                             .font(.system(size: 16))
                             .foregroundColor(viewModel.province.isEmpty ? .gray.opacity(0.5) : .primary)
 
@@ -108,9 +104,8 @@ struct EditAddressForm: View {
                 }
             }
 
-            // City Dropdown
             VStack(alignment: .leading, spacing: 8) {
-                Text("City")
+                Text(localization.text(.city))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.primary)
 
@@ -128,7 +123,7 @@ struct EditAddressForm: View {
                             .foregroundColor(.gray)
                             .frame(width: 24)
 
-                        Text(viewModel.city.isEmpty ? "Select City" : viewModel.city)
+                        Text(viewModel.city.isEmpty ? localization.text(.city) : viewModel.city)
                             .font(.system(size: 16))
                             .foregroundColor(viewModel.city.isEmpty ? .gray.opacity(0.5) : .primary)
 
@@ -145,9 +140,8 @@ struct EditAddressForm: View {
                 }
             }
 
-            // ZIP / Postal Code
             AddressInputField(
-                label: viewModel.country == "Canada" ? "Postal Code" : "ZIP Code",
+                label: viewModel.country == "Canada" ? localization.text(.postalCode) : localization.text(.zipCode),
                 placeholder: viewModel.country == "Canada" ? "e.g. K1A 0B1" : "e.g. 90210",
                 icon: "number",
                 text: $viewModel.zip,
@@ -155,13 +149,12 @@ struct EditAddressForm: View {
                 errorMessage: viewModel.zipError
             )
 
-            // Set as Default Toggle
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Set as Default Address")
+                    Text(localization.text(.setAsDefault))
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.primary)
-                    Text("This address will be pre-selected at checkout")
+                    Text(localization.text(.defaultAddressHint))
                         .font(.system(size: 12))
                         .foregroundColor(.secondary)
                 }

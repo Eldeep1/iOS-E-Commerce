@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CollectionProductsView: View {
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel: CollectionProductsViewModel
 
     init(collection: Collection, source: CollectionProductsSource) {
@@ -32,13 +33,13 @@ struct CollectionProductsView: View {
                     Button {
                         viewModel.isFilterSheetPresented = true
                     } label: {
-                        Label("Filters", systemImage: "line.3.horizontal.decrease.circle")
+                        Label(localization.text(.filters), systemImage: "line.3.horizontal.decrease.circle")
                             .font(.subheadline)
                             .foregroundColor(viewModel.hasActiveFilters ? .black : .secondary)
                     }
 
                     if viewModel.hasActiveFilters {
-                        Text("• Active")
+                        Text(localization.text(.active))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -46,7 +47,7 @@ struct CollectionProductsView: View {
                     Spacer()
 
                     if !viewModel.isLoading {
-                        Text("\(viewModel.displayedProducts.count) items")
+                        Text(localization.format(.items, viewModel.displayedProducts.count))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -78,22 +79,22 @@ struct CollectionProductsView: View {
                 onReset: { viewModel.resetFilters() }
             )
         }
-        .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
-            Button("Cancel", role: .cancel) { }
-            Button("Remove", role: .destructive) {
+        .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.remove), role: .destructive) {
                 viewModel.confirmRemoveFavorite()
             }
         } message: { product in
-            Text("Are you sure you want to remove \(product.title) from your favorites?")
+            Text(localization.format(.removeFromFavoritesMessage, product.title))
         }
-        .alert("Sign In Required", isPresented: $viewModel.showGuestAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Sign In") {
+        .alert(localization.text(.signInRequired), isPresented: $viewModel.showGuestAlert) {
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.signIn)) {
                 appState.isGuest = false
                 appState.currentRoute = .auth
             }
         } message: {
-            Text("Please sign in to enjoy adding products to your favorites and cart. It only takes a moment!")
+            Text(localization.text(.signInRequiredFavoritesMessage))
         }
         .onAppear {
             viewModel.isGuest = appState.isGuest
@@ -112,7 +113,7 @@ struct CollectionProductsView: View {
                 .foregroundColor(.secondary)
                 .padding()
         } else if viewModel.fetchedProducts.isEmpty {
-            Text("No products found")
+            Text(localization.text(.noProductsFound))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.top, 40)
@@ -136,9 +137,9 @@ struct CollectionProductsView: View {
 
     private var emptyResultsMessage: String {
         if !viewModel.searchText.isEmpty {
-            return "No products match \"\(viewModel.searchText)\""
+            return localization.format(.noProductsMatchSearch, viewModel.searchText)
         }
-        return "No products match the selected filters"
+        return localization.text(.noProductsMatchFilters)
     }
 }
 
@@ -152,5 +153,7 @@ struct CollectionProductsView: View {
             ),
             source: .brand(vendor: "ADIDAS")
         )
+        .environmentObject(AppStateManager())
+        .environmentObject(LocalizationManager())
     }
 }

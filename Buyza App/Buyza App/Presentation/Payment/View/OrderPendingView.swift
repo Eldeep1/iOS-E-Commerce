@@ -6,13 +6,13 @@
 import SwiftUI
 
 struct OrderPendingView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     let order: CheckoutOrder?
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Icon
             ZStack {
                 Circle()
                     .fill(Color.orange.opacity(0.12))
@@ -23,29 +23,27 @@ struct OrderPendingView: View {
             }
             .padding(.bottom, 32)
 
-            // Title
-            Text("Order Placed!")
+            Text(localization.text(.orderPlaced))
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding(.bottom, 8)
 
-            Text("Your order has been received. Please pay the courier upon delivery.")
+            Text(localization.text(.codMessage))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
                 .padding(.bottom, 40)
 
-            // COD Instruction Banner
             HStack(spacing: 12) {
                 Image(systemName: "banknote")
                     .font(.system(size: 22))
                     .foregroundColor(.orange)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Cash on Delivery")
+                    Text(localization.text(.cashOnDelivery))
                         .font(.subheadline)
                         .fontWeight(.bold)
-                    Text("Have exact change ready for the courier.")
+                    Text(localization.text(.exactChange))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -59,14 +57,13 @@ struct OrderPendingView: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 24)
 
-            // Order Details Card
             if let order {
                 VStack(spacing: 12) {
-                    orderRow(label: "Order Number", value: order.name)
+                    orderRow(label: localization.text(.orderNumber), value: order.name)
                     Divider()
-                    orderRow(label: "Total Amount", value: String(format: "$%.2f", order.totalPrice))
+                    orderRow(label: localization.text(.total), value: String(format: "$%.2f", order.totalPrice))
                     Divider()
-                    orderRow(label: "Payment", value: "Cash on Delivery")
+                    orderRow(label: localization.text(.paymentMethod), value: localization.text(.cashOnDelivery))
                 }
                 .padding(20)
                 .background(
@@ -80,11 +77,10 @@ struct OrderPendingView: View {
 
             Spacer()
 
-            // CTA
             Button(action: {
                 NotificationCenter.default.post(name: .popToRoot, object: nil)
             }) {
-                Text("Continue Shopping")
+                Text(localization.text(.continueShopping))
                     .font(.headline)
                     .foregroundColor(Color(.systemBackground))
                     .frame(maxWidth: .infinity)

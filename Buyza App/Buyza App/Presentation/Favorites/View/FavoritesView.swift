@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @StateObject private var viewModel = FavoritesViewModel()
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Favorites")
+                    Text(localization.text(.favorites))
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.horizontal, 20)
@@ -28,7 +29,7 @@ struct FavoritesView: View {
                                 .frame(width: 80, height: 80)
                                 .foregroundColor(.black)
                                 .padding(.bottom, 16)
-                            Text("No favorites yet")
+                            Text(localization.text(.noFavoritesYet))
                                 .font(.title2)
                                 .foregroundColor(.black)
                         }
@@ -51,13 +52,13 @@ struct FavoritesView: View {
             .onAppear {
                 viewModel.fetchFavorites()
             }
-            .alert("Remove from Favorites?", isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
-                Button("Cancel", role: .cancel) { }
-                Button("Remove", role: .destructive) {
+            .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
+                Button(localization.text(.cancel), role: .cancel) { }
+                Button(localization.text(.remove), role: .destructive) {
                     viewModel.confirmRemoveFavorite()
                 }
             } message: { product in
-                Text("Are you sure you want to remove \(product.title) from your favorites?")
+                Text(localization.format(.removeFromFavoritesMessage, product.title))
             }
         }
         .navigationViewStyle(.stack)
@@ -66,4 +67,5 @@ struct FavoritesView: View {
 
 #Preview {
     FavoritesView()
+        .environmentObject(LocalizationManager())
 }

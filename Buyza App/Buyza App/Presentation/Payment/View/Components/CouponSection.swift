@@ -7,17 +7,18 @@
 import SwiftUI
 
 struct CouponSection: View {
+    @EnvironmentObject private var localization: LocalizationManager
     @ObservedObject var viewModel: PaymentViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Promo Code")
+            Text(localization.text(.promoCode))
                 .font(.headline)
                 .fontWeight(.bold)
             
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 12) {
-                    TextField("Enter promo code", text: $viewModel.couponCode)
+                    TextField(localization.text(.promoCode), text: $viewModel.couponCode)
                         .padding(14)
                         .background(Color(.systemGray6))
                         .cornerRadius(10)
@@ -33,7 +34,7 @@ struct CouponSection: View {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: Color(.systemBackground)))
                         } else {
-                            Text("Apply")
+                            Text(localization.text(.apply))
                                 .fontWeight(.bold)
                         }
                     }
@@ -49,7 +50,7 @@ struct CouponSection: View {
                         .font(.caption)
                         .foregroundColor(.red)
                 } else if viewModel.discountAmount > 0 {
-                    Text("Coupon applied successfully!")
+                    Text(localization.text(.couponApplied))
                         .font(.caption)
                         .foregroundColor(.green)
                 }
