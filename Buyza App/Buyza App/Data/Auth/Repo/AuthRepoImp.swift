@@ -59,8 +59,8 @@ struct AuthRepoImp : AuthRepoProtocol {
         do {
             let firebaseModel = try await firebaseService.signInWithGoogle()
             
-            // Use a deterministic password for Shopify since Google doesn't provide one
-            let shopifyPassword = "\(firebaseModel.uid)_GoogleAuthSecret123!"
+            
+            let shopifyPassword = "\(firebaseModel.uid)_GAuth1!"
             
             var shopifyToken: String
             
