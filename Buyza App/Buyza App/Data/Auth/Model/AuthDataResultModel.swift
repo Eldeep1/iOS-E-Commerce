@@ -12,9 +12,12 @@ struct AuthDataResultModel {
     let uid : String
     let email: String?
     let name: String?
-    init(user:User){
-        self.uid=user.uid
-        self.email=user.email
-        self.name=user.displayName 
+    let isEmailVerified: Bool
+    
+    init(user: User) {
+        self.uid = user.uid
+        self.email = user.email
+        self.name = user.displayName
+        self.isEmailVerified = user.isEmailVerified
     }
 }

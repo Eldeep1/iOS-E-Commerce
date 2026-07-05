@@ -2,9 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ShopifyStorefrontToken</key>
-	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.666326933220-q3916e76c03261oai59qmr3grgv24fkv</string>
+			</array>
+		</dict>
+	</array>
 	<key>ShopifyAdminAccessToken</key>
 	<string>$(SHOPIFY_ADMIN_ACCESS_TOKEN)</string>
+	<key>ShopifyStorefrontToken</key>
+	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
 </dict>
 </plist>

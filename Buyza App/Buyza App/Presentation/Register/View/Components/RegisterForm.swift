@@ -41,11 +41,19 @@ struct RegisterForm: View {
                     .foregroundColor(.gray)
                     .tracking(1)
                 
-                TextField("depo@example.com", text: $viewModel.email)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .modifier(InputFieldModifier())
+                ZStack(alignment: .leading) {
+                    if viewModel.email.isEmpty {
+                        Text(verbatim: "depo@example.com")
+                            .foregroundColor(Color.gray.opacity(0.6))
+                    }
+                    TextField("", text: $viewModel.email)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .foregroundColor(.black)
+                        .tint(.black)
+                }
+                .modifier(InputFieldModifier())
             }
             
             
@@ -64,6 +72,27 @@ struct RegisterForm: View {
                     
                     Button(action: { viewModel.isPasswordVisible.toggle() }) {
                         Image(systemName: viewModel.isPasswordVisible ? "eye.slash" : "eye")
+                            .foregroundColor(.gray)
+                    }
+                }
+                .modifier(InputFieldModifier())
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("CONFIRM PASSWORD")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(.gray)
+                    .tracking(1)
+                
+                HStack {
+                    if viewModel.isConfirmPasswordVisible {
+                        TextField("••••••••", text: $viewModel.confirmPassword)
+                    } else {
+                        SecureField("••••••••", text: $viewModel.confirmPassword)
+                    }
+                    
+                    Button(action: { viewModel.isConfirmPasswordVisible.toggle() }) {
+                        Image(systemName: viewModel.isConfirmPasswordVisible ? "eye.slash" : "eye")
                             .foregroundColor(.gray)
                     }
                 }

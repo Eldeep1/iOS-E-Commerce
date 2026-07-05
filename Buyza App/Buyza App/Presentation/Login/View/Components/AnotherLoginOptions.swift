@@ -10,6 +10,8 @@ import SwiftUI
 
 struct AnotherLoginOptions: View {
     @EnvironmentObject var appState: AppStateManager
+    var showGuestOption: Bool = true
+    var onGoogleLogin: () -> Void
         
         var body: some View {
             VStack(spacing: 16) {
@@ -27,7 +29,7 @@ struct AnotherLoginOptions: View {
                 
                 VStack(spacing: 12) {
                     Button(action: {
-                        print("Google Auth tapped")
+                        onGoogleLogin()
                     }) {
                         HStack {
                             Image(systemName: "globe")

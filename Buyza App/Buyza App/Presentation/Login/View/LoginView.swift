@@ -12,8 +12,36 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
     @EnvironmentObject var appState: AppStateManager
-    init(loginUseCase: LoginUseCaseProtocol) {
-        _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase))
+    init(loginUseCase: LoginUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
+        _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase, googleLoginUseCase: googleLoginUseCase))
+    }
+    @State private var showForgotPassword = false
+    
+    var formSection: some View {
+        VStack(spacing: 20) {
+            NavigationLink(destination: ForgotPasswordView(sendPasswordResetUseCase: SendPasswordResetUseCase(authRepository: AuthRepoImp(firebaseService: FirebaseServices(), shopifyService: ShopifyAuthService(), localDataSource: KeychainService.shared))), isActive: $showForgotPassword) {
+                EmptyView()
+            }
+            
+            LoginForm(viewModel: viewModel) {
+                showForgotPassword = true
+            }
+            
+            LoginButton(viewModel: viewModel)
+                .padding(.top, 8)
+            
+            AnotherLoginOptions(showGuestOption: true, onGoogleLogin: {
+                viewModel.signInWithGoogle()
+            })
+        }
+        .padding(24)
+        .background(Color.white)
+        .cornerRadius(28)
+        .overlay(
+            RoundedRectangle(cornerRadius: 28)
+                .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+        )
+        .padding(.horizontal, 16)
     }
     
     var body: some View {
@@ -25,35 +53,19 @@ struct LoginView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 24) {
-                Spacer().frame(height: 40)
-                
-                LoginHeader()
-                
-                
-                VStack(spacing: 20) {
-                    LoginForm(viewModel: viewModel) {
-                        print("Forgot password tapped")
-                    }
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 24) {
+                    Spacer().frame(height: 40)
                     
-                    LoginButton(viewModel: viewModel)
-                        .padding(.top, 8)
+                    LoginHeader()
                     
-                    AnotherLoginOptions()
+                    formSection
+                    
+                    Spacer().frame(height: 20)
+                    
+                    LoginFooter()
+                        .padding(.bottom, 40)
                 }
-                .padding(24)
-                .background(Color.white)
-                .cornerRadius(28)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color.gray.opacity(0.1), lineWidth: 1)
-                )
-                .padding(.horizontal, 16)
-                
-                Spacer()
-                
-                LoginFooter()
-                    .padding(.bottom, 16)
             }
         }
         .alert("Authentication Issue", isPresented: $viewModel.showErrorAlert, actions: {
