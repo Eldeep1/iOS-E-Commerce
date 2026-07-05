@@ -17,6 +17,9 @@ final class CollectionProductsViewModel: ObservableObject {
     @Published var isFilterSheetPresented = false
     @Published var showRemoveAlert = false
     @Published var productToRemove: Product?
+    @Published var showGuestAlert = false
+    
+    var isGuest: Bool = false
 
     let collectionTitle: String
     let filterLabel: String
@@ -111,10 +114,16 @@ final class CollectionProductsViewModel: ObservableObject {
     }
 
     func isFavorite(productID: Int64) -> Bool {
-        (try? checkIsFavoriteUseCase.execute(productId: productID)) ?? false
+        if isGuest { return false }
+        return (try? checkIsFavoriteUseCase.execute(productId: productID)) ?? false
     }
 
     func toggleFavorite(product: Product) {
+        if isGuest {
+            showGuestAlert = true
+            return
+        }
+        
         do {
             let isFav = try checkIsFavoriteUseCase.execute(productId: product.id)
             if isFav {

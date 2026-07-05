@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CollectionProductsView: View {
+    @EnvironmentObject var appState: AppStateManager
     @StateObject private var viewModel: CollectionProductsViewModel
 
     init(collection: Collection, source: CollectionProductsSource) {
@@ -85,7 +86,17 @@ struct CollectionProductsView: View {
         } message: { product in
             Text("Are you sure you want to remove \(product.title) from your favorites?")
         }
+        .alert("Sign In Required", isPresented: $viewModel.showGuestAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Sign In") {
+                appState.isGuest = false
+                appState.currentRoute = .auth
+            }
+        } message: {
+            Text("Please sign in to enjoy adding products to your favorites and cart. It only takes a moment!")
+        }
         .onAppear {
+            viewModel.isGuest = appState.isGuest
             viewModel.objectWillChange.send()
         }
     }

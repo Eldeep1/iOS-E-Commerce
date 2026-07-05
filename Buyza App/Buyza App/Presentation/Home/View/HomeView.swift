@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var appState: AppStateManager
     @StateObject private var viewModel: HomeViewModel = HomeViewModel()
 
     var body: some View {
@@ -84,7 +85,17 @@ struct HomeView: View {
             } message: { product in
                 Text("Are you sure you want to remove \(product.title) from your favorites?")
             }
+            .alert("Sign In Required", isPresented: $viewModel.showGuestAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Sign In") {
+                    appState.isGuest = false
+                    appState.currentRoute = .auth
+                }
+            } message: {
+                Text("Please sign in to enjoy adding products to your favorites and cart. It only takes a moment!")
+            }
             .onAppear {
+                viewModel.isGuest = appState.isGuest
                 viewModel.objectWillChange.send()
             }
         }
@@ -94,4 +105,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(AppStateManager())
 }

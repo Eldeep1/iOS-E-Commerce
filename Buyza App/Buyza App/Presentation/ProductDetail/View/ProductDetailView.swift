@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProductDetailView: View {
+    @EnvironmentObject var appState: AppStateManager
     @StateObject private var viewModel: ProductDetailViewModel
     @Environment(\.dismiss) private var dismiss
 
@@ -73,6 +74,18 @@ struct ProductDetailView: View {
         } message: {
             Text(viewModel.addToCartError ?? "")
         }
+        .alert("Sign In Required", isPresented: $viewModel.showGuestAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Sign In") {
+                appState.isGuest = false
+                appState.currentRoute = .auth
+            }
+        } message: {
+            Text("Please sign in to enjoy adding products to your favorites and cart. It only takes a moment!")
+        }
+        .onAppear {
+            viewModel.isGuest = appState.isGuest
+        }
     }
 
     private var navigationBar: some View {
@@ -93,7 +106,13 @@ struct ProductDetailView: View {
 
             Spacer()
 
-            Button(action: { viewModel.navigateToCart = true }) {
+            Button(action: {
+                if viewModel.isGuest {
+                    viewModel.showGuestAlert = true
+                } else {
+                    viewModel.navigateToCart = true
+                }
+            }) {
                 Image(systemName: "bag")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.primary)

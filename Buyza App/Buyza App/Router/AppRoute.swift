@@ -17,4 +17,5 @@ enum AppRoute {
 
 class AppStateManager: ObservableObject {
     @Published var currentRoute: AppRoute = .splash
+    @Published var isGuest: Bool = false
 }

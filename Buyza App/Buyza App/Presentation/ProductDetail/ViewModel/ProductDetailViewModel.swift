@@ -26,6 +26,9 @@ final class ProductDetailViewModel: ObservableObject {
     @Published var addToCartSuccess = false
     @Published var navigateToCart = false
     @Published var addToCartError: String? = nil
+    
+    @Published var showGuestAlert = false
+    var isGuest = false
 
     let formattedPrice: String
     let informationSections: [ProductInformationSection]
@@ -78,10 +81,18 @@ final class ProductDetailViewModel: ObservableObject {
     }
 
     func toggleFavorite() {
+        if isGuest {
+            showGuestAlert = true
+            return
+        }
         isFavorite.toggle()
     }
 
     func addToCart() {
+        if isGuest {
+            showGuestAlert = true
+            return
+        }
         guard let variant = product.variants.first else { return }
         // Storefront API uses gid://shopify/ProductVariant/...
         let variantID = "gid://shopify/ProductVariant/\(variant.id)"
@@ -104,6 +115,10 @@ final class ProductDetailViewModel: ObservableObject {
     }
 
     func buyNow() {
+        if isGuest {
+            showGuestAlert = true
+            return
+        }
         guard let variant = product.variants.first else { return }
         let variantID = "gid://shopify/ProductVariant/\(variant.id)"
         
