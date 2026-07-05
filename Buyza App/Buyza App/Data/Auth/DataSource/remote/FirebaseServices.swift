@@ -14,6 +14,7 @@ protocol AuthServiceProtocol {
     func createAccount(email: String, password: String, name:String) async throws -> AuthDataResultModel
     func signIn(email: String, password: String) async throws -> AuthDataResultModel
     @MainActor func signInWithGoogle() async throws -> AuthDataResultModel
+    func sendPasswordReset(email: String) async throws
     func signOut() throws
 }
 
@@ -21,6 +22,11 @@ struct FirebaseServices :AuthServiceProtocol{
     func signOut() throws {
         try Auth.auth().signOut()
     }
+    
+    func sendPasswordReset(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
     func createAccount(email: String, password: String,name:String) async throws-> AuthDataResultModel {
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         

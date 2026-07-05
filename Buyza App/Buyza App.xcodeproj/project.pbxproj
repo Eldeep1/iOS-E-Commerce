@@ -103,6 +103,10 @@
 		B81D84CE2FF2D850000DFBE1 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CD2FF2D850000DFBE1 /* RootContainerView.swift */; };
 		B81D84D02FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */; };
 		B81D84D52FF3093F000DFBE1 /* ShopifyLoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */; };
+		B82C3EDE2FFAD7AB0055B70B /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3ED92FFAD7AB0055B70B /* ForgotPasswordView.swift */; };
+		B82C3EDF2FFAD7AB0055B70B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EDB2FFAD7AB0055B70B /* ForgotPasswordViewModel.swift */; };
+		B82C3EE22FFAD9AC0055B70B /* GoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */; };
+		B82C3EE32FFAD9AC0055B70B /* SendPasswordResetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */; };
 		B8371B552FF8EF1B00D9ED3B /* GeographicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */; };
 		B89BAC272FF9217000DA1703 /* FilterProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC242FF9217000DA1703 /* FilterProductsUseCase.swift */; };
 		B89BAC282FF9217000DA1703 /* SearchProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC252FF9217000DA1703 /* SearchProductsUseCase.swift */; };
@@ -315,6 +319,10 @@
 		B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginStatusUseCase.swift; sourceTree = "<group>"; };
 		B81D84D32FF3068A000DFBE1 /* Buyza-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Buyza-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B81D84D42FF30939000DFBE1 /* ShopifyLoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyLoginModels.swift; sourceTree = "<group>"; };
+		B82C3ED92FFAD7AB0055B70B /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		B82C3EDB2FFAD7AB0055B70B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginUseCase.swift; sourceTree = "<group>"; };
+		B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPasswordResetUseCase.swift; sourceTree = "<group>"; };
 		B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicData.swift; sourceTree = "<group>"; };
 		B89BAC242FF9217000DA1703 /* FilterProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterProductsUseCase.swift; sourceTree = "<group>"; };
 		B89BAC252FF9217000DA1703 /* SearchProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsUseCase.swift; sourceTree = "<group>"; };
@@ -525,6 +533,7 @@
 				097C91F42FF6E13000AEB7D3 /* Ads */,
 				B8EAE98C2FF4F94B00129771 /* Addresses */,
 				B8165DFB2FF418D0009DC909 /* Cart */,
+				B82C3EDD2FFAD7AB0055B70B /* ForgotPassword */,
 				B8BA56022FEFFE1E004CA9FF /* Register */,
 				B8BA56012FEFFE12004CA9FF /* Login */,
 				769DC0182FF0010000F532C7 /* ProductDetail */,
@@ -1042,6 +1051,31 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		B82C3EDA2FFAD7AB0055B70B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B82C3ED92FFAD7AB0055B70B /* ForgotPasswordView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B82C3EDC2FFAD7AB0055B70B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B82C3EDB2FFAD7AB0055B70B /* ForgotPasswordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B82C3EDD2FFAD7AB0055B70B /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				B82C3EDA2FFAD7AB0055B70B /* View */,
+				B82C3EDC2FFAD7AB0055B70B /* ViewModel */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
 		B89BAC262FF9217000DA1703 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1398,6 +1432,8 @@
 		B8BA560D2FF00572004CA9FF /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */,
+				B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */,
 				B8FC98722FF93A5D00A0C614 /* LogoutUseCase.swift */,
 				B81D84CF2FF2F1B8000DFBE1 /* CheckLoginStatusUseCase.swift */,
 				B8BA55B72FEFE961004CA9FF /* LoginUseCase.swift */,
@@ -1743,6 +1779,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82C3EDE2FFAD7AB0055B70B /* ForgotPasswordView.swift in Sources */,
+				B82C3EDF2FFAD7AB0055B70B /* ForgotPasswordViewModel.swift in Sources */,
 				098A0ABF2FF9054B00F000FF /* SearchResultsView.swift in Sources */,
 				B8BA55B42FEFE64A004CA9FF /* AuthRepo.swift in Sources */,
 				B8BA55A32FEFE251004CA9FF /* FirebaseServices.swift in Sources */,
@@ -1795,6 +1833,8 @@
 				0997ED582FF829AB00C7B976 /* CollectionRepoImp.swift in Sources */,
 				B8BA56092FEFFF04004CA9FF /* RegisterView.swift in Sources */,
 				B8EAE9D42FF5316500129771 /* EditAddressView.swift in Sources */,
+				B82C3EE22FFAD9AC0055B70B /* GoogleLoginUseCase.swift in Sources */,
+				B82C3EE32FFAD9AC0055B70B /* SendPasswordResetUseCase.swift in Sources */,
 				B89BAC312FF921F500DA1703 /* OrdersView.swift in Sources */,
 				B89BAC322FF921F500DA1703 /* OrderRowView.swift in Sources */,
 				B89BAC332FF921F500DA1703 /* OrdersViewModel.swift in Sources */,

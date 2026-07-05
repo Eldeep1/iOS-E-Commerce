@@ -20,8 +20,8 @@ struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppStateManager
     
-    init(registerUseCase: RegisterUseCaseProtocol) {
-        _viewModel = StateObject(wrappedValue: RegisterViewModel(registerUseCase: registerUseCase))
+    init(registerUseCase: RegisterUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
+        _viewModel = StateObject(wrappedValue: RegisterViewModel(registerUseCase: registerUseCase, googleLoginUseCase: googleLoginUseCase))
     }
     
     var formSection: some View {

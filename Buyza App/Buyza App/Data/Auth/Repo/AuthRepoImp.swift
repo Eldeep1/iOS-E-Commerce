@@ -111,6 +111,14 @@ struct AuthRepoImp : AuthRepoProtocol {
         return hasFirebaseUser && hasShopifyToken
     }
     
+    func sendPasswordReset(email: String) async throws {
+        do {
+            try await firebaseService.sendPasswordReset(email: email)
+        } catch {
+            throw AuthError.firebaseError(error.localizedDescription)
+        }
+    }
+    
     func logout() async throws {
         do {
             try firebaseService.signOut()

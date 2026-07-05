@@ -12,14 +12,19 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
     @EnvironmentObject var appState: AppStateManager
-    init(loginUseCase: LoginUseCaseProtocol) {
-        _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase))
+    init(loginUseCase: LoginUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
+        _viewModel = StateObject(wrappedValue: LoginViewModel(loginUseCase: loginUseCase, googleLoginUseCase: googleLoginUseCase))
     }
+    @State private var showForgotPassword = false
     
     var formSection: some View {
         VStack(spacing: 20) {
+            NavigationLink(destination: ForgotPasswordView(sendPasswordResetUseCase: SendPasswordResetUseCase(authRepository: AuthRepoImp(firebaseService: FirebaseServices(), shopifyService: ShopifyAuthService(), localDataSource: KeychainService.shared))), isActive: $showForgotPassword) {
+                EmptyView()
+            }
+            
             LoginForm(viewModel: viewModel) {
-                print("Forgot password tapped")
+                showForgotPassword = true
             }
             
             LoginButton(viewModel: viewModel)

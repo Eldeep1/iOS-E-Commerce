@@ -30,9 +30,11 @@ final class RegisterViewModel: ObservableObject {
     @Published var registrationSuccess = false
     
     private let registerUseCase: RegisterUseCaseProtocol
+    private let googleLoginUseCase: GoogleLoginUseCaseProtocol
     
-    init(registerUseCase: RegisterUseCaseProtocol) {
+    init(registerUseCase: RegisterUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
         self.registerUseCase = registerUseCase
+        self.googleLoginUseCase = googleLoginUseCase
     }
     
     func signUp() {
@@ -78,15 +80,14 @@ final class RegisterViewModel: ObservableObject {
         
         Task {
             do {
-                let userModel = try await registerUseCase.executeGoogleLogin()
-                print("Successfully logged in with Google: \(userModel.name)")
+                let userModel = try await googleLoginUseCase.execute()
+                print("Google login successful! Welcome \(userModel.name)")
                 self.registrationSuccess = true
-                self.isLoading = false
             } catch {
                 self.errorMessage = error.localizedDescription
                 self.showErrorAlert = true
-                self.isLoading = false
             }
+            self.isLoading = false
         }
     }
 }

@@ -21,9 +21,11 @@ final class LoginViewModel: ObservableObject {
     @Published var loginSuccess = false
     
     private let loginUseCase: LoginUseCaseProtocol
+    private let googleLoginUseCase: GoogleLoginUseCaseProtocol
     
-    init(loginUseCase: LoginUseCaseProtocol) {
+    init(loginUseCase: LoginUseCaseProtocol, googleLoginUseCase: GoogleLoginUseCaseProtocol) {
         self.loginUseCase = loginUseCase
+        self.googleLoginUseCase = googleLoginUseCase
     }
     
     func signIn() {
@@ -52,15 +54,14 @@ final class LoginViewModel: ObservableObject {
         
         Task {
             do {
-                let userModel = try await loginUseCase.executeGoogleLogin()
-                print("Successfully logged in with Google: \(userModel.name)")
+                let userModel = try await googleLoginUseCase.execute()
+                print("Google login successful! Welcome \(userModel.name)")
                 self.loginSuccess = true
-                self.isLoading = false
             } catch {
                 self.errorMessage = error.localizedDescription
                 self.showErrorAlert = true
-                self.isLoading = false
             }
+            self.isLoading = false
         }
     }
 }

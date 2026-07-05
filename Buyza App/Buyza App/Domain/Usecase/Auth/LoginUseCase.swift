@@ -10,7 +10,6 @@ import Foundation
 
 protocol LoginUseCaseProtocol {
     func execute(email: String, password: String) async throws -> UserModel
-    @MainActor func executeGoogleLogin() async throws -> UserModel
 }
 
 struct LoginUseCase: LoginUseCaseProtocol {
@@ -28,15 +27,6 @@ struct LoginUseCase: LoginUseCaseProtocol {
         
         do {
             return try await authRepository.loginUser(email: email, password: password)
-        } catch {
-            throw AuthError.map(error)
-        }
-    }
-    
-    @MainActor
-    func executeGoogleLogin() async throws -> UserModel {
-        do {
-            return try await authRepository.loginWithGoogle()
         } catch {
             throw AuthError.map(error)
         }
