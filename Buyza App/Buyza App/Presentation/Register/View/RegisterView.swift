@@ -113,5 +113,12 @@ struct RegisterView: View {
         }, message: {
             Text(viewModel.errorMessage ?? "An unexpected error occurred.")
         })
+        .alert("Check your email", isPresented: $viewModel.showSuccessAlert, actions: {
+            Button("OK", role: .cancel) {
+                dismiss()
+            }
+        }, message: {
+            Text("We've sent a verification link to your email address. Please verify it before signing in.")
+        })
     }
 }

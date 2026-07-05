@@ -27,7 +27,17 @@ struct AuthRepoImp : AuthRepoProtocol {
         do {
             let firebaseModel = try await firebaseService.signIn(email: email, password: password)
             
-            let shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
+            guard firebaseModel.isEmailVerified else {
+                throw AuthError.emailNotVerified
+            }
+            
+            var shopifyToken: String
+            
+            do {
+                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
+            } catch {
+                shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
+            }
             
             try localDataSource.saveShopifyToken(shopifyToken)
             
@@ -37,9 +47,10 @@ struct AuthRepoImp : AuthRepoProtocol {
                 email: firebaseModel.email ?? email,
                 name: firebaseModel.name ?? "User"
             )
+        } catch let authError as AuthError {
+            throw authError
         } catch {
             throw AuthError.firebaseError(error.localizedDescription)
-            
         }
     }
     
@@ -75,15 +86,9 @@ struct AuthRepoImp : AuthRepoProtocol {
     
     func createUser(email: String, password: String, name: String) async throws -> UserModel {
         do {
-            print("we are here")
             let firebaseModel = try await firebaseService.createAccount(email: email, password: password, name: name)
-            print(firebaseModel.uid)
-            print("aaaaaa")
-            print(firebaseModel.name)
-            let shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
-            print("that was saved successfully")
-            try localDataSource.saveShopifyToken(shopifyToken)
             
+            // Do NOT create the Shopify account here. Wait until they verify email and login.
             return UserModel(
                 uid: firebaseModel.uid,
                 email: firebaseModel.email ?? email,

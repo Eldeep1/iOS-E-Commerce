@@ -25,10 +25,11 @@ struct FirebaseServices :AuthServiceProtocol{
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         
         let changeRequest = authResult.user.createProfileChangeRequest()
-        
         changeRequest.displayName = name
-        
         try await changeRequest.commitChanges()
+        
+        // Send verification email
+        try await authResult.user.sendEmailVerification()
         
         try await authResult.user.reload()
         

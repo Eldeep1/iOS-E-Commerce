@@ -11,12 +11,14 @@ enum AuthError: LocalizedError {
     case invalidEmail
     case firebaseError(String)
     case shopifyError(String)
+    case emailNotVerified
     
     var errorDescription: String? {
         switch self {
         case .invalidEmail: return "Please enter a valid email address."
         case .firebaseError(let msg): return msg
         case .shopifyError(let msg): return msg
+        case .emailNotVerified: return "Please check your email and verify your account before logging in."
         }
     }
     

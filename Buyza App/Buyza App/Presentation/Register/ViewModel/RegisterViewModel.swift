@@ -26,6 +26,7 @@ final class RegisterViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var showErrorAlert = false
+    @Published var showSuccessAlert = false
     @Published var registrationSuccess = false
     
     private let registerUseCase: RegisterUseCaseProtocol
@@ -60,7 +61,7 @@ final class RegisterViewModel: ObservableObject {
                 )
                 
                 print("Successfully registered domain user: \(userModel.name)")
-                self.registrationSuccess = true
+                self.showSuccessAlert = true
                 self.isLoading = false
             } catch {
                 self.errorMessage = error.localizedDescription
