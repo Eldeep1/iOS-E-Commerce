@@ -56,7 +56,17 @@ struct FirebaseServices :AuthServiceProtocol{
         
         let topVC = UIApplication.shared.getRootViewController()
         
-        let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: topVC)
+        let result: GIDSignInResult
+        do {
+            result = try await GIDSignIn.sharedInstance.signIn(withPresenting: topVC)
+        } catch {
+            let nsError = error as NSError
+            if nsError.domain == kGIDSignInErrorDomain && nsError.code == -5 { // -5 is GIDSignInError.canceled
+                throw AuthError.userCanceled
+            }
+            throw AuthError.firebaseError(error.localizedDescription)
+        }
+        
         guard let idToken = result.user.idToken?.tokenString else {
             throw AuthError.firebaseError("No ID token found.")
         }

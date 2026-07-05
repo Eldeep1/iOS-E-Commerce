@@ -12,6 +12,7 @@ enum AuthError: LocalizedError {
     case firebaseError(String)
     case shopifyError(String)
     case emailNotVerified
+    case userCanceled
     
     var errorDescription: String? {
         switch self {
@@ -19,6 +20,7 @@ enum AuthError: LocalizedError {
         case .firebaseError(let msg): return msg
         case .shopifyError(let msg): return msg
         case .emailNotVerified: return "Please check your email and verify your account before logging in."
+        case .userCanceled: return "Authentication was canceled."
         }
     }
     
