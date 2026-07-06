@@ -17,7 +17,7 @@ struct MainTabView: View {
         Binding {
             selectedTab
         } set: { newValue in
-            if appState.isGuest && (newValue == 1 || newValue == 2) {
+            if appState.isGuest && (newValue == 2) {
                 showGuestAlert = true
             } else {
                 selectedTab = newValue
