@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CollectionCell: View {
     var collectionItem : Collection?
-    @State private var isPressed = false
     
     var body: some View {
         VStack(spacing: 12) {
@@ -27,8 +26,6 @@ struct CollectionCell: View {
             .frame(width: 110, height: 110)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(color: Color.black.opacity(0.12), radius: 8, x: 0, y: 4)
-            .scaleEffect(isPressed ? 0.95 : 1.0)
-            .animation(.easeInOut(duration: 0.2), value: isPressed)
             
             Text(collectionItem?.title ?? "Unknown")
                 .font(.system(size: 16, weight: .semibold, design: .default))
@@ -39,9 +36,6 @@ struct CollectionCell: View {
                 .opacity(0.9)
         }
         .frame(width: 130)
-        .onLongPressGesture(minimumDuration: 0.1, perform: {}) { isPressed in
-            self.isPressed = isPressed
-        }
     }
 }
 
