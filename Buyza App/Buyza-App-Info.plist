@@ -15,6 +15,8 @@
 	</array>
 	<key>ShopifyAdminAccessToken</key>
 	<string>$(SHOPIFY_ADMIN_ACCESS_TOKEN)</string>
+	<key>PAYMOB_API_KEY</key>
+	<string>$(PAYMOB_API_KEY)</string>
 	<key>ShopifyStorefrontToken</key>
 	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
 </dict>

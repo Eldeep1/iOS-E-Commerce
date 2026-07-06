@@ -69,11 +69,31 @@ struct PaymentView: View {
             }
         )
         .fullScreenCover(isPresented: $viewModel.showWebView, onDismiss: {
-            Task { await viewModel.checkOrderAfterWebReturn() }
+            // Dismissal by the user without explicit success handles as a cancel
+            if viewModel.isPlacingOrder {
+                // If it's already placing an order, don't override the state
+                return
+            }
+            viewModel.handlePaymobCancel()
         }) {
             if let url = viewModel.webUrl {
-                SafariView(url: url)
-                    .ignoresSafeArea()
+                NavigationView {
+                    PaymobWebView(url: url, onResult: { success in
+                        Task { await viewModel.handlePaymobResult(success: success) }
+                    }, onDismiss: {
+                        viewModel.showWebView = false
+                    })
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("Secure Checkout")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel") {
+                                viewModel.showWebView = false
+                            }
+                        }
+                    }
+                    .ignoresSafeArea(edges: .bottom)
+                }
             }
         }
         .onDisappear {

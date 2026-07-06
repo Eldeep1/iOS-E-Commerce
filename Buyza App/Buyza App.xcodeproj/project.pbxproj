@@ -77,7 +77,6 @@
 		767461102FFB873C0043EF87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767461092FFB873B0043EF87 /* SettingsView.swift */; };
 		767461112FFB873C0043EF87 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7674610B2FFB873B0043EF87 /* EditProfileViewModel.swift */; };
 		767461122FFB873C0043EF87 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7674610C2FFB873B0043EF87 /* SettingsViewModel.swift */; };
-		767461142FFB87500043EF87 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 767461132FFB87500043EF87 /* Secrets.xcconfig */; };
 		767461182FFB87820043EF87 /* L10nTranslations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767461152FFB87820043EF87 /* L10nTranslations.swift */; };
 		767461192FFB87820043EF87 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767461162FFB87820043EF87 /* L10n.swift */; };
 		7674611A2FFB87820043EF87 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767461172FFB87820043EF87 /* LocalizationManager.swift */; };
@@ -125,6 +124,10 @@
 		B82C3EE22FFAD9AC0055B70B /* GoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */; };
 		B82C3EE32FFAD9AC0055B70B /* SendPasswordResetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */; };
 		B8371B552FF8EF1B00D9ED3B /* GeographicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */; };
+		B84E76D82FFBBFC400852CF5 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */; };
+		B84E76DA2FFBC0E300852CF5 /* PaymobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76D92FFBC0E300852CF5 /* PaymobService.swift */; };
+		B84E76DC2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76DB2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift */; };
+		B84E76DE2FFBC3F000852CF5 /* PaymobWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76DD2FFBC3F000852CF5 /* PaymobWebView.swift */; };
 		B89BAC272FF9217000DA1703 /* FilterProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC242FF9217000DA1703 /* FilterProductsUseCase.swift */; };
 		B89BAC282FF9217000DA1703 /* SearchProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC252FF9217000DA1703 /* SearchProductsUseCase.swift */; };
 		B89BAC312FF921F500DA1703 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC2C2FF921F500DA1703 /* OrdersView.swift */; };
@@ -309,7 +312,6 @@
 		767461092FFB873B0043EF87 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7674610B2FFB873B0043EF87 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		7674610C2FFB873B0043EF87 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		767461132FFB87500043EF87 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		767461152FFB87820043EF87 /* L10nTranslations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10nTranslations.swift; sourceTree = "<group>"; };
 		767461162FFB87820043EF87 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		767461172FFB87820043EF87 /* LocalizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
@@ -358,6 +360,10 @@
 		B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginUseCase.swift; sourceTree = "<group>"; };
 		B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPasswordResetUseCase.swift; sourceTree = "<group>"; };
 		B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicData.swift; sourceTree = "<group>"; };
+		B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		B84E76D92FFBC0E300852CF5 /* PaymobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymobService.swift; sourceTree = "<group>"; };
+		B84E76DB2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePaidOrderUseCase.swift; sourceTree = "<group>"; };
+		B84E76DD2FFBC3F000852CF5 /* PaymobWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymobWebView.swift; sourceTree = "<group>"; };
 		B89BAC242FF9217000DA1703 /* FilterProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterProductsUseCase.swift; sourceTree = "<group>"; };
 		B89BAC252FF9217000DA1703 /* SearchProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsUseCase.swift; sourceTree = "<group>"; };
 		B89BAC292FF921F500DA1703 /* EmptyOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOrdersView.swift; sourceTree = "<group>"; };
@@ -825,7 +831,7 @@
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
-				767461132FFB87500043EF87 /* Secrets.xcconfig */,
+				B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */,
 				B8BA56102FF019E1004CA9FF /* .gitignore */,
 				09F9B4412FEFCCA10017509E /* Buyza App */,
 				09F9B4572FEFCCA40017509E /* Buyza AppTests */,
@@ -1301,10 +1307,11 @@
 		B8AF23622FF6A061003A7B2E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8AF23632FF6A06B003A7B2E /* Components */,
+				B84E76DD2FFBC3F000852CF5 /* PaymobWebView.swift */,
 				B8AF23942FF6CE9F003A7B2E /* OrderPendingView.swift */,
 				B8AF23952FF6CE9F003A7B2E /* OrderSuccessView.swift */,
 				B8AF23962FF6CE9F003A7B2E /* SafariView.swift */,
-				B8AF23632FF6A06B003A7B2E /* Components */,
 				B8AF23652FF6A0B5003A7B2E /* PaymentView.swift */,
 			);
 			path = View;
@@ -1332,6 +1339,7 @@
 		B8AF23782FF6AFFB003A7B2E /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
+				B84E76DB2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift */,
 				B8AF238E2FF6CE00003A7B2E /* FetchLatestOrderUseCase.swift */,
 				B8AF238F2FF6CE00003A7B2E /* PlaceCODOrderUseCase.swift */,
 				B8AF23762FF6AFFB003A7B2E /* ApplyDiscountUseCase.swift */,
@@ -1343,6 +1351,7 @@
 		B8AF23802FF6B167003A7B2E /* Remote */ = {
 			isa = PBXGroup;
 			children = (
+				B84E76D92FFBC0E300852CF5 /* PaymobService.swift */,
 				B8AF239A2FF6CEDD003A7B2E /* ShopifyAdminCheckoutDataSource.swift */,
 				B8AF237F2FF6B167003A7B2E /* ShopifyCheckoutDataSource.swift */,
 			);
@@ -1874,7 +1883,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767461142FFB87500043EF87 /* Secrets.xcconfig in Resources */,
+				B84E76D82FFBBFC400852CF5 /* Secrets.xcconfig in Resources */,
 				09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */,
 				B8D5C1762FF982A000426537 /* GoogleService-Info.plist in Resources */,
 				09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */,
@@ -1903,6 +1912,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B82C3EDE2FFAD7AB0055B70B /* ForgotPasswordView.swift in Sources */,
+				B84E76DA2FFBC0E300852CF5 /* PaymobService.swift in Sources */,
 				B82C3EDF2FFAD7AB0055B70B /* ForgotPasswordViewModel.swift in Sources */,
 				098A0ABF2FF9054B00F000FF /* SearchResultsView.swift in Sources */,
 				B8BA55B42FEFE64A004CA9FF /* AuthRepo.swift in Sources */,
@@ -1951,6 +1961,7 @@
 				B8BA55F82FEFFDF6004CA9FF /* LoginButton.swift in Sources */,
 				B8BA55F92FEFFDF6004CA9FF /* LoginFooter.swift in Sources */,
 				B8BA55FA2FEFFDF6004CA9FF /* LoginForm.swift in Sources */,
+				B84E76DC2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift in Sources */,
 				B89BAC272FF9217000DA1703 /* FilterProductsUseCase.swift in Sources */,
 				B89BAC282FF9217000DA1703 /* SearchProductsUseCase.swift in Sources */,
 				B8D5C1792FF9889500426537 /* UIApplication+RootVC.swift in Sources */,
@@ -1983,6 +1994,7 @@
 				B89BAC472FF922E600DA1703 /* OrderDataSourceProtocol.swift in Sources */,
 				B89BAC482FF922E600DA1703 /* OrderResponse.swift in Sources */,
 				767461232FFB880A0043EF87 /* ShopifyProfileDataSource.swift in Sources */,
+				B84E76DE2FFBC3F000852CF5 /* PaymobWebView.swift in Sources */,
 				B89BAC492FF922E600DA1703 /* OrderRepositoryImp.swift in Sources */,
 				B89BAC4A2FF922E600DA1703 /* ShopifyOrderDataSource.swift in Sources */,
 				B8BA560B2FEFFF5B004CA9FF /* RegisterViewModel.swift in Sources */,
@@ -2141,6 +2153,7 @@
 /* Begin XCBuildConfiguration section */
 		09F9B4662FEFCCA50017509E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2204,6 +2217,7 @@
 		};
 		09F9B4672FEFCCA50017509E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

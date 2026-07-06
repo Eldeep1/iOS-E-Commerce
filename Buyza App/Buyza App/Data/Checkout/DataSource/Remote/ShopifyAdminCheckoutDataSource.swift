@@ -35,7 +35,18 @@ final class ShopifyAdminCheckoutDataSource {
         let draftOrderId = try await createDraftOrder(address: address, customerID: customerID, lineItems: lineItems, discountAmount: discountAmount, discountCode: discountCode)
 
         // Step 3: Complete it as payment-pending (COD)
-        return try await completeDraftOrder(draftOrderID: draftOrderId)
+        return try await completeDraftOrder(draftOrderID: draftOrderId, paymentPending: true)
+    }
+    
+    // MARK: - Place Paid Order (Paymob)
+    
+    func placePaidOrder(cartID: String, address: Address, customerID: String, discountAmount: Double, discountCode: String?) async throws -> CheckoutOrder {
+        let lineItems = try await fetchCartLineItems(cartID: cartID)
+        
+        let draftOrderId = try await createDraftOrder(address: address, customerID: customerID, lineItems: lineItems, discountAmount: discountAmount, discountCode: discountCode)
+
+        // Complete it instantly as PAID (paymentPending: false)
+        return try await completeDraftOrder(draftOrderID: draftOrderId, paymentPending: false)
     }
 
     private func fetchCartLineItems(cartID: String) async throws -> [DraftOrderLineItemInput] {
@@ -165,7 +176,7 @@ final class ShopifyAdminCheckoutDataSource {
         return draftID
     }
 
-    private func completeDraftOrder(draftOrderID: String) async throws -> CheckoutOrder {
+    private func completeDraftOrder(draftOrderID: String, paymentPending: Bool) async throws -> CheckoutOrder {
         let mutation = """
         mutation draftOrderComplete($id: ID!, $paymentPending: Boolean) {
           draftOrderComplete(id: $id, paymentPending: $paymentPending) {
@@ -188,7 +199,7 @@ final class ShopifyAdminCheckoutDataSource {
             let paymentPending: Bool
         }
 
-        let variables = CompleteVariables(id: draftOrderID, paymentPending: true)
+        let variables = CompleteVariables(id: draftOrderID, paymentPending: paymentPending)
         let request = GraphQLRequest(query: mutation, variables: variables)
         let endpoint = ApiEndpoint(
             path: "/admin/api/2024-04/graphql.json",
