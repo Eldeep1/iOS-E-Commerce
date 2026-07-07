@@ -20,8 +20,6 @@ struct ProductFilterCriteria: Equatable {
     var hasActiveFilters: Bool {
         productType != nil
             || vendor != nil
-            || publishedStatus != .any
-            || status != nil
             || minPrice != nil
             || maxPrice != nil
             || sort != .recommended

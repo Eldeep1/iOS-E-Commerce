@@ -16,8 +16,8 @@ final class ProductDetailViewModel: ObservableObject {
     @Published var selectedColorIndex: Int
     @Published var currentImageIndex: Int = 0
     @Published var expandedSectionIDs: Set<String>
-    @Published var isFavorite: Bool = false
-    
+    @Published var showRemoveAlert = false
+
     private var storedCartID: String {
         get { UserDefaults.standard.string(forKey: "shopify_cart_id") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "shopify_cart_id") }
@@ -26,7 +26,7 @@ final class ProductDetailViewModel: ObservableObject {
     @Published var addToCartSuccess = false
     @Published var navigateToCart = false
     @Published var addToCartError: String? = nil
-    
+
     @Published var showGuestAlert = false
     var isGuest = false
 
@@ -35,7 +35,7 @@ final class ProductDetailViewModel: ObservableObject {
     private let addToCartUseCase: AddToCartUseCaseProtocol
 
     init(
-        product: Product, 
+        product: Product,
         useCase: ProductDetailUseCaseProtocol = ProductDetailUseCase(),
         addToCartUseCase: AddToCartUseCaseProtocol = AddToCartUseCase(repository: CartRepositoryImp())
     ) {
@@ -80,12 +80,21 @@ final class ProductDetailViewModel: ObservableObject {
         }
     }
 
-    func toggleFavorite() {
+    func toggleFavorite(favoritesStore: FavoritesStore) {
         if isGuest {
             showGuestAlert = true
             return
         }
-        isFavorite.toggle()
+
+        if favoritesStore.isFavorite(productId: product.id) {
+            showRemoveAlert = true
+        } else {
+            try? favoritesStore.add(product: product)
+        }
+    }
+
+    func confirmRemoveFavorite(favoritesStore: FavoritesStore) {
+        try? favoritesStore.remove(productId: product.id)
     }
 
     func addToCart() {
@@ -94,9 +103,8 @@ final class ProductDetailViewModel: ObservableObject {
             return
         }
         guard let variant = product.variants.first else { return }
-        // Storefront API uses gid://shopify/ProductVariant/...
         let variantID = "gid://shopify/ProductVariant/\(variant.id)"
-        
+
         isAddToCartLoading = true
         Task {
             do {
@@ -121,7 +129,7 @@ final class ProductDetailViewModel: ObservableObject {
         }
         guard let variant = product.variants.first else { return }
         let variantID = "gid://shopify/ProductVariant/\(variant.id)"
-        
+
         isAddToCartLoading = true
         Task {
             do {

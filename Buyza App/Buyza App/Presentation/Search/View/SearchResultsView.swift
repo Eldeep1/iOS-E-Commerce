@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchResultsView: View {
     @EnvironmentObject private var localization: LocalizationManager
     @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var favoritesStore: FavoritesStore
     @StateObject private var viewModel: SearchResultsViewModel
 
     init(initialSearchText: String = "") {
@@ -79,7 +80,7 @@ struct SearchResultsView: View {
         .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
             Button(localization.text(.cancel), role: .cancel) { }
             Button(localization.text(.remove), role: .destructive) {
-                viewModel.confirmRemoveFavorite()
+                viewModel.confirmRemoveFavorite(favoritesStore: favoritesStore)
             }
         } message: { product in
             Text(localization.format(.removeFromFavoritesMessage, product.title))
@@ -124,9 +125,9 @@ struct SearchResultsView: View {
         } else {
             ProductsGrid(
                 products: viewModel.displayedProducts,
-                isFavorite: viewModel.isFavorite(productID:),
+                isFavorite: { favoritesStore.isFavorite(productId: $0) },
                 onFavoriteTap: { product in
-                    viewModel.toggleFavorite(product: product)
+                    viewModel.toggleFavorite(product: product, favoritesStore: favoritesStore)
                 }
             )
         }
@@ -144,5 +145,7 @@ struct SearchResultsView: View {
     NavigationView {
         SearchResultsView(initialSearchText: "adidas")
             .environmentObject(LocalizationManager())
+            .environmentObject(AppStateManager())
+            .environmentObject(FavoritesStore())
     }
 }
