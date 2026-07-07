@@ -17,7 +17,7 @@ struct GetFeaturedProductsUseCase: GetFeaturedProductsUseCaseProtocol {
     }
     
     func execute() async throws -> [Product] {
-        let response = try await repository.fetchProducts(limit: 8)
+        let response = try await repository.fetchProducts(limit: 6)
         return response.products
     }
 }

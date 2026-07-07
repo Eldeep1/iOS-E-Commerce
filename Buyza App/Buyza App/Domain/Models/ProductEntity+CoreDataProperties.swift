@@ -24,6 +24,7 @@ extension ProductEntity {
     @NSManaged public var optionsData: Data?
     @NSManaged public var imagesData: Data?
     @NSManaged public var variantsData: Data?
+    @NSManaged public var userId: String?
 
     // MARK: - Computed Properties for Domain Models
     
