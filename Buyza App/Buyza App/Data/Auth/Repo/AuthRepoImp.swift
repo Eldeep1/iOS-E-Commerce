@@ -30,13 +30,20 @@ struct AuthRepoImp : AuthRepoProtocol {
             guard firebaseModel.isEmailVerified else {
                 throw AuthError.emailNotVerified
             }
-            
+            let shopifyPassword = "\(firebaseModel.uid)_GAuth1!"
             var shopifyToken: String
             
             do {
-                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
+//                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
+                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: shopifyPassword)
+
             } catch {
-                shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
+                let nameParts = firebaseModel.name?.split(separator: " ", maxSplits: 1)
+                let firstName = nameParts?.first.map(String.init) ?? "Customer"
+                let lastName = (nameParts?.count ?? 0) > 1 ? String(nameParts![1]) : "Buyza"
+                
+                shopifyToken = try await shopifyService.createCustomer(email: email, password: shopifyPassword, firstName: firstName, lastName: lastName)
+
             }
             
             try localDataSource.saveShopifyToken(shopifyToken)
@@ -68,8 +75,11 @@ struct AuthRepoImp : AuthRepoProtocol {
                 // Try to log in to Shopify
                 shopifyToken = try await shopifyService.getCustomerToken(email: firebaseModel.email ?? "", password: shopifyPassword)
             } catch {
-                // If it fails, assume the user doesn't exist in Shopify yet, so create them
-                shopifyToken = try await shopifyService.createCustomer(email: firebaseModel.email ?? "", password: shopifyPassword)
+                let nameParts = firebaseModel.name?.split(separator: " ", maxSplits: 1)
+                let firstName = nameParts?.first.map(String.init) ?? "Customer"
+                let lastName = (nameParts?.count ?? 0) > 1 ? String(nameParts![1]) : "Buyza"
+                
+                shopifyToken = try await shopifyService.createCustomer(email: firebaseModel.email ?? "", password: shopifyPassword, firstName: firstName, lastName: lastName)
             }
             
             try localDataSource.saveShopifyToken(shopifyToken)
@@ -84,15 +94,15 @@ struct AuthRepoImp : AuthRepoProtocol {
         }
     }
     
-    func createUser(email: String, password: String, name: String) async throws -> UserModel {
+    func createUser(email: String, password: String, firstName: String, lastName: String) async throws -> UserModel {
         do {
-            let firebaseModel = try await firebaseService.createAccount(email: email, password: password, name: name)
+            let firebaseModel = try await firebaseService.createAccount(email: email, password: password, firstName: firstName, lastName: lastName)
             
             // Do NOT create the Shopify account here. Wait until they verify email and login.
             return UserModel(
                 uid: firebaseModel.uid,
                 email: firebaseModel.email ?? email,
-                name: firebaseModel.name ?? name
+                name: firebaseModel.name ?? "\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)
             )
         } catch {
             throw AuthError.firebaseError(error.localizedDescription)

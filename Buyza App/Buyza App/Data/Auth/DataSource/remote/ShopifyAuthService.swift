@@ -8,13 +8,13 @@
 import Foundation
 
 protocol ShopifyAuthServiceProtocol {
-    func createCustomer(email: String, password: String) async throws -> String
+    func createCustomer(email: String, password: String, firstName: String?, lastName: String?) async throws -> String
     func getCustomerToken(email: String, password: String) async throws -> String
 }
 
 final class ShopifyAuthService: ShopifyAuthServiceProtocol {
     
-    func createCustomer(email: String, password: String) async throws -> String {
+    func createCustomer(email: String, password: String, firstName: String?, lastName: String?) async throws -> String {
         
         let mutation = """
         mutation customerCreate($input: CustomerCreateInput!) {
@@ -32,6 +32,8 @@ final class ShopifyAuthService: ShopifyAuthServiceProtocol {
         
         let variables = CustomerVariables(
             input: CustomerCreateInputData(
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password
             )

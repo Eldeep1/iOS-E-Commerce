@@ -107,7 +107,7 @@ struct AddressListContent: View {
                 customerID: viewModel.customerGID,
                 createCheckoutUseCase: CreateCheckoutUseCase(repository: repo),
                 applyDiscountUseCase: ApplyDiscountUseCase(repository: repo),
-                placeCODOrderUseCase: PlaceCODOrderUseCase(repository: repo),
+                placeCODOrderUseCase: PlaceCODOrderUseCase(repository: repo), placePaidOrderUseCase: PlacePaidOrderUseCase(repository: repo),
                 fetchLatestOrderUseCase: FetchLatestOrderUseCase(repository: repo)
             )
             PaymentView(viewModel: paymentVM)

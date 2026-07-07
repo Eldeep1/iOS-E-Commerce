@@ -15,7 +15,13 @@
 	</array>
 	<key>ShopifyAdminAccessToken</key>
 	<string>$(SHOPIFY_ADMIN_ACCESS_TOKEN)</string>
+	<key>PAYMOB_API_KEY</key>
+	<string>$(PAYMOB_API_KEY)</string>
+	<key>PAYPAL_CLIENT_ID</key>
+	<string>${PAYPAL_CLIENT_ID}</string>
 	<key>ShopifyStorefrontToken</key>
 	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
+	<key>PAYPAL_SECRET</key>
+	<string>${PAYPAL_SECRET}</string>
 </dict>
 </plist>

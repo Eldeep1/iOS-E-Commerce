@@ -9,6 +9,7 @@ import Foundation
 
 enum PaymentMethodType: String, CaseIterable {
     case creditCard = "Credit / Debit Card"
+    case paypal = "PayPal"
     case cashOnDelivery = "Cash on Delivery"
 }
 
@@ -47,6 +48,7 @@ class PaymentViewModel: ObservableObject {
     private let createCheckoutUseCase: CreateCheckoutUseCase
     private let applyDiscountUseCase: ApplyDiscountUseCase
     private let placeCODOrderUseCase: PlaceCODOrderUseCase
+    private let placePaidOrderUseCase: PlacePaidOrderUseCase
     private let fetchLatestOrderUseCase: FetchLatestOrderUseCase
 
     init(
@@ -55,6 +57,7 @@ class PaymentViewModel: ObservableObject {
         createCheckoutUseCase: CreateCheckoutUseCase,
         applyDiscountUseCase: ApplyDiscountUseCase,
         placeCODOrderUseCase: PlaceCODOrderUseCase,
+        placePaidOrderUseCase: PlacePaidOrderUseCase,
         fetchLatestOrderUseCase: FetchLatestOrderUseCase
     ) {
         self.address = address
@@ -62,6 +65,7 @@ class PaymentViewModel: ObservableObject {
         self.createCheckoutUseCase = createCheckoutUseCase
         self.applyDiscountUseCase = applyDiscountUseCase
         self.placeCODOrderUseCase = placeCODOrderUseCase
+        self.placePaidOrderUseCase = placePaidOrderUseCase
         self.fetchLatestOrderUseCase = fetchLatestOrderUseCase
         self.deliveryAddressString = address.fullAddressString
     }
@@ -141,12 +145,9 @@ class PaymentViewModel: ObservableObject {
         case .cashOnDelivery:
             Task { await placeCOD() }
         case .creditCard:
-            guard webUrl != nil else {
-                orderError = L10n.checkoutNotReady.text(for: AppLanguage.stored)
-                return
-            }
-            checkoutStartedAt = Date()
-            showWebView = true
+            Task { await preparePaymobCheckout() }
+        case .paypal:
+            Task { await preparePayPalCheckout() }
         }
     }
 
@@ -170,57 +171,112 @@ class PaymentViewModel: ObservableObject {
         isPlacingOrder = false
     }
 
-    // MARK: - Called when user returns from Webview
+    @MainActor
+    private func preparePaymobCheckout() async {
+        isPlacingOrder = true
+        do {
+            let paymobURL = try await PaymobService.shared.generatePaymentURL(
+                amount: total,
+                address: address
+            )
+            self.webUrl = paymobURL
+            self.showWebView = true
+        } catch {
+            orderError = "Could not initialize credit card checkout. Please try again."
+            print("Paymob Error: \(error)")
+        }
+        isPlacingOrder = false
+    }
 
     @MainActor
-    func checkOrderAfterWebReturn() async {
-        // if user dismissed without paying, check if an order was placed
+    private func preparePayPalCheckout() async {
+        isPlacingOrder = true
+        do {
+            let paypalURL = try await PayPalService.shared.createOrder(amountInUSD: total)
+            self.webUrl = paypalURL
+            self.showWebView = true
+        } catch {
+            orderError = "Could not initialize PayPal checkout. Please try again."
+            print("PayPal Error: \(error)")
+        }
+        isPlacingOrder = false
+    }
+
+    @MainActor
+    func handlePaymobResult(success: Bool) async {
+        showWebView = false
+        
+        guard success else {
+            orderError = "Payment was declined or cancelled. Please try again."
+            isPlacingOrder = false
+            return
+        }
+        
         isPlacingOrder = true
         orderError = nil
 
-        // give Shopify 2 seconds to process the order before polling
-        try? await Task.sleep(nanoseconds: 2_000_000_000)
-
         do {
-            if let order = try await fetchLatestOrderUseCase.execute(customerID: customerID) {
-                // transfr the order's createdAt string into a Date
-                let formatter = ISO8601DateFormatter()
-                
-                formatter.formatOptions = [.withInternetDateTime]
-                var orderDate = formatter.date(from: order.createdAt)
-                if orderDate == nil {
-                    // Try with fractional seconds
-                    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                    orderDate = formatter.date(from: order.createdAt)
-                }
-
-                let startedAt = checkoutStartedAt ?? Date.distantPast
-                
-                // Add a small buffer (e.g., 60 seconds) in case of device clock sync issues
-                let isNewOrder = (orderDate ?? Date.distantPast) > startedAt.addingTimeInterval(-60)
-                
-                if isNewOrder {
-                    if order.paymentStatus.lowercased() == "paid" {
-                        placedOrder = order
-                        navigateToSuccess = true
-                    } else {
-                        
-                        orderError = L10n.paymentNotCompleted.text(for: AppLanguage.stored)
-                    }
-                } else {
-                    // that's an old order, the user just closed the browser
-                    orderError = L10n.paymentCancelled.text(for: AppLanguage.stored)
-                }
-            } else {
-                // No order found — user closed the browser without paying
-                orderError = L10n.paymentCancelled.text(for: AppLanguage.stored)
-            }
+            let order = try await placePaidOrderUseCase.execute(
+                cartID: cartID,
+                address: address,
+                customerID: customerID,
+                discountAmount: discountAmount,
+                discountCode: couponCode.isEmpty ? nil : couponCode
+            )
+            placedOrder = order
+            navigateToSuccess = true
         } catch {
-            orderError = L10n.couldNotVerifyPayment.text(for: AppLanguage.stored)
-            print("Order check error: \(error)")
+            orderError = "Payment confirmation failed. If your card was charged, please contact support."
+            print("Paid Order Error: \(error)")
         }
 
         isPlacingOrder = false
+    }
+    
+    @MainActor
+    func handlePaymobCancel() {
+        if isPlacingOrder { return }
+        orderError = "Payment was cancelled."
+    }
+
+    @MainActor
+    func handlePayPalResult(success: Bool, token: String?) async {
+        showWebView = false
+        
+        guard success, let token = token else {
+            orderError = "Payment was declined or cancelled. Please try again."
+            isPlacingOrder = false
+            return
+        }
+        
+        isPlacingOrder = true
+        orderError = nil
+
+        do {
+            
+            try await PayPalService.shared.captureOrder(orderID: token)
+            
+            let order = try await placePaidOrderUseCase.execute(
+                cartID: cartID,
+                address: address,
+                customerID: customerID,
+                discountAmount: discountAmount,
+                discountCode: couponCode.isEmpty ? nil : couponCode
+            )
+            placedOrder = order
+            navigateToSuccess = true
+        } catch {
+            orderError = "Payment confirmation failed. If your account was charged, please contact support."
+            print("Paid Order Error: \(error)")
+        }
+
+        isPlacingOrder = false
+    }
+    
+    @MainActor
+    func handlePayPalCancel() {
+        if isPlacingOrder { return }
+        orderError = "Payment was cancelled."
     }
 
    

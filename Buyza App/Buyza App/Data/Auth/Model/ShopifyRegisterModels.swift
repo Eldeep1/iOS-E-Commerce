@@ -11,8 +11,9 @@ import Foundation
 struct CustomerVariables: Encodable {
     let input: CustomerCreateInputData
 }
-
 struct CustomerCreateInputData: Encodable {
+    let firstName: String?
+    let lastName: String?
     let email: String
     let password: String
 }

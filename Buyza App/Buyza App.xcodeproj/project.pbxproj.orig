@@ -26,6 +26,7 @@
 		097FE6C42FF025AE00C42BC9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C32FF025AE00C42BC9 /* HomeView.swift */; };
 		097FE6C82FF026BD00C42BC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C72FF026BD00C42BC9 /* MainView.swift */; };
 		097FE6CA2FF027E400C42BC9 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6C92FF027E400C42BC9 /* HomeHeader.swift */; };
+		0987B7FC2FFBB37E001791B7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0987B7FB2FFBB37E001791B7 /* Secrets.xcconfig */; };
 		098A0A9B2FF8FEE800F000FF /* ProductFilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098A0A9A2FF8FEE800F000FF /* ProductFilterCriteria.swift */; };
 		098A0A9D2FF8FEED00F000FF /* ProductSearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098A0A9C2FF8FEED00F000FF /* ProductSearchQuery.swift */; };
 		098A0A9F2FF902E400F000FF /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098A0A9E2FF902E400F000FF /* SearchBarView.swift */; };
@@ -260,6 +261,7 @@
 		097FE6C32FF025AE00C42BC9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		097FE6C72FF026BD00C42BC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		097FE6C92FF027E400C42BC9 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
+		0987B7FB2FFBB37E001791B7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		098A0A9A2FF8FEE800F000FF /* ProductFilterCriteria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductFilterCriteria.swift; sourceTree = "<group>"; };
 		098A0A9C2FF8FEED00F000FF /* ProductSearchQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSearchQuery.swift; sourceTree = "<group>"; };
 		098A0A9E2FF902E400F000FF /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -835,7 +837,11 @@
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */,
+=======
+				0987B7FB2FFBB37E001791B7 /* Secrets.xcconfig */,
+>>>>>>> Base/dev
 				B8BA56102FF019E1004CA9FF /* .gitignore */,
 				09F9B4412FEFCCA10017509E /* Buyza App */,
 				09F9B4572FEFCCA40017509E /* Buyza AppTests */,
@@ -1889,7 +1895,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				B84E76D82FFBBFC400852CF5 /* Secrets.xcconfig in Resources */,
+=======
+				0987B7FC2FFBB37E001791B7 /* Secrets.xcconfig in Resources */,
+>>>>>>> Base/dev
 				09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */,
 				B8D5C1762FF982A000426537 /* GoogleService-Info.plist in Resources */,
 				09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */,
@@ -2161,7 +2171,11 @@
 /* Begin XCBuildConfiguration section */
 		09F9B4662FEFCCA50017509E /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */;
+=======
+			baseConfigurationReference = 0987B7FB2FFBB37E001791B7 /* Secrets.xcconfig */;
+>>>>>>> Base/dev
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2225,7 +2239,11 @@
 		};
 		09F9B4672FEFCCA50017509E /* Release */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */;
+=======
+			baseConfigurationReference = 0987B7FB2FFBB37E001791B7 /* Secrets.xcconfig */;
+>>>>>>> Base/dev
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

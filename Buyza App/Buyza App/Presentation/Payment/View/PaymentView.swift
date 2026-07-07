@@ -69,11 +69,44 @@ struct PaymentView: View {
             }
         )
         .fullScreenCover(isPresented: $viewModel.showWebView, onDismiss: {
-            Task { await viewModel.checkOrderAfterWebReturn() }
+            if viewModel.isPlacingOrder { return }
+            if viewModel.selectedPaymentMethod == .paypal {
+                viewModel.handlePayPalCancel()
+            } else {
+                viewModel.handlePaymobCancel()
+            }
         }) {
             if let url = viewModel.webUrl {
-                SafariView(url: url)
-                    .ignoresSafeArea()
+                NavigationView {
+                    if viewModel.selectedPaymentMethod == .paypal {
+                        PayPalWebView(url: url, onResult: { success, token in
+                            Task { await viewModel.handlePayPalResult(success: success, token: token) }
+                        }, onDismiss: {
+                            viewModel.showWebView = false
+                        })
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("PayPal Checkout")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel") { viewModel.showWebView = false }
+                            }
+                        }
+                    } else {
+                        PaymobWebView(url: url, onResult: { success in
+                            Task { await viewModel.handlePaymobResult(success: success) }
+                        }, onDismiss: {
+                            viewModel.showWebView = false
+                        })
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("Secure Checkout")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel") { viewModel.showWebView = false }
+                            }
+                        }
+                    }
+                }
+                .ignoresSafeArea(edges: .bottom)
             }
         }
         .onDisappear {

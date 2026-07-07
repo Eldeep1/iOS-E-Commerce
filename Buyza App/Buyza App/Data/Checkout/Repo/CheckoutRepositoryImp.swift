@@ -45,6 +45,10 @@ struct CheckoutRepositoryImp: CheckoutRepository {
         return try await adminDataSource.placeCODOrder(cartID: cartID, address: address, customerID: customerID, discountAmount: discountAmount, discountCode: discountCode)
     }
     
+    func placePaidOrder(cartID: String, address: Address, customerID: String, discountAmount: Double, discountCode: String?) async throws -> CheckoutOrder {
+        return try await adminDataSource.placePaidOrder(cartID: cartID, address: address, customerID: customerID, discountAmount: discountAmount, discountCode: discountCode)
+    }
+    
     func fetchLatestOrder(customerID: String) async throws -> CheckoutOrder? {
         return try await adminDataSource.fetchLatestOrder(customerID: customerID)
     }
