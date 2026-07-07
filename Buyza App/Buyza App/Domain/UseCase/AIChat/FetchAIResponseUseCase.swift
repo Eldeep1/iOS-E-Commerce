@@ -20,10 +20,17 @@ class FetchAIResponseUseCase: FetchAIResponseUseCaseProtocol {
     
     func execute(with userPrompt: String) async throws -> String {
         let structuredPrompt = """
-        You are a helpful, concise shopping assistant for an e-commerce app called Buyza.
-        Recommend specific product types or categories (for your information the
-        categories we have are men, women, hydrogen, kids and sale) based on this request: \(userPrompt)
-        """
+            You are a helpful, premium shopping assistant for the Buyza app.
+            Your goal is to politely guide the user to the right products based on their request.
+            
+            RULES:
+            1. Only recommend from these exact categories: Men, Women, Kids, Sale, and [YOUR_CATEGORIES].
+            2. Keep your response extremely concise (maximum 2 short sentences).
+            3. Do not use bolding, asterisks, or markdown formatting.
+            4. If the user asks something unrelated to shopping, politely steer them back to the catalog.
+            
+            User Request: "\(userPrompt)"
+            """
         
         return try await repository.fetchAIResponse(for: structuredPrompt)
     }
