@@ -40,6 +40,7 @@
 		098A0A9F2FF902E400F000FF /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098A0A9E2FF902E400F000FF /* SearchBarView.swift */; };
 		098A0AA12FF902EA00F000FF /* ProductFilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098A0AA02FF902EA00F000FF /* ProductFilterSheet.swift */; };
 		098A0ABF2FF9054B00F000FF /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098A0ABE2FF9054B00F000FF /* SearchResultsView.swift */; };
+		098F5FF82FFD374B00F7BFF5 /* PayPalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76E12FFBF48500852CF5 /* PayPalWebView.swift */; };
 		0996349F2FF85A36007CCE33 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996349E2FF85A36007CCE33 /* FavoritesViewModel.swift */; };
 		099634A12FF85A4F007CCE33 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099634A02FF85A4F007CCE33 /* FavoritesView.swift */; };
 		0997ED1E2FF7E3BC00C7B976 /* Database Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997ED1D2FF7E3BC00C7B976 /* Database Manager.swift */; };
@@ -133,12 +134,10 @@
 		B82C3EE22FFAD9AC0055B70B /* GoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */; };
 		B82C3EE32FFAD9AC0055B70B /* SendPasswordResetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */; };
 		B8371B552FF8EF1B00D9ED3B /* GeographicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */; };
-		B84E76D82FFBBFC400852CF5 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */; };
 		B84E76DA2FFBC0E300852CF5 /* PaymobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76D92FFBC0E300852CF5 /* PaymobService.swift */; };
 		B84E76DC2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76DB2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift */; };
 		B84E76DE2FFBC3F000852CF5 /* PaymobWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76DD2FFBC3F000852CF5 /* PaymobWebView.swift */; };
 		B84E76E02FFBF31600852CF5 /* PayPalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76DF2FFBF31600852CF5 /* PayPalService.swift */; };
-		B84E76E22FFBF48500852CF5 /* PayPalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E76E12FFBF48500852CF5 /* PayPalWebView.swift */; };
 		B89BAC272FF9217000DA1703 /* FilterProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC242FF9217000DA1703 /* FilterProductsUseCase.swift */; };
 		B89BAC282FF9217000DA1703 /* SearchProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC252FF9217000DA1703 /* SearchProductsUseCase.swift */; };
 		B89BAC312FF921F500DA1703 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89BAC2C2FF921F500DA1703 /* OrdersView.swift */; };
@@ -380,7 +379,6 @@
 		B82C3EE02FFAD9AC0055B70B /* GoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginUseCase.swift; sourceTree = "<group>"; };
 		B82C3EE12FFAD9AC0055B70B /* SendPasswordResetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPasswordResetUseCase.swift; sourceTree = "<group>"; };
 		B8371B542FF8EF1B00D9ED3B /* GeographicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicData.swift; sourceTree = "<group>"; };
-		B84E76D72FFBBFC400852CF5 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B84E76D92FFBC0E300852CF5 /* PaymobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymobService.swift; sourceTree = "<group>"; };
 		B84E76DB2FFBC0FC00852CF5 /* PlacePaidOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePaidOrderUseCase.swift; sourceTree = "<group>"; };
 		B84E76DD2FFBC3F000852CF5 /* PaymobWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymobWebView.swift; sourceTree = "<group>"; };
@@ -2081,6 +2079,7 @@
 				B89BAC312FF921F500DA1703 /* OrdersView.swift in Sources */,
 				B89BAC322FF921F500DA1703 /* OrderRowView.swift in Sources */,
 				B89BAC332FF921F500DA1703 /* OrdersViewModel.swift in Sources */,
+				098F5FF82FFD374B00F7BFF5 /* PayPalWebView.swift in Sources */,
 				B89BAC342FF921F500DA1703 /* EmptyOrdersView.swift in Sources */,
 				B8BA55FB2FEFFDF6004CA9FF /* LoginHeader.swift in Sources */,
 				0997ED402FF8260C00C7B976 /* GetBrandsUseCase.swift in Sources */,
