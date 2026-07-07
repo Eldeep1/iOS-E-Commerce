@@ -62,7 +62,8 @@ final class RegisterViewModel: ObservableObject {
                 let userModel = try await registerUseCase.execute(
                     email: cleanEmail,
                     password: password,
-                    name: cleanName
+                    firstName: cleanFirstName,
+                    lastName: cleanLastName
                 )
                 
                 print("Successfully registered domain user: \(userModel.name)")

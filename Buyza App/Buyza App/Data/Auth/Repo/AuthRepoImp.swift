@@ -27,9 +27,9 @@ struct AuthRepoImp : AuthRepoProtocol {
         do {
             let firebaseModel = try await firebaseService.signIn(email: email, password: password)
             
-            guard firebaseModel.isEmailVerified else {
-                throw AuthError.emailNotVerified
-            }
+//            guard firebaseModel.isEmailVerified else {
+//                throw AuthError.emailNotVerified
+//            }
             let shopifyPassword = "\(firebaseModel.uid)_GAuth1!"
             var shopifyToken: String
             
@@ -94,15 +94,15 @@ struct AuthRepoImp : AuthRepoProtocol {
         }
     }
     
-    func createUser(email: String, password: String, name: String) async throws -> UserModel {
+    func createUser(email: String, password: String, firstName: String, lastName: String) async throws -> UserModel {
         do {
-            let firebaseModel = try await firebaseService.createAccount(email: email, password: password, name: name)
+            let firebaseModel = try await firebaseService.createAccount(email: email, password: password, firstName: firstName, lastName: lastName)
             
             // Do NOT create the Shopify account here. Wait until they verify email and login.
             return UserModel(
                 uid: firebaseModel.uid,
                 email: firebaseModel.email ?? email,
-                name: firebaseModel.name ?? name
+                name: firebaseModel.name ?? "\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)
             )
         } catch {
             throw AuthError.firebaseError(error.localizedDescription)
