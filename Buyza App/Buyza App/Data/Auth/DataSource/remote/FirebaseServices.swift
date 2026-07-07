@@ -11,7 +11,7 @@ import FirebaseCore
 import GoogleSignIn
 
 protocol AuthServiceProtocol {
-    func createAccount(email: String, password: String, name:String) async throws -> AuthDataResultModel
+    func createAccount(email: String, password: String, firstName: String, lastName: String) async throws -> AuthDataResultModel
     func signIn(email: String, password: String) async throws -> AuthDataResultModel
     @MainActor func signInWithGoogle() async throws -> AuthDataResultModel
     func sendPasswordReset(email: String) async throws
@@ -38,11 +38,12 @@ struct FirebaseServices :AuthServiceProtocol{
         try await changeRequest.commitChanges()
     }
     
-    func createAccount(email: String, password: String,name:String) async throws-> AuthDataResultModel {
+    func createAccount(email: String, password: String, firstName: String, lastName: String) async throws -> AuthDataResultModel {
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         
         let changeRequest = authResult.user.createProfileChangeRequest()
-        changeRequest.displayName = name
+        let fullName = "\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)
+        changeRequest.displayName = fullName
         try await changeRequest.commitChanges()
         
         // Send verification email

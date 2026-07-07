@@ -15,16 +15,30 @@ struct RegisterForm: View {
         VStack(alignment: .leading, spacing: 20) {
             
             
-            VStack(alignment: .leading, spacing: 8) {
-                Text(localization.text(.fullName))
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(.gray)
-                    .tracking(1)
+            HStack(spacing: 16) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(localization.text(.firstName))
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(.gray)
+                        .tracking(1)
+                    
+                    TextField("Ali", text: $viewModel.firstName)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
+                        .modifier(InputFieldModifier())
+                }
                 
-                TextField("Ali Eldeep", text: $viewModel.name)
-                    .autocapitalization(.words)
-                    .disableAutocorrection(true)
-                    .modifier(InputFieldModifier())
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(localization.text(.lastName))
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(.gray)
+                        .tracking(1)
+                    
+                    TextField("Eldeep", text: $viewModel.lastName)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
+                        .modifier(InputFieldModifier())
+                }
             }
             
             

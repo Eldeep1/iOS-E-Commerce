@@ -17,7 +17,8 @@ import Foundation
 
 @MainActor
 final class RegisterViewModel: ObservableObject {
-    @Published var name = ""
+    @Published var firstName = ""
+    @Published var lastName = ""
     @Published var email = ""
     @Published var password = ""
     @Published var confirmPassword = ""
@@ -41,7 +42,9 @@ final class RegisterViewModel: ObservableObject {
         guard !isLoading else { return }
         
         
-        let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanFirstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanLastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanName = "\(cleanFirstName) \(cleanLastName)".trimmingCharacters(in: .whitespacesAndNewlines)
         let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard password == confirmPassword else {
@@ -59,7 +62,8 @@ final class RegisterViewModel: ObservableObject {
                 let userModel = try await registerUseCase.execute(
                     email: cleanEmail,
                     password: password,
-                    name: cleanName
+                    firstName: cleanFirstName,
+                    lastName: cleanLastName
                 )
                 
                 print("Successfully registered domain user: \(userModel.name)")

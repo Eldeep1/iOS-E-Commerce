@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import FirebaseAuth
 
 protocol ProductLocalDataSourceProtocol {
     func saveProduct(product: Product) throws
@@ -24,6 +25,7 @@ class ProductLocalDataSource: ProductLocalDataSourceProtocol {
     }
     
     func saveProduct(product: Product) throws {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         let context = coreDataManager.viewContext
         
         if try isFavorite(productId: product.id) {
@@ -32,13 +34,15 @@ class ProductLocalDataSource: ProductLocalDataSourceProtocol {
         
         let entity = ProductEntity(context: context)
         entity.fromDomain(product)
+        entity.userId = userId
         coreDataManager.saveContext(context)
     }
     
     func removeProduct(productId: Int64) throws {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         let context = coreDataManager.viewContext
         let fetchRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %lld", productId)
+        fetchRequest.predicate = NSPredicate(format: "id == %lld AND userId == %@", productId, userId)
         
         let results = try context.fetch(fetchRequest)
         if let entity = results.first {
@@ -48,17 +52,20 @@ class ProductLocalDataSource: ProductLocalDataSourceProtocol {
     }
     
     func getFavoriteProducts() throws -> [Product] {
+        guard let userId = Auth.auth().currentUser?.uid else { return [] }
         let context = coreDataManager.viewContext
         let fetchRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "userId == %@", userId)
         
         let results = try context.fetch(fetchRequest)
         return results.map { $0.toDomain() }
     }
     
     func isFavorite(productId: Int64) throws -> Bool {
+        guard let userId = Auth.auth().currentUser?.uid else { return false }
         let context = coreDataManager.viewContext
         let fetchRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %lld", productId)
+        fetchRequest.predicate = NSPredicate(format: "id == %lld AND userId == %@", productId, userId)
         fetchRequest.fetchLimit = 1
         
         let count = try context.count(for: fetchRequest)

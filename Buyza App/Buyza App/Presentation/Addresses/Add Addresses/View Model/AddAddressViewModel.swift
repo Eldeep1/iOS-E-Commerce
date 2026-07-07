@@ -10,13 +10,14 @@ final class AddAddressViewModel: ObservableObject {
 
     private let addAddressUseCase: AddAddressUseCaseProtocol
 
-    @Published var fullName: String = ""
+    @Published var firstName: String = ""
+    @Published var lastName: String = ""
     @Published var phoneNumber: String = ""
     @Published var streetAddress: String = ""
-    @Published var city: String = "Birmingham"
-    @Published var province: String = "Alabama"
+    @Published var city: String = ""
+    @Published var province: String = ""
     @Published var zip: String = ""
-    @Published var country: String = "United States"
+    @Published var country: String = "Egypt"
     @Published var isDefault: Bool = false
 
     @Published var isSaving: Bool = false
@@ -30,40 +31,30 @@ final class AddAddressViewModel: ObservableObject {
 
 
     var isFormValid: Bool {
-        !fullName.trimmingCharacters(in: .whitespaces).isEmpty && fullNameError == nil &&
+        !firstName.trimmingCharacters(in: .whitespaces).isEmpty && firstNameError == nil &&
+        !lastName.trimmingCharacters(in: .whitespaces).isEmpty && lastNameError == nil &&
         !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty && phoneError == nil &&
         !streetAddress.trimmingCharacters(in: .whitespaces).isEmpty &&
         !city.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !province.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !zip.trimmingCharacters(in: .whitespaces).isEmpty && zipError == nil &&
         !country.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    var fullNameError: String? {
-        guard !fullName.isEmpty else { return nil }
-        return fullName.trimmingCharacters(in: .whitespaces).count < 3 ? "Enter a valid full name" : nil
+    var firstNameError: String? {
+        guard !firstName.isEmpty else { return nil }
+        return firstName.trimmingCharacters(in: .whitespaces).count < 2 ? "Enter a valid first name" : nil
+    }
+
+    var lastNameError: String? {
+        guard !lastName.isEmpty else { return nil }
+        return lastName.trimmingCharacters(in: .whitespaces).count < 2 ? "Enter a valid last name" : nil
     }
 
     var phoneError: String? {
         guard !phoneNumber.isEmpty else { return nil }
-        if GeographicData.isValidPhoneNumber(phoneNumber, in: country) {
-            return nil
-        } else {
-            let sample = GeographicData.samplePhoneNumber(for: province, in: country)
-            return "Enter a valid phone number with a real Area Code (e.g. \(sample)-555-0199)"
-        }
+        return phoneNumber.trimmingCharacters(in: .whitespaces).count < 6 ? "Enter a valid phone number" : nil
     }
 
     var zipError: String? {
-        guard !zip.isEmpty else { return nil }
-        if !GeographicData.isValidZip(zip, for: province, in: country) {
-            let sample = GeographicData.samplePostalCode(for: province, in: country)
-            if country == "Canada" {
-                return "Enter a valid postal code for \(province) (e.g. \(sample))"
-            } else {
-                return "Enter a valid ZIP code for \(province) (e.g. \(sample))"
-            }
-        }
         return nil
     }
 
@@ -79,8 +70,9 @@ final class AddAddressViewModel: ObservableObject {
         errorMessage = nil
 
         let newAddress = Address(
-            id: UUID().uuidString, // Shopify assigns ID upon creation, but domain model requires non-optional id
-            fullName: fullName.trimmingCharacters(in: .whitespaces),
+            id: UUID().uuidString,
+            firstName: firstName.trimmingCharacters(in: .whitespaces),
+            lastName: lastName.trimmingCharacters(in: .whitespaces),
             phoneNumber: phoneNumber.trimmingCharacters(in: .whitespaces),
             streetAddress: streetAddress.trimmingCharacters(in: .whitespaces),
             city: city.trimmingCharacters(in: .whitespaces),

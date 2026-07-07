@@ -15,14 +15,10 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
     // MARK: - Mapping Helpers
     
     private func map(dto: AddressDTO, isDefault: Bool) -> Address {
-        let fullName = [dto.firstName, dto.lastName]
-            .compactMap { $0 }
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
-        
         return Address(
             id: dto.id,
-            fullName: fullName.isEmpty ? "Unknown Name" : fullName,
+            firstName: dto.firstName ?? "",
+            lastName: dto.lastName ?? "",
             phoneNumber: dto.phone ?? "",
             streetAddress: dto.address1 ?? "",
             city: dto.city ?? "",
@@ -31,15 +27,6 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
             country: dto.country ?? "",
             isDefault: isDefault
         )
-    }
-    
-    private func split(fullName: String) -> (firstName: String, lastName: String) {
-        let components = fullName.split(separator: " ")
-        guard !components.isEmpty else { return ("", "") }
-        
-        let firstName = String(components.first!)
-        let lastName = components.dropFirst().joined(separator: " ")
-        return (firstName, lastName)
     }
     
     // MARK: - AddressRepositoryProtocol
@@ -54,11 +41,9 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
     }
     
     func addAddress(_ address: Address) async throws -> Address {
-        let names = split(fullName: address.fullName)
-        
         let dto = try await remoteDataSource.addAddress(
-            firstName: names.firstName,
-            lastName: names.lastName,
+            firstName: address.firstName,
+            lastName: address.lastName,
             phone: address.phoneNumber,
             address1: address.streetAddress,
             city: address.city,
@@ -75,12 +60,10 @@ final class AddressRepositoryImp: AddressRepositoryProtocol {
     }
     
     func updateAddress(_ address: Address) async throws -> Address {
-        let names = split(fullName: address.fullName)
-        
         let dto = try await remoteDataSource.updateAddress(
             id: address.id,
-            firstName: names.firstName,
-            lastName: names.lastName,
+            firstName: address.firstName,
+            lastName: address.lastName,
             phone: address.phoneNumber,
             address1: address.streetAddress,
             city: address.city,

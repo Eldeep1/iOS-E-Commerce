@@ -33,7 +33,7 @@ struct AnotherLoginOptions: View {
                         onGoogleLogin()
                     }) {
                         HStack {
-                            Image(systemName: "globe")
+                            Image("google_logo")
                                 .font(.system(size: 18))
                             Text(localization.text(.continueWithGoogle))
                                 .font(.system(size: 15, weight: .semibold))

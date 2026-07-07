@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol RegisterUseCaseProtocol {
-    func execute(email: String, password: String, name:String) async throws -> UserModel
+    func execute(email: String, password: String, firstName: String, lastName: String) async throws -> UserModel
 }
 
 struct RegisterUseCase: RegisterUseCaseProtocol {
@@ -20,13 +20,13 @@ struct RegisterUseCase: RegisterUseCaseProtocol {
         self.authRepository = authRepository
     }
     
-    func execute(email: String, password: String, name: String) async throws -> UserModel {
+    func execute(email: String, password: String, firstName: String, lastName: String) async throws -> UserModel {
         guard email.contains("@") && email.count > 5 else {
             throw AuthError.invalidEmail
         }
         
         do {
-            return try await authRepository.createUser(email: email, password: password, name: name)
+            return try await authRepository.createUser(email: email, password: password, firstName: firstName, lastName: lastName)
         } catch {
             throw AuthError.map(error)
         }
