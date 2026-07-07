@@ -9,6 +9,7 @@ import Foundation
 
 enum PaymentMethodType: String, CaseIterable {
     case creditCard = "Credit / Debit Card"
+    case paypal = "PayPal"
     case cashOnDelivery = "Cash on Delivery"
 }
 
@@ -145,6 +146,8 @@ class PaymentViewModel: ObservableObject {
             Task { await placeCOD() }
         case .creditCard:
             Task { await preparePaymobCheckout() }
+        case .paypal:
+            Task { await preparePayPalCheckout() }
         }
     }
 
@@ -186,6 +189,20 @@ class PaymentViewModel: ObservableObject {
     }
 
     @MainActor
+    private func preparePayPalCheckout() async {
+        isPlacingOrder = true
+        do {
+            let paypalURL = try await PayPalService.shared.createOrder(amountInUSD: total)
+            self.webUrl = paypalURL
+            self.showWebView = true
+        } catch {
+            orderError = "Could not initialize PayPal checkout. Please try again."
+            print("PayPal Error: \(error)")
+        }
+        isPlacingOrder = false
+    }
+
+    @MainActor
     func handlePaymobResult(success: Bool) async {
         showWebView = false
         
@@ -218,6 +235,46 @@ class PaymentViewModel: ObservableObject {
     
     @MainActor
     func handlePaymobCancel() {
+        if isPlacingOrder { return }
+        orderError = "Payment was cancelled."
+    }
+
+    @MainActor
+    func handlePayPalResult(success: Bool, token: String?) async {
+        showWebView = false
+        
+        guard success, let token = token else {
+            orderError = "Payment was declined or cancelled. Please try again."
+            isPlacingOrder = false
+            return
+        }
+        
+        isPlacingOrder = true
+        orderError = nil
+
+        do {
+            
+            try await PayPalService.shared.captureOrder(orderID: token)
+            
+            let order = try await placePaidOrderUseCase.execute(
+                cartID: cartID,
+                address: address,
+                customerID: customerID,
+                discountAmount: discountAmount,
+                discountCode: couponCode.isEmpty ? nil : couponCode
+            )
+            placedOrder = order
+            navigateToSuccess = true
+        } catch {
+            orderError = "Payment confirmation failed. If your account was charged, please contact support."
+            print("Paid Order Error: \(error)")
+        }
+
+        isPlacingOrder = false
+    }
+    
+    @MainActor
+    func handlePayPalCancel() {
         if isPlacingOrder { return }
         orderError = "Payment was cancelled."
     }

@@ -69,31 +69,44 @@ struct PaymentView: View {
             }
         )
         .fullScreenCover(isPresented: $viewModel.showWebView, onDismiss: {
-            // Dismissal by the user without explicit success handles as a cancel
-            if viewModel.isPlacingOrder {
-                // If it's already placing an order, don't override the state
-                return
+            if viewModel.isPlacingOrder { return }
+            if viewModel.selectedPaymentMethod == .paypal {
+                viewModel.handlePayPalCancel()
+            } else {
+                viewModel.handlePaymobCancel()
             }
-            viewModel.handlePaymobCancel()
         }) {
             if let url = viewModel.webUrl {
                 NavigationView {
-                    PaymobWebView(url: url, onResult: { success in
-                        Task { await viewModel.handlePaymobResult(success: success) }
-                    }, onDismiss: {
-                        viewModel.showWebView = false
-                    })
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle("Secure Checkout")
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button("Cancel") {
-                                viewModel.showWebView = false
+                    if viewModel.selectedPaymentMethod == .paypal {
+                        PayPalWebView(url: url, onResult: { success, token in
+                            Task { await viewModel.handlePayPalResult(success: success, token: token) }
+                        }, onDismiss: {
+                            viewModel.showWebView = false
+                        })
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("PayPal Checkout")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel") { viewModel.showWebView = false }
+                            }
+                        }
+                    } else {
+                        PaymobWebView(url: url, onResult: { success in
+                            Task { await viewModel.handlePaymobResult(success: success) }
+                        }, onDismiss: {
+                            viewModel.showWebView = false
+                        })
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("Secure Checkout")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel") { viewModel.showWebView = false }
                             }
                         }
                     }
-                    .ignoresSafeArea(edges: .bottom)
                 }
+                .ignoresSafeArea(edges: .bottom)
             }
         }
         .onDisappear {
