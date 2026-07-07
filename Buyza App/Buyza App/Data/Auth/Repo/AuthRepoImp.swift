@@ -30,13 +30,17 @@ struct AuthRepoImp : AuthRepoProtocol {
             guard firebaseModel.isEmailVerified else {
                 throw AuthError.emailNotVerified
             }
-            
+            let shopifyPassword = "\(firebaseModel.uid)_GAuth1!"
             var shopifyToken: String
             
             do {
-                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
+//                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: password)
+                shopifyToken = try await shopifyService.getCustomerToken(email: email, password: shopifyPassword)
+
             } catch {
-                shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
+//                shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
+                shopifyToken = try await shopifyService.createCustomer(email: email, password: shopifyPassword)
+
             }
             
             try localDataSource.saveShopifyToken(shopifyToken)
