@@ -24,6 +24,7 @@ struct Buyza_AppApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject private var appState = AppStateManager()
     @StateObject private var localization = LocalizationManager()
+    @StateObject private var favoritesStore = FavoritesStore()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
@@ -31,6 +32,7 @@ struct Buyza_AppApp: App {
             RootContainerView()
                 .environmentObject(appState)
                 .environmentObject(localization)
+                .environmentObject(favoritesStore)
                 .environment(\.layoutDirection, localization.layoutDirection)
                 .environment(\.locale, Locale(identifier: localization.currentLanguage.localeIdentifier))
         }

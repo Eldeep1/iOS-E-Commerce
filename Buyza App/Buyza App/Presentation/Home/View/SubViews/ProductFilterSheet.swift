@@ -51,21 +51,6 @@ struct ProductFilterSheet: View {
                         .keyboardType(.decimalPad)
                 }
 
-                Section(localization.text(.availability)) {
-                    Picker(localization.text(.published), selection: $criteria.publishedStatus) {
-                        ForEach(ProductPublishedStatus.allCases) { status in
-                            Text(status.localizedName(for: localization.currentLanguage)).tag(status)
-                        }
-                    }
-
-                    Picker(localization.text(.status), selection: statusBinding) {
-                        Text(localization.text(.any)).tag("")
-                        ForEach(ProductStatusFilter.allCases) { status in
-                            Text(status.localizedName(for: localization.currentLanguage)).tag(status.rawValue)
-                        }
-                    }
-                }
-
                 Section(localization.text(.sortBy)) {
                     Picker(localization.text(.sortBy), selection: $criteria.sort) {
                         ForEach(ProductSortOption.allCases) { option in
@@ -110,13 +95,6 @@ struct ProductFilterSheet: View {
         Binding(
             get: { criteria.vendor ?? "" },
             set: { criteria.vendor = $0.isEmpty ? nil : $0 }
-        )
-    }
-
-    private var statusBinding: Binding<String> {
-        Binding(
-            get: { criteria.status?.rawValue ?? "" },
-            set: { criteria.status = $0.isEmpty ? nil : ProductStatusFilter(rawValue: $0) }
         )
     }
 

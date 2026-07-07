@@ -27,9 +27,6 @@ final class SearchResultsViewModel: ObservableObject {
     }
 
     private let filterUseCase: FilterProductsUseCaseProtocol
-    private let saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
-    private let removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol
-    private let checkIsFavoriteUseCase: CheckIsFavoriteUseCaseProtocol
     private var baselineProductTypes: [String] = []
     private var baselineVendors: [String] = []
 
@@ -60,10 +57,7 @@ final class SearchResultsViewModel: ObservableObject {
 
     init(
         initialSearchText: String = "",
-        filterUseCase: FilterProductsUseCaseProtocol? = nil,
-        saveFavoriteUseCase: SaveFavoriteUseCaseProtocol? = nil,
-        removeFavoriteUseCase: RemoveFavoriteUseCaseProtocol? = nil,
-        checkIsFavoriteUseCase: CheckIsFavoriteUseCaseProtocol? = nil
+        filterUseCase: FilterProductsUseCaseProtocol? = nil
     ) {
         let defaultRepo = HomeRepoImp(
             remoteDataSource: HomeRemoteDataSource(),
@@ -72,9 +66,6 @@ final class SearchResultsViewModel: ObservableObject {
 
         self.searchText = initialSearchText
         self.filterUseCase = filterUseCase ?? FilterProductsUseCase(repository: defaultRepo)
-        self.saveFavoriteUseCase = saveFavoriteUseCase ?? SaveFavoriteUseCase(repository: defaultRepo)
-        self.removeFavoriteUseCase = removeFavoriteUseCase ?? RemoveFavoriteUseCase(repository: defaultRepo)
-        self.checkIsFavoriteUseCase = checkIsFavoriteUseCase ?? CheckIsFavoriteUseCase(repository: defaultRepo)
         fetchProducts()
     }
 
@@ -105,36 +96,29 @@ final class SearchResultsViewModel: ObservableObject {
         fetchProducts()
     }
 
-    func isFavorite(productID: Int64) -> Bool {
-        (try? checkIsFavoriteUseCase.execute(productId: productID)) ?? false
-    }
-
-    func toggleFavorite(product: Product) {
+    func toggleFavorite(product: Product, favoritesStore: FavoritesStore) {
         if isGuest {
             showGuestAlert = true
             return
         }
-        
-        do {
-            let isFav = try checkIsFavoriteUseCase.execute(productId: product.id)
-            if isFav {
-                productToRemove = product
-                showRemoveAlert = true
-            } else {
-                try saveFavoriteUseCase.execute(product: product)
-                objectWillChange.send()
+
+        if favoritesStore.isFavorite(productId: product.id) {
+            productToRemove = product
+            showRemoveAlert = true
+        } else {
+            do {
+                try favoritesStore.add(product: product)
+            } catch {
+                print("Error toggling favorite: \(error)")
+                errorMessage = L10n.failedUpdateFavorites.text(for: AppLanguage.stored)
             }
-        } catch {
-            print("Error toggling favorite: \(error)")
-            errorMessage = L10n.failedUpdateFavorites.text(for: AppLanguage.stored)
         }
     }
 
-    func confirmRemoveFavorite() {
+    func confirmRemoveFavorite(favoritesStore: FavoritesStore) {
         guard let product = productToRemove else { return }
         do {
-            try removeFavoriteUseCase.execute(productId: product.id)
-            objectWillChange.send()
+            try favoritesStore.remove(productId: product.id)
         } catch {
             print("Error removing favorite: \(error)")
             errorMessage = L10n.failedRemoveFavorites.text(for: AppLanguage.stored)

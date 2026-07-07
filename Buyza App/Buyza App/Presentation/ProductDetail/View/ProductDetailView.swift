@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductDetailView: View {
     @EnvironmentObject var appState: AppStateManager
     @EnvironmentObject private var localization: LocalizationManager
+    @EnvironmentObject private var favoritesStore: FavoritesStore
     @StateObject private var viewModel: ProductDetailViewModel
     @Environment(\.dismiss) private var dismiss
 
@@ -28,8 +29,8 @@ struct ProductDetailView: View {
                     ProductImageCarousel(
                         imageURLs: viewModel.product.imageURLs,
                         currentIndex: $viewModel.currentImageIndex,
-                        isFavorite: viewModel.isFavorite,
-                        onFavoriteTap: viewModel.toggleFavorite
+                        isFavorite: favoritesStore.isFavorite(productId: viewModel.product.id),
+                        onFavoriteTap: { viewModel.toggleFavorite(favoritesStore: favoritesStore) }
                     )
 
                     productInfoSection
@@ -81,6 +82,14 @@ struct ProductDetailView: View {
             }
         } message: {
             Text(localization.text(.signInRequiredFavoritesMessage))
+        }
+        .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert) {
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.remove), role: .destructive) {
+                viewModel.confirmRemoveFavorite(favoritesStore: favoritesStore)
+            }
+        } message: {
+            Text(localization.format(.removeFromFavoritesMessage, viewModel.product.title))
         }
         .onAppear {
             viewModel.isGuest = appState.isGuest
@@ -190,5 +199,6 @@ struct ProductDetailView: View {
         ProductDetailView(product: .adidasClassicBackpack)
             .environmentObject(AppStateManager())
             .environmentObject(LocalizationManager())
+            .environmentObject(FavoritesStore())
     }
 }

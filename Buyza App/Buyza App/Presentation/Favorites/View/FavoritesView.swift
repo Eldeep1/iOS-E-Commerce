@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoritesView: View {
     @EnvironmentObject private var localization: LocalizationManager
-    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject private var favoritesStore: FavoritesStore
     @StateObject private var viewModel = FavoritesViewModel()
 
     var body: some View {
@@ -22,44 +22,7 @@ struct FavoritesView: View {
                         .padding(.horizontal, 20)
                         .padding(.top, 20)
 
-                    if appState.isGuest {
-                        VStack(alignment: .center, spacing: 16) {
-                            Image(systemName: "heart.slash")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 80, height: 80)
-                                .foregroundColor(.black)
-                                .padding(.bottom, 8)
-                                
-                            Text("No favorites yet")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                
-                            Text("To add products to your favorites, sign in")
-                                .font(.body)
-                                .foregroundColor(.secondary)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 32)
-                                
-                            Button(action: {
-                                appState.isGuest = false
-                                appState.currentRoute = .auth
-                            }) {
-                                Text(localization.text(.signIn))
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.black)
-                                    .cornerRadius(12)
-                            }
-                            .padding(.top, 16)
-                            .padding(.horizontal, 32)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 400)
-                        .padding(.vertical, 80)
-                    } else if viewModel.products.isEmpty {
+                    if viewModel.products.isEmpty {
                         VStack(alignment: .center) {
                             Image(systemName: "heart.slash")
                                 .resizable()
@@ -76,9 +39,9 @@ struct FavoritesView: View {
                     } else {
                         ProductsGrid(
                             products: viewModel.products,
-                            isFavorite: viewModel.isFavorite(productID:),
+                            isFavorite: { favoritesStore.isFavorite(productId: $0) },
                             onFavoriteTap: { product in
-                                viewModel.toggleFavorite(product: product)
+                                viewModel.toggleFavorite(product: product, favoritesStore: favoritesStore)
                             }
                         )
                     }
@@ -90,10 +53,13 @@ struct FavoritesView: View {
             .onAppear {
                 viewModel.fetchFavorites()
             }
+            .onChange(of: favoritesStore.favoriteIds) { _ in
+                viewModel.fetchFavorites()
+            }
             .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
                 Button(localization.text(.cancel), role: .cancel) { }
                 Button(localization.text(.remove), role: .destructive) {
-                    viewModel.confirmRemoveFavorite()
+                    viewModel.confirmRemoveFavorite(favoritesStore: favoritesStore)
                 }
             } message: { product in
                 Text(localization.format(.removeFromFavoritesMessage, product.title))
@@ -106,4 +72,5 @@ struct FavoritesView: View {
 #Preview {
     FavoritesView()
         .environmentObject(LocalizationManager())
+        .environmentObject(FavoritesStore())
 }

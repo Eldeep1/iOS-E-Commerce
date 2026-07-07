@@ -194,6 +194,20 @@ enum L10n: String, CaseIterable {
     case onboarding3Title
     case onboarding3Description
 
+    // Ads / Events
+    case event1Title
+    case event1Subtitle
+    case event1Button
+    case event2Title
+    case event2Subtitle
+    case event2Button
+    case event3Title
+    case event3Subtitle
+    case event3Button
+    case event4Title
+    case event4Subtitle
+    case event4Button
+
     // Filters
     case productType
     case brandVendor

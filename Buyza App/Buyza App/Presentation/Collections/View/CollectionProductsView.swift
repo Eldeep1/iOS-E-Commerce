@@ -10,6 +10,7 @@ import SwiftUI
 struct CollectionProductsView: View {
     @EnvironmentObject var appState: AppStateManager
     @EnvironmentObject private var localization: LocalizationManager
+    @EnvironmentObject private var favoritesStore: FavoritesStore
     @StateObject private var viewModel: CollectionProductsViewModel
 
     init(collection: Collection, source: CollectionProductsSource) {
@@ -82,7 +83,7 @@ struct CollectionProductsView: View {
         .alert(localization.text(.removeFromFavorites), isPresented: $viewModel.showRemoveAlert, presenting: viewModel.productToRemove) { product in
             Button(localization.text(.cancel), role: .cancel) { }
             Button(localization.text(.remove), role: .destructive) {
-                viewModel.confirmRemoveFavorite()
+                viewModel.confirmRemoveFavorite(favoritesStore: favoritesStore)
             }
         } message: { product in
             Text(localization.format(.removeFromFavoritesMessage, product.title))
@@ -127,9 +128,9 @@ struct CollectionProductsView: View {
         } else {
             ProductsGrid(
                 products: viewModel.displayedProducts,
-                isFavorite: viewModel.isFavorite(productID:),
+                isFavorite: { favoritesStore.isFavorite(productId: $0) },
                 onFavoriteTap: { product in
-                    viewModel.toggleFavorite(product: product)
+                    viewModel.toggleFavorite(product: product, favoritesStore: favoritesStore)
                 }
             )
         }
@@ -155,5 +156,6 @@ struct CollectionProductsView: View {
         )
         .environmentObject(AppStateManager())
         .environmentObject(LocalizationManager())
+        .environmentObject(FavoritesStore())
     }
 }
