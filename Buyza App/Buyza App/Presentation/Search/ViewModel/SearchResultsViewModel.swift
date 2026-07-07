@@ -17,6 +17,8 @@ final class SearchResultsViewModel: ObservableObject {
     @Published var isFilterSheetPresented = false
     @Published var showRemoveAlert = false
     @Published var productToRemove: Product?
+    @Published var showGuestAlert = false
+    var isGuest = false
 
     let showsVendorFilter = true
 
@@ -108,6 +110,11 @@ final class SearchResultsViewModel: ObservableObject {
     }
 
     func toggleFavorite(product: Product) {
+        if isGuest {
+            showGuestAlert = true
+            return
+        }
+        
         do {
             let isFav = try checkIsFavoriteUseCase.execute(productId: product.id)
             if isFav {

@@ -8,6 +8,7 @@
         <attribute name="product_type" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="String"/>
         <attribute name="variantsData" optional="YES" attributeType="Binary"/>
         <attribute name="vendor" attributeType="String"/>
     </entity>

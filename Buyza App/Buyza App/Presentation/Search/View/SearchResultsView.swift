@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchResultsView: View {
     @EnvironmentObject private var localization: LocalizationManager
+    @EnvironmentObject var appState: AppStateManager
     @StateObject private var viewModel: SearchResultsViewModel
 
     init(initialSearchText: String = "") {
@@ -83,7 +84,17 @@ struct SearchResultsView: View {
         } message: { product in
             Text(localization.format(.removeFromFavoritesMessage, product.title))
         }
+        .alert(localization.text(.signInRequired), isPresented: $viewModel.showGuestAlert) {
+            Button(localization.text(.cancel), role: .cancel) { }
+            Button(localization.text(.signIn)) {
+                appState.isGuest = false
+                appState.currentRoute = .auth
+            }
+        } message: {
+            Text(localization.text(.signInRequiredMessage))
+        }
         .onAppear {
+            viewModel.isGuest = appState.isGuest
             viewModel.objectWillChange.send()
         }
     }

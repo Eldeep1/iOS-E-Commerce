@@ -42,6 +42,7 @@ struct EventCard: View {
                         .background(Color.black)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
+                .disabled(true)
             }
             .padding(.horizontal, 16)
             .padding(.top, 20)

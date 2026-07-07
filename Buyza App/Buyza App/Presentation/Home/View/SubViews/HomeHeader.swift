@@ -48,11 +48,11 @@ struct HomeHeader: View {
                 )
             }
             .padding(.horizontal)
-            .padding(.bottom, 4)
+            //.padding(.bottom, 4)
             .padding(.top, 4)
 
             Divider()
-                .padding(.top, 6)
+                .padding(.top, 4)
         }
         .background(Color.white.ignoresSafeArea()
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
