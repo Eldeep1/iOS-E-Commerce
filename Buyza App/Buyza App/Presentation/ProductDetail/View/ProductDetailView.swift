@@ -121,7 +121,7 @@ struct ProductDetailView: View {
                     viewModel.navigateToCart = true
                 }
             }) {
-                Image(systemName: "bag")
+                Image(systemName: "cart")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.primary)
                     .frame(width: 44, height: 44)

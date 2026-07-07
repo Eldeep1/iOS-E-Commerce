@@ -10,8 +10,9 @@ import SwiftUI
 struct FavoritesView: View {
     @EnvironmentObject private var localization: LocalizationManager
     @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject var appState: AppStateManager
     @StateObject private var viewModel = FavoritesViewModel()
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -21,8 +22,45 @@ struct FavoritesView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal, 20)
                         .padding(.top, 20)
-
-                    if viewModel.products.isEmpty {
+                    
+                    if appState.isGuest {
+                        VStack(alignment: .center, spacing: 16) {
+                            Image(systemName: "heart.slash")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 80, height: 80)
+                                .foregroundColor(.black)
+                                .padding(.bottom, 8)
+                            
+                            Text("No favorites yet")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                            
+                            Text("To add products to your favorites, sign in")
+                                .font(.body)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 32)
+                            
+                            Button(action: {
+                                appState.isGuest = false
+                                appState.currentRoute = .auth
+                            }) {
+                                Text(localization.text(.signIn))
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.black)
+                                    .cornerRadius(12)
+                            }
+                            .padding(.top, 16)
+                            .padding(.horizontal, 32)
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 400)
+                        .padding(.vertical, 80)
+                    } else if viewModel.products.isEmpty {
                         VStack(alignment: .center) {
                             Image(systemName: "heart.slash")
                                 .resizable()

@@ -18,6 +18,7 @@
 		097C91F72FF6E23400AEB7D3 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C91F62FF6E23400AEB7D3 /* EventCard.swift */; };
 		097C91F92FF6E46000AEB7D3 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C91F82FF6E46000AEB7D3 /* EventsList.swift */; };
 		097C91FC2FF6E74F00AEB7D3 /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C91FB2FF6E74F00AEB7D3 /* EventsViewModel.swift */; };
+		097FCC202FFD9506005CD45B /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 097FCC1F2FFD9506005CD45B /* Secrets.xcconfig */; };
 		097FE6AC2FEFD85400C42BC9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6AB2FEFD85400C42BC9 /* SplashView.swift */; };
 		097FE6B12FEFE05400C42BC9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */; };
 		097FE6B82FEFF26200C42BC9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */; };
@@ -259,6 +260,7 @@
 		097C91F62FF6E23400AEB7D3 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		097C91F82FF6E46000AEB7D3 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		097C91FB2FF6E74F00AEB7D3 /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
+		097FCC1F2FFD9506005CD45B /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		097FE6AB2FEFD85400C42BC9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		097FE6B02FEFE05400C42BC9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		097FE6B72FEFF26200C42BC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -335,7 +337,6 @@
 		7674611B2FFB880A0043EF87 /* ShopifyProfileDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyProfileDataSource.swift; sourceTree = "<group>"; };
 		7674611E2FFB880A0043EF87 /* ProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		767461202FFB880A0043EF87 /* ProfileRepoImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRepoImp.swift; sourceTree = "<group>"; };
-		767C40A72FFD8D04009128B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		769DB5292FEFD7B600F532C7 /* ApiEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
 		769DB52B2FEFD96A00F532C7 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		769DB52D2FEFDA3400F532C7 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -926,7 +927,7 @@
 		09F9B4362FEFCCA10017509E = {
 			isa = PBXGroup;
 			children = (
-				767C40A72FFD8D04009128B8 /* Secrets.xcconfig */,
+				097FCC1F2FFD9506005CD45B /* Secrets.xcconfig */,
 				B8BA56102FF019E1004CA9FF /* .gitignore */,
 				09F9B4412FEFCCA10017509E /* Buyza App */,
 				09F9B4572FEFCCA40017509E /* Buyza AppTests */,
@@ -1984,6 +1985,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				097FCC202FFD9506005CD45B /* Secrets.xcconfig in Resources */,
 				09F9B44A2FEFCCA40017509E /* Preview Assets.xcassets in Resources */,
 				B8D5C1762FF982A000426537 /* GoogleService-Info.plist in Resources */,
 				09F9B4472FEFCCA40017509E /* Assets.xcassets in Resources */,
@@ -2263,7 +2265,7 @@
 /* Begin XCBuildConfiguration section */
 		09F9B4662FEFCCA50017509E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 767C40A72FFD8D04009128B8 /* Secrets.xcconfig */;
+			baseConfigurationReference = 097FCC1F2FFD9506005CD45B /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2327,7 +2329,7 @@
 		};
 		09F9B4672FEFCCA50017509E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 767C40A72FFD8D04009128B8 /* Secrets.xcconfig */;
+			baseConfigurationReference = 097FCC1F2FFD9506005CD45B /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
