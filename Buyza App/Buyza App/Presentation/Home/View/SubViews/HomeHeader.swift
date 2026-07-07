@@ -29,6 +29,13 @@ struct HomeHeader: View {
                         .foregroundColor(.black)
                         .padding(.trailing, 8)
                 }
+                
+                NavigationLink(destination: AIChatView()) {
+                    Image(systemName: "bubble")
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .padding(.trailing, 8)
+                }
 
                 Button(action: {
                     if appState.isGuest {
@@ -48,11 +55,8 @@ struct HomeHeader: View {
                 )
             }
             .padding(.horizontal)
-            //.padding(.bottom, 4)
-            .padding(.top, 4)
 
             Divider()
-                .padding(.top, 4)
         }
         .background(Color.white.ignoresSafeArea()
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 5))
