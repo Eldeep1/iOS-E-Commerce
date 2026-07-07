@@ -13,23 +13,39 @@ class PaymobService {
     private var apiKey: String {
         Bundle.main.infoDictionary?["PAYMOB_API_KEY"] as? String ?? "YOUR_PAYMOB_API_KEY"
     }
-    private let integrationID = 2297861
-    private let iframeID = "409009"
+    private let integrationID = 5769699
+    private let iframeID = "1058544"
     
     private init() {}
     
+   
+    private func fetchConversionRate() async -> Double {
+        guard let url = URL(string: "https://api.exchangerate-api.com/v4/latest/USD") else { return 48.0 }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let rates = json["rates"] as? [String: Any],
+               let egpRate = rates["EGP"] as? Double {
+                return egpRate
+            }
+        } catch {
+            print("Failed to fetch live exchange rate: \(error)")
+        }
+        return 48.0
+    }
+
     func generatePaymentURL(amount: Double, address: Address, customerEmail: String = "customer@buyza.com") async throws -> URL {
-        // 1. Authentication Request
+        
         let authToken = try await authenticate()
         
-        // 2. Order Registration
-        let exchangeRate: Double = 48.0
+        
+        let exchangeRate = await fetchConversionRate()
         let amountInEGP = amount * exchangeRate
         let amountInCents = Int(amountInEGP * 100)
         
         let orderID = try await registerOrder(authToken: authToken, amountInCents: amountInCents)
         
-        // 3. Payment Key Request
+        
         let paymentKey = try await requestPaymentKey(
             authToken: authToken,
             orderID: orderID,
@@ -38,7 +54,7 @@ class PaymobService {
             email: customerEmail
         )
         
-        // 4. Build iFrame URL
+        
         guard let url = URL(string: "https://accept.paymob.com/api/acceptance/iframes/\(iframeID)?payment_token=\(paymentKey)") else {
             throw NSError(domain: "PaymobError", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid iFrame URL"])
         }
