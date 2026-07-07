@@ -14,7 +14,7 @@ protocol AIChatRemoteDataSourceProtocol {
 }
 
 class AIChatRemoteDataSource: AIChatRemoteDataSourceProtocol {
-    private let apiKey = "AQ.Ab8RN6IAjioe3noVFVAY35xwglvevmB3Ag7lhQSSzzY8Ant8oA"
+    private let apiKey = "AQ.Ab8RN6Lya5WAYIl5Pvm7AnB3IR4LoBZSLWJ3vE1LuIO89DsOPw"
     private let endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
     
     func fetchGeminiResponse(for prompt: String) async throws -> GeminiResponse {
