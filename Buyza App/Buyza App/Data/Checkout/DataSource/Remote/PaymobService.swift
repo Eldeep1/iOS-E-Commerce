@@ -107,24 +107,23 @@ class PaymobService {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let nameParts = address.fullName.split(separator: " ", maxSplits: 1)
-        let firstName = nameParts.first.map(String.init) ?? "Customer"
-        let lastName = nameParts.count > 1 ? String(nameParts[1]) : "Buyza"
+        let firstName = address.firstName.isEmpty ? "Customer" : address.firstName
+        let lastName = address.lastName.isEmpty ? "Buyza" : address.lastName
         
         let billingData: [String: String] = [
-            "apartment": "12",
+            "apartment": "NA",
             "email": email,
-            "floor": "3",
+            "floor": "NA",
             "first_name": firstName,
-            "street": "El Tahrir Street",
-            "building": "15",
-            "phone_number": "01022222222",
+            "street": address.streetAddress.isEmpty ? "NA" : address.streetAddress,
+            "building": "NA",
+            "phone_number": address.phoneNumber.isEmpty ? "01000000000" : address.phoneNumber,
             "shipping_method": "PKG",
-            "postal_code": "11511",
-            "city": "Cairo",
-            "country": "EG",
+            "postal_code": address.zip.isEmpty ? "NA" : address.zip,
+            "city": address.city.isEmpty ? "NA" : address.city,
+            "country": address.country.isEmpty ? "EG" : address.country,
             "last_name": lastName,
-            "state": "Cairo"
+            "state": address.province.isEmpty ? "NA" : address.province
         ]
         
         let body: [String: Any] = [

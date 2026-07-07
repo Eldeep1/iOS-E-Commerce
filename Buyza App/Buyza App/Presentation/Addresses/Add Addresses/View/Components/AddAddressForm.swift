@@ -11,51 +11,39 @@ struct AddAddressForm: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(localization.text(.country))
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.primary)
+            
+            HStack(spacing: 16) {
+                AddressInputField(
+                    label: localization.text(.firstName),
+                    placeholder: "e.g. John",
+                    icon: "person",
+                    text: $viewModel.firstName,
+                    errorMessage: viewModel.firstNameError
+                )
 
-                HStack(spacing: 12) {
-                    countryButton(title: localization.text(.unitedStates), flag: "🇺🇸", isSelected: viewModel.country == "United States") {
-                        viewModel.country = "United States"
-                        if !GeographicData.usStates.contains(viewModel.province) {
-                            let newProv = GeographicData.usStates.first ?? ""
-                            viewModel.province = newProv
-                            viewModel.city = GeographicData.cities(for: newProv).first ?? ""
-                        } else if !GeographicData.cities(for: viewModel.province).contains(viewModel.city) {
-                            viewModel.city = GeographicData.cities(for: viewModel.province).first ?? ""
-                        }
-                    }
-
-                    countryButton(title: localization.text(.canada), flag: "🇨🇦", isSelected: viewModel.country == "Canada") {
-                        viewModel.country = "Canada"
-                        if !GeographicData.canadianProvinces.contains(viewModel.province) {
-                            let newProv = GeographicData.canadianProvinces.first ?? ""
-                            viewModel.province = newProv
-                            viewModel.city = GeographicData.cities(for: newProv).first ?? ""
-                        } else if !GeographicData.cities(for: viewModel.province).contains(viewModel.city) {
-                            viewModel.city = GeographicData.cities(for: viewModel.province).first ?? ""
-                        }
-                    }
-                }
+                AddressInputField(
+                    label: localization.text(.lastName),
+                    placeholder: "e.g. Doe",
+                    icon: "person.fill",
+                    text: $viewModel.lastName,
+                    errorMessage: viewModel.lastNameError
+                )
             }
 
             AddressInputField(
-                label: localization.text(.fullName),
-                placeholder: "e.g. John Doe",
-                icon: "person",
-                text: $viewModel.fullName,
-                errorMessage: viewModel.fullNameError
-            )
-
-            AddressInputField(
                 label: localization.text(.phone),
-                placeholder: "e.g. +1 234 567 8900",
+                placeholder: "e.g. +201001234567",
                 icon: "phone",
                 text: $viewModel.phoneNumber,
                 keyboardType: .phonePad,
                 errorMessage: viewModel.phoneError
+            )
+            
+            AddressInputField(
+                label: localization.text(.country),
+                placeholder: "e.g. Egypt",
+                icon: "globe",
+                text: $viewModel.country
             )
 
             AddressInputField(
@@ -64,88 +52,29 @@ struct AddAddressForm: View {
                 icon: "mappin",
                 text: $viewModel.streetAddress
             )
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text(viewModel.country == "Canada" ? localization.text(.province) : localization.text(.state))
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.primary)
-
-                Menu {
-                    let options = viewModel.country == "Canada" ? GeographicData.canadianProvinces : GeographicData.usStates
-                    ForEach(options, id: \.self) { option in
-                        Button(option) {
-                            viewModel.province = option
-                            if !GeographicData.cities(for: option).contains(viewModel.city) {
-                                viewModel.city = GeographicData.cities(for: option).first ?? ""
-                            }
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "map")
-                            .font(.system(size: 16))
-                            .foregroundColor(.gray)
-                            .frame(width: 24)
-
-                        Text(viewModel.province.isEmpty ? (viewModel.country == "Canada" ? localization.text(.province) : localization.text(.state)) : viewModel.province)
-                            .font(.system(size: 16))
-                            .foregroundColor(viewModel.province.isEmpty ? .gray.opacity(0.5) : .primary)
-
-                        Spacer()
-
-                        Image(systemName: "chevron.up.chevron.down")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 14)
-                    .background(Color(.systemGray6).opacity(0.6))
-                    .cornerRadius(10)
-                }
-            }
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text(localization.text(.city))
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.primary)
-
-                Menu {
-                    let cities = GeographicData.cities(for: viewModel.province)
-                    ForEach(cities, id: \.self) { cityOption in
-                        Button(cityOption) {
-                            viewModel.city = cityOption
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "building.2")
-                            .font(.system(size: 16))
-                            .foregroundColor(.gray)
-                            .frame(width: 24)
-
-                        Text(viewModel.city.isEmpty ? localization.text(.city) : viewModel.city)
-                            .font(.system(size: 16))
-                            .foregroundColor(viewModel.city.isEmpty ? .gray.opacity(0.5) : .primary)
-
-                        Spacer()
-
-                        Image(systemName: "chevron.up.chevron.down")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 14)
-                    .background(Color(.systemGray6).opacity(0.6))
-                    .cornerRadius(10)
-                }
+            
+            HStack(spacing: 16) {
+                AddressInputField(
+                    label: localization.text(.city),
+                    placeholder: "e.g. Cairo",
+                    icon: "building.2",
+                    text: $viewModel.city
+                )
+                
+                AddressInputField(
+                    label: localization.text(.state),
+                    placeholder: "e.g. Cairo",
+                    icon: "map",
+                    text: $viewModel.province
+                )
             }
 
             AddressInputField(
-                label: viewModel.country == "Canada" ? localization.text(.postalCode) : localization.text(.zipCode),
-                placeholder: viewModel.country == "Canada" ? "e.g. K1A 0B1" : "e.g. 90210",
+                label: localization.text(.zipCode) + " (Optional)",
+                placeholder: "e.g. 11511",
                 icon: "number",
                 text: $viewModel.zip,
-                keyboardType: viewModel.country == "Canada" ? .default : .numbersAndPunctuation,
+                keyboardType: .default,
                 errorMessage: viewModel.zipError
             )
 

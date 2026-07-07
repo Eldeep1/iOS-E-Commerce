@@ -10,7 +10,8 @@ final class EditAddressViewModel: ObservableObject {
 
     private let updateAddressUseCase: UpdateAddressUseCaseProtocol
 
-    @Published var fullName: String
+    @Published var firstName: String
+    @Published var lastName: String
     @Published var phoneNumber: String
     @Published var streetAddress: String
     @Published var city: String
@@ -30,54 +31,44 @@ final class EditAddressViewModel: ObservableObject {
         address: Address,
         updateAddressUseCase: UpdateAddressUseCaseProtocol) {
         self.addressId = address.id
-        self.fullName = address.fullName
+        self.firstName = address.firstName
+        self.lastName = address.lastName
         self.phoneNumber = address.phoneNumber
         self.streetAddress = address.streetAddress
-        let prov = address.province.isEmpty ? "Alabama" : address.province
-        self.province = prov
-        self.city = address.city.isEmpty ? (GeographicData.cities(for: prov).first ?? "") : address.city
+        self.province = address.province
+        self.city = address.city
         self.zip = address.zip
-        self.country = address.country.isEmpty ? "United States" : address.country
+        self.country = address.country.isEmpty ? "Egypt" : address.country
         self.isDefault = address.isDefault
         self.updateAddressUseCase = updateAddressUseCase
     }
 
 
     var isFormValid: Bool {
-        !fullName.trimmingCharacters(in: .whitespaces).isEmpty && fullNameError == nil &&
+        !firstName.trimmingCharacters(in: .whitespaces).isEmpty && firstNameError == nil &&
+        !lastName.trimmingCharacters(in: .whitespaces).isEmpty && lastNameError == nil &&
         !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty && phoneError == nil &&
         !streetAddress.trimmingCharacters(in: .whitespaces).isEmpty &&
         !city.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !province.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !zip.trimmingCharacters(in: .whitespaces).isEmpty && zipError == nil &&
         !country.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    var fullNameError: String? {
-        guard !fullName.isEmpty else { return nil }
-        return fullName.trimmingCharacters(in: .whitespaces).count < 3 ? "Enter a valid full name" : nil
+    var firstNameError: String? {
+        guard !firstName.isEmpty else { return nil }
+        return firstName.trimmingCharacters(in: .whitespaces).count < 2 ? "Enter a valid first name" : nil
+    }
+
+    var lastNameError: String? {
+        guard !lastName.isEmpty else { return nil }
+        return lastName.trimmingCharacters(in: .whitespaces).count < 2 ? "Enter a valid last name" : nil
     }
 
     var phoneError: String? {
         guard !phoneNumber.isEmpty else { return nil }
-        if GeographicData.isValidPhoneNumber(phoneNumber, in: country) {
-            return nil
-        } else {
-            let sample = GeographicData.samplePhoneNumber(for: province, in: country)
-            return "Enter a valid phone number with a real Area Code (e.g. \(sample)-555-0199)"
-        }
+        return phoneNumber.trimmingCharacters(in: .whitespaces).count < 6 ? "Enter a valid phone number" : nil
     }
 
     var zipError: String? {
-        guard !zip.isEmpty else { return nil }
-        if !GeographicData.isValidZip(zip, for: province, in: country) {
-            let sample = GeographicData.samplePostalCode(for: province, in: country)
-            if country == "Canada" {
-                return "Enter a valid postal code for \(province) (e.g. \(sample))"
-            } else {
-                return "Enter a valid ZIP code for \(province) (e.g. \(sample))"
-            }
-        }
         return nil
     }
 
@@ -94,7 +85,8 @@ final class EditAddressViewModel: ObservableObject {
 
         let updated = Address(
             id: addressId,
-            fullName: fullName.trimmingCharacters(in: .whitespaces),
+            firstName: firstName.trimmingCharacters(in: .whitespaces),
+            lastName: lastName.trimmingCharacters(in: .whitespaces),
             phoneNumber: phoneNumber.trimmingCharacters(in: .whitespaces),
             streetAddress: streetAddress.trimmingCharacters(in: .whitespaces),
             city: city.trimmingCharacters(in: .whitespaces),

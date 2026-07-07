@@ -7,7 +7,8 @@ import Foundation
 
 struct Address: Identifiable, Equatable {
     let id: String
-    let fullName: String
+    let firstName: String
+    let lastName: String
     let phoneNumber: String
     let streetAddress: String
     let city: String
@@ -15,6 +16,10 @@ struct Address: Identifiable, Equatable {
     let zip: String
     let country: String
     var isDefault: Bool
+    
+    var fullName: String {
+        return "\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)
+    }
     
     var fullAddressString: String {
         var parts = [streetAddress, city]
