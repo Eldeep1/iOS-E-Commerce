@@ -38,8 +38,11 @@ struct AuthRepoImp : AuthRepoProtocol {
                 shopifyToken = try await shopifyService.getCustomerToken(email: email, password: shopifyPassword)
 
             } catch {
-//                shopifyToken = try await shopifyService.createCustomer(email: email, password: password)
-                shopifyToken = try await shopifyService.createCustomer(email: email, password: shopifyPassword)
+                let nameParts = firebaseModel.name?.split(separator: " ", maxSplits: 1)
+                let firstName = nameParts?.first.map(String.init) ?? "Customer"
+                let lastName = (nameParts?.count ?? 0) > 1 ? String(nameParts![1]) : "Buyza"
+                
+                shopifyToken = try await shopifyService.createCustomer(email: email, password: shopifyPassword, firstName: firstName, lastName: lastName)
 
             }
             
@@ -72,8 +75,11 @@ struct AuthRepoImp : AuthRepoProtocol {
                 // Try to log in to Shopify
                 shopifyToken = try await shopifyService.getCustomerToken(email: firebaseModel.email ?? "", password: shopifyPassword)
             } catch {
-                // If it fails, assume the user doesn't exist in Shopify yet, so create them
-                shopifyToken = try await shopifyService.createCustomer(email: firebaseModel.email ?? "", password: shopifyPassword)
+                let nameParts = firebaseModel.name?.split(separator: " ", maxSplits: 1)
+                let firstName = nameParts?.first.map(String.init) ?? "Customer"
+                let lastName = (nameParts?.count ?? 0) > 1 ? String(nameParts![1]) : "Buyza"
+                
+                shopifyToken = try await shopifyService.createCustomer(email: firebaseModel.email ?? "", password: shopifyPassword, firstName: firstName, lastName: lastName)
             }
             
             try localDataSource.saveShopifyToken(shopifyToken)
