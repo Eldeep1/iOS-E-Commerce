@@ -27,9 +27,9 @@ struct AuthRepoImp : AuthRepoProtocol {
         do {
             let firebaseModel = try await firebaseService.signIn(email: email, password: password)
             
-//            guard firebaseModel.isEmailVerified else {
-//                throw AuthError.emailNotVerified
-//            }
+            guard firebaseModel.isEmailVerified else {
+                throw AuthError.emailNotVerified
+            }
             let shopifyPassword = "\(firebaseModel.uid)_GAuth1!"
             var shopifyToken: String
             
