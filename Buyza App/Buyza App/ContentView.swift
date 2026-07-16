@@ -9,78 +9,61 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+        Text("Testing...")
+            .task {
+                do {
+                    let response: ProductsResponse = try await ApiManager.shared.sendRequest(from: ProductsEndpoints.products)
+
+                    print("REST:", response.products)
+
+                    if let first = response.products.first {
+                        print(first.id)
+                        print(first.title)
                     }
+                } catch {
+                    print("REST error:", error)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+
+                do {
+                    let response: GraphQLResponse<ProductsGraphQLData> = try await ApiManager.shared.sendRequest(
+                        from: ProductsEndpoints.graphQL,
+                        with: GraphQLQuery(query: """
+                            {
+                              products(first: 10) {
+                                edges {
+                                  node {
+                                    id
+                                    title
+                                  }
+                                }
+                              }
+                            }
+                            """)
+                    )
+
+                    if let error = response.firstError {
+                        print("GraphQL error:", error.message)
+                        return
                     }
+
+                    let products = response.data.products.edges.map(\.node)
+                    print("GraphQL:", products)
+
+                    if let first = products.first {
+                        print(first.id)
+                        print(first.title)
+                    }
+                } catch {
+                    print("GraphQL error:", error)
                 }
             }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
 }

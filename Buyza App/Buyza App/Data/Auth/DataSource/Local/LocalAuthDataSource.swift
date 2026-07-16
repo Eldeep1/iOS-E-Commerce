@@ -1,0 +1,87 @@
+//
+//  KeychainService.swift
+//  Buyza App
+//
+//  Created by depo on 29/06/2026.
+//
+
+import Foundation
+import Security
+
+protocol LocalAuthDataSourceProtocol {
+    func saveShopifyToken(_ token: String) throws
+    func getShopifyToken() throws -> String
+    func clearShopifyToken() throws
+}
+
+final class KeychainService : LocalAuthDataSourceProtocol{
+    
+    func saveShopifyToken(_ token: String) throws {
+        print("from the save in the keychain")
+        print(token)
+        try save(key: "ShopifyCustomerToken", value: token)
+    }
+    
+    func getShopifyToken() throws -> String {
+        return try read(key: "ShopifyCustomerToken")
+    }
+    
+    func clearShopifyToken() throws {
+        try delete(key: "ShopifyCustomerToken")
+    }
+    
+    enum KeychainError: Error {
+        case itemNotFound
+        case unexpectedStatus(OSStatus)
+    }
+    
+    static let shared = KeychainService()
+    private init() {}
+    
+    func save(key: String, value: String) throws {
+        let data = Data(value.utf8)
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecValueData as String: data
+        ]
+        
+        // delete any existing item with this key before saving
+        SecItemDelete(query as CFDictionary)
+        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard status == errSecSuccess else {
+            throw KeychainError.unexpectedStatus(status)
+        }
+    }
+    
+    func read(key: String) throws -> String {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        
+        var dataTypeRef: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        
+        guard status == errSecSuccess, let data = dataTypeRef as? Data, let result = String(data: data, encoding: .utf8) else {
+            throw KeychainError.itemNotFound
+        }
+        
+        return result
+    }
+    
+    func delete(key: String) throws {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            throw KeychainError.unexpectedStatus(status)
+        }
+    }
+}
